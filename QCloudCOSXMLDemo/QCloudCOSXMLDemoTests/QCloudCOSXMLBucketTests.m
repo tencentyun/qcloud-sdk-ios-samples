@@ -36,7 +36,7 @@
     
     QCloudCredential* credential = [QCloudCredential new];
     credential.secretID = kSecretID;
-    credential.secretKey = kSecretKey
+    credential.secretKey = kSecretKey;
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc] initWithCredential:credential];
     QCloudSignature* signature =  [creator signatureForData:urlRequst];
     continueBlock(signature, nil);
