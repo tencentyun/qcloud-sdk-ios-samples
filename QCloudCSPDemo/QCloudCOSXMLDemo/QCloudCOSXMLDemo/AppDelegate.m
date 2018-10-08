@@ -32,22 +32,12 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    NSString *url;
-    if (url) {
         NSMutableURLRequest *requestToSigned = urlRequst;
         
-        [[COSXMLGetSignatureTool sharedNewtWorkTool]PutRequestWithUrl:@"服务器地址" request:urlRequst successBlock:^(NSString * _Nonnull sign) {
+        [[COSXMLGetSignatureTool sharedNewtWorkTool]PutRequestWithUrl:@"服务器地址" request:requestToSigned successBlock:^(NSString * _Nonnull sign) {
             QCloudSignature *signature = [[QCloudSignature alloc] initWithSignature:sign expiration:nil];
             continueBlock(signature, nil);
         }];
-    }else{
-        QCloudCredential* credential = [QCloudCredential new];
-        credential.secretID = kSecretID;
-        credential.secretKey = kSecretKey;
-        QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc] initWithCredential:credential];
-        QCloudSignature* signature =  [creator signatureForData:urlRequst];
-        continueBlock(signature, nil);
-    }
 }
 
 - (void) setupCOSXMLShareService {
