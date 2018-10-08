@@ -1,0 +1,6 @@
+framework module Pods_QCloudNewCOSV4DemoTests {
+  umbrella header "Pods-QCloudNewCOSV4DemoTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

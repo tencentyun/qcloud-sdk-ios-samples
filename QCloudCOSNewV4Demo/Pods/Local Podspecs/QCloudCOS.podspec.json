@@ -1,0 +1,24 @@
+{
+  "name": "QCloudCOS",
+  "version": "0.1.0",
+  "summary": "A short description of QCloudCOS.xx",
+  "description": "TODO: Add long description of the pod here.aaa",
+  "homepage": "http://git.code.oa.com/qcloud-terminal/QCloudCOS",
+  "license": "MIT",
+  "authors": {
+    "stonedong": "stonedong@tencent.com"
+  },
+  "source": {
+    "git": "http://git.code.oa.com/qcloud-terminal/QCloudCOS.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "6.0"
+  },
+  "source_files": "Pod/Classes/**/*",
+  "dependencies": {
+    "QCloudCore": [
+
+    ]
+  }
+}

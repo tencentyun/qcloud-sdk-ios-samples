@@ -1,0 +1,25 @@
+{
+  "name": "QCloudNewCOSV4",
+  "version": "5.3.1",
+  "summary": "New refactored COSV4 framework",
+  "description": "TODO: Add long description of the pod here.aaa",
+  "homepage": "http://git.code.oa.com/qcloud-terminal/QCloudCOS",
+  "license": "MIT",
+  "authors": {
+    "QCloud Terminal Team": "QCloudTerminalTeam"
+  },
+  "source": {
+    "git": "https://github.com/tencentyun/qcloud-sdk-ios.git",
+    "tag": "5.3.1"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "Pod/Classes/**/*",
+  "dependencies": {
+    "QCloudCore": [
+
+    ]
+  },
+  "static_framework": true
+}

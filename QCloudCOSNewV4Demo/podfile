@@ -1,0 +1,8 @@
+use_frameworks!
+target 'QCloudNewCOSV4Demo' do
+pod 'QCloudNewCOSV4'
+end
+target 'QCloudNewCOSV4DemoTests' do
+pod 'QCloudNewCOSV4'
+
+end
