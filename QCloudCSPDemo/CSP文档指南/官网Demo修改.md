@@ -2,11 +2,11 @@
 ## 运行提供的demo（对官网demo做的改动，运行时只需要做小部分修改）
 * cd 到podfile所在的文件夹， pod update --verbose --no-repo-update，确保安装的是5.5.6或者5.5.6以上的QCloudCOSXML
 * 需要修改的文件：
-  修改TestCommonDefine.h文件，输入 kAppID， kRegionk、TestBucket（确保该testBucket在kAppID下是存在的，如果是测试环境确保该bucket的本地配置了host）,testserviceName等信息
-* 修改AppDelegate.m中获取签名的方式:将服务器地址替换为签名服务器的地址即可
+  1. 修改TestCommonDefine.h文件，输入 kAppID， kRegionk、TestBucket（确保该testBucket在kAppID下是存在的，如果是测试环境确保该bucket的本地配置了host）,testserviceName等信息
+  2. 修改AppDelegate.m中获取签名的方式:将服务器地址替换为签名服务器的地址即可
+  
 ```
-
-  - (void) signatureWithFields:(QCloudSignatureFields*)fileds
+- (void) signatureWithFields:(QCloudSignatureFields*)fileds
                  request:(QCloudBizHTTPRequest*)request
               urlRequest:(NSMutableURLRequest*)urlRequst
                compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock{
@@ -15,7 +15,7 @@
               QCloudSignature *signature = [[QCloudSignature alloc] initWithSignature:sign expiration:nil];
               continueBlock(signature, nil);
           }];
-  }
+}
 
   ```
 
