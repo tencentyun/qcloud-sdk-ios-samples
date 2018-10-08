@@ -12,11 +12,11 @@
 //#if QCloudCoreModuleVersionNumber >= 502000
 #import <QCloudCore/QCloudTestUtility.h>
 #import <QCloudCore/QCloudCore.h>
-
+#import <QCloudCOSXML/QCloudCOSXML.h>
 @interface QCloudCOSXMLTestUtility : QCloudTestUtility
-
+@property (nonatomic,strong)QCloudCOSXMLService *cosxmlService;
 + (instancetype)sharedInstance;
-
+- (NSString*)createTestBucket:(NSString *)bucketName;
 - (NSString*)createTestBucket;
 
 - (void)deleteTestBucket:(NSString*)bucket;

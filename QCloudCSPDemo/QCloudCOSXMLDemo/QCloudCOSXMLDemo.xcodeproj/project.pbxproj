@@ -19,6 +19,9 @@
 		1AFD73241EED1EF5002A1CD2 /* QCloudUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD73231EED1EF5002A1CD2 /* QCloudUploadViewController.m */; };
 		1AFD73271EED1EFF002A1CD2 /* QCloudDownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD73261EED1EFF002A1CD2 /* QCloudDownloadViewController.m */; };
 		73E6C668E5458D7E419F8A84 /* Pods_QCloudCOSXMLDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70A96602CA6E1F5946D6C497 /* Pods_QCloudCOSXMLDemoTests.framework */; };
+		7FA6DE4D216B3E47006646DF /* QCloudCSPTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA6DE4C216B3E47006646DF /* QCloudCSPTests.m */; };
+		7FA6DE53216B3F02006646DF /* QCloudCSPCOSXMLTestUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA6DE51216B3F02006646DF /* QCloudCSPCOSXMLTestUtility.m */; };
+		7FA6DE56216B543D006646DF /* QCloudCSPCOSXMLTestUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA6DE54216B543D006646DF /* QCloudCSPCOSXMLTestUtility.m */; };
 		A52CF565A7DC8D318452880C /* Pods_QCloudCOSXMLDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831FA4BA8BB44C748DF19C70 /* Pods_QCloudCOSXMLDemo.framework */; };
 		A801AD41201990DC004D1B9A /* NSString+UINCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C56AA31F205F13007D845B /* NSString+UINCategory.m */; };
 		A801AD42201990DC004D1B9A /* QCloudTestTempVariables.m in Sources */ = {isa = PBXBuildFile; fileRef = A80802DF1FB945E800A7020E /* QCloudTestTempVariables.m */; };
@@ -73,6 +76,11 @@
 		6EA9F3C34ABACFEC7DD62D8B /* Pods_QCloudCOSXMLDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QCloudCOSXMLDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F98B7F2A1115840A5C2B935 /* Pods_QCloudCOSXMLDemoTests5_2_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QCloudCOSXMLDemoTests5_2_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70A96602CA6E1F5946D6C497 /* Pods_QCloudCOSXMLDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QCloudCOSXMLDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FA6DE4C216B3E47006646DF /* QCloudCSPTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCloudCSPTests.m; sourceTree = "<group>"; };
+		7FA6DE51216B3F02006646DF /* QCloudCSPCOSXMLTestUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCloudCSPCOSXMLTestUtility.m; sourceTree = "<group>"; };
+		7FA6DE52216B3F02006646DF /* QCloudCSPCOSXMLTestUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCloudCSPCOSXMLTestUtility.h; sourceTree = "<group>"; };
+		7FA6DE54216B543D006646DF /* QCloudCSPCOSXMLTestUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCloudCSPCOSXMLTestUtility.m; sourceTree = "<group>"; };
+		7FA6DE55216B543D006646DF /* QCloudCSPCOSXMLTestUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCloudCSPCOSXMLTestUtility.h; sourceTree = "<group>"; };
 		831FA4BA8BB44C748DF19C70 /* Pods_QCloudCOSXMLDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QCloudCOSXMLDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9654212306C795652741CD7D /* Pods-QCloudCOSXMLDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QCloudCOSXMLDemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QCloudCOSXMLDemoUITests/Pods-QCloudCOSXMLDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97B41EAB32CF1E794485FFFD /* Pods_QCloudCOSXMLDemo_QCloudCOSXMLDemoTests5_2_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QCloudCOSXMLDemo_QCloudCOSXMLDemoTests5_2_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +200,11 @@
 		1AB144081E601E0500830F93 /* QCloudCOSXMLDemoTests */ = {
 			isa = PBXGroup;
 			children = (
+				7FA6DE52216B3F02006646DF /* QCloudCSPCOSXMLTestUtility.h */,
+				7FA6DE55216B543D006646DF /* QCloudCSPCOSXMLTestUtility.h */,
+				7FA6DE51216B3F02006646DF /* QCloudCSPCOSXMLTestUtility.m */,
+				7FA6DE54216B543D006646DF /* QCloudCSPCOSXMLTestUtility.m */,
+				7FA6DE4C216B3E47006646DF /* QCloudCSPTests.m */,
 				A82A95001FD13F3800273FC3 /* QCloudCOSXMLTestUtility.h */,
 				A82A95011FD13F3800273FC3 /* QCloudCOSXMLTestUtility.m */,
 				A8674C401F4ACF20005E14DD /* QCloudCOSXMLExceptionCoverage.m */,
@@ -317,7 +330,6 @@
 				TargetAttributes = {
 					1AB143EB1E601E0500830F93 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = R4S4R7Q4ZH;
 						ProvisioningStyle = Manual;
 					};
 					1AB144041E601E0500830F93 = {
@@ -494,11 +506,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FA6DE4D216B3E47006646DF /* QCloudCSPTests.m in Sources */,
 				1A1C1DB31ED4324400EF74AB /* QCloudCOSTransferTests.m in Sources */,
 				A84AB4FB201AC62100A47F14 /* QCloudCOSXMLTestUtility.m in Sources */,
 				1AB3815E1EE8FFCA00F6E302 /* QCloudCOSXMLBucketTests.m in Sources */,
 				1AB1440A1E601E0500830F93 /* QCloudCOSXMLDemoTests.m in Sources */,
 				A8674C411F4ACF20005E14DD /* QCloudCOSXMLExceptionCoverage.m in Sources */,
+				7FA6DE53216B3F02006646DF /* QCloudCSPCOSXMLTestUtility.m in Sources */,
+				7FA6DE56216B543D006646DF /* QCloudCSPCOSXMLTestUtility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,7 +636,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = R4S4R7Q4ZH;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = QCloudCOSXMLDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -633,7 +648,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.qcloud.QCloudCOSXMLDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2754d152-a9e1-4889-9de4-cacb1d9891fc";
-				PROVISIONING_PROFILE_SPECIFIER = TencentClient;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -642,9 +657,9 @@
 			baseConfigurationReference = F3E9F7DE3343D4DD2A0004E1 /* Pods-QCloudCOSXMLDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Tencent Technology (Shenzhen) Co., Ltd";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = R4S4R7Q4ZH;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = QCloudCOSXMLDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -656,7 +671,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.qcloud.QCloudCOSXMLDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2754d152-a9e1-4889-9de4-cacb1d9891fc";
-				PROVISIONING_PROFILE_SPECIFIER = TencentClient;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

@@ -12,7 +12,6 @@
 #import "NSString+UINCategory.h"
 #define CNNORTH_REGION
 
-#error 输入 secretID,secretKey,appID，region等信息
 #define kSecretID @""
 #define kSecretKey @""
 #define kAppID @""

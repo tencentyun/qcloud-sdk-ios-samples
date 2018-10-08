@@ -11,10 +11,11 @@
 #define TestCommonDefine_h
 #import "NSString+UINCategory.h"
 #define CNNORTH_REGION
-#error 输入 kAppID， kRegionk、TestBucket,testserviceName等信息
+#define kSecretID @""
+#define kSecretKey @""
 #define kAppID @""
-#define kRegion @""
+#define kRegion @"wh"
 #define kTestBucket @""
-#define testserviceName @""
+#define testserviceName @"yun.ccb.com"
 
 #endif /* TestCommonDefine_h */

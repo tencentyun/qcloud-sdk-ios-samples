@@ -33,11 +33,12 @@
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
         NSMutableURLRequest *requestToSigned = urlRequst;
-        
+
         [[COSXMLGetSignatureTool sharedNewtWorkTool]PutRequestWithUrl:@"服务器地址" request:requestToSigned successBlock:^(NSString * _Nonnull sign) {
             QCloudSignature *signature = [[QCloudSignature alloc] initWithSignature:sign expiration:nil];
             continueBlock(signature, nil);
         }];
+   
 }
 
 - (void) setupCOSXMLShareService {

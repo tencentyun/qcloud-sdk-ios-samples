@@ -36,6 +36,24 @@
     });
     return instance;
 }
+-(QCloudCOSXMLService *)cosxmlService{
+    return [QCloudCOSXMLService defaultCOSXML];
+}
+- (NSString*)createTestBucket:(NSString *)bucketName{
+    
+    QCloudPutBucketRequest* putBucket = [[QCloudPutBucketRequest alloc] init];
+    putBucket.bucket = bucketName;
+    [putBucket setFinishBlock:^(id outputObject, NSError *error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    
+    if ([QCloudCOSXMLService defaultCOSXML] == nil) {
+        NSLog(@"sfasf");
+    }
+    [self.cosxmlService PutBucket:putBucket];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return bucketName;
+}
 
 - (NSString*)createTestBucket {
     
@@ -51,12 +69,10 @@
     if ([QCloudCOSXMLService defaultCOSXML] == nil) {
         NSLog(@"sfasf");
     }
-    
-    [[QCloudCOSXMLService defaultCOSXML] PutBucket:putBucket];
+    [self.cosxmlService PutBucket:putBucket];
     dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     return bucketName;
 }
-
 
 - (void)deleteTestBucket:(NSString*)testBucket {
     __block dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
@@ -68,7 +84,7 @@
         listBucketContents = result.contents;
         dispatch_semaphore_signal(semaphore);
     }];
-    [[QCloudCOSXMLService defaultCOSXML] GetBucket:getBucketRequest];
+    [self.cosxmlService GetBucket:getBucketRequest];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     
     if (listBucketContents == nil ) {
@@ -77,7 +93,7 @@
         [deleteBucketRequest setFinishBlock:^(id outputObject, NSError *error) {
             dispatch_semaphore_signal(semaphore);
         }];
-        [[QCloudCOSXMLService defaultCOSXML] DeleteBucket:deleteBucketRequest];
+        [self.cosxmlService DeleteBucket:deleteBucketRequest];
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     }
     
@@ -100,7 +116,7 @@
         }
         dispatch_semaphore_signal(semaphore);
     }];
-    [[QCloudCOSXMLService defaultCOSXML] DeleteMultipleObject:deleteMultipleObjectRequest];
+    [self.cosxmlService DeleteMultipleObject:deleteMultipleObjectRequest];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     
     
@@ -109,7 +125,7 @@
     [deleteBucketRequest setFinishBlock:^(id outputObject, NSError *error) {
         dispatch_semaphore_signal(semaphore);
     }];
-    [[QCloudCOSXMLService defaultCOSXML] DeleteBucket:deleteBucketRequest];
+    [self.cosxmlService DeleteBucket:deleteBucketRequest];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 }
 
@@ -125,7 +141,7 @@
     [put setFinishBlock:^(id outputObject, NSError *error) {
         dispatch_semaphore_signal(semaphore);
     }];
-    [[QCloudCOSXMLService defaultCOSXML] PutObject:put];
+    [self.cosxmlService PutObject:put];
     return put.object;
 }
 - (NSString*)createCanbeDeleteTestObject {
@@ -139,7 +155,7 @@
         dispatch_semaphore_signal(self.semaphore);
         
     }];
-    [[QCloudCOSXMLService defaultCOSXML] PutObject:putObject];
+    [self.cosxmlService PutObject:putObject];
     dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     return object;
 }
@@ -157,7 +173,7 @@
         listBucketContents = result.contents;
         dispatch_semaphore_signal(semaphore);
     }];
-    [[QCloudCOSXMLService defaultCOSXML] GetBucket:getBucketRequest];
+    [self.cosxmlService GetBucket:getBucketRequest];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     if (nil == listBucketContents) {
         return;
@@ -190,7 +206,7 @@
         }
         dispatch_semaphore_signal(semaphore);
     }];
-    [[QCloudCOSXMLService defaultCOSXML] DeleteMultipleObject:deleteMultipleObjectRequest];
+    [self.cosxmlService DeleteMultipleObject:deleteMultipleObjectRequest];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 }
 
@@ -209,7 +225,7 @@
         }
         dispatch_semaphore_signal(semaphore);
     }];
-    [[QCloudCOSXMLService defaultCOSXML] GetService:getServiceRequest];
+    [self.cosxmlService GetService:getServiceRequest];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     if (allBuckets == nil) {
         return ;
@@ -222,49 +238,53 @@
         NSString* bucketNamePrefix = [bucket.name substringToIndex:prefixLength];
         if ([bucketNamePrefix isEqualToString:prefix]) {
             //This is the bucket should be deleted
-            [self cleanFilesInBucket:bucket.name];
-            [self cleanMultipleUploadsInBucket:bucket.name];
-            [self cleanMultipleVersionFilesInBucket:bucket.name];
+            [self cleanFilesInBucket:bucket];
+            [self cleanMultipleUploadsInBucket:bucket];
+            [self cleanMultipleVersionFilesInBucket:bucket];
             
             QCloudDeleteBucketRequest* deleteBucketRequest = [[QCloudDeleteBucketRequest alloc] init];
+            deleteBucketRequest.regionName = bucket.location;
             deleteBucketRequest.bucket = bucket.name;
             [deleteBucketRequest setFinishBlock:^(id outputObject, NSError *error) {
                 dispatch_semaphore_signal(semaphore);
             }];
-            [[QCloudCOSXMLService defaultCOSXML] DeleteBucket:deleteBucketRequest];
+            [self.cosxmlService DeleteBucket:deleteBucketRequest];
             dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         }
     }
 }
 
 
-- (void)cleanFilesInBucket:(NSString*)bucket {
+- (void)cleanFilesInBucket:(QCloudBucket*)bucket {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
     __block NSArray<QCloudBucketContents*>* listBucketContents;
     QCloudGetBucketRequest* getBucketRequest = [[QCloudGetBucketRequest alloc] init];
-    getBucketRequest.bucket = bucket;
+    getBucketRequest.regionName = bucket.location;
+    getBucketRequest.bucket = bucket.name;
     getBucketRequest.maxKeys = 500;
     [getBucketRequest setFinishBlock:^(QCloudListBucketResult * _Nonnull result, NSError * _Nonnull error) {
         listBucketContents = result.contents;
         dispatch_semaphore_signal(semaphore);
     }];
-    [[QCloudCOSXMLService defaultCOSXML] GetBucket:getBucketRequest];
+    [self.cosxmlService GetBucket:getBucketRequest];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     
     if (listBucketContents == nil ) {
         QCloudDeleteBucketRequest* deleteBucketRequest = [[QCloudDeleteBucketRequest alloc] init];
-        deleteBucketRequest.bucket = bucket;
+        deleteBucketRequest.bucket = bucket.name;
+        deleteBucketRequest.regionName = bucket.location;
         [deleteBucketRequest setFinishBlock:^(id outputObject, NSError *error) {
             dispatch_semaphore_signal(semaphore);
         }];
-        [[QCloudCOSXMLService defaultCOSXML] DeleteBucket:deleteBucketRequest];
+        [self.cosxmlService DeleteBucket:deleteBucketRequest];
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     }
     
     
     QCloudDeleteMultipleObjectRequest* deleteMultipleObjectRequest = [[QCloudDeleteMultipleObjectRequest alloc] init];
-    deleteMultipleObjectRequest.bucket = bucket;
+    deleteMultipleObjectRequest.bucket = bucket.name;
+    deleteMultipleObjectRequest.regionName = bucket.location;
     deleteMultipleObjectRequest.deleteObjects = [[QCloudDeleteInfo alloc] init];
     NSMutableArray* deleteObjectInfoArray = [[NSMutableArray alloc] init];
     for (QCloudBucketContents* bucketContents in listBucketContents) {
@@ -281,15 +301,16 @@
         }
         dispatch_semaphore_signal(semaphore);
     }];
-    [[QCloudCOSXMLService defaultCOSXML] DeleteMultipleObject:deleteMultipleObjectRequest];
+    [self.cosxmlService  DeleteMultipleObject:deleteMultipleObjectRequest];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 }
 
-- (void)cleanMultipleUploadsInBucket:(NSString*)bucket {
+- (void)cleanMultipleUploadsInBucket:(QCloudBucket*)bucket {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     __block NSArray<QCloudListMultipartUploadContent*>* currentUploads;
     QCloudListBucketMultipartUploadsRequest* listBucketMultipartUploadRequest = [[QCloudListBucketMultipartUploadsRequest alloc] init];
-    listBucketMultipartUploadRequest.bucket = bucket;
+    listBucketMultipartUploadRequest.bucket = bucket.name;
+    listBucketMultipartUploadRequest.regionName = bucket.location;
     listBucketMultipartUploadRequest.maxUploads = 1000;
     [listBucketMultipartUploadRequest setFinishBlock:^(QCloudListMultipartUploadsResult * _Nonnull result, NSError * _Nonnull error) {
         if (nil == error) {
@@ -300,13 +321,14 @@
         }
         dispatch_semaphore_signal(semaphore);
     }];
-    [[QCloudCOSXMLService defaultCOSXML] ListBucketMultipartUploads:listBucketMultipartUploadRequest];
+    [self.cosxmlService ListBucketMultipartUploads:listBucketMultipartUploadRequest];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     
     
     for (QCloudListMultipartUploadContent* content in currentUploads) {
         QCloudAbortMultipfartUploadRequest* abortMultipartUploadRequest = [[QCloudAbortMultipfartUploadRequest alloc] init];
-        abortMultipartUploadRequest.bucket = bucket;
+        abortMultipartUploadRequest.bucket = bucket.name;
+        abortMultipartUploadRequest.regionName = bucket.location;
         abortMultipartUploadRequest.uploadId = content.uploadID;
         abortMultipartUploadRequest.object = content.key;
         [abortMultipartUploadRequest setFinishBlock:^(id outputObject, NSError *error) {
@@ -318,13 +340,13 @@
             dispatch_semaphore_signal(semaphore);
         }];
         
-        [[QCloudCOSXMLService defaultCOSXML] AbortMultipfartUpload:abortMultipartUploadRequest];
+        [self.cosxmlService AbortMultipfartUpload:abortMultipartUploadRequest];
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     }
 }
 
 
-- (void)cleanMultipleVersionFilesInBucket:(NSString*)bucket {
+- (void)cleanMultipleVersionFilesInBucket:(QCloudBucket*)bucket {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
     
@@ -332,12 +354,13 @@
     QCloudPutBucketVersioningRequest* putBucketVersioningRequest = [[QCloudPutBucketVersioningRequest alloc] init];
     QCloudBucketVersioningConfiguration* configuration = [[QCloudBucketVersioningConfiguration alloc] init];
     configuration.status = QCloudCOSBucketVersioningStatusSuspended;
-    putBucketVersioningRequest.bucket = bucket;
+    putBucketVersioningRequest.bucket = bucket.name;
+    putBucketVersioningRequest.regionName = bucket.location;
     putBucketVersioningRequest.configuration = configuration;
     [putBucketVersioningRequest setFinishBlock:^(id outputObject, NSError *error) {
         dispatch_semaphore_signal(semaphore);
     }];
-    [[QCloudCOSXMLService defaultCOSXML] PutBucketVersioning:putBucketVersioningRequest];
+    [self.cosxmlService PutBucketVersioning:putBucketVersioningRequest];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     
     
@@ -346,7 +369,8 @@
     __block NSArray<QCloudDeleteMarker*> *deleteMarkerArray;
     __block NSArray<QCloudVersionContent*> *versionContentArray;
     QCloudListObjectVersionsRequest* listObjectVersionsRequest = [[QCloudListObjectVersionsRequest alloc] init];
-    listObjectVersionsRequest.bucket = bucket;
+    listObjectVersionsRequest.bucket = bucket.name;
+    listObjectVersionsRequest.regionName = bucket.location;
     listObjectVersionsRequest.maxKeys = 1000;
     [listObjectVersionsRequest setFinishBlock:^(QCloudListVersionsResult * _Nonnull result, NSError * _Nonnull error) {
         if (error) {
@@ -357,14 +381,15 @@
         }
         dispatch_semaphore_signal(semaphore);
     }];
-    [[QCloudCOSXMLService defaultCOSXML] ListObjectVersions:listObjectVersionsRequest];
+    [self.cosxmlService ListObjectVersions:listObjectVersionsRequest];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     
     
     
     for (QCloudDeleteMarker* deleteMarker in deleteMarkerArray) {
         QCloudDeleteObjectRequest* deleteObjectRequest = [QCloudDeleteObjectRequest new];
-        deleteObjectRequest.bucket = bucket;
+        deleteObjectRequest.bucket = bucket.name;
+        deleteObjectRequest.regionName = bucket.location;
         deleteObjectRequest.object = deleteMarker.object;
         deleteObjectRequest.versionID = deleteMarker.versionID?deleteMarker.versionID:@"null";
         [deleteObjectRequest setFinishBlock:^(id outputObject, NSError *error) {
@@ -376,13 +401,14 @@
             dispatch_semaphore_signal(semaphore);
         }];
         
-        [[QCloudCOSXMLService defaultCOSXML] DeleteObject:deleteObjectRequest];
+        [self.cosxmlService DeleteObject:deleteObjectRequest];
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     }
     
     for (QCloudVersionContent* version in versionContentArray) {
         QCloudDeleteObjectRequest* deleteObjectRequest = [QCloudDeleteObjectRequest new];
-        deleteObjectRequest.bucket = bucket;
+        deleteObjectRequest.bucket = bucket.name;
+        deleteObjectRequest.regionName = bucket.location;
         deleteObjectRequest.object = version.object;
         deleteObjectRequest.versionID = version.versionID?version.versionID:@"null";
         [deleteObjectRequest setFinishBlock:^(id outputObject, NSError *error) {
@@ -394,7 +420,7 @@
             dispatch_semaphore_signal(semaphore);
         }];
         
-        [[QCloudCOSXMLService defaultCOSXML] DeleteObject:deleteObjectRequest];
+        [self.cosxmlService DeleteObject:deleteObjectRequest];
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     }
     

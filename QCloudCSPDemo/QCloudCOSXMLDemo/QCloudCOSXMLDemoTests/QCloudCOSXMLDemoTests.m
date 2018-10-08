@@ -467,7 +467,7 @@
     __block NSError* resultError;
     __block QCloudCopyObjectResult* copyObjectResult;
     [put setFinishBlock:^(id outputObject, NSError *error) {
-        NSURL* serviceURL = [[QCloudCOSXMLService defaultCOSXML].configuration.endpoint serverURLWithBucket:self.bucket appID:self.appID];
+        NSURL* serviceURL = [[QCloudCOSXMLService defaultCOSXML].configuration.endpoint serverURLWithBucket:self.bucket appID:self.appID regionName:nil];
         NSMutableString* objectCopySource = [serviceURL.absoluteString mutableCopy] ;
         [objectCopySource appendFormat:@"/%@",copyObjectSourceName];
         objectCopySource = [[objectCopySource substringFromIndex:7] mutableCopy];
@@ -673,7 +673,7 @@
 
 - (void)testGetObjectURL {
     NSString* obejctKey = [self uploadTempObject];
-    NSString* objectDownloadURL = [[QCloudCOSXMLService defaultCOSXML] getURLWithBucket:self.bucket object:obejctKey withAuthorization:YES];
+    NSString* objectDownloadURL = [[QCloudCOSXMLService defaultCOSXML]getURLWithBucket:self.bucket object:obejctKey withAuthorization:YES regionName:nil];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:objectDownloadURL]];
     request.cachePolicy = NSURLRequestReloadIgnoringCacheData;
     XCTestExpectation* expectation = [self expectationWithDescription:@"get object url"];
