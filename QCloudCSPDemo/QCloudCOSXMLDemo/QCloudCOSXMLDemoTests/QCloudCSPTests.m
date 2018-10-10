@@ -143,7 +143,7 @@
         XCTAssertNil(error);
         XCTAssertNotNil(result);
         if (!error && result) {
-            XCTAssert([result.name isEqual:kTestBucket],@"result.name is %@",result.name);
+            XCTAssert([result.name isEqual:self.bucket],@"result.name is %@",result.name);
         }
         [exception fulfill];
     }];
@@ -632,8 +632,7 @@
     
     [self waitForExpectationsWithTimeout:80 handler:^(NSError * _Nullable error) {
     }];
-    NSString* expectedBucketString = [NSString stringWithFormat:@"%@-%@",self.bucket,kAppID];
-    XCTAssert([initResult.bucket isEqualToString:expectedBucketString]);
+    XCTAssert([initResult.bucket isEqualToString:self.bucket]);
     XCTAssert([initResult.key isEqualToString:initrequest.object]);
     
 }
