@@ -18,7 +18,7 @@
 
 #define kOwnerUIN @"100004603008"
 //这是一个通用的bucket，请确保该bucket存在，测试环境请确认配置了hosts
-#define kCSPBucket @"a"
+#define kCSPBucket @"bukcet-appid"
 //这个bucket是要测试先创建后删除的，请确保该bucket不存在，否则无法创建成功，测试环境请确认配置了hosts
 #define kTestDeleteBucket @"bucketcanbedelete"
 
@@ -143,8 +143,7 @@
         XCTAssertNil(error);
         XCTAssertNotNil(result);
         if (!error && result) {
-            NSString *bucketName = [NSString stringWithFormat:@"%@-%@",kTestBucket,kAppID];
-            XCTAssert([result.name isEqual:bucketName],@"result.name is %@",result.name);
+            XCTAssert([result.name isEqual:kTestBucket],@"result.name is %@",result.name);
         }
         [exception fulfill];
     }];
