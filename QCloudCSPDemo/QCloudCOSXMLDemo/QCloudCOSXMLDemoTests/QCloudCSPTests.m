@@ -18,11 +18,11 @@
 
 #define kOwnerUIN @"100004603008"
 //这是一个测试文件的一个全局bucket，请确保该bucket存在，测试环境请确认配置了hosts（可以使用不用创建新的bucket，使用demo中的宏定义的kTestBucket也可以）
-#define ktestCSPBucket
+#define ktestCSPBucket @"a-appid"
 //这是一个测试copy的目的的bucket，请确保该bucket存在，测试环境请确认配置了hosts
 #define ktestCopyDesBucket @"bukcet-appid"
 //这个bucket是要测试先创建后删除的，请确保该bucket不存在，否则无法创建成功，测试环境请确认配置了hosts
-#define kTestDeleteBucket @"bucketcanbedelete"
+#define kTestPutBucket @"testPutBucket"
 //用来测试chunked的文件
 #define kTestGetChunkedObject @"2.txt"
 //这个bucket是用来测试批量删除对象接口的，请确保该bucket存在，测试环境请确认配置了hosts
@@ -37,11 +37,13 @@
 @implementation QCloudCOSCSPTest
 - (void)signatureWithFields:(QCloudSignatureFields *)fileds request:(QCloudBizHTTPRequest *)request urlRequest:(NSMutableURLRequest *)urlRequst compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock {
     NSMutableURLRequest *requestToSigned = urlRequst;
-    //请在这里将服务器地址替换为签名服务器的地址
-    [[COSXMLGetSignatureTool sharedNewtWorkTool]PutRequestWithUrl:@"服务器地址" request:requestToSigned successBlock:^(NSString * _Nonnull sign) {
-        QCloudSignature *signature = [[QCloudSignature alloc] initWithSignature:sign expiration:nil];
-        continueBlock(signature, nil);
-    }];
+    QCloudCredential* credential = [QCloudCredential new];
+    credential.secretID = kSecretID;
+    credential.secretKey = kSecretKey;
+    //    credential.experationDate = [NSDate dateWithTimeIntervalSince1970:1504183628];
+    QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc] initWithCredential:credential];
+    QCloudSignature* signature =  [creator signatureForData:urlRequst];
+    continueBlock(signature, nil);
    
     
 }
@@ -175,29 +177,16 @@
 }
 
 
-- (void)testPutAndDeleteBucket {
+- (void)testPutBucket {
     XCTestExpectation* exception = [self expectationWithDescription:@"get bucket exception"];
     __block NSError* responseError ;
     QCloudPutBucketRequest* putBucketRequest = [[QCloudPutBucketRequest alloc] init];
     putBucketRequest.bucket = kTestDeleteBucket;
     [putBucketRequest setFinishBlock:^(id outputObject, NSError* error) {
         XCTAssertNil(error);
-        if (!error) {
-            QCloudDeleteBucketRequest* request = [[QCloudDeleteBucketRequest alloc ] init];
-            request.bucket =kTestDeleteBucket;
-            [request setFinishBlock:^(id outputObject,NSError*error) {
-                responseError = error;
-                [exception fulfill];
-            }];
-            [[self getCSPCOSXMLService] DeleteBucket:request];
-        } else {
-            [exception fulfill];
-        }
-        [exception fulfill];
-    }];
     [[self getCSPCOSXMLService] PutBucket:putBucketRequest];
     [self waitForExpectationsWithTimeout:100 handler:nil];
-    XCTAssertNil(responseError);
+//    XCTAssertNil(responseError);
 }
 
 

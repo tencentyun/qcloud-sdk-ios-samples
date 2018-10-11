@@ -32,7 +32,7 @@
     * 操作 Method: GET
     * Allow-Headers: *
   2. ktestCopyDesBucket：//这是一个测试copy的目的的bucket，请确保该bucket存在，测试环境请确认配置了hosts
-  3. #define kTestDeleteBucket @"bucketcanbedelete",//这个bucket是要测试先创建后删除的，所以宏定义该bucket的时候不要加appid，同时请确保该bucket不存在， 否则无法创建成功，测试环境请确认配置了hosts
+  3. #define kTestPutBucket @"bucketcanbedelete",//这个bucket是要测试创建bucket的接口的，所以宏定义该bucket的时候不要加appid，同时请确保该bucket不存在， 否则无法创建成功，测试环境请确认配置了hosts
   4. #define kTestMuti_Del_Object_Bucket @"testmutidelobjectsbucket",//这个bucket是用来测试批量删除对象接口的，请确保该bucket存在，测试环境请确认配置了hosts
 * 修改QCloudCOSCSPTest.m中获取签名的方式即可
 ```
