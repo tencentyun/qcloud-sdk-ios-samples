@@ -21,7 +21,8 @@
 #define kCSPBucket @"bukcet-appid"
 //这个bucket是要测试先创建后删除的，请确保该bucket不存在，否则无法创建成功，测试环境请确认配置了hosts
 #define kTestDeleteBucket @"bucketcanbedelete"
-
+//用来测试chunked的文件
+#define kTestGetChunkedObject @"2.txt"
 //这个bucket是用来测试批量删除对象接口的，请确保该bucket存在，测试环境请确认配置了hosts
 #define kTestMuti_Del_Object_Bucket @"testmutidelobjectsbucket"
 @interface QCloudCOSCSPTest : XCTestCase<QCloudSignatureProvider>
@@ -335,7 +336,7 @@
     QCloudLogInfo(@"%@",request.downloadingURL);
     //    [put setFinishBlock:^(id outputObject, NSError *error) {
     request.bucket = kCSPBucket;
-    request.object = @"2.txt";
+    request.object = kTestGetChunkedObject;
     request.enableMD5Verification = YES;
     [request setFinishBlock:^(id outputObject, NSError *error) {
         XCTAssertNil(error);
