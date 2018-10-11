@@ -37,13 +37,11 @@
 @implementation QCloudCOSCSPTest
 - (void)signatureWithFields:(QCloudSignatureFields *)fileds request:(QCloudBizHTTPRequest *)request urlRequest:(NSMutableURLRequest *)urlRequst compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock {
     NSMutableURLRequest *requestToSigned = urlRequst;
-    QCloudCredential* credential = [QCloudCredential new];
-    credential.secretID = kSecretID;
-    credential.secretKey = kSecretKey;
-    //    credential.experationDate = [NSDate dateWithTimeIntervalSince1970:1504183628];
-    QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc] initWithCredential:credential];
-    QCloudSignature* signature =  [creator signatureForData:urlRequst];
-    continueBlock(signature, nil);
+    //请在这里将服务器地址替换为签名服务器的地址
+    [[COSXMLGetSignatureTool sharedNewtWorkTool]PutRequestWithUrl:@"服务器地址" request:requestToSigned successBlock:^(NSString * _Nonnull sign) {
+        QCloudSignature *signature = [[QCloudSignature alloc] initWithSignature:sign expiration:nil];
+        continueBlock(signature, nil);
+    }];
    
     
 }
@@ -178,15 +176,17 @@
 
 
 - (void)testPutBucket {
-    XCTestExpectation* exception = [self expectationWithDescription:@"get bucket exception"];
-    __block NSError* responseError ;
+    XCTestExpectation* exception = [self expectationWithDescription:@"put bucket exception"];
+
     QCloudPutBucketRequest* putBucketRequest = [[QCloudPutBucketRequest alloc] init];
-    putBucketRequest.bucket = kTestDeleteBucket;
+    putBucketRequest.bucket = kTestPutBucket;
     [putBucketRequest setFinishBlock:^(id outputObject, NSError* error) {
         XCTAssertNil(error);
+        [exception fulfill];
+    }];
     [[self getCSPCOSXMLService] PutBucket:putBucketRequest];
     [self waitForExpectationsWithTimeout:100 handler:nil];
-//    XCTAssertNil(responseError);
+
 }
 
 
