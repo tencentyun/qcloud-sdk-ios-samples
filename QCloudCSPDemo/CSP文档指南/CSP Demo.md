@@ -27,13 +27,13 @@
 在官网demo 的基础上增加了对于csp支持的每一个接口的测试UT，在QCloudCOSCSPTest.m中，该文件需要做的修改
 * 该文件宏定义了几个bucket，分别用于不同的接口测试
 
-  1. #define kCSPBucket @"bukcetName-appID"//这是一个通用的bucket，请确保该bucket存在，测试环境请确认配置了hosts,因为这个bucket要用来测试跨域访问接口，所以需要在控制台配置好规则，规则
+  1. #define ktestCSPBucket @"bukcetName-appID"//这是一个测试文件的一个全局bucket，请确保该bucket存在，测试环境请确认配置了hosts（可以使用不用创建新的bucket，使用demo中的宏定义的kTestBucket也可以）置了hosts,因为这个bucket要用来测试跨域访问接口，所以需要在控制台配置好规则，规则
     * 来源 Origin：http://www.yun.ccb.com
     * 操作 Method: GET
     * Allow-Headers: *
-
-  2. #define kTestDeleteBucket @"bucketcanbedelete",//这个bucket是要测试先创建后删除的，所以宏定义该bucket的时候不要加appid，同时请确保该bucket不存在， 否则无法创建成功，测试环境请确认配置了hosts
-  3. #define kTestMuti_Del_Object_Bucket @"testmutidelobjectsbucket",//这个bucket是用来测试批量删除对象接口的，请确保该bucket存在，测试环境请确认配置了hosts
+  2. ktestCopyDesBucket：//这是一个测试copy的目的的bucket，请确保该bucket存在，测试环境请确认配置了hosts
+  3. #define kTestDeleteBucket @"bucketcanbedelete",//这个bucket是要测试先创建后删除的，所以宏定义该bucket的时候不要加appid，同时请确保该bucket不存在， 否则无法创建成功，测试环境请确认配置了hosts
+  4. #define kTestMuti_Del_Object_Bucket @"testmutidelobjectsbucket",//这个bucket是用来测试批量删除对象接口的，请确保该bucket存在，测试环境请确认配置了hosts
 * 修改QCloudCOSCSPTest.m中获取签名的方式即可
 ```
 - (void) signatureWithFields:(QCloudSignatureFields*)fileds

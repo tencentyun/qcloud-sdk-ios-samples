@@ -17,8 +17,10 @@
 #import "QCloudCSPCOSXMLTestUtility.h"
 
 #define kOwnerUIN @"100004603008"
-//这是一个通用的bucket，请确保该bucket存在，测试环境请确认配置了hosts
-#define kCSPBucket @"bukcet-appid"
+//这是一个测试文件的一个全局bucket，请确保该bucket存在，测试环境请确认配置了hosts（可以使用不用创建新的bucket，使用demo中的宏定义的kTestBucket也可以）
+#define ktestCSPBucket
+//这是一个测试copy的目的的bucket，请确保该bucket存在，测试环境请确认配置了hosts
+#define ktestCopyDesBucket @"bukcet-appid"
 //这个bucket是要测试先创建后删除的，请确保该bucket不存在，否则无法创建成功，测试环境请确认配置了hosts
 #define kTestDeleteBucket @"bucketcanbedelete"
 //用来测试chunked的文件
@@ -105,7 +107,7 @@
     [self setupSpecialCOSXMLShareService];
     [QCloudTestTempVariables sharedInstance].testBucket = [[QCloudCSPCOSXMLTestUtility sharedInstance] createTestBucket:kTestBucket];
     self.tempFilePathArray = [NSMutableArray array];
-    self.bucket = kTestBucket;
+    self.bucket = ktestCSPBucket;
     self.ownerUIN = kOwnerUIN;
 }
 
@@ -335,7 +337,7 @@
     request.downloadingURL = [NSURL URLWithString:QCloudTempFilePathWithExtension(@"downding-1111111")];
     QCloudLogInfo(@"%@",request.downloadingURL);
     //    [put setFinishBlock:^(id outputObject, NSError *error) {
-    request.bucket = kCSPBucket;
+    request.bucket = self.bucket;
     request.object = kTestGetChunkedObject;
     request.enableMD5Verification = YES;
     [request setFinishBlock:^(id outputObject, NSError *error) {
@@ -362,7 +364,7 @@
     QCloudPutObjectRequest* put = [QCloudPutObjectRequest new];
     NSString* object =  [NSUUID UUID].UUIDString;
     put.object =object;
-    put.bucket = kCSPBucket;
+    put.bucket = self.bucket;
     NSURL* fileURL = [NSURL fileURLWithPath:[self tempFileWithSize:1024*1024*3]];
     put.body = fileURL;
     NSLog(@"fileURL  %@",fileURL.absoluteString);
@@ -371,7 +373,7 @@
     request.downloadingURL = [NSURL URLWithString:QCloudTempFilePathWithExtension(@"downding")];
     QCloudLogInfo(@"%@",request.downloadingURL);
     [put setFinishBlock:^(id outputObject, NSError *error) {
-        request.bucket = kCSPBucket;
+        request.bucket = ktestCSPBucket;
         request.object = object;
         request.enableMD5Verification = YES;
         [request setFinishBlock:^(id outputObject, NSError *error) {
@@ -419,7 +421,7 @@
     
     XCTestExpectation* ObjectExpectation = [self expectationWithDescription:@"options object"];
     QCloudOptionsObjectRequest* request = [[QCloudOptionsObjectRequest alloc] init];
-    request.bucket = kCSPBucket;
+    request.bucket = self.bucket;
     request.origin = @"http://www.yun.ccb.com";
     request.accessControlRequestMethod = @"GET";
     request.accessControlRequestHeaders = @"origin";
@@ -560,7 +562,7 @@
         [objectCopySource appendFormat:@"/%@",copyObjectSourceName];
         objectCopySource = [[objectCopySource substringFromIndex:7] mutableCopy];
         QCloudPutObjectCopyRequest* request = [[QCloudPutObjectCopyRequest alloc] init];
-        request.bucket = kCSPBucket;
+        request.bucket = ktestCopyDesBucket;
         request.object = @"1111copy";
         request.objectCopySource = objectCopySource;
         [request setFinishBlock:^(QCloudCopyObjectResult* result, NSError* error) {
@@ -596,7 +598,7 @@
     
     QCloudCOSXMLCopyObjectRequest* request = [[QCloudCOSXMLCopyObjectRequest alloc] init];
     
-    request.bucket = kCSPBucket;
+    request.bucket = ktestCSPBucket;
     request.object = @"copy-5MBBigFile";
     request.sourceBucket = tempBucket;
     request.sourceObject = tempFileName;
@@ -640,7 +642,7 @@
 
 -(void)testPut_get_delete_BucketLifeCycle{
     QCloudPutBucketLifecycleRequest* request = [QCloudPutBucketLifecycleRequest new];
-    request.bucket = kCSPBucket;
+    request.bucket = ktestCSPBucket;
     __block QCloudLifecycleConfiguration* configuration = [[QCloudLifecycleConfiguration alloc] init];
     QCloudLifecycleRule* rule = [[QCloudLifecycleRule alloc] init];
     rule.identifier = @"id11";
@@ -661,7 +663,7 @@
         XCTAssertNil(putLifecycleError);
         
         QCloudGetBucketLifecycleRequest* request = [QCloudGetBucketLifecycleRequest new];
-        request.bucket = kCSPBucket;
+        request.bucket = ktestCSPBucket;
         [request setFinishBlock:^(QCloudLifecycleConfiguration* getLifecycleReuslt,NSError* getLifeCycleError) {
             XCTAssertNil(getLifeCycleError);
             XCTAssertNotNil(getLifecycleReuslt);
@@ -671,7 +673,7 @@
             
             //delete configuration
             QCloudDeleteBucketLifeCycleRequest* request = [[QCloudDeleteBucketLifeCycleRequest alloc ] init];
-            request.bucket = kCSPBucket;
+            request.bucket = ktestCSPBucket;
             [request setFinishBlock:^(QCloudLifecycleConfiguration* deleteResult, NSError* deleteError) {
                 XCTAssert(deleteResult);
                 XCTAssertNil(deleteError);
