@@ -15,7 +15,6 @@
 #import <QCloudCore/QCloudCredential.h>
 #import "QCloudTestTempVariables.h"
 #import "QCloudCSPCOSXMLTestUtility.h"
-
 #define kOwnerUIN @"100004603008"
 //这是一个测试文件的一个全局bucket，请确保该bucket存在，测试环境请确认配置了hosts（可以使用不用创建新的bucket，使用demo中的宏定义的kTestBucket也可以）
 #define ktestCSPBucket @"a-appid"
@@ -52,8 +51,6 @@
     endpoint.regionName = kRegion;
     //设置bucket是前缀还是后缀，默认是yes为前缀（bucket.cos.wh.yun.ccb.com），设置为no即为后缀（cos.wh.yun.ccb.com/bucket）
     //    endpoint.isPrefixURL = NO;
-    //开启https服务
-    //        endpoint.useHTTPS = YES;
     configuration.appID = kAppID;
     endpoint.serviceName = testserviceName;
     configuration.endpoint = endpoint;
@@ -121,7 +118,7 @@
 
 #pragma mark - bukcet
 - (void)testHeadBucket{
-    XCTestExpectation* exception = [self expectationWithDescription:@"Delete bucket exception"];
+    XCTestExpectation* exception = [self expectationWithDescription:@"head bucket exception"];
     QCloudHeadBucketRequest* request = [QCloudHeadBucketRequest new];
     request.bucket = self.bucket; //存储桶名称(cos v5 的 bucket格式为：xxx-appid, 如 test-1253960454)
     __block NSError* resultError;
@@ -166,7 +163,6 @@
         XCTAssertNotNil(result.buckets);
         XCTAssert(result.buckets.count > 0,@"buckets not more than zero, it is %lu",(unsigned long)result.buckets.count);
         XCTAssertNotNil(result.buckets.firstObject.name);
-        //        XCTAssertNotNil(result.buckets.firstObject.location);
         XCTAssertNotNil(result.buckets.firstObject.createDate);
         [expectation fulfill];
     }];
@@ -266,22 +262,6 @@
 }
 
 
-//#pragma mark - bucket location ：该接口不支持
-//- (void) testGetBucketLocation {
-//    QCloudGetBucketLocationRequest* locationReq = [QCloudGetBucketLocationRequest new];
-//    locationReq.bucket = kCSPBucket;
-//    XCTestExpectation* exp = [self expectationWithDescription:@"get location"];
-//    __block QCloudBucketLocationConstraint* location;
-//    [locationReq setFinishBlock:^(QCloudBucketLocationConstraint * _Nonnull result, NSError * _Nonnull error) {
-//        location = result;
-//        XCTAssertNil(error);
-//        [exp fulfill];
-//    }];
-//    [[self getCSPCOSXMLService] GetBucketLocation:locationReq];
-//    [self waitForExpectationsWithTimeout:100 handler:nil];
-//    XCTAssertNotNil(location);
-//    XCTAssert([location.locationConstraint isEqualToString:testRegionName]);
-//}
 
 #pragma mark - obejct
 - (void) testHeadeObject   {
@@ -313,23 +293,14 @@
 }
 
 -(void)testGetObjectWithChunked{
-    
-    //    QCloudPutObjectRequest* put = [QCloudPutObjectRequest new];
-    //    NSString* object =  [NSUUID UUID].UUIDString;
-    //    put.object =@"a.png";
-    //    put.bucket = kCSPBucket;
-    //    NSURL* fileURL = [NSURL fileURLWithPath:[self tempFileWithSize:1024*1024*3]];
-    //    put.body = fileURL;
-    //    NSLog(@"fileURL  %@",fileURL.absoluteString);
-    XCTestExpectation* exp = [self expectationWithDescription:@"delete"];
-    __block QCloudGetObjectRequest* request = [QCloudGetObjectRequest new];
-    request.downloadingURL = [NSURL URLWithString:QCloudTempFilePathWithExtension(@"downding-1111111")];
+    XCTestExpectation* exp = [self expectationWithDescription:@"get chunked object expectation"];
+    QCloudGetObjectRequest* request = [QCloudGetObjectRequest new];
+    request.downloadingURL = [NSURL URLWithString:QCloudTempFilePathWithExtension(@"downloading-1111111")];
     QCloudLogInfo(@"%@",request.downloadingURL);
-    //    [put setFinishBlock:^(id outputObject, NSError *error) {
     request.bucket = self.bucket;
     request.object = kTestGetChunkedObject;
-    request.enableMD5Verification = YES;
     [request setFinishBlock:^(id outputObject, NSError *error) {
+        QCloudLogInfo(@"outputObject: %@",outputObject);
         XCTAssertNil(error);
         [exp fulfill];
     }];
@@ -337,16 +308,7 @@
         NSLog(@"⏬⏬⏬⏬DOWN [Total]%lld  [Downloaded]%lld [Download]%lld", totalBytesExpectedToDownload, totalBytesDownload, bytesDownload);
     }];
     [[self getCSPCOSXMLService] GetObject:request];
-    
-    //    }];
-    //    [[self getCSPCOSXMLService] PutObject:put];
-    
     [self waitForExpectationsWithTimeout:80 handler:nil];
-    
-    //    XCTAssertEqual(QCloudFileSize(request.downloadingURL.path), QCloudFileSize(fileURL.path));
-    
-    
-    
 }
 
 -(void)testGetObjectWithMD5{
@@ -357,15 +319,15 @@
     NSURL* fileURL = [NSURL fileURLWithPath:[self tempFileWithSize:1024*1024*3]];
     put.body = fileURL;
     NSLog(@"fileURL  %@",fileURL.absoluteString);
-    XCTestExpectation* exp = [self expectationWithDescription:@"delete"];
+    XCTestExpectation* exp = [self expectationWithDescription:@"get Object expectation"];
     __block QCloudGetObjectRequest* request = [QCloudGetObjectRequest new];
-    request.downloadingURL = [NSURL URLWithString:QCloudTempFilePathWithExtension(@"downding")];
-    QCloudLogInfo(@"%@",request.downloadingURL);
+    request.downloadingURL = [NSURL URLWithString:QCloudTempFilePathWithExtension(@"downloading")];
     [put setFinishBlock:^(id outputObject, NSError *error) {
         request.bucket = ktestCSPBucket;
         request.object = object;
         request.enableMD5Verification = YES;
         [request setFinishBlock:^(id outputObject, NSError *error) {
+            QCloudLogInfo(@"outputObject: %@",outputObject);
             XCTAssertNil(error);
             [exp fulfill];
         }];
@@ -376,9 +338,7 @@
         
     }];
     [[self getCSPCOSXMLService] PutObject:put];
-    
     [self waitForExpectationsWithTimeout:80 handler:nil];
-    
     XCTAssertEqual(QCloudFileSize(request.downloadingURL.path), QCloudFileSize(fileURL.path));
     
 }
@@ -389,7 +349,7 @@
     put.object = object;
     put.bucket = self.bucket;
     put.body =  [@"This is test content" dataUsingEncoding:NSUTF8StringEncoding];
-    XCTestExpectation* ObjectExpectation = [self expectationWithDescription:@"delete"];
+    XCTestExpectation* ObjectExpectation = [self expectationWithDescription:@"delete object expectation"];
     [put setFinishBlock:^(id outputObject, NSError *error) {
         XCTAssertNil(error,@"put Object fail!");
         QCloudDeleteObjectRequest* deleteObjectRequest = [[QCloudDeleteObjectRequest alloc] init];
@@ -629,55 +589,6 @@
     
 }
 
--(void)testPut_get_delete_BucketLifeCycle{
-    QCloudPutBucketLifecycleRequest* request = [QCloudPutBucketLifecycleRequest new];
-    request.bucket = ktestCSPBucket;
-    __block QCloudLifecycleConfiguration* configuration = [[QCloudLifecycleConfiguration alloc] init];
-    QCloudLifecycleRule* rule = [[QCloudLifecycleRule alloc] init];
-    rule.identifier = @"id11";
-    rule.status = QCloudLifecycleStatueEnabled;
-    QCloudLifecycleRuleFilter* filter = [[QCloudLifecycleRuleFilter alloc] init];
-    filter.prefix = @"logs";
-    rule.filter = filter;
-    
-    QCloudLifecycleExpiration* Expiration = [[QCloudLifecycleExpiration alloc] init];
-    Expiration.days = 1;
-    rule.expiration = Expiration;
-    request.lifeCycle = configuration;
-    request.lifeCycle.rules = @[rule];
-    XCTestExpectation* exception = [self expectationWithDescription:@"Put Bucket Life cycle exception"];
-    [request setFinishBlock:^(id outputObject, NSError* putLifecycleError) {
-        XCTAssertNil(putLifecycleError);
-        //Get Configuration
-        XCTAssertNil(putLifecycleError);
-        
-        QCloudGetBucketLifecycleRequest* request = [QCloudGetBucketLifecycleRequest new];
-        request.bucket = ktestCSPBucket;
-        [request setFinishBlock:^(QCloudLifecycleConfiguration* getLifecycleReuslt,NSError* getLifeCycleError) {
-            XCTAssertNil(getLifeCycleError);
-            XCTAssertNotNil(getLifecycleReuslt);
-            XCTAssert(getLifecycleReuslt.rules.count==configuration.rules.count);
-            XCTAssert([getLifecycleReuslt.rules.firstObject.identifier isEqualToString:configuration.rules.firstObject.identifier]);
-            XCTAssert(getLifecycleReuslt.rules.firstObject.status==configuration.rules.firstObject.status);
-            
-            //delete configuration
-            QCloudDeleteBucketLifeCycleRequest* request = [[QCloudDeleteBucketLifeCycleRequest alloc ] init];
-            request.bucket = ktestCSPBucket;
-            [request setFinishBlock:^(QCloudLifecycleConfiguration* deleteResult, NSError* deleteError) {
-                XCTAssert(deleteResult);
-                XCTAssertNil(deleteError);
-                [exception fulfill];
-            }];
-            [[self getCSPCOSXMLService] DeleteBucketLifeCycle:request];
-            //delete configuration end
-            
-        }];
-        [[self getCSPCOSXMLService] GetBucketLifecycle:request];
-        //Get configuration end
-    }];
-    [[self getCSPCOSXMLService] PutBucketLifecycle:request];
-    [self waitForExpectationsWithTimeout:500 handler:nil];
-}
 
 //批量删除对象
 -(void)testMutiDelObjects{
