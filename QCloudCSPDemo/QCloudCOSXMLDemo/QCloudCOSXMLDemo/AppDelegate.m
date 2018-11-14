@@ -47,8 +47,6 @@
     endpoint.regionName = kRegion;
     //设置bucket是前缀还是后缀，默认是yes为前缀（bucket.cos.wh.yun.ccb.com），设置为no即为后缀（cos.wh.yun.ccb.com/bucket）
     //    endpoint.isPrefixURL = NO;
-    //开启https服务
-//        endpoint.useHTTPS = YES;
     configuration.appID = kAppID;
     endpoint.serviceName = testserviceName;
     configuration.endpoint = endpoint;
