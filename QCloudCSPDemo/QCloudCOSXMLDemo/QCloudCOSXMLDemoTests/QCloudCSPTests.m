@@ -38,6 +38,7 @@
     NSMutableURLRequest *requestToSigned = urlRequst;
     //请在这里将服务器地址替换为签名服务器的地址
     [[COSXMLGetSignatureTool sharedNewtWorkTool]PutRequestWithUrl:@"服务器地址" request:requestToSigned successBlock:^(NSString * _Nonnull sign) {
+        NSLog(@"该requestid是：%lld  sign是: %@",request.requestID,sign);
         QCloudSignature *signature = [[QCloudSignature alloc] initWithSignature:sign expiration:nil];
         continueBlock(signature, nil);
     }];
@@ -102,7 +103,6 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     [self setupSpecialCOSXMLShareService];
-    [QCloudTestTempVariables sharedInstance].testBucket = [[QCloudCSPCOSXMLTestUtility sharedInstance] createTestBucket:kTestBucket];
     self.tempFilePathArray = [NSMutableArray array];
     self.bucket = ktestCSPBucket;
     self.ownerUIN = kOwnerUIN;
@@ -114,7 +114,6 @@
     //    [[QCloudCSPCOSXMLTestUtility sharedInstance]deleteTestBucket:testBucketCSP];
     //    [[QCloudCSPCOSXMLTestUtility sharedInstance]deleteTestBucket:testCopyBucketCSP];
 }
-
 
 #pragma mark - bukcet
 - (void)testHeadBucket{
