@@ -1,6 +1,8 @@
 language: objective-c
-xcode_workspace: QCloudCOSXMLDemo/QCloudCOSXMLDemo.xcworkspace
-xcode_scheme: QCloudCOSXMLDemo/QCloudCOSXMLDemoTests
+cache: cocoapods 
+podfile: QCloudCOSXMLDemo/Podfile 
+XCODE_WORKSPACE: QCloudCOSXMLDemo/QCloudCOSXMLDemo.xcworkspace
+SCHEME: QCloudCOSXMLDemo/QCloudCOSXMLDemoTests
 xcode_destination: platform=iOS Simulator,OS=11.3,name=iPhone X
-script: xcodebuild build-for-testing   -workspace QCloudCOSXMLDemo.xcworkspace -scheme  QCloudCOSXMLDemoTests  -allowProvisioningUpdates
+script: xcodebuild build-for-testing   -workspace"$XCODE_WORKSPACE" -scheme  "$SCHEME  -allowProvisioningUpdates
 
