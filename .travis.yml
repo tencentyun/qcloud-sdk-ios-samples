@@ -19,5 +19,6 @@ before_script:
   - pwd
   - echo $secretID
   - writeFile file:"key.json", text:"{\"secretID\":\"${secretID}\",  \"secretKey\":\"${secretKey}\"}"
+  - cat key.json
 
 
