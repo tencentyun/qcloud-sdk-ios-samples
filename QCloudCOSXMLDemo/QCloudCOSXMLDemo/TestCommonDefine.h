@@ -17,5 +17,5 @@
 #define kAppID @""
 #define kRegion @""
 #define kTestBucket @""
-
+#define kTestFromAnotherRegionCopy @"" 
 #endif /* TestCommonDefine_h */
