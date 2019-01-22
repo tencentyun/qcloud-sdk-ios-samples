@@ -11,11 +11,12 @@
 #define TestCommonDefine_h
 #import "NSString+UINCategory.h"
 #define CNNORTH_REGION
+#define kCSPServiceKey @"cspService"
+#define kSecretID @""
+#define kSecretKey @""
+#define kAppID @"1253653367"
+#define kRegion @"ap-guangzhou"
+#define kTestBucket @"karistraviscibukcet"
 
-#define kSecretID [[NSProcessInfo processInfo] environment][@"kSecretID"]
-#define kSecretKey [[NSProcessInfo processInfo] environment][@"kSecretKey"]
-#define kAppID [[NSProcessInfo processInfo] environment][@"kAppID"]
-#define kRegion [[NSProcessInfo processInfo] environment][@"kRegion"]
-#define kTestBucket [[NSProcessInfo processInfo] environment][@"kTestBucket"]
-#define kTestFromAnotherRegionCopy [[NSProcessInfo processInfo] environment][@"kTestFromAnotherRegionCopy"] 
+#define kTestFromAnotherRegionCopy @"testcopyFromAnotherRegion"
 #endif /* TestCommonDefine_h */
