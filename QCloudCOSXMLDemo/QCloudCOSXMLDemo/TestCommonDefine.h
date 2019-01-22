@@ -12,10 +12,10 @@
 #import "NSString+UINCategory.h"
 #define CNNORTH_REGION
 
-#define kSecretID @""
-#define kSecretKey @""
-#define kAppID @""
-#define kRegion @""
-#define kTestBucket @""
-#define kTestFromAnotherRegionCopy @"" 
+#define kSecretID [[NSProcessInfo processInfo] environment][@"kSecretID"]
+#define kSecretKey [[NSProcessInfo processInfo] environment][@"kSecretKey"]
+#define kAppID [[NSProcessInfo processInfo] environment][@"kAppID"]
+#define kRegion [[NSProcessInfo processInfo] environment][@"kRegion"]
+#define kTestBucket [[NSProcessInfo processInfo] environment][@"kTestBucket"]
+#define kTestFromAnotherRegionCopy [[NSProcessInfo processInfo] environment][@"kTestFromAnotherRegionCopy"] 
 #endif /* TestCommonDefine_h */
