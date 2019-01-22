@@ -4,9 +4,15 @@ podfile: QCloudCOSXMLDemo/Podfile
 xcode_workspace: QCloudCOSXMLDemo.xcworkspace
 xcode_scheme: QCloudCOSXMLDemoTests
 xcode_destination: platform=iOS Simulator,OS=11.3,name=iPhone X
+
+before_install:
+- pod repo update
+
+intall:
+- pod install
 before_script:
  # Create and start emulator
-  pwd
-  cd QCloudCOSXMLDemo
-  pwd
+  - pwd
+  - cd QCloudCOSXMLDemo
+  - pwd
 
