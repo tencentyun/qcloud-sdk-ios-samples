@@ -17,7 +17,7 @@ before_script:
   
   - cd QCloudCOSXMLDemo
   - pwd
-  - echo -e "{"secretID\":\"${secretID}\", \"secretKey\":\"${secretKey}\"}" >> key.json 
+  - echo -e "{\"secretID\":\"${secretID}\", \"secretKey\":\"${secretKey}\"}" >> key.json 
   - cat key.json
 
 
