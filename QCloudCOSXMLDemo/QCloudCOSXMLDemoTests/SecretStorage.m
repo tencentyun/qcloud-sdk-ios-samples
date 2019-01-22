@@ -23,7 +23,6 @@
     NSString* path = [[NSBundle mainBundle] pathForResource:@"key" ofType:@"json"];
     NSData* jsonData = [[NSData alloc] initWithContentsOfFile:path];
     NSDictionary* dict = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
-    self.appID = dict[@"appID"];
     self.secretID = dict[@"secretID"];
     self.secretKey = dict[@"secretKey"];
     return  self;
