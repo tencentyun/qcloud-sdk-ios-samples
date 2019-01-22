@@ -5,5 +5,5 @@ target 'QCloudCOSXMLDemo' do
 end
 
 target 'QCloudCOSXMLDemoTests' do
-  pod 'QCloudCOSXML'
+     pod 'QCloudCOSXML'
 end

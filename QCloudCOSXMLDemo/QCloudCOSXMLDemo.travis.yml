@@ -1,0 +1,4 @@
+language: objective-c
+xcode_workspace: QCloudCOSXMLDemo.xcworkspace
+xcode_scheme: QCloudCOSXMLDemoTests
+xcode_destination: platform=iOS Simulator,OS=11.3,name=iPhone X
