@@ -17,7 +17,7 @@
 #import "QCloudTestTempVariables.h"
 #import "QCloudCOSXMLTestUtility.h"
 #import <QCloudCOSXML/QCloudCOSXMLService.h>
-
+#import "SecretStorage.h"
 @interface QCloudCOSXMLDemoTests : XCTestCase <QCloudSignatureProvider>
 @property (nonatomic, strong) NSString* bucket;
 @property (nonatomic, strong) NSString* appID;
@@ -32,8 +32,8 @@
 - (void)signatureWithFields:(QCloudSignatureFields *)fileds request:(QCloudBizHTTPRequest *)request urlRequest:(NSMutableURLRequest *)urlRequst compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock {
     
     QCloudCredential* credential = [QCloudCredential new];
-    credential.secretID = kSecretID;
-    credential.secretKey = kSecretKey;
+    credential.secretID = [SecretStorage sharedInstance].secretID;;
+    credential.secretKey = [SecretStorage sharedInstance].secretKey;
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc] initWithCredential:credential];
     QCloudSignature* signature =  [creator signatureForData:urlRequst];
     continueBlock(signature, nil);

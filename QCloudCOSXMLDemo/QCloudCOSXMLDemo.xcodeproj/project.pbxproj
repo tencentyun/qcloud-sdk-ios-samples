@@ -19,6 +19,8 @@
 		1AFD73241EED1EF5002A1CD2 /* QCloudUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD73231EED1EF5002A1CD2 /* QCloudUploadViewController.m */; };
 		1AFD73271EED1EFF002A1CD2 /* QCloudDownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD73261EED1EFF002A1CD2 /* QCloudDownloadViewController.m */; };
 		73E6C668E5458D7E419F8A84 /* Pods_QCloudCOSXMLDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70A96602CA6E1F5946D6C497 /* Pods_QCloudCOSXMLDemoTests.framework */; };
+		7F14001121F74169009247E7 /* SecretStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F14001021F74169009247E7 /* SecretStorage.m */; };
+		7F14001321F7428F009247E7 /* key.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F14001221F7428F009247E7 /* key.json */; };
 		A52CF565A7DC8D318452880C /* Pods_QCloudCOSXMLDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831FA4BA8BB44C748DF19C70 /* Pods_QCloudCOSXMLDemo.framework */; };
 		A801AD41201990DC004D1B9A /* NSString+UINCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C56AA31F205F13007D845B /* NSString+UINCategory.m */; };
 		A801AD42201990DC004D1B9A /* QCloudTestTempVariables.m in Sources */ = {isa = PBXBuildFile; fileRef = A80802DF1FB945E800A7020E /* QCloudTestTempVariables.m */; };
@@ -73,6 +75,9 @@
 		6EA9F3C34ABACFEC7DD62D8B /* Pods_QCloudCOSXMLDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QCloudCOSXMLDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F98B7F2A1115840A5C2B935 /* Pods_QCloudCOSXMLDemoTests5_2_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QCloudCOSXMLDemoTests5_2_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70A96602CA6E1F5946D6C497 /* Pods_QCloudCOSXMLDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QCloudCOSXMLDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F14000F21F74169009247E7 /* SecretStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecretStorage.h; sourceTree = "<group>"; };
+		7F14001021F74169009247E7 /* SecretStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecretStorage.m; sourceTree = "<group>"; };
+		7F14001221F7428F009247E7 /* key.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = key.json; sourceTree = SOURCE_ROOT; };
 		831FA4BA8BB44C748DF19C70 /* Pods_QCloudCOSXMLDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QCloudCOSXMLDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9654212306C795652741CD7D /* Pods-QCloudCOSXMLDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QCloudCOSXMLDemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QCloudCOSXMLDemoUITests/Pods-QCloudCOSXMLDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97B41EAB32CF1E794485FFFD /* Pods_QCloudCOSXMLDemo_QCloudCOSXMLDemoTests5_2_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QCloudCOSXMLDemo_QCloudCOSXMLDemoTests5_2_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +137,7 @@
 		1AB143E31E601E0500830F93 = {
 			isa = PBXGroup;
 			children = (
+				7F14001221F7428F009247E7 /* key.json */,
 				1AB143EE1E601E0500830F93 /* QCloudCOSXMLDemo */,
 				1AB144081E601E0500830F93 /* QCloudCOSXMLDemoTests */,
 				1AB143ED1E601E0500830F93 /* Products */,
@@ -199,6 +205,8 @@
 				1AB1440B1E601E0500830F93 /* Info.plist */,
 				1A1C1DB21ED4324400EF74AB /* QCloudCOSTransferTests.m */,
 				1AB3815D1EE8FFCA00F6E302 /* QCloudCOSXMLBucketTests.m */,
+				7F14000F21F74169009247E7 /* SecretStorage.h */,
+				7F14001021F74169009247E7 /* SecretStorage.m */,
 			);
 			path = QCloudCOSXMLDemoTests;
 			sourceTree = "<group>";
@@ -352,6 +360,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AC3C2711EED368100B3151F /* Main.storyboard in Resources */,
+				7F14001321F7428F009247E7 /* key.json in Resources */,
 				1AB143FF1E601E0500830F93 /* LaunchScreen.storyboard in Resources */,
 				1AB143FC1E601E0500830F93 /* Assets.xcassets in Resources */,
 			);
@@ -499,6 +508,7 @@
 				1AB3815E1EE8FFCA00F6E302 /* QCloudCOSXMLBucketTests.m in Sources */,
 				1AB1440A1E601E0500830F93 /* QCloudCOSXMLDemoTests.m in Sources */,
 				A8674C411F4ACF20005E14DD /* QCloudCOSXMLExceptionCoverage.m in Sources */,
+				7F14001121F74169009247E7 /* SecretStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

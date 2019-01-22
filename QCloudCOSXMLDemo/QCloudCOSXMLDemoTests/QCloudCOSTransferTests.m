@@ -16,6 +16,7 @@
 #import "QCloudTestTempVariables.h"
 #import "QCloudCOSXMLTestUtility.h"
 #define kHTTPServiceKey @"HTTPService"
+#import "SecretStorage.h"
 @interface QCloudCOSTransferTests : XCTestCase <QCloudSignatureProvider>
 @property (nonatomic, strong) NSString* bucket;
 @property (nonatomic, strong) NSMutableArray* tempFilePathArray;
@@ -64,8 +65,8 @@
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
     QCloudCredential* credential = [QCloudCredential new];
-    credential.secretID = kSecretID;
-    credential.secretKey = kSecretKey;
+    credential.secretID = [SecretStorage sharedInstance].secretID;;
+    credential.secretKey = [SecretStorage sharedInstance].secretKey;
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc] initWithCredential:credential];
     QCloudSignature* signature =  [creator signatureForData:urlRequst];
     continueBlock(signature, nil);
