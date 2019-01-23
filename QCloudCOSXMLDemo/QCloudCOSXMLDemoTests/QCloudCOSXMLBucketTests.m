@@ -145,32 +145,6 @@
     XCTAssertNil(responseError);
 }
 
-- (void)testMoreRegion {
-    XCTestExpectation* exception = [self expectationWithDescription:@"Delete bucket exception"];
-    __block NSError* responseError ;
-    __block QCloudPutBucketRequest* putBucketRequest = [[QCloudPutBucketRequest alloc] init];
-    NSString *bucketName = [NSString stringWithFormat:@"bucketcanbedelete%i",arc4random()%1000];
-    NSLog(@"---- %@",bucketName);
-    putBucketRequest.bucket = bucketName;
-    
-    putBucketRequest.regionName = @"ap-beijing-1";;
-    [putBucketRequest setFinishBlock:^(id outputObject, NSError* error) {
-        XCTAssertNil(error);
-        if (!error) {
-            QCloudGetBucketRequest* request = [[QCloudGetBucketRequest alloc ] init];
-            request.bucket = bucketName;
-            [request setFinishBlock:^(id outputObject,NSError*error) {
-                responseError = error;
-                [exception fulfill];
-            }];
-            [[QCloudCOSXMLService defaultCOSXML] GetBucket:request];
-        } else {
-            [exception fulfill];
-        }
-    }];
-    [[QCloudCOSXMLService defaultCOSXML] PutBucket:putBucketRequest];
-    [self waitForExpectationsWithTimeout:100 handler:nil];
-}
 
 //- (void)testPutBucket {
 //    QCloudPutBucketRequest* putBucketRequest = [[QCloudPutBucketRequest alloc] init];
