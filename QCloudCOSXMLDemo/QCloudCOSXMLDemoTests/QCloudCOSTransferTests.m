@@ -120,7 +120,7 @@
 
 - (void) testMultiUpload {
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
-    int randomNumber = arc4random()%100;
+    int randomNumber = arc4random()%30;
     NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:15*1024*1024 + randomNumber]];
     __block NSString *object = [NSUUID UUID].UUIDString;
     put.object = object;
