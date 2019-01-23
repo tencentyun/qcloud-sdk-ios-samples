@@ -897,7 +897,6 @@
                 NSLog(@"result.location: %@",result.location);
                 NSLog(@"result.eTag: %@",result.eTag);
                 XCTAssertNil(error);
-                XCTAssertNotNil(outputObject);
                 [resumeExp fulfill];
             }];
             

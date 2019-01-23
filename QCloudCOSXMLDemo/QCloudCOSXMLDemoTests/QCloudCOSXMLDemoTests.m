@@ -580,7 +580,7 @@
         [uploadExpectation fulfill];
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:uploadObjectRequest];
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    [self waitForExpectationsWithTimeout:300 handler:nil];
     QCloudCOSXMLCopyObjectRequest* request = [[QCloudCOSXMLCopyObjectRequest alloc] init];
     
     request.bucket = self.bucket;
@@ -615,7 +615,7 @@
             [uploadExpectation fulfill];
         }];
         [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:uploadObjectRequest];
-        [self waitForExpectationsWithTimeout:80 handler:nil];
+        [self waitForExpectationsWithTimeout:300 handler:nil];
     }
     
     XCTestExpectation* getBucketExpectation = [self expectationWithDescription:@"get bucket"];
