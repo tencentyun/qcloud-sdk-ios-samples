@@ -121,7 +121,7 @@
 - (void) testMultiUpload {
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
     int randomNumber = arc4random()%30;
-    NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:15*1024*1024 + randomNumber]];
+    NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:20*1024*1024]];
     __block NSString *object = [NSUUID UUID].UUIDString;
     put.object = object;
     put.bucket = self.bucket;
@@ -161,7 +161,7 @@
 - (void) testHTTPSMultipleUpload {
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
     int randomNumber = arc4random()%100;
-    NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:15*1024*1024 + randomNumber]];
+    NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:30*1024*1024];
     put.object = [NSUUID UUID].UUIDString;
     put.bucket = self.bucket;
     put.body =  url;
@@ -201,7 +201,7 @@
         [exp fulfill];
     }];
     [[QCloudCOSXMLService cosxmlServiceForKey:kHTTPServiceKey] PutObject:put];
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    [self waitForExpectationsWithTimeout:200 handler:nil];
     
     __block XCTestExpectation* getObjectExpectation = [self expectationWithDescription:@"Get Object Expectation"];
     QCloudCOSXMLDownloadObjectRequest* getObjectRequest = [[QCloudCOSXMLDownloadObjectRequest alloc] init];
@@ -214,7 +214,7 @@
     }];
     
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] DownloadObject:getObjectRequest];
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    [self waitForExpectationsWithTimeout:200 handler:nil];
 }
 //SSE-C uploadObject 简单上传
 - (void)testSimplePut_GetObjectUseUploadObjectWithSSE{
@@ -236,7 +236,7 @@
         
     }];
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] UploadObject:uploadObjectRequest];
-    [self waitForExpectationsWithTimeout:10 handler:nil];
+    [self waitForExpectationsWithTimeout:100 handler:nil];
     
     __block XCTestExpectation* GetObjectExpectation = [self expectationWithDescription:@"Put Object Expectation"];
     QCloudCOSXMLDownloadObjectRequest* downloadRequest = [[QCloudCOSXMLDownloadObjectRequest alloc] init];
@@ -253,7 +253,7 @@
         QCloudLogInfo(@"bytesDownload: %lld  totalBytesDownload :%lld  totalBytesExpectedToDownload:%lld ",bytesDownload,totalBytesDownload,totalBytesExpectedToDownload);
     }];
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] DownloadObject:downloadRequest];
-    [self waitForExpectationsWithTimeout:10 handler:nil];
+    [self waitForExpectationsWithTimeout:100 handler:nil];
     
 }
 
@@ -275,7 +275,7 @@
     }];
     
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] UploadObject:uploadObjectRequest];
-    [self waitForExpectationsWithTimeout:10 handler:nil];
+    [self waitForExpectationsWithTimeout:100 handler:nil];
     
     __block XCTestExpectation* downloadObjectExp = [self expectationWithDescription:@"download Object Expectation"];
     QCloudCOSXMLDownloadObjectRequest* downloadRequest = [[QCloudCOSXMLDownloadObjectRequest alloc] init];
@@ -292,7 +292,7 @@
         QCloudLogInfo(@"testDownloadObject bytesDownload: %lld  totalBytesDownload :%lld  totalBytesExpectedToDownload:%lld ",bytesDownload,totalBytesDownload,totalBytesExpectedToDownload);
     }];
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] DownloadObject:downloadRequest];
-    [self waitForExpectationsWithTimeout:10 handler:nil];
+    [self waitForExpectationsWithTimeout:100 handler:nil];
     
 }
 -(void)testHeadObjectWithSSE{
@@ -344,7 +344,7 @@
         [Expectation fulfill];
     }];
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] UploadObject:uploadObjectRequest];
-    [self waitForExpectationsWithTimeout:100 handler:nil];
+    [self waitForExpectationsWithTimeout:300 handler:nil];
     
     __block XCTestExpectation* getObjecExpectation = [self expectationWithDescription:@"Put Object Expectation"];
     QCloudGetObjectRequest* getObjectRequest = [[QCloudGetObjectRequest alloc] init];
@@ -360,7 +360,7 @@
         QCloudLogInfo(@"bytesDownload: %lld  totalBytesDownload :%lld  totalBytesExpectedToDownload:%lld ",bytesDownload,totalBytesDownload,totalBytesExpectedToDownload);
     }];
     [[QCloudCOSXMLService cosxmlServiceForKey:kHTTPServiceKey] GetObject:getObjectRequest];
-    [self waitForExpectationsWithTimeout:100 handler:nil];
+    [self waitForExpectationsWithTimeout:300 handler:nil];
 }
 - (void)testCopySmallFileWithSSE {
     NSString* tempBucket = [[QCloudCOSXMLTestUtility sharedInstance] createTestBucketWithPrefix:@"tf"];
@@ -382,7 +382,7 @@
         [uploadChineseNameSmallFileExpectation fulfill];
     }];
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] UploadObject:uploadObjectRequest1];
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    [self waitForExpectationsWithTimeout:200 handler:nil];
     
     QCloudCOSXMLCopyObjectRequest* request = [[QCloudCOSXMLCopyObjectRequest alloc] init];
     [request setCOSServerSideEncyptionWithCustomerKey:customKey];
@@ -414,14 +414,14 @@
     [uploadObjectRequest2 setCOSServerSideEncyptionWithCustomerKey:customKey];
     uploadObjectRequest2.bucket = tempBucket;
     uploadObjectRequest2.object = @"中文名Copy大文件";
-    uploadObjectRequest2.body = [NSURL fileURLWithPath:[self tempFileWithSize:30*1024*1024]];
+    uploadObjectRequest2.body = [NSURL fileURLWithPath:[self tempFileWithSize:20*1024*1024]];
     [uploadObjectRequest2 setFinishBlock:^(QCloudUploadObjectResult *result, NSError *error) {
         NSLog(@"allHeaderFields:  %@",result.__originHTTPURLResponse__.allHeaderFields);
         XCTAssertNil(error,@"error occures on uploading");
         [uploadChineseNameBigFileExpectation fulfill];
     }];
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] UploadObject:uploadObjectRequest2];
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    [self waitForExpectationsWithTimeout:1000 handler:nil];
     XCTestExpectation* expectation = [self expectationWithDescription:@"Put Object Copy"];
     
     QCloudCOSXMLCopyObjectRequest* request = [[QCloudCOSXMLCopyObjectRequest alloc] init];
@@ -463,7 +463,7 @@
         [exp fulfill];
     }];
     [[QCloudCOSXMLService cosxmlServiceForKey:kHTTPServiceKey] PutObject:put];
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    [self waitForExpectationsWithTimeout:200 handler:nil];
     
     __block XCTestExpectation* getObjectExpectation = [self expectationWithDescription:@"Get Object Expectation"];
     QCloudGetObjectRequest* getObjectRequest = [[QCloudGetObjectRequest alloc] init];
@@ -474,7 +474,7 @@
         [getObjectExpectation fulfill];
     }];
     [[QCloudCOSXMLService cosxmlServiceForKey:kHTTPServiceKey] GetObject:getObjectRequest];
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    [self waitForExpectationsWithTimeout:200 handler:nil];
 }
 - (void)testSimplePut_Get_Head_Object_copy_WithSSEKMS {
     ;
@@ -494,7 +494,7 @@
         [putObejctExpectation fulfill];
     }];
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] UploadObject:uploadObjectRequest];
-    [self waitForExpectationsWithTimeout:100 handler:nil];
+    [self waitForExpectationsWithTimeout:300 handler:nil];
     
     __block XCTestExpectation* getObjecExpectation = [self expectationWithDescription:@"get Object Expectation"];
     QCloudGetObjectRequest* getObjectRequest = [[QCloudGetObjectRequest alloc] init];
@@ -506,7 +506,7 @@
         [getObjecExpectation fulfill];
     }];
     [[QCloudCOSXMLService cosxmlServiceForKey:kHTTPServiceKey] GetObject:getObjectRequest];
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    [self waitForExpectationsWithTimeout:300 handler:nil];
     
     __block XCTestExpectation* headObjectExpectation = [self expectationWithDescription:@"Put Object Expectation"];
     QCloudHeadObjectRequest* headObjectRequest = [[QCloudHeadObjectRequest alloc] init];
@@ -517,7 +517,7 @@
     headObjectRequest.bucket = uploadObjectRequest.bucket;
     headObjectRequest.object = uploadObjectRequest.object;
     [[QCloudCOSXMLService cosxmlServiceForKey:kHTTPServiceKey] HeadObject:headObjectRequest];
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    [self waitForExpectationsWithTimeout:200 handler:nil];
     
     
     //    QCloudCOSXMLCopyObjectRequest* request = [[QCloudCOSXMLCopyObjectRequest alloc] init];
@@ -556,7 +556,7 @@
         [putObejctExpectation fulfill];
     }];
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] UploadObject:uploadObjectRequest];
-    [self waitForExpectationsWithTimeout:1000 handler:nil];
+    [self waitForExpectationsWithTimeout:10000 handler:nil];
     
     __block XCTestExpectation* getObjecExpectation = [self expectationWithDescription:@"get Object Expectation"];
     QCloudGetObjectRequest* getObjectRequest = [[QCloudGetObjectRequest alloc] init];
@@ -567,7 +567,7 @@
         [getObjecExpectation fulfill];
     }];
     [[QCloudCOSXMLService cosxmlServiceForKey:kHTTPServiceKey] GetObject:getObjectRequest];
-    [self waitForExpectationsWithTimeout:1000 handler:nil];
+    [self waitForExpectationsWithTimeout:10000 handler:nil];
     
     __block XCTestExpectation* headObjectExpectation = [self expectationWithDescription:@"Put Object Expectation"];
     QCloudHeadObjectRequest* headObjectRequest = [[QCloudHeadObjectRequest alloc] init];
@@ -600,7 +600,7 @@
 - (void) testChineseFileNameBigfileUpload {
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
     int randomNumber = arc4random()%100;
-    NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:15*1024*1024 + randomNumber]];
+    NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:20*1024*1024]];
     put.object = @"中文名大文件";
     put.bucket = self.bucket;
     put.body =  url;
@@ -650,7 +650,7 @@
 - (void)testSpecialCharacterFileNameBigFileUpoload {
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
     int randomNumber = arc4random()%100;
-    NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:15*1024*1024 + randomNumber]];
+    NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:15*1024*1024 ]];
     put.object = @"→↓←→↖↗↙↘! \"#$%&'()*+,-.0123456789:;<=>@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
     put.bucket = self.bucket;
     put.body =  url;
@@ -698,7 +698,7 @@
 
 - (void)testIntegerTimesSliceMultipartUpload {
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
-    NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:50*1024*1024 ]];
+    NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:30*1024*1024 ]];
     put.object = [NSUUID UUID].UUIDString;
     put.bucket = self.bucket;
     put.body =  url;
@@ -949,7 +949,7 @@
         
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    [self waitForExpectationsWithTimeout:200 handler:nil];
 }
 
 
