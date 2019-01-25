@@ -1,5 +1,6 @@
-# 腾讯云 存储SDK Demo for iOS
+# 腾讯云 存储SDK Demo for iOS   ![](https://travis-ci.org/tencentyun/qcloud-sdk-ios-samples.svg?branch=master) 
 这里包含了腾讯云存储 SDK for iOS
+
 # Demo 列表
 当前的产品有
 - COS XML 开箱即用示例(OOTB-XML)
