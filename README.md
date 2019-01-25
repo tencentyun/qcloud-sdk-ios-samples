@@ -1,4 +1,7 @@
-# 腾讯云 存储SDK Demo for iOS   ![](https://travis-ci.org/tencentyun/qcloud-sdk-ios-samples.svg?branch=master) 
+# 腾讯云 存储SDK Demo for iOS
+
+[![Travis CI](https://travis-ci.org/tencentyun/qcloud-sdk-ios-samples.svg?branch=master)](https://travis-ci.org/tencentyun/qcloud-sdk-ios-samples)
+
 这里包含了腾讯云存储 SDK for iOS
 
 # Demo 列表
