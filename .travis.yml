@@ -19,5 +19,10 @@ before_script:
   - pwd
   - echo -e "{\"secretID\":\"${secretID}\", \"secretKey\":\"${secretKey}\"}" >> key.json 
 
-
+notifications:
+  email:
+    recipients:
+      - wjielai@tencent.com
+      - fysntian@tencent.com
+      - burningzhan@tencent.com 
 
