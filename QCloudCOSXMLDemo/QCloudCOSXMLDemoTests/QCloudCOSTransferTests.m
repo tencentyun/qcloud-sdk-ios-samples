@@ -403,41 +403,41 @@
     
 }
 - (void)testCopyBigFileWithSSE {
-    NSString* tempBucket = [[QCloudCOSXMLTestUtility sharedInstance] createTestBucketWithPrefix:@"tf"];
-    NSString* tempFileName =  @"30MBTempFile";
-    
-    XCTestExpectation* uploadChineseNameBigFileExpectation = [self expectationWithDescription:@"upload temp object"];
-    NSString *customKey = @"123456qwertyuioplkjhgfdsazxcvbnm";
-    
-    QCloudCOSXMLUploadObjectRequest* uploadObjectRequest2 = [[QCloudCOSXMLUploadObjectRequest alloc] init];
-    
-    [uploadObjectRequest2 setCOSServerSideEncyptionWithCustomerKey:customKey];
-    uploadObjectRequest2.bucket = tempBucket;
-    uploadObjectRequest2.object = @"中文名Copy大文件";
-    uploadObjectRequest2.body = [NSURL fileURLWithPath:[self tempFileWithSize:20*1024*1024]];
-    [uploadObjectRequest2 setFinishBlock:^(QCloudUploadObjectResult *result, NSError *error) {
-        NSLog(@"allHeaderFields:  %@",result.__originHTTPURLResponse__.allHeaderFields);
-        XCTAssertNil(error,@"error occures on uploading");
-        [uploadChineseNameBigFileExpectation fulfill];
-    }];
-    [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] UploadObject:uploadObjectRequest2];
-    [self waitForExpectationsWithTimeout:10000 handler:nil];
-    XCTestExpectation* expectation = [self expectationWithDescription:@"Put Object Copy"];
-    
-    QCloudCOSXMLCopyObjectRequest* request = [[QCloudCOSXMLCopyObjectRequest alloc] init];
-    [request setCOSServerSideEncyptionWithCustomerKey:customKey];
-    request.bucket = self.bucket;
-    request.object = [NSString stringWithFormat:@"copy-%@",tempFileName];
-    request.sourceBucket = tempBucket;
-    request.sourceObject = uploadObjectRequest2.object;
-    request.sourceAPPID = [QCloudCOSXMLService defaultCOSXML].configuration.appID;
-    request.sourceRegion= [QCloudCOSXMLService defaultCOSXML].configuration.endpoint.regionName;
-    NSLog(@"customHeaders %@",request.customHeaders);
-    [request setFinishBlock:^(QCloudCopyObjectResult* result, NSError* error) {
-        XCTAssertNil(error);
-        [expectation fulfill];
-    }];
-    [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] CopyObject:request];
+//    NSString* tempBucket = [[QCloudCOSXMLTestUtility sharedInstance] createTestBucketWithPrefix:@"tf"];
+//    NSString* tempFileName =  @"30MBTempFile";
+//    
+//    XCTestExpectation* uploadChineseNameBigFileExpectation = [self expectationWithDescription:@"upload temp object"];
+//    NSString *customKey = @"123456qwertyuioplkjhgfdsazxcvbnm";
+//    
+//    QCloudCOSXMLUploadObjectRequest* uploadObjectRequest2 = [[QCloudCOSXMLUploadObjectRequest alloc] init];
+//    
+//    [uploadObjectRequest2 setCOSServerSideEncyptionWithCustomerKey:customKey];
+//    uploadObjectRequest2.bucket = tempBucket;
+//    uploadObjectRequest2.object = @"中文名Copy大文件";
+//    uploadObjectRequest2.body = [NSURL fileURLWithPath:[self tempFileWithSize:20*1024*1024]];
+//    [uploadObjectRequest2 setFinishBlock:^(QCloudUploadObjectResult *result, NSError *error) {
+//        NSLog(@"allHeaderFields:  %@",result.__originHTTPURLResponse__.allHeaderFields);
+//        XCTAssertNil(error,@"error occures on uploading");
+//        [uploadChineseNameBigFileExpectation fulfill];
+//    }];
+//    [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] UploadObject:uploadObjectRequest2];
+//    [self waitForExpectationsWithTimeout:10000 handler:nil];
+//    XCTestExpectation* expectation = [self expectationWithDescription:@"Put Object Copy"];
+//    
+//    QCloudCOSXMLCopyObjectRequest* request = [[QCloudCOSXMLCopyObjectRequest alloc] init];
+//    [request setCOSServerSideEncyptionWithCustomerKey:customKey];
+//    request.bucket = self.bucket;
+//    request.object = [NSString stringWithFormat:@"copy-%@",tempFileName];
+//    request.sourceBucket = tempBucket;
+//    request.sourceObject = uploadObjectRequest2.object;
+//    request.sourceAPPID = [QCloudCOSXMLService defaultCOSXML].configuration.appID;
+//    request.sourceRegion= [QCloudCOSXMLService defaultCOSXML].configuration.endpoint.regionName;
+//    NSLog(@"customHeaders %@",request.customHeaders);
+//    [request setFinishBlock:^(QCloudCopyObjectResult* result, NSError* error) {
+//        XCTAssertNil(error);
+//        [expectation fulfill];
+//    }];
+//    [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] CopyObject:request];
     [self waitForExpectationsWithTimeout:10000 handler:nil];
     
 }
