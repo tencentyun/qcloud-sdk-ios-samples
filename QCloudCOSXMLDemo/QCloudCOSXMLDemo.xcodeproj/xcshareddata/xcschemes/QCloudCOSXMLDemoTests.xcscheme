@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2A221D012BB1C2EE4CAB93211654771D"
-               BuildableName = "libQCloudCOSXML.a"
+               BlueprintIdentifier = "B2155DC9E9B69430B6C78F3E6D06BACF"
+               BuildableName = "QCloudCOSXML.framework"
                BlueprintName = "QCloudCOSXML"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
             </BuildableReference>
@@ -28,8 +28,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "061E8F0A4E1B5731C31CFB2AE174C124"
-               BuildableName = "libQCloudCore.a"
+               BlueprintIdentifier = "DBD31C8A3F2371ED732009637E95423D"
+               BuildableName = "QCloudCore.framework"
                BlueprintName = "QCloudCore"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
             </BuildableReference>
@@ -67,8 +67,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2A221D012BB1C2EE4CAB93211654771D"
-            BuildableName = "libQCloudCOSXML.a"
+            BlueprintIdentifier = "B2155DC9E9B69430B6C78F3E6D06BACF"
+            BuildableName = "QCloudCOSXML.framework"
             BlueprintName = "QCloudCOSXML"
             ReferencedContainer = "container:Pods/Pods.xcodeproj">
          </BuildableReference>
@@ -89,8 +89,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2A221D012BB1C2EE4CAB93211654771D"
-            BuildableName = "libQCloudCOSXML.a"
+            BlueprintIdentifier = "B2155DC9E9B69430B6C78F3E6D06BACF"
+            BuildableName = "QCloudCOSXML.framework"
             BlueprintName = "QCloudCOSXML"
             ReferencedContainer = "container:Pods/Pods.xcodeproj">
          </BuildableReference>
@@ -107,8 +107,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2A221D012BB1C2EE4CAB93211654771D"
-            BuildableName = "libQCloudCOSXML.a"
+            BlueprintIdentifier = "B2155DC9E9B69430B6C78F3E6D06BACF"
+            BuildableName = "QCloudCOSXML.framework"
             BlueprintName = "QCloudCOSXML"
             ReferencedContainer = "container:Pods/Pods.xcodeproj">
          </BuildableReference>
