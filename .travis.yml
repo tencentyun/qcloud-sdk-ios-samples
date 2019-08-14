@@ -22,6 +22,6 @@ before_script:
 notifications:
   email:
     recipients:
-      - wjielai@tencent.com
-      - fysntian@tencent.com
+      # - wjielai@tencent.com
+      # - fysntian@tencent.com
 
