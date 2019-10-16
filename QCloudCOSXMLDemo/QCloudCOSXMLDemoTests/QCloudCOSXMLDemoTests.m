@@ -45,7 +45,7 @@
     configuration.appID =kAppID;
     configuration.signatureProvider = self;
     QCloudCOSXMLEndPoint* endpoint = [[QCloudCOSXMLEndPoint alloc] init];
-    endpoint.regionName = @"ap-guangzhou";
+    endpoint.regionName = @"eu-frankfurt";
     configuration.endpoint = endpoint;
     [QCloudCOSXMLService registerDefaultCOSXMLWithConfiguration:configuration];
     [QCloudCOSTransferMangerService registerDefaultCOSTransferMangerWithConfiguration:configuration];
@@ -136,7 +136,7 @@
     configuration.signatureProvider = self;
     
     QCloudCOSXMLEndPoint* endpoint = [[QCloudCOSXMLEndPoint alloc] init];
-    endpoint.regionName = @"ap-guangzhou";
+    endpoint.regionName = @"eu-frankfurt";
     configuration.endpoint = endpoint;
     
     NSString* serviceKey = @"test";
@@ -505,27 +505,27 @@
     //    NSURL* fileURL = [NSURL fileURLWithPath:[self tempFileWithSize:1024*1024*3]];
     //    put.body = fileURL;
     //    NSLog(@"fileURL  %@",fileURL.absoluteString);
-    XCTestExpectation* exp = [self expectationWithDescription:@"delete"];
-    __block QCloudGetObjectRequest* request = [QCloudGetObjectRequest new];
+//     XCTestExpectation* exp = [self expectationWithDescription:@"delete"];
+//     __block QCloudGetObjectRequest* request = [QCloudGetObjectRequest new];
     
-    request.downloadingURL = [NSURL URLWithString:QCloudTempFilePathWithExtension(@"downding")];
-    //    [put setFinishBlock:^(id outputObject, NSError *error) {
-    request.bucket = @"karis1test-1253653367";
-    request.object = @"multi_tce.txt";
-    request.enableMD5Verification = YES;
-    [request setFinishBlock:^(id outputObject, NSError *error) {
-        XCTAssertNil(error);
-        [exp fulfill];
-    }];
-    [request setDownProcessBlock:^(int64_t bytesDownload, int64_t totalBytesDownload, int64_t totalBytesExpectedToDownload) {
-        NSLog(@"⏬⏬⏬⏬DOWN [Total]%lld  [Downloaded]%lld [Download]%lld", totalBytesExpectedToDownload, totalBytesDownload, bytesDownload);
-    }];
-    [[QCloudCOSXMLService defaultCOSXML] GetObject:request];
+//     request.downloadingURL = [NSURL URLWithString:QCloudTempFilePathWithExtension(@"downding")];
+//     //    [put setFinishBlock:^(id outputObject, NSError *error) {
+//     request.bucket = @"karis1test-1253653367";
+//     request.object = @"multi_tce.txt";
+//     request.enableMD5Verification = YES;
+//     [request setFinishBlock:^(id outputObject, NSError *error) {
+//         XCTAssertNil(error);
+//         [exp fulfill];
+//     }];
+//     [request setDownProcessBlock:^(int64_t bytesDownload, int64_t totalBytesDownload, int64_t totalBytesExpectedToDownload) {
+//         NSLog(@"⏬⏬⏬⏬DOWN [Total]%lld  [Downloaded]%lld [Download]%lld", totalBytesExpectedToDownload, totalBytesDownload, bytesDownload);
+//     }];
+//     [[QCloudCOSXMLService defaultCOSXML] GetObject:request];
     
-    //    }];
-    //    [[QCloudCOSXMLService defaultCOSXML] PutObject:put];
+//     //    }];
+//     //    [[QCloudCOSXMLService defaultCOSXML] PutObject:put];
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+//     [self waitForExpectationsWithTimeout:80 handler:nil];
     
     //    XCTAssertEqual(QCloudFileSize(request.downloadingURL.path), QCloudFileSize(fileURL.path));
     
@@ -746,7 +746,7 @@
 
 - (void)testGetObjectURL {
     NSString* obejctKey = [self uploadTempObject];
-    NSString* objectDownloadURL = [[QCloudCOSXMLService defaultCOSXML] getURLWithBucket:self.bucket object:obejctKey withAuthorization:YES regionName:@"ap-guangzhou"];
+    NSString* objectDownloadURL = [[QCloudCOSXMLService defaultCOSXML] getURLWithBucket:self.bucket object:obejctKey withAuthorization:YES regionName:@"eu-frankfurt"];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:objectDownloadURL]];
     request.cachePolicy = NSURLRequestReloadIgnoringCacheData;
     XCTestExpectation* expectation = [self expectationWithDescription:@"get object url"];
