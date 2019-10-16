@@ -15,8 +15,8 @@
 #define kSecretID @""
 #define kSecretKey @""
 #define kAppID @"1253653367"
-#define kRegion @"ap-guangzhou"
-#define kTestBucket @"karistraviscibukcet"
+#define kRegion @"eu-frankfurt"
+#define kTestBucket @"iostraviscibukcet"
 
 #define kTestFromAnotherRegionCopy @"testcopyFromAnotherRegion"
 #endif /* TestCommonDefine_h */
