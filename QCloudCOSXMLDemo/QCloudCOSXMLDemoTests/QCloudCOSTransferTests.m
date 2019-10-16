@@ -650,7 +650,7 @@
 - (void)testSpecialCharacterFileNameBigFileUpoload {
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
     int randomNumber = arc4random()%100;
-    NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:10*1024*1024 ]];
+    NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:5*1024*1024 ]];
     put.object = @"→↓←→↖↗↙↘! \"#$%&'()*+,-.0123456789:;<=>@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
     put.bucket = self.bucket;
     put.body =  url;
