@@ -438,7 +438,7 @@
 //        [expectation fulfill];
 //    }];
 //    [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] CopyObject:request];
-    [self waitForExpectationsWithTimeout:10000 handler:nil];
+//     [self waitForExpectationsWithTimeout:10000 handler:nil];
     
 }
 
