@@ -600,7 +600,7 @@
 - (void) testChineseFileNameBigfileUpload {
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
     int randomNumber = arc4random()%100;
-    NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:20*1024*1024]];
+    NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:10*1024*1024]];
     put.object = @"中文名大文件";
     put.bucket = self.bucket;
     put.body =  url;
@@ -611,7 +611,7 @@
     __block id result;
     [put setFinishBlock:^(id outputObject, NSError *error) {
         XCTAssertNil(error);
-        result = outputObject;
+        XCTAssertNotNil(outputObject);
         [exp fulfill];
     }];
     [put setInitMultipleUploadFinishBlock:^(QCloudInitiateMultipartUploadResult* result,QCloudCOSXMLUploadObjectResumeData resumeData) {
@@ -621,7 +621,7 @@
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
     [self waitForExpectationsWithTimeout:18000 handler:^(NSError * _Nullable error) {
     }];
-    XCTAssertNotNil(result);
+    
 }
 
 - (void)testChineseFileNameSmallFileUpload {
