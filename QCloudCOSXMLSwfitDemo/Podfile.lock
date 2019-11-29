@@ -1,0 +1,24 @@
+PODS:
+  - QCloudCore (5.6.7):
+    - QCloudCore/Default (= 5.6.7)
+  - QCloudCore/Default (5.6.7)
+  - QCloudCOSXML (5.6.7):
+    - QCloudCOSXML/Default (= 5.6.7)
+  - QCloudCOSXML/Default (5.6.7):
+    - QCloudCore (= 5.6.7)
+
+DEPENDENCIES:
+  - QCloudCOSXML
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - QCloudCore
+    - QCloudCOSXML
+
+SPEC CHECKSUMS:
+  QCloudCore: ac179452be85d3e27d0299c8009a1491877d7d61
+  QCloudCOSXML: 01f23ab750056135a508540f28edd5c183d311d2
+
+PODFILE CHECKSUM: d1a2d490fa6a3338cb457662c69845475bfeff66
+
+COCOAPODS: 1.7.2
