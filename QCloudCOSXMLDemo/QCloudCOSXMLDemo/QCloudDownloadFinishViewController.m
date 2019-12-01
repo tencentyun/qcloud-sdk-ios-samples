@@ -9,8 +9,8 @@
 #import "QCloudDownloadFinishViewController.h"
 #import "NSURL+FileExtension.h"
 @interface QCloudDownloadFinishViewController ()
-@property (weak, nonatomic) IBOutlet UITextView *DownloadImformationTextView;
-@property (weak, nonatomic) IBOutlet UIButton *openWithOtherApplicationButton;
+@property (strong, nonatomic)  UITextView *DownloadImformationTextView;
+@property (strong, nonatomic) UIButton *openWithOtherApplicationButton;
 
 @end
 
@@ -19,6 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.DownloadImformationTextView = [[UITextView alloc] initWithFrame:self.view.bounds textContainer:nil];
+    [self.view addSubview:self.DownloadImformationTextView];
 }
 
 - (void)didReceiveMemoryWarning {

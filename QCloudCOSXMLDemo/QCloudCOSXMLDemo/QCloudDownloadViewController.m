@@ -96,7 +96,7 @@
     return cell;
 }
 
-#pragma mark - table view delegate 
+#pragma mark - table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -116,7 +116,7 @@
                             imfo.timeSpent = [after timeIntervalSinceDate:before];
                             imfo.fileURL = [weakSelf tempFileURLWithName:content.key];
                             dispatch_async(dispatch_get_main_queue(), ^{
-                                QCloudDownloadFinishViewController* vc = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"QCloudDownloadFinishViewController"];
+                                QCloudDownloadFinishViewController* vc = [QCloudDownloadFinishViewController new];
                                 vc.imformation = imfo;
                                 [weakSelf.navigationController pushViewController:vc animated:YES];
                             });

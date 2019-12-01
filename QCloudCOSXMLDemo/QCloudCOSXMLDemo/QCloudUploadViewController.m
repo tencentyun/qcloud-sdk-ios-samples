@@ -16,24 +16,111 @@
 #import "NSObject+HTTPHeadersContainer.h"
 #import "NSURL+FileExtension.h"
 #import "QCloudCOSXMLConfiguration.h"
+#import "AppDelegate.h"
+#import <QCloudCOSXML/QCloudCOSTransferMangerService.h>
+#import <QCloudCOSXML/QCloudCOSXMLUploadObjectRequest_Private.h>
+#import <QCloudCore/QCloudHTTPSessionManager.h>
 @interface QCloudUploadViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@property (nonatomic, strong)  UIImageView* imagePreviewView;
+@property (nonatomic, strong)  UIProgressView* progressView;
+
+@property (nonatomic,strong) UIView *operationsView;
+@property (nonatomic, strong)  UITextView* resultTextView;
+
+
 @property (nonatomic, strong) NSString* uploadTempFilePath;
 @property (nonatomic, weak) QCloudCOSXMLUploadObjectRequest* uploadRequest;
 @property (nonatomic, strong) NSData* uploadResumeData;
 @property (nonatomic, copy) NSString* uploadBucket;
+@property (nonatomic,strong)QCloudServiceConfiguration *config;
 @end
 
 @implementation QCloudUploadViewController
-
+- (NSString*) tempFileWithSize:(int)size
+{
+    NSString* file4MBPath = QCloudPathJoin(QCloudTempDir(), [NSUUID UUID].UUIDString);
+    
+    if (!QCloudFileExist(file4MBPath)) {
+        [[NSFileManager defaultManager] createFileAtPath:file4MBPath contents:[NSData data] attributes:nil];
+    }
+    NSFileHandle* handler = [NSFileHandle fileHandleForWritingAtPath:file4MBPath];
+    [handler truncateFileAtOffset:size];
+    [handler closeFile];
+    
+    return file4MBPath;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     UIBarButtonItem* rightItem = [[UIBarButtonItem alloc] initWithTitle:@"相册" style:UIBarButtonItemStylePlain target:self action:@selector(selectImage)];
     self.title = @"上传";
-
+//    [self uploadObject];
     self.tabBarController.navigationItem.rightBarButtonItems = @[rightItem];
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self setUpContent];
+    
+}
+-(void)setUpContent{
+    self.imagePreviewView = [[UIImageView alloc] init];
+    [self.view addSubview:self.imagePreviewView];
+    
+    self.progressView = [[UIProgressView alloc]init];
+    self.progressView.backgroundColor = [UIColor lightGrayColor];
+    self.progressView.progressTintColor = [UIColor blueColor];
+    [self.view addSubview:self.progressView];
+    
+    self.operationsView = [[UIView alloc]init];
+    [self.view addSubview:self.operationsView];
+    
+    NSArray *actions = @[@"上传",@"暂停",@"续传",@"取消"];
+    for (int i = 0; i<actions.count; i++) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setTitle:actions[i] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
+        [self.operationsView addSubview:button];
+        switch (i) {
+            case 0:
+                [button addTarget:self action:@selector(beginUpload:) forControlEvents:UIControlEventTouchUpInside];
+                break;
+            case 1:
+            [button addTarget:self action:@selector(pasueUpload:) forControlEvents:UIControlEventTouchUpInside];
+                break;
+            case 2:
+                [button addTarget:self action:@selector(resumeUpload:) forControlEvents:UIControlEventTouchUpInside];
+                break;
+            case 3:
+                [button addTarget:self action:@selector(abortUpload:) forControlEvents:UIControlEventTouchUpInside];
+                break;
+                
+            default:
+                break;
+        }
+    }
+    self.resultTextView = [[UITextView alloc]init];
+    self.resultTextView.text = @"上传结果的信息展示";
+    [self.view addSubview:self.resultTextView];
+    
+    
 }
 
+-(void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+    CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
+    CGFloat screenH = [UIScreen mainScreen].bounds.size.height;
+    CGFloat space = 20;
+    self.imagePreviewView.frame = CGRectMake(space, 0,screenW - space*2 , 300);
+    self.progressView.frame = CGRectMake(space, CGRectGetMaxY(self.imagePreviewView.frame)+space, self.imagePreviewView.frame.size.width, 10);
+    self.operationsView.frame = CGRectMake(space, CGRectGetMaxY(self.progressView.frame)+space,  self.imagePreviewView.frame.size.width, 40);
+    NSUInteger count  = self.operationsView.subviews.count;
+    CGFloat w = (screenW - space*2 - space*(count - 1))/count;
+    for (int i = 0; i<self.operationsView.subviews.count; i++) {
+        UIButton *button = self.operationsView.subviews[i];
+        button.frame = CGRectMake((space + w )*i, 0, w, 40);
+    }
+    self.resultTextView.frame = CGRectMake(space, CGRectGetMaxY(self.operationsView.frame)+space,  self.imagePreviewView.frame.size.width, 200);
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -46,7 +133,7 @@
 }
 
 
-- (IBAction)  selectImage{
+- (void)  selectImage{
     UIImagePickerController* picker = [UIImagePickerController new];
     picker.delegate = self;
     [self presentViewController:picker animated:YES completion:nil];
@@ -62,7 +149,7 @@
     UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
     NSString* tempPath = QCloudTempFilePathWithExtension(@"png");
     [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
-    self.uploadTempFilePath = tempPath;
+    self.uploadTempFilePath = [self tempFileWithSize:1024*1024*40];
     self.imagePreviewView.image = image;
     [picker dismissViewControllerAnimated:NO completion:^{
         
@@ -74,7 +161,7 @@
     self.resultTextView.text = message;
 }
 
-- (IBAction) beginUpload:(id)sender
+- (void) beginUpload:(id)sender
 {
     if (!self.uploadTempFilePath) {
         [self showErrorMessage:@"没有选择文件！！！"];
@@ -87,11 +174,12 @@
     QCloudCOSXMLUploadObjectRequest* upload = [QCloudCOSXMLUploadObjectRequest new];
     upload.body = [NSURL fileURLWithPath:self.uploadTempFilePath];
     upload.bucket = self.uploadBucket;
+
     upload.object = [NSUUID UUID].UUIDString;
     [self uploadFileByRequest:upload];
 }
 
-- (IBAction) abortUpload:(id)sender
+- (void) abortUpload:(id)sender
 {
     if (!self.uploadRequest) {
         [self showErrorMessage:@"不存在上传请求，无法完全中断上传"];
@@ -109,7 +197,7 @@
         [self.uploadRequest cancel];
     }
 }
-- (IBAction) pasueUpload:(id)sender {
+- (void) pasueUpload:(id)sender {
     QCloudLogDebug(@"点击了暂停按钮");
     if (!self.uploadRequest) {
         [self showErrorMessage:@"不存在上传请求，无法暂停上传"];
@@ -124,7 +212,7 @@
     }
 }
 
-- (IBAction)resumeUpload:(id)sender {
+- (void)resumeUpload:(id)sender {
     if (!self.uploadResumeData) {
         [self showErrorMessage:@"不再在恢复上传数据，无法继续上传"];
         return;
@@ -133,11 +221,12 @@
     [self uploadFileByRequest:upload];
 }
 
-
 - (void) uploadFileByRequest:(QCloudCOSXMLUploadObjectRequest*)upload
 {
     [self showErrorMessage:@"开始上传"];
     _uploadRequest = upload;
+    
+    
     __weak typeof(self) weakSelf = self;
     NSDate* beforeUploadDate = [NSDate date];
     unsigned long long fileSize = [(NSURL*)upload.body fileSizeInContent];
@@ -172,13 +261,12 @@
     [upload setSendProcessBlock:^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf.progressView setProgress:(1.0f*totalBytesSent)/totalBytesExpectedToSend animated:YES];
-            QCloudLogDebug(@"bytesSent: %i, totoalBytesSent %i ,totalBytesExpectedToSend: %i ",bytesSent,totalBytesSent,totalBytesExpectedToSend);
+            QCloudLogDebug(@"⬆️⬆️⬆️⬆️⬆️⬆️⬆️bytesSent: %i, totoalBytesSent %i ,totalBytesExpectedToSend: %i ",bytesSent,totalBytesSent,totalBytesExpectedToSend);
         });
     }];
-    
-//    [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:upload];
 
-    [[QCloudCOSXMLConfiguration sharedInstance].currentTransferManager UploadObject:upload];
+    QCloudCOSTransferMangerService *transferService = [QCloudCOSXMLConfiguration sharedInstance].currentTransferManager;
+    [transferService UploadObject:upload];
 }
 
 /*

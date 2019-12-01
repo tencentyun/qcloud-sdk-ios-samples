@@ -17,15 +17,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    for (UIViewController* viewController in self.viewControllers) {
-        if ([viewController isKindOfClass:[QCloudUploadViewController class]]) {
-            viewController.title = @"上传";
-        }
-        if ([viewController isKindOfClass:[QCloudDownloadViewController class]]) {
-            viewController.title = @"下载";
-        }
-    }
-    // Do any additional setup after loading the view.
+    QCloudUploadViewController *uplaodVc = [QCloudUploadViewController new];
+    uplaodVc.title = @"上传";
+    [self addChildViewController:uplaodVc];
+    
+    QCloudDownloadViewController *downloadVC = [QCloudDownloadViewController new];
+    downloadVC.title = @"下载";
+    [self addChildViewController:downloadVC];
+
 }
 
 - (void)didReceiveMemoryWarning {
