@@ -44,7 +44,7 @@ class QCloudFileDetailController: UIViewController {
     }
     
     @objc func onHandleShareFile(){
-        let activity = UIActivityViewController.init(activityItems: [self.fileInfo.fileURL], applicationActivities: nil);
+        let activity = UIActivityViewController.init(activityItems: [self.fileInfo.fileURL as Any], applicationActivities: nil);
         activity.excludedActivityTypes = [.print,.assignToContact];
         activity.completionWithItemsHandler = {(activityType ,completed,returnedItems,activityError) in
             print("Share via system result");

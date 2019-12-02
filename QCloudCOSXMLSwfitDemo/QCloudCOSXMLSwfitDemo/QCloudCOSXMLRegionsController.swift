@@ -47,7 +47,7 @@ UITableViewDelegate,UITableViewDataSource{
         let region = self.regions[indexPath.row];
         tranferController.title = region;
         var configuration:QCloudServiceConfiguration?
-        configuration = QCloudCOSXMLService.defaultCOSXML()?.configuration.copy() as? QCloudServiceConfiguration;
+        configuration = QCloudCOSXMLService.defaultCOSXML().configuration.copy() as? QCloudServiceConfiguration;
         configuration?.endpoint.regionName = region;
         QCloudCOSXMLService.registerCOSXML(with: configuration!, withKey: region);
         QCloudCOSTransferMangerService.registerCOSTransferManger(with: configuration!, withKey: region)

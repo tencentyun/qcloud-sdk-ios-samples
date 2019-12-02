@@ -30,12 +30,18 @@ class  QCloudDownloadController: UIViewController,UITableViewDelegate,UITableVie
         getBucketRequest.bucket = QCloudCOSXMLServiceConfiguration.shared.currentBucket();
         getBucketRequest.setFinish { (result, error) in
             DispatchQueue.main.async {
-            self.indicatorView.stopAnimating();
-                for item in result.contents {
-                self.fileLists.append(item.key);
+                
+                if error == nil{
+                    self.indicatorView.stopAnimating();
+                    for item in result!.contents {
+                        self.fileLists.append(item.key);
+                    }
+                   self.tableView.reloadData();
                 }
-                self.tableView.reloadData();
+                      
             }
+           
+           
         };
         QCloudCOSXMLServiceConfiguration.shared.currentCOSXMLService().getBucket(getBucketRequest);
     }
@@ -63,7 +69,7 @@ class  QCloudDownloadController: UIViewController,UITableViewDelegate,UITableVie
         if cell == nil {
             cell = UITableViewCell.init(style: .default, reuseIdentifier: identifier);
         }
-        cell?.textLabel?.text = self.fileLists[indexPath.row] as! String;
+        cell?.textLabel?.text = self.fileLists[indexPath.row] as? String;
         return cell!
     }
     
@@ -76,9 +82,8 @@ class  QCloudDownloadController: UIViewController,UITableViewDelegate,UITableVie
         getObjectReq.downloadingURL = self.tempFilePath(fileName: name as! String);
         getObjectReq.finishBlock = {(result,error) in
             let afterDate = NSDate.now;
-             let downLoadTime = Double(afterDate .timeIntervalSince(beforeDate));
+            let downLoadTime = Double(afterDate .timeIntervalSince(beforeDate));
             if error == nil {
-               
                 let fileInfo =  QCloudDownloadedFileInfo();
                 fileInfo.fileURL = getObjectReq.downloadingURL as NSURL;
                 fileInfo.fileName = (name as! String);

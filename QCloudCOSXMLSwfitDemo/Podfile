@@ -7,7 +7,7 @@ use_frameworks!
 target 'QCloudCOSXMLSwfitDemo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-# pod 'QCloudCOSXML'
+pod 'QCloudCOSXML'
 
   target 'QCloudCOSXMLSwfitDemoTests' do
     inherit! :search_paths

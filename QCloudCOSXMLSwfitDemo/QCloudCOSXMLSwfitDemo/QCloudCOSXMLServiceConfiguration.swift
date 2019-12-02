@@ -16,9 +16,9 @@ class QCloudCOSXMLServiceConfiguration: NSObject {
         return "demo-\(self.currentRegion ?? "ap-guangzhou")";
     }
     func currentTransferManagerService() -> QCloudCOSTransferMangerService {
-        return QCloudCOSTransferMangerService.costransfermangerService(forKey: self.currentRegion);
+        return QCloudCOSTransferMangerService.costransfermangerService(forKey: self.currentRegion!);
     }
     func currentCOSXMLService () -> QCloudCOSXMLService {
-        return QCloudCOSXMLService.init(forKey: self.currentRegion);
+        return QCloudCOSXMLService.init(forKey: self.currentRegion!);
     }
 }

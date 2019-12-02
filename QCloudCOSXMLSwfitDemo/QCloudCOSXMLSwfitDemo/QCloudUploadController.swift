@@ -81,7 +81,7 @@ class QCloudUploadController: UIViewController,UIImagePickerControllerDelegate,U
         
         print("start upload");
         self.uploadRequest = QCloudCOSXMLUploadObjectRequest.init();
-        self.uploadRequest.body = self.uploadFilePath as AnyObject?;
+        self.uploadRequest.body = self.uploadFilePath as AnyObject
         self.uploadRequest.bucket = self.bucket;
         self.uploadRequest.object = NSUUID().uuidString;
         if self.uploadRequest == nil {
@@ -98,13 +98,9 @@ class QCloudUploadController: UIViewController,UIImagePickerControllerDelegate,U
     
     //暂停上传
     @objc func pauseUpload(){
-    
+        var error:NSError?;
         print("pause upload");
-        do {
-            self.resumedData =  try self.uploadRequest.cancelByProductingResumeData() as QCloudCOSXMLUploadObjectResumeData?
-        } catch  {
-            print("resumeData error");
-        }
+        self.resumedData =  self.uploadRequest.cancel(byProductingResumeData: &error) as QCloudCOSXMLUploadObjectResumeData;
 
     }
     
@@ -112,8 +108,7 @@ class QCloudUploadController: UIViewController,UIImagePickerControllerDelegate,U
     @objc func resumeUpload(){
         
         print("resume upload");
-        guard let resumeUploadRequest = QCloudCOSXMLUploadObjectRequest<AnyObject>.init(request: self.resumedData as Data?)
-            else { return print("uplaodRequest is nil") };
+        let resumeUploadRequest = QCloudCOSXMLUploadObjectRequest<AnyObject>.init(request: self.resumedData as Data?);
         self.uploadFile(uploadRequest: resumeUploadRequest);
     }
     
