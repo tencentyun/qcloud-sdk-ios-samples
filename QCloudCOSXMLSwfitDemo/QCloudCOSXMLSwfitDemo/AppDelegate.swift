@@ -12,9 +12,9 @@ import QCloudCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,
-                                QCloudSignatureProvider,
-                                QCloudCredentailFenceQueueDelegate {
-
+    QCloudSignatureProvider,
+QCloudCredentailFenceQueueDelegate {
+    
     
     var window: UIWindow?
     var credentialFenceQueue:QCloudCredentailFenceQueue?
@@ -22,11 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,
         let credential = QCloudCredential.init();
         credential.secretID = SECRET_ID;
         credential.secretKey = SECRET_KEY;
-//        credential.experationDate = NSDate.init(timeIntervalSince1970:1575012803) as Date;
         credential.token = "token";
         let creator = QCloudAuthentationV5Creator.init(credential: credential);
         continueBlock(creator,nil);
-
     }
     
     func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
@@ -43,26 +41,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate,
         config.signatureProvider = self;
         config.appID = APPID;
         let endpoint = QCloudCOSXMLEndPoint.init();
-        endpoint.regionName = "ap-guangzhou";
+        endpoint.regionName = CURRENT_REGION;
         endpoint.useHTTPS = true;
         config.endpoint = endpoint;
         QCloudCOSXMLService.registerDefaultCOSXML(with: config);
         QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
     }
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        self.window?.rootViewController = UINavigationController.init(rootViewController: QCloudCOSXMLRegionsController());
+        
+        
+        self.window?.rootViewController = UINavigationController.init(rootViewController: QCloudMyBucketListCtor());
         self.window?.makeKeyAndVisible();
         self.setupCOSXMLService();
         self.credentialFenceQueue = QCloudCredentailFenceQueue.init();
         self.credentialFenceQueue?.delegate = self;
         TACMTAConfig.getInstance()?.debugEnable = true;
+        
+        
+        var configuration:QCloudServiceConfiguration?
+        configuration = QCloudCOSXMLService.defaultCOSXML().configuration.copy() as? QCloudServiceConfiguration;
+        configuration?.endpoint.regionName = CURRENT_REGION;
+        QCloudCOSXMLService.registerCOSXML(with: configuration!, withKey: CURRENT_REGION);
+        QCloudCOSTransferMangerService.registerCOSTransferManger(with: configuration!, withKey: CURRENT_REGION)
+        QCloudCOSXMLServiceConfiguration.shared.currentRegion = CURRENT_REGION;
+        
         return true
     }
-
     
-  
-
+    
+    
+    
 }
 

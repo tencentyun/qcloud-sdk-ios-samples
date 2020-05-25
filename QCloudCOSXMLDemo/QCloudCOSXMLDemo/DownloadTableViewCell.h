@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <QCloudCore/QCloudCore.h>
+
 #import <QCloudCOSXML/QCloudCOSXML.h>
 #import "QCloudCOSXMLContants.h"
 @interface DownloadTableViewCell : UITableViewCell

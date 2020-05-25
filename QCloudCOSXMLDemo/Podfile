@@ -7,3 +7,4 @@ end
 target 'QCloudCOSXMLDemoTests' do
      pod 'QCloudCOSXML'
 end
+

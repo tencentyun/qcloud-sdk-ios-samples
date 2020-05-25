@@ -1,0 +1,6 @@
+framework module Pods_QCloudCOSXMLSwfitDemoTests {
+  umbrella header "Pods-QCloudCOSXMLSwfitDemoTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -12,7 +12,7 @@
 #import <QCloudCore/QCloudServiceConfiguration_Private.h>
 #import <QCloudCore/QCloudAuthentationCreator.h>
 #import <QCloudCore/QCloudCredential.h>
-#import <QCloudCore/QCloudCore.h>
+
 #import "TestCommonDefine.h"
 #import "QCloudCOSXMLServiceUtilities.h"
 #import "QCloudTestTempVariables.h"
@@ -36,12 +36,12 @@
 - (void)signatureWithFields:(QCloudSignatureFields *)fileds request:(QCloudBizHTTPRequest *)request urlRequest:(NSMutableURLRequest *)urlRequst compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock {
     
     QCloudCredential* credential = [QCloudCredential new];
-    credential.secretID = [SecretStorage sharedInstance].secretID;;
-    credential.secretKey = [SecretStorage sharedInstance].secretKey;
+    credential.secretID =  [SecretStorage sharedInstance].secretID;
+    credential.secretKey =  [SecretStorage sharedInstance].secretKey;
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc] initWithCredential:credential];
     QCloudSignature* signature =  [creator signatureForData:urlRequst];
     continueBlock(signature, nil);
-    
+
 }
 
 - (void) setupSpecialCOSXMLShareService {
@@ -49,16 +49,14 @@
     configuration.appID = kAppID;
     configuration.signatureProvider = self;
     QCloudCOSXMLEndPoint* endpoint = [[QCloudCOSXMLEndPoint alloc] init];
-    endpoint.regionName = @"eu-frankfurt";
+    endpoint.regionName = @"ap-guangzhou";
     configuration.endpoint = endpoint;
-    [QCloudCOSXMLService registerDefaultCOSXMLWithConfiguration:configuration];
-    [QCloudCOSTransferMangerService registerDefaultCOSTransferMangerWithConfiguration:configuration];
     [QCloudCOSXMLService registerCOSXMLWithConfiguration:configuration withKey:@"aclService"];
 }
 
 + (void)setUp {
-    [QCloudTestTempVariables sharedInstance].testBucket = kTestBucket;
-    
+    [QCloudTestTempVariables sharedInstance].testBucket = [[QCloudCOSXMLTestUtility sharedInstance] createTestBucketWithPrefix:@"bt"];
+
 }
 
 
@@ -69,12 +67,10 @@
 - (void)setUp {
     [super setUp];
     [self setupSpecialCOSXMLShareService];
-    //    [QCloudTestTempVariables sharedInstance].testBucket = [[QCloudCOSXMLTestUtility sharedInstance] createTestBucket];
     self.bucket = [QCloudTestTempVariables sharedInstance].testBucket;
     self.appID = kAppID;
-    self.authorizedUIN = @"1131975903";
-    self.ownerUIN = @"1278687956";
-    [[QCloudCOSXMLTestUtility sharedInstance]deleteOject:kTestBucket];
+    self.authorizedUIN = @"authorizedUIN";
+    self.ownerUIN = @"ownerUIN";
 }
 
 - (void)createTestBucket {
@@ -97,7 +93,7 @@
 
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
-    //    [[QCloudCOSXMLTestUtility sharedInstance] deleteTestBucket:self.bucket];
+//    [[QCloudCOSXMLTestUtility sharedInstance] deleteTestBucket:self.bucket];
     [super tearDown];
 }
 
@@ -145,6 +141,32 @@
     XCTAssertNil(responseError);
 }
 
+- (void)testMoreRegion {
+    XCTestExpectation* exception = [self expectationWithDescription:@"Delete bucket exception"];
+    __block NSError* responseError ;
+    __block QCloudPutBucketRequest* putBucketRequest = [[QCloudPutBucketRequest alloc] init];
+    NSString *bucketName = [NSString stringWithFormat:@"bucketcanbedelete%i",arc4random()%1000];
+    NSLog(@"---- %@",bucketName);
+    putBucketRequest.bucket = bucketName;
+    
+    putBucketRequest.regionName = @"ap-beijing-1";;
+    [putBucketRequest setFinishBlock:^(id outputObject, NSError* error) {
+        XCTAssertNil(error);
+        if (!error) {
+            QCloudGetBucketRequest* request = [[QCloudGetBucketRequest alloc ] init];
+            request.bucket = bucketName;
+            [request setFinishBlock:^(id outputObject,NSError*error) {
+                responseError = error;
+                [exception fulfill];
+            }];
+            [[QCloudCOSXMLService defaultCOSXML] GetBucket:request];
+        } else {
+            [exception fulfill];
+        }
+    }];
+    [[QCloudCOSXMLService defaultCOSXML] PutBucket:putBucketRequest];
+    [self waitForExpectationsWithTimeout:100 handler:nil];
+}
 
 //- (void)testPutBucket {
 //    QCloudPutBucketRequest* putBucketRequest = [[QCloudPutBucketRequest alloc] init];
@@ -250,7 +272,7 @@
         }];
         
         [[QCloudCOSXMLService defaultCOSXML] GetBucketCORS:corsReqeust];
-        
+
         
     }];
     
@@ -290,7 +312,7 @@
         
     }];
     XCTAssertNil(resultError);
-    
+
     
 }
 
@@ -303,11 +325,11 @@
     
     __block NSError* localError;
     XCTestExpectation* exp = [self expectationWithDescription:@"putacl"];
-    //    [deleteCORS setFinishBlock:^(id outputObject, NSError *error) {
-    //        localError = error;
-    //        [exp fulfill];
-    //    }];
-    //    [[QCloudCOSXMLService defaultCOSXML] DeleteBucketCORS:deleteCORS];
+//    [deleteCORS setFinishBlock:^(id outputObject, NSError *error) {
+//        localError = error;
+//        [exp fulfill];
+//    }];
+//    [[QCloudCOSXMLService defaultCOSXML] DeleteBucketCORS:deleteCORS];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSLog(@"after");
         [exp fulfill];
@@ -334,9 +356,9 @@
     NSString* currentLocation;
     
 #ifdef CNNORTH_REGION
-    currentLocation = @"eu-frankfurt";
-#else
-    currentLocation = @"eu-frankfurt";
+    currentLocation = @"ap-guangzhou";
+#else 
+    currentLocation = @"ap-beijing";
 #endif
     XCTAssert([location.locationConstraint isEqualToString:kRegion]);
 }
@@ -368,7 +390,7 @@
     [[QCloudCOSXMLService defaultCOSXML] PutBucketACL:putACL];
     [self waitForExpectationsWithTimeout:100 handler:nil];
     XCTAssertNil(localError);
-    
+
 }
 
 
@@ -423,7 +445,7 @@
     request.bucket = self.bucket;
     request.object = uploadObjectRequest.object;
     request.uploadId = uploadID;
-    
+
     XCTestExpectation* expectation = [self expectationWithDescription:@"test" ];
     [request setFinishBlock:^(QCloudListPartsResult * _Nonnull result, NSError * _Nonnull error) {
         XCTAssertNil(error);
@@ -467,7 +489,7 @@
 - (void)testaPut_Get_Delete_BucketLifeCycle {
     QCloudPutBucketLifecycleRequest* request = [QCloudPutBucketLifecycleRequest new];
     request.bucket = self.bucket;
-    __block QCloudLifecycleConfiguration* configuration = [[QCloudLifecycleConfiguration alloc] init];
+   __block QCloudLifecycleConfiguration* configuration = [[QCloudLifecycleConfiguration alloc] init];
     QCloudLifecycleRule* rule = [[QCloudLifecycleRule alloc] init];
     rule.identifier = @"id1";
     rule.status = QCloudLifecycleStatueEnabled;
@@ -487,30 +509,29 @@
         //Get Configuration
         XCTAssertNil(putLifecycleError);
         
-//         QCloudGetBucketLifecycleRequest* request = [QCloudGetBucketLifecycleRequest new];
-//         request.bucket = self.bucket;
-//         [request setFinishBlock:^(QCloudLifecycleConfiguration* getLifecycleReuslt,NSError* getLifeCycleError) {
-//             XCTAssertNil(getLifeCycleError);
-//             XCTAssertNotNil(getLifecycleReuslt);
-//             XCTAssert(getLifecycleReuslt.rules.count==configuration.rules.count);
-//             XCTAssert([getLifecycleReuslt.rules.firstObject.identifier isEqualToString:configuration.rules.firstObject.identifier]);
-//             XCTAssert(getLifecycleReuslt.rules.firstObject.status==configuration.rules.firstObject.status);
+        QCloudGetBucketLifecycleRequest* request = [QCloudGetBucketLifecycleRequest new];
+        request.bucket = self.bucket;
+        [request setFinishBlock:^(QCloudLifecycleConfiguration* getLifecycleReuslt,NSError* getLifeCycleError) {
+            XCTAssertNil(getLifeCycleError);
+            XCTAssertNotNil(getLifecycleReuslt);
+            XCTAssert(getLifecycleReuslt.rules.count==configuration.rules.count);
+            XCTAssert([getLifecycleReuslt.rules.firstObject.identifier isEqualToString:configuration.rules.firstObject.identifier]);
+            XCTAssert(getLifecycleReuslt.rules.firstObject.status==configuration.rules.firstObject.status);
             
-//             //delete configuration
-//             QCloudDeleteBucketLifeCycleRequest* request = [[QCloudDeleteBucketLifeCycleRequest alloc ] init];
-//             request.bucket = self.bucket;
-//             [request setFinishBlock:^(QCloudLifecycleConfiguration* deleteResult, NSError* deleteError) {
-//                 XCTAssert(deleteResult);
-//                 XCTAssertNil(deleteError);
-//                 [exception fulfill];
-//             }];
-//             [[QCloudCOSXMLService defaultCOSXML] DeleteBucketLifeCycle:request];
-//             //delete configuration end
+            //delete configuration
+            QCloudDeleteBucketLifeCycleRequest* request = [[QCloudDeleteBucketLifeCycleRequest alloc ] init];
+            request.bucket = self.bucket;
+            [request setFinishBlock:^(QCloudLifecycleConfiguration* deleteResult, NSError* deleteError) {
+                XCTAssert(deleteResult);
+                XCTAssertNil(deleteError);
+                [exception fulfill];
+            }];
+            [[QCloudCOSXMLService defaultCOSXML] DeleteBucketLifeCycle:request];
+            //delete configuration end
             
-//         }];
-//         [[QCloudCOSXMLService defaultCOSXML] GetBucketLifecycle:request];
+        }];
+        [[QCloudCOSXMLService defaultCOSXML] GetBucketLifecycle:request];
         //Get configuration end
-        [exception fulfill];
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucketLifecycle:request];
     [self waitForExpectationsWithTimeout:100 handler:nil];
@@ -519,144 +540,144 @@
 
 
 - (void)testPut_And_Get_BucketVersioning {
-//     QCloudPutBucketVersioningRequest* request = [[QCloudPutBucketVersioningRequest alloc] init];
-//     request.bucket = @"xiaodaxiansource";
-//     QCloudBucketVersioningConfiguration* configuration = [[QCloudBucketVersioningConfiguration alloc] init];
-//     request.configuration = configuration;
-//     configuration.status = QCloudCOSBucketVersioningStatusEnabled;
-//     XCTestExpectation* expectation = [self expectationWithDescription:@"Put Bucket Versioning"];
-//     [request setFinishBlock:^(id outputObject, NSError* error) {
-//         XCTAssertNil(error);
+    QCloudPutBucketVersioningRequest* request = [[QCloudPutBucketVersioningRequest alloc] init];
+    request.bucket = @"xiaodaxiansource";
+    QCloudBucketVersioningConfiguration* configuration = [[QCloudBucketVersioningConfiguration alloc] init];
+    request.configuration = configuration;
+    configuration.status = QCloudCOSBucketVersioningStatusEnabled;
+    XCTestExpectation* expectation = [self expectationWithDescription:@"Put Bucket Versioning"];
+    [request setFinishBlock:^(id outputObject, NSError* error) {
+            XCTAssertNil(error);
         
         
-//         QCloudGetBucketVersioningRequest* request = [[QCloudGetBucketVersioningRequest alloc] init];
-//         request.bucket = self.bucket;
-//         [request setFinishBlock:^(QCloudBucketVersioningConfiguration* result, NSError* error) {
-//             XCTAssert(result);
-//             XCTAssertNil(error);
-//             [expectation fulfill];
-//         }];
-//         [[QCloudCOSXMLService defaultCOSXML] GetBucketVersioning:request];
+            QCloudGetBucketVersioningRequest* request = [[QCloudGetBucketVersioningRequest alloc] init];
+            request.bucket = self.bucket;
+            [request setFinishBlock:^(QCloudBucketVersioningConfiguration* result, NSError* error) {
+                XCTAssert(result);
+                XCTAssertNil(error);
+                [expectation fulfill];
+            }];
+            [[QCloudCOSXMLService defaultCOSXML] GetBucketVersioning:request];
         
-        
-//     }];
-//     [[QCloudCOSXMLService defaultCOSXML] PutBucketVersioning:request];
-//     [self waitForExpectationsWithTimeout:80 handler:nil];
+             
+    }];
+    [[QCloudCOSXMLService defaultCOSXML] PutBucketVersioning:request];
+    [self waitForExpectationsWithTimeout:80 handler:nil];
     
-//     //
-//     QCloudPutBucketVersioningRequest* suspendRequest = [[QCloudPutBucketVersioningRequest alloc] init];
-//     suspendRequest.bucket = self.bucket;
-//     QCloudBucketVersioningConfiguration* suspendConfiguration = [[QCloudBucketVersioningConfiguration alloc] init];
-//     request.configuration = suspendConfiguration;
-//     suspendConfiguration.status = QCloudCOSBucketVersioningStatusSuspended;
-//     [[QCloudCOSXMLService defaultCOSXML] PutBucketVersioning:request];
+    //
+    QCloudPutBucketVersioningRequest* suspendRequest = [[QCloudPutBucketVersioningRequest alloc] init];
+    suspendRequest.bucket = self.bucket;
+    QCloudBucketVersioningConfiguration* suspendConfiguration = [[QCloudBucketVersioningConfiguration alloc] init];
+    request.configuration = suspendConfiguration;
+    suspendConfiguration.status = QCloudCOSBucketVersioningStatusSuspended;
+    [[QCloudCOSXMLService defaultCOSXML] PutBucketVersioning:request];
 }
 
-//- (void)testPut_Get_Delte_BucketReplication {
-//    
-//    __block NSString* sourceBucket = @"xiaodaxiansource";
-//    __block NSString* destinationBucket = @"replication-destination";
-//    __block NSString* destinationRegion = @"ap-beijing";
-//    
-//    //enable bucket versioning first
-//    QCloudPutBucketVersioningRequest* destinationPutBucketVersioningRequest = [[QCloudPutBucketVersioningRequest alloc] init];
-//    destinationPutBucketVersioningRequest.bucket = destinationBucket;
+- (void)testPut_Get_Delte_BucketReplication {
+    
+    __block NSString* sourceBucket = @"xiaodaxiansource";
+    __block NSString* destinationBucket = @"replication-destination";
+    __block NSString* destinationRegion = @"ap-beijing";
+
+    //enable bucket versioning first
+    QCloudPutBucketVersioningRequest* destinationPutBucketVersioningRequest = [[QCloudPutBucketVersioningRequest alloc] init];
+    destinationPutBucketVersioningRequest.bucket = destinationBucket;
+    QCloudBucketVersioningConfiguration* configuration = [[QCloudBucketVersioningConfiguration alloc] init];
+    destinationPutBucketVersioningRequest.configuration = configuration;
+    configuration.status = QCloudCOSBucketVersioningStatusEnabled;
+    XCTestExpectation* putDestinationBucketVersioningExpectation = [self expectationWithDescription:@"Put Bucket Versioning first "];
+    [destinationPutBucketVersioningRequest setFinishBlock:^(id outputObject, NSError* error) {
+        [putDestinationBucketVersioningExpectation fulfill];
+        XCTAssertNil(error);
+    }];
+    __block NSString* previousRegion = [QCloudCOSXMLService  defaultCOSXML].configuration.endpoint.regionName;
+    [QCloudCOSXMLService  defaultCOSXML].configuration.endpoint.regionName = destinationRegion;
+    [[QCloudCOSXMLService defaultCOSXML] PutBucketVersioning:destinationPutBucketVersioningRequest];
+    [self waitForExpectationsWithTimeout:10 handler:^(NSError * _Nullable error) {
+        [QCloudCOSXMLService  defaultCOSXML].configuration.endpoint.regionName = previousRegion;
+    }];
+    
+    
+    
+    
+    
+    QCloudPutBucketVersioningRequest* request = [[QCloudPutBucketVersioningRequest alloc] init];
+    request.bucket = sourceBucket;
 //    QCloudBucketVersioningConfiguration* configuration = [[QCloudBucketVersioningConfiguration alloc] init];
-//    destinationPutBucketVersioningRequest.configuration = configuration;
-//    configuration.status = QCloudCOSBucketVersioningStatusEnabled;
-//    XCTestExpectation* putDestinationBucketVersioningExpectation = [self expectationWithDescription:@"Put Bucket Versioning first "];
-//    [destinationPutBucketVersioningRequest setFinishBlock:^(id outputObject, NSError* error) {
-//        [putDestinationBucketVersioningExpectation fulfill];
-//        XCTAssertNil(error);
-//    }];
-//    __block NSString* previousRegion = [QCloudCOSXMLService  defaultCOSXML].configuration.endpoint.regionName;
-//    [QCloudCOSXMLService  defaultCOSXML].configuration.endpoint.regionName = destinationRegion;
-//    [[QCloudCOSXMLService defaultCOSXML] PutBucketVersioning:destinationPutBucketVersioningRequest];
-//    [self waitForExpectationsWithTimeout:10 handler:^(NSError * _Nullable error) {
-//        [QCloudCOSXMLService  defaultCOSXML].configuration.endpoint.regionName = previousRegion;
-//    }];
-//    
-//    
-//    
-//    
-//    
-//    QCloudPutBucketVersioningRequest* request = [[QCloudPutBucketVersioningRequest alloc] init];
-//    request.bucket = sourceBucket;
-//    //    QCloudBucketVersioningConfiguration* configuration = [[QCloudBucketVersioningConfiguration alloc] init];
-//    request.configuration = configuration;
-//    configuration.status = QCloudCOSBucketVersioningStatusEnabled;
-//    XCTestExpectation* expectation = [self expectationWithDescription:@"Put Bucket Versioning"];
-//    [request setFinishBlock:^(id outputObject, NSError* error) {
-//        XCTAssertNil(error);
-//        
-//        // put bucket replication
-//        QCloudPutBucketReplicationRequest* request = [[QCloudPutBucketReplicationRequest alloc] init];
-//        request.bucket = sourceBucket;
-//        QCloudBucketReplicationConfiguation* configuration = [[QCloudBucketReplicationConfiguation alloc] init];
-//        configuration.role = [NSString identifierStringWithID:@"1278687956" :@"1278687956"];
-//        QCloudBucketReplicationRule* rule = [[QCloudBucketReplicationRule alloc] init];
-//        
-//        rule.identifier = [NSUUID UUID].UUIDString;
-//        rule.status = QCloudCOSXMLStatusEnabled;
-//        
-//        QCloudBucketReplicationDestination* destination = [[QCloudBucketReplicationDestination alloc] init];
-//        //qcs:id/0:cos:[region]:appid/[AppId]:[bucketname]
-//        //        NSString* destinationBucket = destinationBucket;
-//        destination.bucket = [NSString stringWithFormat:@"qcs:id/0:cos:%@:appid/%@:%@",destinationRegion,self.appID,destinationBucket];
-//        rule.destination = destination;
-//        configuration.rule = @[rule];
-//        request.configuation = configuration;
-//        [request setFinishBlock:^(id outputObject, NSError* error) {
-//            XCTAssertNil(error);
-//            // get bucket replication
-//            QCloudGetBucketReplicationRequest* request = [[QCloudGetBucketReplicationRequest alloc] init];
-//            request.bucket =sourceBucket;
-//            [request setFinishBlock:^(QCloudBucketReplicationConfiguation* result, NSError* error) {
-//                XCTAssertNil(error);
-//                XCTAssertNotNil(result);
-//                
-//                
-//                //delete bucket replication
-//                QCloudDeleteBucketReplicationRequest* request = [[QCloudDeleteBucketReplicationRequest alloc] init];
-//                request.bucket = sourceBucket;
-//                [request setFinishBlock:^(id outputObject, NSError* error) {
-//                    XCTAssertNil(error);
-//                    [expectation fulfill];
-//                }];
-//                [[QCloudCOSXMLService defaultCOSXML] DeleteBucketReplication:request];
-//                //delete bucket replication end
-//                
-//                
-//            }];
-//            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-//            dispatch_semaphore_wait(semaphore, 5*NSEC_PER_SEC);
-//            [[QCloudCOSXMLService defaultCOSXML] GetBucketReplication:request];
-//            
-//            
-//            // get bucket replication end
-//            
-//            
-//            
-//            
-//            
-//        }];
-//        [[QCloudCOSXMLService defaultCOSXML] PutBucketRelication:request];
-//        // put bucket replication end
-//        
-//        
-//    }];
+    request.configuration = configuration;
+    configuration.status = QCloudCOSBucketVersioningStatusEnabled;
+    XCTestExpectation* expectation = [self expectationWithDescription:@"Put Bucket Versioning"];
+    [request setFinishBlock:^(id outputObject, NSError* error) {
+        XCTAssertNil(error);
+        
+        // put bucket replication
+        QCloudPutBucketReplicationRequest* request = [[QCloudPutBucketReplicationRequest alloc] init];
+        request.bucket = sourceBucket;
+        QCloudBucketReplicationConfiguation* configuration = [[QCloudBucketReplicationConfiguation alloc] init];
+        configuration.role = [NSString identifierStringWithID:@"1278687956" :@"1278687956"];
+        QCloudBucketReplicationRule* rule = [[QCloudBucketReplicationRule alloc] init];
+        
+        rule.identifier = [NSUUID UUID].UUIDString;
+        rule.status = QCloudCOSXMLStatusEnabled;
+        
+        QCloudBucketReplicationDestination* destination = [[QCloudBucketReplicationDestination alloc] init];
+        //qcs:id/0:cos:[region]:appid/[AppId]:[bucketname]
+//        NSString* destinationBucket = destinationBucket;
+        destination.bucket = [NSString stringWithFormat:@"qcs:id/0:cos:%@:appid/%@:%@",destinationRegion,self.appID,destinationBucket];
+        rule.destination = destination;
+        configuration.rule = @[rule];
+        request.configuation = configuration;
+        [request setFinishBlock:^(id outputObject, NSError* error) {
+            XCTAssertNil(error);
+            // get bucket replication
+            QCloudGetBucketReplicationRequest* request = [[QCloudGetBucketReplicationRequest alloc] init];
+            request.bucket =sourceBucket;
+            [request setFinishBlock:^(QCloudBucketReplicationConfiguation* result, NSError* error) {
+                XCTAssertNil(error);
+                XCTAssertNotNil(result);
+                
+                
+                //delete bucket replication
+                QCloudDeleteBucketReplicationRequest* request = [[QCloudDeleteBucketReplicationRequest alloc] init];
+                request.bucket = sourceBucket;
+                [request setFinishBlock:^(id outputObject, NSError* error) {
+                    XCTAssertNil(error);
+                    [expectation fulfill];
+                }];
+                [[QCloudCOSXMLService defaultCOSXML] DeleteBucketReplication:request];
+                //delete bucket replication end
+                
+                
+            }];
+            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+            dispatch_semaphore_wait(semaphore, 5*NSEC_PER_SEC);
+            [[QCloudCOSXMLService defaultCOSXML] GetBucketReplication:request];
+            
+            
+            // get bucket replication end
+            
+            
+            
+            
+            
+        }];
+        [[QCloudCOSXMLService defaultCOSXML] PutBucketRelication:request];
+        // put bucket replication end
+        
+        
+    }];
+    [[QCloudCOSXMLService defaultCOSXML] PutBucketVersioning:request];
+    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
+    //
+//    QCloudPutBucketVersioningRequest* suspendRequest = [[QCloudPutBucketVersioningRequest alloc] init];
+//    suspendRequest.bucket = self.bucket;
+//    QCloudBucketVersioningConfiguration* suspendConfiguration = [[QCloudBucketVersioningConfiguration alloc] init];
+//    request.configuration = suspendConfiguration;
+//    suspendConfiguration.status = QCloudCOSBucketVersioningStatusSuspended;
 //    [[QCloudCOSXMLService defaultCOSXML] PutBucketVersioning:request];
-//    [self waitForExpectationsWithTimeout:80 handler:nil];
-//    
-//    //
-//    //    QCloudPutBucketVersioningRequest* suspendRequest = [[QCloudPutBucketVersioningRequest alloc] init];
-//    //    suspendRequest.bucket = self.bucket;
-//    //    QCloudBucketVersioningConfiguration* suspendConfiguration = [[QCloudBucketVersioningConfiguration alloc] init];
-//    //    request.configuration = suspendConfiguration;
-//    //    suspendConfiguration.status = QCloudCOSBucketVersioningStatusSuspended;
-//    //    [[QCloudCOSXMLService defaultCOSXML] PutBucketVersioning:request];
-//    
-//}
+ 
+}
 //
 //- (void)testNewPut_Get_DeleteBucketReplication {
 //    NSString* tempBucket = @"bucketcanbedeleteReplication";
@@ -666,9 +687,9 @@
 //    QCloudServiceConfiguration* tempServiceConfiguration = [[QCloudServiceConfiguration alloc] init];
 //    tempServiceConfiguration.endpoint = endpoint;
 //    QCloudCOSXMLService* tempService = [[QCloudCOSXMLService alloc] initWithConfiguration:tempServiceConfiguration];
-//
-//
-//
+//    
+//    
+//    
 //    // Put a temp bucket for testing first.
 //    XCTestExpectation* putBucketExpectation = [self expectationWithDescription:@"Put temp bucket"];
 //    QCloudPutBucketRequest* putBucketRequest = [[QCloudPutBucketRequest alloc] init];
@@ -679,8 +700,8 @@
 //    }];
 //    [tempService PutBucket:putBucketRequest];
 //    [self waitForExpectationsWithTimeout:80 handler:nil];
-//
-//
+//    
+//    
 //    // Then enable replication for source bucket;
 //    XCTestExpectation* putReplicationExpectation = [self expectationWithDescription:@"put replication expectation"];
 //    QCloudPutBucketReplicationRequest* putBucketReplicationRequest = [[QCloudPutBucketReplicationRequest alloc] init];
@@ -693,8 +714,8 @@
 //        [putReplicationExpectation fulfill];
 //    }];
 //    [[QCloudCOSXMLService defaultCOSXML] PutBucketRelication:putBucketReplicationRequest];
-//
-//
+//    
+//    
 //}
 
 
@@ -725,4 +746,277 @@
 //
 //}
 
+
+
+-(void)testPUT_GETBucketDomain{
+//     XCTestExpectation* expectation = [self expectationWithDescription:@" bucket domain" ];
+//    QCloudPutBucketDomainRequest *req = [QCloudPutBucketDomainRequest new];
+//    req.bucket = @"000001-1253653367";
+//    req.regionName = @"ap-chengdu";
+//    QCloudDomainConfiguration *config = [QCloudDomainConfiguration new];
+//    QCloudDomainRule *rule = [QCloudDomainRule new];
+//    rule.status = QCloudDomainStatueEnabled;
+//    rule.name = @"www.baidu.com";
+//    rule.replace = QCloudCOSDomainReplaceTypeTxt;
+//    rule.type = QCloudCOSDomainTypeRest;
+//    config.rules = @[rule];
+//    req.domain  = config;
+//    [req setFinishBlock:^(id outputObject, NSError *error) {
+//        XCTAssertNotNil(outputObject);
+//        XCTAssertNil(error);
+//        
+//        if (!error) {
+//            QCloudGetBucketDomainRequest *getReq =  [QCloudGetBucketDomainRequest new];
+//            getReq.bucket = @"000001-1253653367";
+//            getReq.regionName = @"ap-chengdu";
+//            [getReq setFinishBlock:^(QCloudDomainConfiguration * _Nonnull result, NSError * _Nonnull error) {
+//                QCloudLogDebug(@"%@",result);
+//                [expectation fulfill];
+//            }];
+//             [[QCloudCOSXMLService defaultCOSXML]GetBucketDomain:getReq];
+//        }
+//    }];
+//      [[QCloudCOSXMLService defaultCOSXML]PutBucketDomain:req];
+//    [self waitForExpectationsWithTimeout:1000 handler:nil];
+  
+}
+
+//-(void)testPut_Get_DelBucketWebsite{
+//    XCTestExpectation* expectation = [self expectationWithDescription:@" bucket domain" ];
+//    NSString *bucket = @"000001-1253653367";
+//    NSString * regionName = @"ap-chengdu";
+//    
+//    NSString *indexDocumentSuffix = @"index.html";
+//    NSString *errorDocKey = @"error.html";
+//    NSString *derPro = @"https";
+//    int errorCode = 451;
+//    NSString * replaceKeyPrefixWith = @"404.html";
+//    QCloudPutBucketWebsiteRequest *putReq = [QCloudPutBucketWebsiteRequest new];
+//    putReq.bucket = bucket;
+//    putReq.regionName = @"ap-chengdu";;
+//    QCloudWebsiteConfiguration *config = [QCloudWebsiteConfiguration new];
+//    
+//    QCloudWebsiteIndexDocument *indexDocument = [QCloudWebsiteIndexDocument new];
+//    indexDocument.suffix = indexDocumentSuffix;
+//    config.indexDocument = indexDocument;
+//    
+//    QCloudWebisteErrorDocument *errDocument = [QCloudWebisteErrorDocument new];
+//    errDocument.key = errorDocKey;
+//    config.errorDocument = errDocument;
+//    
+//    
+//    QCloudWebsiteRedirectAllRequestsTo *redir = [QCloudWebsiteRedirectAllRequestsTo new];
+//    redir.protocol  = @"https";
+//    config.redirectAllRequestsTo = redir;
+//  
+//    
+//    QCloudWebsiteRoutingRule *rule = [QCloudWebsiteRoutingRule new];
+//    QCloudWebsiteCondition *contition = [QCloudWebsiteCondition new];
+//    contition.httpErrorCodeReturnedEquals = errorCode;
+//    rule.condition = contition;
+//    
+//    QCloudWebsiteRedirect *webRe = [QCloudWebsiteRedirect new];
+//    webRe.protocol = @"https";
+//    webRe.replaceKeyPrefixWith = replaceKeyPrefixWith;
+//    rule.redirect = webRe;
+//    
+//    QCloudWebsiteRoutingRules *routingRules = [QCloudWebsiteRoutingRules new];
+//    routingRules.routingRule = @[rule];
+//    config.rules = routingRules;
+//    putReq.websiteConfiguration  = config;
+//    
+//  
+//    [putReq setFinishBlock:^(id outputObject, NSError *error) {
+//        XCTAssertNil(error);
+//        XCTAssertNotNil(outputObject);
+//        if (!error) {
+//            QCloudGetBucketWebsiteRequest *getReq = [QCloudGetBucketWebsiteRequest new];
+//            getReq.bucket = bucket;
+//            getReq.regionName = regionName;
+//            [getReq setFinishBlock:^(QCloudWebsiteConfiguration * _Nonnull result, NSError * _Nonnull error) {
+//                XCTAssertNil(error);
+//                XCTAssertNotNil(result);
+//                XCTAssertEqualObjects(result.errorDocument.key, errorDocKey);
+//                XCTAssertEqualObjects(result.indexDocument.suffix, indexDocumentSuffix);
+//                XCTAssertEqualObjects(result.redirectAllRequestsTo.protocol,derPro);
+//                if (!error) {
+//                    QCloudDeleteBucketWebsiteRequest *delReq = [QCloudDeleteBucketWebsiteRequest new];
+//                    delReq.bucket = bucket;
+//                    delReq.regionName = regionName;
+//                    [delReq setFinishBlock:^(id outputObject, NSError *error) {
+//                        XCTAssertNil(error);
+//                        XCTAssertNotNil(outputObject);
+//                        [expectation fulfill];
+//                    }];
+//                    [[QCloudCOSXMLService defaultCOSXML] DeleteBucketWebsite:delReq];
+//                }
+//               
+//                
+//            }];
+//            [[QCloudCOSXMLService defaultCOSXML] GetBucketWebsite:getReq];
+//        }
+//       
+//        
+//    }];
+//    
+//    [[QCloudCOSXMLService defaultCOSXML] PutBucketWebsite:putReq];
+//    [self waitForExpectationsWithTimeout:200 handler:nil];
+//}
+//
+//-(void)testPUT_GETBucketLogging{
+//    XCTestExpectation* exp = [self expectationWithDescription:@"Put Bucket Versioning first "];
+//    QCloudPutBucketLoggingRequest *request = [QCloudPutBucketLoggingRequest new];
+//    QCloudBucketLoggingStatus *status = [QCloudBucketLoggingStatus new];
+//    QCloudLoggingEnabled *loggingEnabled = [QCloudLoggingEnabled new];
+//    loggingEnabled.targetBucket = @"1504078136-1253653367";
+//    loggingEnabled.targetPrefix = @"mylogs";
+//    status.loggingEnabled = loggingEnabled;
+//    request.bucketLoggingStatus = status;
+//    request.bucket = @"1504078136-1253653367";
+//    [request setFinishBlock:^(id outputObject, NSError *error) {
+//        XCTAssertNil(error);
+//        XCTAssertNotNil(outputObject);
+//        NSLog(@"logging result = %@",outputObject);
+//        
+//        QCloudGetBucketLoggingRequest *getReq = [QCloudGetBucketLoggingRequest new];
+//        getReq.bucket = @"1504078136-1253653367";
+//        [getReq setFinishBlock:^(QCloudBucketLoggingStatus * _Nonnull result, NSError * _Nonnull error) {
+//            NSLog(@"getReq result = %@",result.loggingEnabled.targetBucket);
+//            XCTAssertNil(error);
+//             XCTAssertNotNil(result);
+//            [exp fulfill];
+//        }];
+//        [[QCloudCOSXMLService defaultCOSXML]GetBucketLogging:getReq];
+//        
+//    }];
+//    [[QCloudCOSXMLService defaultCOSXML] PutBucketLogging:request];
+//     [self waitForExpectationsWithTimeout:100 handler:nil];
+//    
+//}
+//
+//- (void)testPUT_GET_Delete_ListBucketInventory{
+//    
+//    XCTestExpectation* exp = [self expectationWithDescription:@"Put Bucket Versioning first "];
+//    QCloudPutBucketInventoryRequest *putReq = [QCloudPutBucketInventoryRequest new];
+//    putReq.bucket= @"1504078136-1253653367";
+//    putReq.inventoryID = @"list1";
+//    QCloudInventoryConfiguration *config = [QCloudInventoryConfiguration new];
+//    config.identifier = @"list1";
+//    config.isEnabled = @"True";
+//    QCloudInventoryDestination *des = [QCloudInventoryDestination new];
+//    QCloudInventoryBucketDestination *btDes =[QCloudInventoryBucketDestination new];
+//    btDes.cs = @"CSV";
+//    btDes.account = @"1278687956";
+//    btDes.bucket  = @"qcs::cos:ap-guangzhou::1504078136-1253653367";
+//    btDes.prefix = @"list1";
+//    QCloudInventoryEncryption *enc = [QCloudInventoryEncryption new];
+//    enc.ssecos = @"";
+//    btDes.encryption = enc;
+//    des.bucketDestination = btDes;
+//    config.destination = des;
+//    QCloudInventorySchedule *sc = [QCloudInventorySchedule new];
+//    sc.frequency = @"Daily";
+//    config.schedule = sc;
+//    QCloudInventoryFilter *fileter = [QCloudInventoryFilter new];
+//    fileter.prefix = @"myPrefix";
+//    config.filter = fileter;
+//    config.includedObjectVersions = QCloudCOSIncludedObjectVersionsAll;
+//    QCloudInventoryOptionalFields *fields = [QCloudInventoryOptionalFields new];
+//    fields.field = @[ @"Size",@"LastModifiedDate",@"ETag",@"StorageClass",@"IsMultipartUploaded",@"ReplicationStatus"];
+//    config.optionalFields = fields;
+//    putReq.inventoryConfiguration = config;
+//    [putReq setFinishBlock:^(id outputObject, NSError *error) {
+//        XCTAssertNil(error);
+//        XCTAssertNotNil(outputObject);
+//        NSLog(@"Inventory outputObject %@",outputObject);
+//        QCloudGetBucketInventoryRequest *getReq = [QCloudGetBucketInventoryRequest new];
+//        getReq.bucket = @"1504078136-1253653367";
+//        getReq.inventoryID = @"list1";
+//        [getReq setFinishBlock:^(QCloudInventoryConfiguration * _Nonnull result, NSError * _Nonnull error) {
+//            XCTAssertNotNil(result);
+//            NSLog(@"outputObject result %@",result.optionalFields.field);
+//            XCTAssertNil(error);
+//            QCloudListBucketInventoryConfigurationsRequest *req = [QCloudListBucketInventoryConfigurationsRequest new];
+//            req.bucket = @"1504078136-1253653367";
+//            [req setFinishBlock:^(QCloudListInventoryConfigurationResult * _Nonnull result, NSError * _Nonnull error) {
+//                XCTAssertNil(error);
+//                XCTAssertNotNil(result);
+//                QCloudInventoryConfiguration *config = result.inventoryConfiguration[0];
+//                XCTAssertNotNil(config.optionalFields);
+//                QCloudDeleteBucketInventoryRequest *delReq = [QCloudDeleteBucketInventoryRequest new];
+//                delReq.bucket = @"1504078136-1253653367";
+//                delReq.inventoryID = @"list1";
+//                [delReq setFinishBlock:^(id outputObject, NSError *error) {
+//                    XCTAssertNotNil(outputObject);
+//                    XCTAssertNil(error);
+//                    [exp fulfill];
+//                }];
+//                [[QCloudCOSXMLService defaultCOSXML] DeleteBucketInventory:delReq];
+//            }];
+//            [[QCloudCOSXMLService defaultCOSXML]ListBucketInventory:req];
+//            
+//    }];
+//    [[QCloudCOSXMLService defaultCOSXML] GetBucketInventory:getReq];
+//      
+//    }];
+//    [[QCloudCOSXMLService defaultCOSXML] PutBucketInventory:putReq];
+//  [self waitForExpectationsWithTimeout:100 handler:nil];
+//}
+
+//-(void)testPUT_GET_DeleteBucketTagging{
+//    
+//    XCTestExpectation *exp = [self expectationWithDescription:@"bucket tagging exp"];
+//    QCloudPutBucketTaggingRequest *putReq = [QCloudPutBucketTaggingRequest new];
+//    putReq.bucket = @"1504078136-1253653367";
+//    QCloudBucketTagging *taggings = [QCloudBucketTagging new];
+//    QCloudBucketTag *tag1 = [QCloudBucketTag new];
+//    QCloudBucketTagSet *tagSet = [QCloudBucketTagSet new];
+//    taggings.tagSet = tagSet;
+//    tag1.key = @"age";
+//    tag1.value = @"20";
+//    QCloudBucketTag *tag2 = [QCloudBucketTag new];
+//    tag2.key = @"name";
+//    tag2.value = @"karis";
+//    tagSet.tag = @[tag1,tag2];
+//    putReq.taggings = taggings;
+//    
+//    [putReq setFinishBlock:^(id outputObject, NSError *error) {
+//        XCTAssertNil(error);
+//        XCTAssertNotNil(outputObject);
+//        
+//        QCloudGetBucketTaggingRequest *getReq = [QCloudGetBucketTaggingRequest new];
+//        getReq.bucket = @"1504078136-1253653367";
+//        [getReq setFinishBlock:^(QCloudBucketTagging * _Nonnull result, NSError * _Nonnull error) {
+//            XCTAssertNil(error);
+//            XCTAssertNotNil(result);
+//            XCTAssertEqual(result.tagSet.tag.count, tagSet.tag.count);
+//            QCloudDeleteBucketTaggingRequest *delReq = [QCloudDeleteBucketTaggingRequest new];
+//            delReq.bucket =  @"1504078136-1253653367";
+//            [delReq setFinishBlock:^(id outputObject, NSError *error) {
+//                XCTAssertNil(error);
+//                XCTAssertNotNil(outputObject);
+//                 [exp fulfill];
+//            }];
+//            [[QCloudCOSXMLService defaultCOSXML] DeleteBucketTagging:delReq];
+//           
+//            
+//        }];
+//        [[QCloudCOSXMLService defaultCOSXML] GetBucketTagging:getReq];
+//        
+//    }];
+//    [[QCloudCOSXMLService defaultCOSXML] PutBucketTagging:putReq];
+//    [self waitForExpectationsWithTimeout:200 handler:nil];
+//    
+//    
+//}
+//-(void)testPUT_GET_DeleteObjectTagging{
+//   
+//    
+//    
+//    
+//}
+//
+
+
 @end
+

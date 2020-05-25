@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
+
    LastUpgradeVersion = "1010"
+
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -61,36 +63,13 @@
             ReferencedContainer = "container:QCloudCOSXMLDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "kSecretID"
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "QCloudLogLevel"
+            value = "6"
             isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "kSecretKey"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "kAppID"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "kRegion"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "kTestBucket"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "kTestFromAnotherRegionCopy"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "kCSPServiceKey"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

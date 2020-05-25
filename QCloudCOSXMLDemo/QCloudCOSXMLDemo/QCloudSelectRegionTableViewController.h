@@ -10,4 +10,6 @@
 
 @interface QCloudSelectRegionTableViewController : UITableViewController
 
+@property (nonatomic,copy)BlockOneParams selectRegion;
+
 @end

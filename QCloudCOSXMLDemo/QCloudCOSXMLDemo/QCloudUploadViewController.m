@@ -9,17 +9,12 @@
 #ifndef BUILD_FOR_TEST
 
 #import "QCloudUploadViewController.h"
-#import <QCloudCore/QCloudCore.h>
 #import <QCloudCOSXML/QCloudCOSXML.h>
 #import "QCloudCOSXMLContants.h"
-#import "TestCommonDefine.h"
-#import "NSObject+HTTPHeadersContainer.h"
 #import "NSURL+FileExtension.h"
 #import "QCloudCOSXMLConfiguration.h"
 #import "AppDelegate.h"
-#import <QCloudCOSXML/QCloudCOSTransferMangerService.h>
-#import <QCloudCOSXML/QCloudCOSXMLUploadObjectRequest_Private.h>
-#import <QCloudCore/QCloudHTTPSessionManager.h>
+
 @interface QCloudUploadViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic, strong)  UIImageView* imagePreviewView;
 @property (nonatomic, strong)  UIProgressView* progressView;
@@ -54,7 +49,6 @@
     // Do any additional setup after loading the view.
     UIBarButtonItem* rightItem = [[UIBarButtonItem alloc] initWithTitle:@"相册" style:UIBarButtonItemStylePlain target:self action:@selector(selectImage)];
     self.title = @"上传";
-//    [self uploadObject];
     self.tabBarController.navigationItem.rightBarButtonItems = @[rightItem];
     self.view.backgroundColor = [UIColor whiteColor];
     [self setUpContent];
@@ -107,7 +101,6 @@
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
     CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
-    CGFloat screenH = [UIScreen mainScreen].bounds.size.height;
     CGFloat space = 20;
     self.imagePreviewView.frame = CGRectMake(space, 0,screenW - space*2 , 300);
     self.progressView.frame = CGRectMake(space, CGRectGetMaxY(self.imagePreviewView.frame)+space, self.imagePreviewView.frame.size.width, 10);
@@ -132,7 +125,6 @@
     [self.progressView setProgress:0.0f animated:NO];
 }
 
-
 - (void)  selectImage{
     UIImagePickerController* picker = [UIImagePickerController new];
     picker.delegate = self;
@@ -149,7 +141,7 @@
     UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
     NSString* tempPath = QCloudTempFilePathWithExtension(@"png");
     [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
-    self.uploadTempFilePath = [self tempFileWithSize:1024*1024*40];
+    self.uploadTempFilePath = tempPath;
     self.imagePreviewView.image = image;
     [picker dismissViewControllerAnimated:NO completion:^{
         
@@ -172,8 +164,13 @@
         return;
     }
     QCloudCOSXMLUploadObjectRequest* upload = [QCloudCOSXMLUploadObjectRequest new];
-    upload.body = [NSURL fileURLWithPath:self.uploadTempFilePath];
+//    upload.enableQuic = YES;
     upload.bucket = self.uploadBucket;
+    
+//    upload.body = [NSURL fileURLWithPath:[self tempFileWithSize:1*1024*1024]];
+    upload.body = [NSURL fileURLWithPath:self.uploadTempFilePath];
+
+
 
     upload.object = [NSUUID UUID].UUIDString;
     [self uploadFileByRequest:upload];
@@ -229,11 +226,11 @@
     
     __weak typeof(self) weakSelf = self;
     NSDate* beforeUploadDate = [NSDate date];
-    unsigned long long fileSize = [(NSURL*)upload.body fileSizeInContent];
     NSString* fileSizeDescription =  [(NSURL*)upload.body fileSizeWithUnit];
     double fileSizeSmallerThan1024 = [(NSURL*)upload.body fileSizeSmallerThan1024];
     NSString* fileSizeCount = [(NSURL*)upload.body fileSizeCount];
     [upload setFinishBlock:^(QCloudUploadObjectResult *result, NSError * error) {
+    
         weakSelf.uploadRequest = nil;
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {

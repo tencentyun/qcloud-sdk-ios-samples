@@ -1,0 +1,1562 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		020CA02E9F140B823BF7D89617359092 /* QCloudHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F74A2491F74525465A08438D6D9090EB /* QCloudHTTPSessionManager.m */; };
+		02339939A2E961C5C6D281DEA00AAD00 /* QCloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C315E37EEBCED6EE2AD50197272B6F /* QCloudService.m */; };
+		028ABFEAD307D8B5ACB78D958E0945D5 /* SimplePing.h in Headers */ = {isa = PBXBuildFile; fileRef = D80B4B29370ABE219F82F6B0A0C59318 /* SimplePing.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		02DEDFC7906552D52A29179DAC354FBF /* MTAConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 61CCFE8141438DE65219FA6439B34340 /* MTAConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0381CB601961EE8ABA0EF42893344FA1 /* QCloudFileOffsetBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 64DA05CC8B3E4861142600F75ADD8DDE /* QCloudFileOffsetBody.m */; };
+		0468D38E2BDE9D796A73094202161AC6 /* QCLOUDRestNet.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE86CDBAF3C77CC35F5618122A1A5DE /* QCLOUDRestNet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05C4AF439859CDA1C84929C00F945CC0 /* QCloudHTTPRetryHanlder.m in Sources */ = {isa = PBXBuildFile; fileRef = 689AF43A336B5F9F7D8C5B6BD22A19B2 /* QCloudHTTPRetryHanlder.m */; };
+		05DE91B967B71D010D66B761CCF9E3D0 /* QCloudAbstractRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 86EDD2583FE25E81C70BCA50F4B1786B /* QCloudAbstractRequest.m */; };
+		06586A5DC70494B6A887A299FFA51C41 /* QCloudEndPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A4E4A8F5340FB2D01CD7ECBF25D35F7 /* QCloudEndPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0B03FEDD566F356C32CC0533079A29F6 /* QCloudSupervisorySession.h in Headers */ = {isa = PBXBuildFile; fileRef = 886BF705D6D0B0EB125401A7B56A27B8 /* QCloudSupervisorySession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C59A267DABAD7339107BB34ABF4A705 /* QCloudUploadPartRequestRetryHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = B61D8CAFD480E8A2E270B882E63E8DA7 /* QCloudUploadPartRequestRetryHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0F03DBF438EA445F71398DC4331E6C20 /* QCloudEncryt.mm in Sources */ = {isa = PBXBuildFile; fileRef = D0843CF25223AE79DFFDA1029C7AE985 /* QCloudEncryt.mm */; };
+		0F217F3348205195216F3B2EA37BBB15 /* QCloudSHAPart.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EFD76AC8C8A1668E3CE0AAF82A16144 /* QCloudSHAPart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1161C54F36ABA8C6688CB8D5215F94C0 /* libmtasdk.a in Sources */ = {isa = PBXBuildFile; fileRef = 86DD57FD1E45B858B7B620E3522F3D40 /* libmtasdk.a */; };
+		116BB8BD7F1A7BC78C3A7EA19AB4675C /* QCloudServiceConfiguration_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F97CDDCAFAD7B1A7E41ABEAA6A2667A /* QCloudServiceConfiguration_Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1219884C3676CFEC2C14EC7AD4C9D39A /* QCloudCore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F18F299B9A3C04BFFEB0F1B4E3E9FF /* QCloudCore-dummy.m */; };
+		1324A48A084308F7AD8091B6356ECE7E /* QCloudLoggerOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE486A8D26CE6FC6D64D203EEF508CF /* QCloudLoggerOutput.m */; };
+		13975B0D092C546C4027A39C2F372573 /* QCloudSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F928D6179930ADFD439DD27946F1535 /* QCloudSignature.m */; };
+		148A88238194FBBE3FE237ADA337491F /* QCloudUniversalPathConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 580985F8D31B019C7266093434A26069 /* QCloudUniversalPathConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1720C172789FEE36B5A08B62A45181E1 /* NSHTTPCookie+QCloudNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FFB787C88D1E632F98304C03759F22 /* NSHTTPCookie+QCloudNetworking.m */; };
+		1729830619C46EE242AA9607759E2867 /* QCloudModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C54C328F381A04DD74BFB0F1DEA5F08 /* QCloudModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		179B7536396BC4653F7D5013BB4CFAA9 /* QCloudSignatureFields.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D1CBDAAE7E6358C81DD555FCE7FDC67 /* QCloudSignatureFields.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1802126034CF4826AED84E8FC3CC2D3F /* QCloudXMLDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 70653A0D9F16574B9204DB4720D0D677 /* QCloudXMLDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		19EC68A0A9AF3677262585181B2B3774 /* QCloudXMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C14ECBE7F4228175F37BCCFE1E9819 /* QCloudXMLWriter.m */; };
+		1AC58AB10F53AD5587E0A66066E96B70 /* QCloudServiceConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 930155D8E145C2E48FFEC857A00D23C7 /* QCloudServiceConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1B9940D42F4AF03E33AC983FF44770A6 /* QCloudUniversalPath.h in Headers */ = {isa = PBXBuildFile; fileRef = B05C7DF243BC1F9EF49F3D1FFBF76DBA /* QCloudUniversalPath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1BA6E872E2616323D27039384C151A57 /* QCloudLogModel.h in Headers */ = {isa = PBXBuildFile; fileRef = BDBA88120E031765CA2CE919D6F38998 /* QCloudLogModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1C9FD002B82E4314A65889DC7C6CC3E6 /* QCloudCredential.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAF3BBD7A419C3EFB0F32C395584505 /* QCloudCredential.m */; };
+		1CDA0681ED5150E5AAB5286E678F32B5 /* QCloudCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5921CAA8B97F7F431372C07601BC1E41 /* QCloudCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E517454B6CEF3DED656A1F39C321C30 /* QCloudSandboxPath.m in Sources */ = {isa = PBXBuildFile; fileRef = D445607424EB997A361D1FABCB76967C /* QCloudSandboxPath.m */; };
+		20264AA39D1612FB9CCC41F16DA373A8 /* QCloudFileOffsetStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 0666438A33522945F18A0BC39C2BD4C0 /* QCloudFileOffsetStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		205407DEF521766132359A37CE160EB1 /* QCloudHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C20EA4F10E2264460D164BEA2FFD9C /* QCloudHTTPRequest.m */; };
+		21D7168EB0B38ACDDCB7D6B156BD0E5A /* QCloudReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3045B9EE8F8464580658D56B162D0B2A /* QCloudReachability.m */; };
+		21F63C99AF19EC8357411F491EBCB473 /* QCloudUniversalPath.m in Sources */ = {isa = PBXBuildFile; fileRef = E29E6110E7A6B19C289AE7BD719C7322 /* QCloudUniversalPath.m */; };
+		28A565C25C9C73C2AAE3262DF4715052 /* QCloudCredential.h in Headers */ = {isa = PBXBuildFile; fileRef = 83248C9D50EB4205C24E3A543470B815 /* QCloudCredential.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29B48F56508DE3924EC34493BC7FC3CE /* QCloudURLSessionTaskData.m in Sources */ = {isa = PBXBuildFile; fileRef = 158D1B92E1B55E6B2C1C234F67E75782 /* QCloudURLSessionTaskData.m */; };
+		2C97FD5867ADCA5280403054563193EB /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC4C6EFACD3A67CF918A30908672156 /* SimplePing.m */; };
+		3751CAC1676490739637B390D08E002B /* QCloudMediaPath.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBD5E57BA7844CA5616EE02FC2B015B /* QCloudMediaPath.m */; };
+		3776076FF0BFB51A47F0DD325F1A51DB /* QCloudSignature.h in Headers */ = {isa = PBXBuildFile; fileRef = 441A0A9F76BBF9F02CDFCA094BCB4C96 /* QCloudSignature.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3809A91A0883972D7B2CB8C1E0A7D2A6 /* QCloudHTTPTaskDelayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F07F097518DDCD4C79E7954A67100 /* QCloudHTTPTaskDelayManager.m */; };
+		3B65640F63422F29C1B07FFDEAF4A598 /* QCloudTestUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FB47746B5EBF545496F50BBA20C7954 /* QCloudTestUtility.m */; };
+		3CB578FF5B11DFFDCD1927409F5305A2 /* QCloudNetEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = 4161BC578D5529286BEE99D956157E43 /* QCloudNetEnv.m */; };
+		3DDC257A2F740ED88728C5CD0342BCEF /* QCloudIntelligenceTimeOutAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BAFD51C1F70FFF2EB23EBFA922CA3D /* QCloudIntelligenceTimeOutAdapter.m */; };
+		3E73765BCF66B52FDDF97BA1A66D8D8C /* NSDate+QCLOUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0361EF51B962462C988114D7BB6C2102 /* NSDate+QCLOUD.m */; };
+		3EB38C259AD642276DA07FF31136A20C /* QCloudTestUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0AEAE9F71A9AF612C98B6A6AEAAE36 /* QCloudTestUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4191BF5E9A31195E27AD046C0396D697 /* QCloudXMLWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = CB819ACA2F622C9B49A95E7A1F4A2531 /* QCloudXMLWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		434C22817D712F12D315DBE6FE5AA4DF /* NSDate+QCloudInternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCCC1446940CFF989783FDC74F8728A /* NSDate+QCloudInternetDateTime.m */; };
+		4353370F5826E62AA28ECF1DF00CC362 /* QCloudSupervisorySession.m in Sources */ = {isa = PBXBuildFile; fileRef = 2530DC3E2D480B410D3B83998146EEAB /* QCloudSupervisorySession.m */; };
+		44D3F381F640463A8C7952A4E9535B5E /* QCloudFakeRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = E9719B5D3754AB9BFA12966687DC5E55 /* QCloudFakeRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		456239AEF0F0E94DEC24612B22D9C998 /* QCloudHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7282450AE596E26A74D57BC5D1675079 /* QCloudHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		469A20B8782CE1E4A002C70B9EA7D985 /* QCloudEnv.h in Headers */ = {isa = PBXBuildFile; fileRef = 54EB01E0E2BFE34AB5D9E0399FBF4312 /* QCloudEnv.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		46FCDE49288AFD61BE7AB2B34BA6F478 /* QCloudFileUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 7172AAC0CD4D5F4F726DE53E935C0E74 /* QCloudFileUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4A8E3F99118E4B67FD689F4C830581A8 /* QCloudAbstractRequest_FakeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A2CBB2D433411049E789A3F8C055501D /* QCloudAbstractRequest_FakeRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4B6790AF6A3A89787BF05DDF3EC523FF /* QCloudWeakProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = A39F286BE9BF61A07E0A383F6A773670 /* QCloudWeakProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4BD10EF73DBC6ACA9FE430625E95C3AB /* QCloudAuthentationV5Creator.m in Sources */ = {isa = PBXBuildFile; fileRef = A8855EA8AF768E1DFC4D0D9B7EA7AE1B /* QCloudAuthentationV5Creator.m */; };
+		4C5443D15EA073E5F4E939C51F6A0637 /* QCloudProgrameDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C7B8B790666077246BC617D4E7E7259 /* QCloudProgrameDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4CCC5C5A50863E2BEE1C81AF0D030884 /* NSObject+HTTPHeadersContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4859FA2831929F83A0A9A4DA6BD9011A /* NSObject+HTTPHeadersContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5407F5D226192D88079A637DBD97E1F3 /* QCloudHttpMetrics.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BE5E8E04751095E19524148A7E7E13C /* QCloudHttpMetrics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55FD8A1CAFE0EC0A1269CF4E24A207C5 /* QCloudThreadSafeMutableDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 3222C19F746F5C38DFC18C495E9F4322 /* QCloudThreadSafeMutableDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		57745BFBEFFFD1FFC6C5BA4BE8E9DC67 /* QCloudFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BA36930673579D3FA15B35106B9835 /* QCloudFileUtils.m */; };
+		5799D81ECE3DE6912BC6B94C7DDAD47A /* QCloudHttpDNS.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6532523671CF2942561EAF02BD7E13 /* QCloudHttpDNS.m */; };
+		5848B429C01EDA74D92007EA39892A25 /* QCloudNetResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D386AF4158A31E3F798B840BA6C2289 /* QCloudNetResponse.m */; };
+		593E4B2D0E1306A543EB9B678CEB5933 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B056BCF1E872E1443886D46E1D82F373 /* Foundation.framework */; };
+		5AF466E37D7DBDDEAB85F2F944DFB7CD /* MTA.h in Headers */ = {isa = PBXBuildFile; fileRef = 263A24643C5538F36B6D1EC6410B7E7C /* MTA.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5B547E13908113EAE3902354421D34DF /* QCloudEncryt.h in Headers */ = {isa = PBXBuildFile; fileRef = B9A894F67A5F89D35A364BD394B11E55 /* QCloudEncryt.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5B5EA20CA8B7F067F94CDBBBEA3B5171 /* QCloudHosts.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D0D860EE3417D196CF00F7738AE9187 /* QCloudHosts.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CB8B5EA18607D8A5696B81140CCB352 /* QCloudSupervisoryRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB63E661BF494867D83386B1C32E676 /* QCloudSupervisoryRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5D620747F35FA278DCC93053064576B9 /* QCloudResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7557C08C9645E2703AEE0DD366E87C73 /* QCloudResponseSerializer.m */; };
+		60168EF07B0F56604E68840115B9D9B4 /* QCloudFCUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E9B4A6760CAE2BDCBDC63A6D7597A4 /* QCloudFCUUID.m */; };
+		60606253C39EF6A8010259ABDF84C962 /* QCloudURLTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 31D882FB7687D54B00C158B942E265AC /* QCloudURLTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		628253F639E2363297B44DC5A697D097 /* QCloudHTTPMultiDataStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 64A353B043AE6895B5C42B409C9E08AE /* QCloudHTTPMultiDataStream.m */; };
+		63B3DB3C530CE006ED556E7E1265DB2F /* QCloudPingTester.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F099E4C81BEABA2765F3712C9186C6A /* QCloudPingTester.m */; };
+		64B9BB356197AAB30DC2836A1ECC459E /* QCloudResponseSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = FB5E49B53C29E3C156DC5C1F759121CA /* QCloudResponseSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		653BD7204147576134DF58AC35FDBCD0 /* QCloudUniversalAdjustablePath.h in Headers */ = {isa = PBXBuildFile; fileRef = 411186F8F79884319B099D3A61D3EEAA /* QCloudUniversalAdjustablePath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6547FB757F1A990E90FE36477B03AFCD /* QCloudBizHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F6E003AD0AED91222984FEAEC34C846 /* QCloudBizHTTPRequest.m */; };
+		66A9E584499EF042D1C44FF332DE83EF /* QCloudOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = A5F25B3880ED93564F5A9ED29AC24E1E /* QCloudOperationQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		66ED4FAEEBEAF8EFC5A84F59CAA2CE81 /* QCloudHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E100CE7CE2B75012FA08072845A5700A /* QCloudHTTPRequestOperation.m */; };
+		6D5EB8D9AEC9E80C0C6D5DAE7180578C /* QCloudFileZipper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4DE9EF50379001B96EB7AAE518F13A /* QCloudFileZipper.m */; };
+		6F05561CFBBC0C087243CAFC7915C605 /* QCloudSDKModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 397252888932B5BF0B8E0E2825422169 /* QCloudSDKModuleManager.m */; };
+		6F90C82420C6339F8F1E8FCEA594E191 /* QCloudRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0B25B9D0B2899851A2D43A86ACFB71 /* QCloudRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		70022605D67CBF8F09EA506116D954DB /* QCloudHttpDNS.h in Headers */ = {isa = PBXBuildFile; fileRef = 54F13F3B3017BAF5F69A97D529CEAB60 /* QCloudHttpDNS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		73E1999174944B9645A9F27CD8378233 /* QCloudFileOffsetBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 4428492B8DDC2C3E4A238D5873A18524 /* QCloudFileOffsetBody.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7486884770DD136B0379FC6DAEA4180E /* QCloudXMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B5268F66D557DA20AF2038BB7D9FF9E1 /* QCloudXMLDictionary.m */; };
+		757007C8CA6B7CF2285647AAA5CF9BAA /* NSDate+QCloudInternetDateTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 635AE3BC3C0AC7028EE9D7C5C3F80E18 /* NSDate+QCloudInternetDateTime.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		75D747EBC38CC614E3B3A7C82B8F5514 /* QCloudEndPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 384D0D451B85EC183EAFCA7FBF6B00EC /* QCloudEndPoint.m */; };
+		7866FE72821E35CE5E44A7D0FA0826C3 /* QCloudUICKeyChainStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EEF0B5F0AC9459A8B5CED5A92003BF6 /* QCloudUICKeyChainStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B87F5F5D8162485FB31E6DCF06EB09F /* QCloudUniversalPathFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0799CBDC4B3AD647A182262FC8EA85EF /* QCloudUniversalPathFactory.m */; };
+		7CED3E56139A392736947E1B9FB71DAE /* QCloudSandboxPath.h in Headers */ = {isa = PBXBuildFile; fileRef = CDB835E1DB25A356811075F3BA1567F4 /* QCloudSandboxPath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7DE048A51CA91E135EB74579A1F29490 /* QCloudHTTPRequestDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 27B90EB9CF350B666E48C30021BA832E /* QCloudHTTPRequestDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		827B9627354A42D1D07802B67507BC81 /* NSString+QCloudSHA.mm in Sources */ = {isa = PBXBuildFile; fileRef = 12EC3AB6C328DE9F0F108F8ADEC13693 /* NSString+QCloudSHA.mm */; };
+		8346B7554DB906C61B08CBC5C5DAF1FB /* QCloudSHAPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DF11A58FEB50087E9923148CA151F2 /* QCloudSHAPart.m */; };
+		844A0E02674CB3BC0AE38F004146BBC2 /* QCloudClientContext.h in Headers */ = {isa = PBXBuildFile; fileRef = C9B70670A1CE28CE7559F2A1B44C5127 /* QCloudClientContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		846DDE5F0496D0CA26254F5F6FEE7147 /* QCloudHTTPRequest_RequestID.h in Headers */ = {isa = PBXBuildFile; fileRef = 320DA251B525C14D2104B274DEB2AABA /* QCloudHTTPRequest_RequestID.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84AD1DD427BCF0EBFCE10E5EABA936C9 /* QCloudAuthentationCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F155CF4347D07DF6929B24BCB1806CC /* QCloudAuthentationCreator.m */; };
+		85624433F85CB740E0A75150735EE771 /* QCloudModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 007BE273ACED0B573E9A4B72C5984666 /* QCloudModel.m */; };
+		86015D8B876807C37E587CA9EE0DBF6C /* NSObject+HTTPHeadersContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF747AD4474CB38B4ABB280FA0E6657 /* NSObject+HTTPHeadersContainer.m */; };
+		87127AB537870D2B141366B5A7822499 /* QCloudMediaPath.h in Headers */ = {isa = PBXBuildFile; fileRef = A55151FA9BDB64CFD8858130B3F21912 /* QCloudMediaPath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8A328CFC2CAFBFD362665D12014EBE3C /* MTA+Account.h in Headers */ = {isa = PBXBuildFile; fileRef = 9804882FA697F64B3F127889A7B42ED6 /* MTA+Account.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8ACFE1DDF84F852ADCF717A3F207C317 /* QCloudLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BCBA80E4D75E546DAE2B0EDBF6576A /* QCloudLogger.m */; };
+		8C0661DABC323E5B5121FB00360A9B46 /* QCloudThreadSafeMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = D637C88625A6E0DA0F4D62A5A6ACD003 /* QCloudThreadSafeMutableDictionary.m */; };
+		8C506BE18901D7B69853F8E301C36727 /* NSString+QCloudSHA.h in Headers */ = {isa = PBXBuildFile; fileRef = 9417C04553B11D2267C40FF7306A80F7 /* NSString+QCloudSHA.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8C6A4C209A06F95D1A23643385E29920 /* QCloudSupervisoryRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C5C0FF461F0CA9A5E121FC588DE96E /* QCloudSupervisoryRecord.m */; };
+		8CB7A5CF208056F24CFE591D80857B51 /* QCloudNetEnv.h in Headers */ = {isa = PBXBuildFile; fileRef = 42C6533D4BB179C8F276A4873EEE876F /* QCloudNetEnv.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8CCABC2F0360361C11B53DAEF79FD702 /* QCloudAuthentationV4Creator.h in Headers */ = {isa = PBXBuildFile; fileRef = 90CDE4F6366E67C6C6942EF7367257B4 /* QCloudAuthentationV4Creator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D47BE20087C5652E012F44825D57ECD /* QCloudProgrameDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E425654A0C840BD7C6D25F5385E7F6 /* QCloudProgrameDefines.m */; };
+		8DEDA264457711B6CBF0B9AF6A50A919 /* QCloudNetProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 014A34F8D0D952E6EC359906DC65BA57 /* QCloudNetProfile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8F2624C9BE0A274EFA49DDCA37D1ED65 /* QCloudAuthentationV4Creator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 565B7E63681B174DF8A2DCED91A37E79 /* QCloudAuthentationV4Creator.mm */; };
+		94593E2502A6AEF371D0567A25EEF321 /* QCloudHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 118C50487956E22A16B617D261F7A622 /* QCloudHTTPRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		965C949F9ADE69461ADDD876B7820BE2 /* QCloudServiceConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5C4634A63E3E8825986FAADBFC2169 /* QCloudServiceConfiguration.m */; };
+		97CE0F58E8EBF35650903C52B60D8CDF /* QCloudHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D4BE5DF1CB0392232182759829612B64 /* QCloudHTTPSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		984B9FBE7A2DC86A3851983B429FB108 /* QCloudAuthentationCreator.h in Headers */ = {isa = PBXBuildFile; fileRef = C501ADF93C36343A1FA5368545D52AFA /* QCloudAuthentationCreator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9965DBD2C0F42F37FC6033599CE27108 /* QCloudService.h in Headers */ = {isa = PBXBuildFile; fileRef = 36B4D35C58EA3B693E6E57D1FDC5EB86 /* QCloudService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		99A4567E39A617DFFCC1E5FF7C694121 /* QCloudUploadPartRequestRetryHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E4564AD52CB5FA62BB0217858CFF367C /* QCloudUploadPartRequestRetryHandler.m */; };
+		9BA092D036F3FB920F0CE2BD46FA7794 /* QCloudUniversalFixedPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 35841B6209D602AD0EA915E7DA4A84AF /* QCloudUniversalFixedPath.m */; };
+		9C76E2875B2CD755F756745EA29E53F9 /* COSXMLGetSignatureTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E5706AEEEC2AF5799216099BFC19F571 /* COSXMLGetSignatureTool.m */; };
+		9CC4440E5E280A1CAD092A213768D5C6 /* QCloudFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = F65FA872F2A13F6CA54473FE28F18111 /* QCloudFileLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9DC063010FEF61F25AB2BA81D00EE530 /* QCloudLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = D653364B86192E7B3188FF45F42B3F45 /* QCloudLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9EC02887621DA2ED8CB479B2329EB0A4 /* NSDate+QCloudComapre.m in Sources */ = {isa = PBXBuildFile; fileRef = C696122DB6359B13CA315EC5D867C268 /* NSDate+QCloudComapre.m */; };
+		9ECA4F7986B1F0922A1210CCA4C2FC2F /* QCloudIntelligenceTimeOutAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 461D940593045812DDB2BC7C092106B4 /* QCloudIntelligenceTimeOutAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9F4F252A8CDA6512902E4EACD004A34F /* QCloudRequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC782C741E8EF614D4AC349324E78E /* QCloudRequestSerializer.m */; };
+		A0C7E3CA2F6EF537FAF98828DDC4D8FF /* QCloudMultiDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6611FD4C9A31188A0DB730607F41C46B /* QCloudMultiDelegateProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A23DD354744E83B2E2C767E63B996FFE /* UIImage+QCloudBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D5D5CA61B894BFF7A05FCAB8BB4DC3 /* UIImage+QCloudBundle.m */; };
+		A436F027C6259B138D25A3098C2EBB15 /* QCloudSDKModuleManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D9623A6BF5C1AB805AF66BAA1AEECD7E /* QCloudSDKModuleManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A58793537262CA85F79449EBC9EFE7F5 /* QCloudHTTPBodyPart.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BDEA4D617E6FDEA347FC764039AD685 /* QCloudHTTPBodyPart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5DB6214C063810A8E3981772D5CAD7A /* QCloudSupervisory.m in Sources */ = {isa = PBXBuildFile; fileRef = 804BB18781E6682977ED885CA17FE171 /* QCloudSupervisory.m */; };
+		A5E0DA8D67A345EA5E6D6766CE9BAAAA /* QCloudMainBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = BFC4AA7B44DE6DDEC208F5FBA16E235C /* QCloudMainBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A607AC250E3B503BE6EBC722F7DFB273 /* QCloudHTTPSessionManager_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = A5598C857015554B48A07C975334DB57 /* QCloudHTTPSessionManager_Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A75BA3CBC3AC2E4CBC980AF04DF10E46 /* NSObject+QCloudModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 0EB178A5FF7B1941A1AC5DF79E0D22A5 /* NSObject+QCloudModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A78434BE7A1F92D5416330B488E21294 /* QCloudNetProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FA2165C34D415C318C2A6321BB9199 /* QCloudNetProfile.m */; };
+		A7F052D97DCBC211C495D8EE9211B619 /* QCloudHTTPTaskDelayManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C90FAE9923ED74E0FD794ED8FCE2FC1D /* QCloudHTTPTaskDelayManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9DFBACC7308D485FEF2AAA4E0BFAD57 /* QCloudHTTPRequest_SessionPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = B1CD07C4DFC268A2A5D278CF1EB553DB /* QCloudHTTPRequest_SessionPrivate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA2B873A06320DF3A0A2F11624C3FD20 /* QCloudDomain.h in Headers */ = {isa = PBXBuildFile; fileRef = 6578A3A27D47936A7BFD02B779245B6D /* QCloudDomain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA73C2D514E886FE8E979003CDC72C8A /* QCloudAuthentationV5Creator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3893EC3D06882D67AC8993CFBFED3247 /* QCloudAuthentationV5Creator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC29F97AF4D7E100E5A6DA8CC57691C9 /* QCloudCredentailFenceQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7E186267073C9B03CD18327790DC39 /* QCloudCredentailFenceQueue.m */; };
+		AC3FFF3A09810A50BEA5425A91F98DE9 /* QCloudHttpMetrics.m in Sources */ = {isa = PBXBuildFile; fileRef = F30D5130E73C5C5803BA14741C6CCDD6 /* QCloudHttpMetrics.m */; };
+		ADFB065A785B7A09471E2B187FDC7E08 /* NSObject+QCloudModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 806F3D901DEFBBF8679B1163CA75F5CE /* NSObject+QCloudModel.m */; };
+		AE248300845D09BCC103E04DC15F45B1 /* QCloudHTTPMultiDataStream.h in Headers */ = {isa = PBXBuildFile; fileRef = A1A906814825D7719C05CA65D875A9BA /* QCloudHTTPMultiDataStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AEAA231C0C9C4BFABD887805C5558CD0 /* QCloudMainBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEAA8B05B9A2A49B378A5C0592C27FA /* QCloudMainBundle.m */; };
+		AF585B9F45A561797B9DE0B2090C9908 /* QCloudClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD6D997A77A617C6C0AD9D47BB8CEEB /* QCloudClassInfo.m */; };
+		AF715F7912A51DBAC9A15A9F1E0FC595 /* QCloudLogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F5A96AA770E4395AD2D0BD87BD1627 /* QCloudLogModel.m */; };
+		AFB9BE6B6615575CFD55063A6DA33F37 /* QCloudNetResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E581DAC7DF98CABED6948C1B03B814 /* QCloudNetResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B1A19107DA9BE70E468DE2B322853ABF /* QCloudUICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F244377FF11E16ACD7E3F7F841F7A /* QCloudUICKeyChainStore.m */; };
+		B1B3FF7BA8F2E590F3DBA97046F20065 /* QCloudNetworkingAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 685351E9F65E069F5197CB0955D2A000 /* QCloudNetworkingAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B2DC25362774C9E5E4F185744F892D7B /* QCloudURLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A43F5A9E1BCED5BF29F5BF750A92837 /* QCloudURLHelper.m */; };
+		B6D97FD575F5FBD1C16725ADAF71F0E8 /* QCloudError.h in Headers */ = {isa = PBXBuildFile; fileRef = F79B643FE8B7DD2EBA0A2D0D12940EA8 /* QCloudError.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B8FAB00B5B77B5A11999621357F5AC2C /* QCloudDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A56442280DEFB7D7CA97E9849A2744A /* QCloudDomain.m */; };
+		BA875BB64CE91A7FF8A829B90B3D7A0B /* QCloudRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = EF7AB6571ADD9F1A9F515E10710B313B /* QCloudRequestOperation.m */; };
+		BB7832B6E72BF224ADC98D465A189842 /* QCloudMultiDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D8BB012F50BD7A648048D8AAC0F72C /* QCloudMultiDelegateProxy.m */; };
+		BD6B11D88F9AD65D88BE83B17F4BBBBF /* QCloudWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = B2673DDDDE89B8B0A9FFD68759C92D5A /* QCloudWeakProxy.m */; };
+		BDD71510BC0F382C81D43BC08DEE6F5A /* NSError+QCloudNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = F67ED40B85E6EECE87F5AF51CEBF5DBC /* NSError+QCloudNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BEEC861F2F6FBB41FE653D442251099A /* QCloudOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E8EDE712BCE9DC29DC3A41CF3C98F0F7 /* QCloudOperationQueue.m */; };
+		C1B21C5DF95A8E623CB61C6AED6081B1 /* COSXMLGetSignatureTool.h in Headers */ = {isa = PBXBuildFile; fileRef = B99C5D9DA26B3CF6A23CAC27B67E6541 /* COSXMLGetSignatureTool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C255B60B32CD6DF11A64BA7852F687D7 /* QCloudUniversalPathFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = DD48C42DE59A5B6FF5E9D227105DE795 /* QCloudUniversalPathFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C263A8E997F0CA1C6C7687AB70D4DF45 /* QCloudBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D53756C46DD4B2350ADDA4E8D0D5FD9 /* QCloudBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C566392073F1114D8C5C2DB70F696427 /* QCloudBundlePath.h in Headers */ = {isa = PBXBuildFile; fileRef = CE186D37B6C98CF655B9973AA6A92A57 /* QCloudBundlePath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C64FEBE601E251C3D7A74E7C39B4DF78 /* QCloudFileOffsetStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 104CFEB93A861DDCE4C59DF19ECC0A64 /* QCloudFileOffsetStream.m */; };
+		C9B2BC6798013EC8D245D70C209D2CF5 /* QCloudClientContext.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C582FA8EAB27974EF7758BC1C3B426 /* QCloudClientContext.m */; };
+		CA2FD72A4335F2396A01CB0C88AE1569 /* QCloudCore-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AFFFD6A7266A96A4D579D393121351CF /* QCloudCore-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CA9E9DDC786A33B922BA5C478A6EAFB5 /* QCloudSupervisory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC7E63093C9CEA4F272E29C10D53738 /* QCloudSupervisory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CCDD945BA2566714E4F80B759073762B /* QCloudPingTester.h in Headers */ = {isa = PBXBuildFile; fileRef = 6193DC1B3A15A0E39D57BACF9F4C59D4 /* QCloudPingTester.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CDDEF7F81C14E3DAC941CDFF3BBE2571 /* QCloudHTTPBodyPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 708B5B171C254D8C2A55E3E90EA63157 /* QCloudHTTPBodyPart.m */; };
+		CF4BB46ED7E11104D7710D34FD7E3F30 /* QCloudCredentailFenceQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 503345887BFBF354F273906D1E8DBD28 /* QCloudCredentailFenceQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D06786B8C9D4A247FC8738AA961AD699 /* QCloudFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D5DCB16A3A92413AC21388E677E2F /* QCloudFileLogger.m */; };
+		D1CE5BAAC293706EF2704A4FD510BE2B /* QCloudEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A0A75B089FF14D7DD89710BF806710 /* QCloudEnv.m */; };
+		D25151435BEFDC6F4A67BE9FD5CA23CD /* QCloudSignatureProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AA7DF6397B2FEADA3908582C025CD6 /* QCloudSignatureProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D35DD98F045D2D76D3DDF7D1788DE66C /* NSHTTPCookie+QCloudNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = F0A35FF79A4DB5B1FDD4ABB6DC36C419 /* NSHTTPCookie+QCloudNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D677DCBF8A02AD5C87F669C4F7FEBAF8 /* UIImage+QCloudBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = CF5B2B5B1AE159811C398DF4E872F989 /* UIImage+QCloudBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6B3F68A27822AC05D382B10357C017A /* QCloudFakeRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AA92422B5B89AAAFBADC1E5F858C4862 /* QCloudFakeRequestOperation.m */; };
+		D6BC96364EC7A7A914E8DA162DBDFBF8 /* QCloudSignatureFields.m in Sources */ = {isa = PBXBuildFile; fileRef = 516B530E3CD8AC2D65D2BAB3CC42458A /* QCloudSignatureFields.m */; };
+		D74D654C233B253FE7138919E65C0E4F /* UIDevice+QCloudFCUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = BFF1FC84FB4482EC15FA0E7760F161CF /* UIDevice+QCloudFCUUID.m */; };
+		DAA2AC04DC04C27F50F420A49D077226 /* QCloudUniversalAdjustablePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D02A7C10BDFD7CADF6C42E61DD88D0 /* QCloudUniversalAdjustablePath.m */; };
+		DC36696E4005F59497022A6654E4DA30 /* QCloudBizHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = B2698EE26C2C9DFFC8AC98815A7234CA /* QCloudBizHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DC4ADBF5D95FCDF58C8FBF23BEAB99CD /* QCloudBundlePath.m in Sources */ = {isa = PBXBuildFile; fileRef = B1CB11C1280023EF91C9FA1C1F74CA1E /* QCloudBundlePath.m */; };
+		DD2B295620CC294388C6ADA4CD5E319B /* QCloudHosts.m in Sources */ = {isa = PBXBuildFile; fileRef = FA19E2178A8A1380AED23DAE27EFC666 /* QCloudHosts.m */; };
+		DE7508721441EDC4C3D3DDAFDECF03D0 /* QCloudAbstractRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = ED5753DE6CAC310965D375A54CA7A791 /* QCloudAbstractRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DF03D21CFC3D02619DF93D83307A4CCE /* MTACrashReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D61D300D4B738CCC9176A637BD3349D /* MTACrashReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DFDD5FEA0A87503EF952BBBA77FB5961 /* QCloudReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = C04112FDAC8B0EA53359C708643591FD /* QCloudReachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E27D634F83CAED81665CA62D468EF73A /* NSDate+QCloudComapre.h in Headers */ = {isa = PBXBuildFile; fileRef = F1F7D0D4BB7026965458B6DBC8779E4C /* NSDate+QCloudComapre.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E32FB44C9F0B36315AB7300696BC3EAB /* QCloudURLTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 48670AF5DC06C06E1A2A32440D342087 /* QCloudURLTools.m */; };
+		E3E5FADF8722FADC7EE3350E550B22AB /* QCloudFileZipper.h in Headers */ = {isa = PBXBuildFile; fileRef = 31B0A423CA7EC81165FACC95CCF27725 /* QCloudFileZipper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED6D00917AE986FB74796F2A949D7F89 /* QCloudCoreVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = DAA1E0D6039BAF0838B6007C9CDD42A3 /* QCloudCoreVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EE1DDA6D7717C4DD97B3A77AB474B55A /* QCloudObjectModel.h in Headers */ = {isa = PBXBuildFile; fileRef = A9B67AC80936FF8E032E89B1692204B8 /* QCloudObjectModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EEE77231758A0E7C473C3CC1C11921B3 /* QCloudRequestData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB14B79FD8DB47B7AD359A12342E840 /* QCloudRequestData.m */; };
+		F0D01BF502A4C0C2704C184BFEF09863 /* QCloudRequestData.h in Headers */ = {isa = PBXBuildFile; fileRef = 431FB10D702B7EB32A04A6ECF9375F15 /* QCloudRequestData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F13DF1FE35BDE608EE2DD3D55938EF94 /* QCloudURLSessionTaskData.h in Headers */ = {isa = PBXBuildFile; fileRef = 9ACD26379D81457AE0749FA66FAD5FC6 /* QCloudURLSessionTaskData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F19BC8674B80A95E8768C5C04CCCF3BE /* QCloudFCUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = AC979117670775C78A097079256E4FF5 /* QCloudFCUUID.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F1B8C374914AA3A7D7B615E8808774B3 /* QCloudURLHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 01B902C366C1827209F35AE7D145FCC4 /* QCloudURLHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F34101CC538FF06A85EA501A368FB134 /* QCloudUniversalFixedPath.h in Headers */ = {isa = PBXBuildFile; fileRef = CC1C9B8BAB438D7403C192F5899932AA /* QCloudUniversalFixedPath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F461A23094F0281CC8C23115DAB70EDB /* QCloudCoreVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 91372535DBCD73A8BDC96559BA3F19DA /* QCloudCoreVersion.m */; };
+		F504DD5747C1F58F129C1BA61E7AFB00 /* QCloudRequestSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6699A557856B8C98F0D87E6ECE6D46AA /* QCloudRequestSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F6B263262AC27C0858C78FA74DE0E99A /* NSDate+QCLOUD.h in Headers */ = {isa = PBXBuildFile; fileRef = C5CBF304A4BB3E87C92384998DF34CD9 /* NSDate+QCLOUD.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F70A88B72576C93A6949032A438036FB /* QCloudClassInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 35BB84885361D0C0C461DFDDEBFB68BF /* QCloudClassInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F7D5346FA44251E6C25E975952E2EC24 /* NSError+QCloudNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9360F8938557D4C28631791721EEA1 /* NSError+QCloudNetworking.m */; };
+		F83309B13BF30D15592111E79A9D5CD6 /* UIDevice+QCloudFCUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = E21B18DA3965098456F70DB2E0362E6F /* UIDevice+QCloudFCUUID.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F95C84717C2739BCBB5C12EFA7CC2D23 /* QCloudError.m in Sources */ = {isa = PBXBuildFile; fileRef = 198E5E71AA6459F17C9A26920550873D /* QCloudError.m */; };
+		FBD2C6BD9505FC7CC94D41CD257C0F67 /* QCloudHTTPRetryHanlder.h in Headers */ = {isa = PBXBuildFile; fileRef = C1235FE41A754ED8599365AAC8B3A661 /* QCloudHTTPRetryHanlder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FC94111B7D873BFC02AF854F4D0EA1D1 /* QCloudLoggerOutput.h in Headers */ = {isa = PBXBuildFile; fileRef = 3770032DC80ABC03F48470DCED82CAD1 /* QCloudLoggerOutput.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		007BE273ACED0B573E9A4B72C5984666 /* QCloudModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudModel.m; sourceTree = "<group>"; };
+		00D02A7C10BDFD7CADF6C42E61DD88D0 /* QCloudUniversalAdjustablePath.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudUniversalAdjustablePath.m; sourceTree = "<group>"; };
+		00F5A96AA770E4395AD2D0BD87BD1627 /* QCloudLogModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudLogModel.m; sourceTree = "<group>"; };
+		00FFB787C88D1E632F98304C03759F22 /* NSHTTPCookie+QCloudNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSHTTPCookie+QCloudNetworking.m"; sourceTree = "<group>"; };
+		014A34F8D0D952E6EC359906DC65BA57 /* QCloudNetProfile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudNetProfile.h; sourceTree = "<group>"; };
+		01B902C366C1827209F35AE7D145FCC4 /* QCloudURLHelper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudURLHelper.h; sourceTree = "<group>"; };
+		0361EF51B962462C988114D7BB6C2102 /* NSDate+QCLOUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSDate+QCLOUD.m"; sourceTree = "<group>"; };
+		0666438A33522945F18A0BC39C2BD4C0 /* QCloudFileOffsetStream.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudFileOffsetStream.h; sourceTree = "<group>"; };
+		0799CBDC4B3AD647A182262FC8EA85EF /* QCloudUniversalPathFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudUniversalPathFactory.m; sourceTree = "<group>"; };
+		0B4DE9EF50379001B96EB7AAE518F13A /* QCloudFileZipper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudFileZipper.m; sourceTree = "<group>"; };
+		0BD6D997A77A617C6C0AD9D47BB8CEEB /* QCloudClassInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudClassInfo.m; sourceTree = "<group>"; };
+		0EB178A5FF7B1941A1AC5DF79E0D22A5 /* NSObject+QCloudModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSObject+QCloudModel.h"; sourceTree = "<group>"; };
+		104CFEB93A861DDCE4C59DF19ECC0A64 /* QCloudFileOffsetStream.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudFileOffsetStream.m; sourceTree = "<group>"; };
+		10D5D5CA61B894BFF7A05FCAB8BB4DC3 /* UIImage+QCloudBundle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImage+QCloudBundle.m"; sourceTree = "<group>"; };
+		118C50487956E22A16B617D261F7A622 /* QCloudHTTPRequestOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudHTTPRequestOperation.h; sourceTree = "<group>"; };
+		11F18F299B9A3C04BFFEB0F1B4E3E9FF /* QCloudCore-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "QCloudCore-dummy.m"; sourceTree = "<group>"; };
+		12EC3AB6C328DE9F0F108F8ADEC13693 /* NSString+QCloudSHA.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = "NSString+QCloudSHA.mm"; sourceTree = "<group>"; };
+		158D1B92E1B55E6B2C1C234F67E75782 /* QCloudURLSessionTaskData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudURLSessionTaskData.m; sourceTree = "<group>"; };
+		187EC4F7C09CBF939000EA22937DEEB0 /* QCloudCore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = QCloudCore.release.xcconfig; sourceTree = "<group>"; };
+		198E5E71AA6459F17C9A26920550873D /* QCloudError.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudError.m; sourceTree = "<group>"; };
+		1A56442280DEFB7D7CA97E9849A2744A /* QCloudDomain.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudDomain.m; sourceTree = "<group>"; };
+		1FCCC1446940CFF989783FDC74F8728A /* NSDate+QCloudInternetDateTime.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSDate+QCloudInternetDateTime.m"; sourceTree = "<group>"; };
+		21648119B9B91EF465F68CA93F61B87A /* QCloudCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = QCloudCore.debug.xcconfig; sourceTree = "<group>"; };
+		2530DC3E2D480B410D3B83998146EEAB /* QCloudSupervisorySession.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudSupervisorySession.m; sourceTree = "<group>"; };
+		263A24643C5538F36B6D1EC6410B7E7C /* MTA.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MTA.h; sourceTree = "<group>"; };
+		27B90EB9CF350B666E48C30021BA832E /* QCloudHTTPRequestDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudHTTPRequestDelegate.h; sourceTree = "<group>"; };
+		2A1B3DCC885C41FAAC78676BD3F70FC1 /* QCloudCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = QCloudCore.framework; path = QCloudCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BE5E8E04751095E19524148A7E7E13C /* QCloudHttpMetrics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudHttpMetrics.h; sourceTree = "<group>"; };
+		2EFD76AC8C8A1668E3CE0AAF82A16144 /* QCloudSHAPart.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudSHAPart.h; sourceTree = "<group>"; };
+		2F099E4C81BEABA2765F3712C9186C6A /* QCloudPingTester.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudPingTester.m; sourceTree = "<group>"; };
+		2FCC782C741E8EF614D4AC349324E78E /* QCloudRequestSerializer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudRequestSerializer.m; sourceTree = "<group>"; };
+		3045B9EE8F8464580658D56B162D0B2A /* QCloudReachability.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudReachability.m; sourceTree = "<group>"; };
+		312399AB12C57B96704DAE205EC33457 /* QCloudCore-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "QCloudCore-Info.plist"; sourceTree = "<group>"; };
+		31B0A423CA7EC81165FACC95CCF27725 /* QCloudFileZipper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudFileZipper.h; sourceTree = "<group>"; };
+		31D882FB7687D54B00C158B942E265AC /* QCloudURLTools.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudURLTools.h; sourceTree = "<group>"; };
+		320DA251B525C14D2104B274DEB2AABA /* QCloudHTTPRequest_RequestID.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudHTTPRequest_RequestID.h; sourceTree = "<group>"; };
+		3222C19F746F5C38DFC18C495E9F4322 /* QCloudThreadSafeMutableDictionary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudThreadSafeMutableDictionary.h; sourceTree = "<group>"; };
+		35841B6209D602AD0EA915E7DA4A84AF /* QCloudUniversalFixedPath.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudUniversalFixedPath.m; sourceTree = "<group>"; };
+		35BB84885361D0C0C461DFDDEBFB68BF /* QCloudClassInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudClassInfo.h; sourceTree = "<group>"; };
+		36B4D35C58EA3B693E6E57D1FDC5EB86 /* QCloudService.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudService.h; sourceTree = "<group>"; };
+		36C5C0FF461F0CA9A5E121FC588DE96E /* QCloudSupervisoryRecord.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudSupervisoryRecord.m; sourceTree = "<group>"; };
+		3770032DC80ABC03F48470DCED82CAD1 /* QCloudLoggerOutput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudLoggerOutput.h; sourceTree = "<group>"; };
+		384D0D451B85EC183EAFCA7FBF6B00EC /* QCloudEndPoint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudEndPoint.m; sourceTree = "<group>"; };
+		3893EC3D06882D67AC8993CFBFED3247 /* QCloudAuthentationV5Creator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudAuthentationV5Creator.h; sourceTree = "<group>"; };
+		397252888932B5BF0B8E0E2825422169 /* QCloudSDKModuleManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudSDKModuleManager.m; sourceTree = "<group>"; };
+		3C7B8B790666077246BC617D4E7E7259 /* QCloudProgrameDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudProgrameDefines.h; sourceTree = "<group>"; };
+		3D0D860EE3417D196CF00F7738AE9187 /* QCloudHosts.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudHosts.h; sourceTree = "<group>"; };
+		3D1CBDAAE7E6358C81DD555FCE7FDC67 /* QCloudSignatureFields.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudSignatureFields.h; sourceTree = "<group>"; };
+		40C315E37EEBCED6EE2AD50197272B6F /* QCloudService.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudService.m; sourceTree = "<group>"; };
+		411186F8F79884319B099D3A61D3EEAA /* QCloudUniversalAdjustablePath.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudUniversalAdjustablePath.h; sourceTree = "<group>"; };
+		4161BC578D5529286BEE99D956157E43 /* QCloudNetEnv.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudNetEnv.m; sourceTree = "<group>"; };
+		42C6533D4BB179C8F276A4873EEE876F /* QCloudNetEnv.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudNetEnv.h; sourceTree = "<group>"; };
+		42E9B4A6760CAE2BDCBDC63A6D7597A4 /* QCloudFCUUID.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudFCUUID.m; sourceTree = "<group>"; };
+		431FB10D702B7EB32A04A6ECF9375F15 /* QCloudRequestData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudRequestData.h; sourceTree = "<group>"; };
+		441A0A9F76BBF9F02CDFCA094BCB4C96 /* QCloudSignature.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudSignature.h; sourceTree = "<group>"; };
+		4428492B8DDC2C3E4A238D5873A18524 /* QCloudFileOffsetBody.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudFileOffsetBody.h; sourceTree = "<group>"; };
+		461D940593045812DDB2BC7C092106B4 /* QCloudIntelligenceTimeOutAdapter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudIntelligenceTimeOutAdapter.h; sourceTree = "<group>"; };
+		4656C18266F8EEE4DE536450D5C3C664 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		4859FA2831929F83A0A9A4DA6BD9011A /* NSObject+HTTPHeadersContainer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSObject+HTTPHeadersContainer.h"; sourceTree = "<group>"; };
+		48670AF5DC06C06E1A2A32440D342087 /* QCloudURLTools.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudURLTools.m; sourceTree = "<group>"; };
+		4AC4C6EFACD3A67CF918A30908672156 /* SimplePing.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SimplePing.m; sourceTree = "<group>"; };
+		4BDEA4D617E6FDEA347FC764039AD685 /* QCloudHTTPBodyPart.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudHTTPBodyPart.h; sourceTree = "<group>"; };
+		4D386AF4158A31E3F798B840BA6C2289 /* QCloudNetResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudNetResponse.m; sourceTree = "<group>"; };
+		4F155CF4347D07DF6929B24BCB1806CC /* QCloudAuthentationCreator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudAuthentationCreator.m; sourceTree = "<group>"; };
+		503345887BFBF354F273906D1E8DBD28 /* QCloudCredentailFenceQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudCredentailFenceQueue.h; sourceTree = "<group>"; };
+		516B530E3CD8AC2D65D2BAB3CC42458A /* QCloudSignatureFields.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudSignatureFields.m; sourceTree = "<group>"; };
+		53BAFD51C1F70FFF2EB23EBFA922CA3D /* QCloudIntelligenceTimeOutAdapter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudIntelligenceTimeOutAdapter.m; sourceTree = "<group>"; };
+		54EB01E0E2BFE34AB5D9E0399FBF4312 /* QCloudEnv.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudEnv.h; sourceTree = "<group>"; };
+		54F13F3B3017BAF5F69A97D529CEAB60 /* QCloudHttpDNS.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudHttpDNS.h; sourceTree = "<group>"; };
+		565B7E63681B174DF8A2DCED91A37E79 /* QCloudAuthentationV4Creator.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = QCloudAuthentationV4Creator.mm; sourceTree = "<group>"; };
+		580985F8D31B019C7266093434A26069 /* QCloudUniversalPathConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudUniversalPathConstants.h; sourceTree = "<group>"; };
+		5921CAA8B97F7F431372C07601BC1E41 /* QCloudCore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudCore.h; sourceTree = "<group>"; };
+		5D53756C46DD4B2350ADDA4E8D0D5FD9 /* QCloudBundle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudBundle.h; sourceTree = "<group>"; };
+		5EEF0B5F0AC9459A8B5CED5A92003BF6 /* QCloudUICKeyChainStore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudUICKeyChainStore.h; sourceTree = "<group>"; };
+		6193DC1B3A15A0E39D57BACF9F4C59D4 /* QCloudPingTester.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudPingTester.h; sourceTree = "<group>"; };
+		61CCFE8141438DE65219FA6439B34340 /* MTAConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MTAConfig.h; sourceTree = "<group>"; };
+		635AE3BC3C0AC7028EE9D7C5C3F80E18 /* NSDate+QCloudInternetDateTime.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSDate+QCloudInternetDateTime.h"; sourceTree = "<group>"; };
+		64A353B043AE6895B5C42B409C9E08AE /* QCloudHTTPMultiDataStream.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudHTTPMultiDataStream.m; sourceTree = "<group>"; };
+		64DA05CC8B3E4861142600F75ADD8DDE /* QCloudFileOffsetBody.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudFileOffsetBody.m; sourceTree = "<group>"; };
+		6578A3A27D47936A7BFD02B779245B6D /* QCloudDomain.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudDomain.h; sourceTree = "<group>"; };
+		6611FD4C9A31188A0DB730607F41C46B /* QCloudMultiDelegateProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudMultiDelegateProxy.h; sourceTree = "<group>"; };
+		6699A557856B8C98F0D87E6ECE6D46AA /* QCloudRequestSerializer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudRequestSerializer.h; sourceTree = "<group>"; };
+		685351E9F65E069F5197CB0955D2A000 /* QCloudNetworkingAPI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudNetworkingAPI.h; sourceTree = "<group>"; };
+		689AF43A336B5F9F7D8C5B6BD22A19B2 /* QCloudHTTPRetryHanlder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudHTTPRetryHanlder.m; sourceTree = "<group>"; };
+		6A43F5A9E1BCED5BF29F5BF750A92837 /* QCloudURLHelper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudURLHelper.m; sourceTree = "<group>"; };
+		6AF747AD4474CB38B4ABB280FA0E6657 /* NSObject+HTTPHeadersContainer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HTTPHeadersContainer.m"; sourceTree = "<group>"; };
+		6D61D300D4B738CCC9176A637BD3349D /* MTACrashReporter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MTACrashReporter.h; sourceTree = "<group>"; };
+		6F0B25B9D0B2899851A2D43A86ACFB71 /* QCloudRequestOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudRequestOperation.h; sourceTree = "<group>"; };
+		6F928D6179930ADFD439DD27946F1535 /* QCloudSignature.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudSignature.m; sourceTree = "<group>"; };
+		6F97CDDCAFAD7B1A7E41ABEAA6A2667A /* QCloudServiceConfiguration_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudServiceConfiguration_Private.h; sourceTree = "<group>"; };
+		6F9D5DCB16A3A92413AC21388E677E2F /* QCloudFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudFileLogger.m; sourceTree = "<group>"; };
+		70653A0D9F16574B9204DB4720D0D677 /* QCloudXMLDictionary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudXMLDictionary.h; sourceTree = "<group>"; };
+		708B5B171C254D8C2A55E3E90EA63157 /* QCloudHTTPBodyPart.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudHTTPBodyPart.m; sourceTree = "<group>"; };
+		7172AAC0CD4D5F4F726DE53E935C0E74 /* QCloudFileUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudFileUtils.h; sourceTree = "<group>"; };
+		7282450AE596E26A74D57BC5D1675079 /* QCloudHTTPRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudHTTPRequest.h; sourceTree = "<group>"; };
+		7557C08C9645E2703AEE0DD366E87C73 /* QCloudResponseSerializer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudResponseSerializer.m; sourceTree = "<group>"; };
+		77B262214F81E5AB1B64D0CA5803B9C1 /* QCloudCore-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QCloudCore-prefix.pch"; sourceTree = "<group>"; };
+		7C6F244377FF11E16ACD7E3F7F841F7A /* QCloudUICKeyChainStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudUICKeyChainStore.m; sourceTree = "<group>"; };
+		7EB14B79FD8DB47B7AD359A12342E840 /* QCloudRequestData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudRequestData.m; sourceTree = "<group>"; };
+		7FB47746B5EBF545496F50BBA20C7954 /* QCloudTestUtility.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudTestUtility.m; sourceTree = "<group>"; };
+		804BB18781E6682977ED885CA17FE171 /* QCloudSupervisory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudSupervisory.m; sourceTree = "<group>"; };
+		806F3D901DEFBBF8679B1163CA75F5CE /* NSObject+QCloudModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+QCloudModel.m"; sourceTree = "<group>"; };
+		83248C9D50EB4205C24E3A543470B815 /* QCloudCredential.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudCredential.h; sourceTree = "<group>"; };
+		86DD57FD1E45B858B7B620E3522F3D40 /* libmtasdk.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; path = libmtasdk.a; sourceTree = "<group>"; };
+		86EDD2583FE25E81C70BCA50F4B1786B /* QCloudAbstractRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudAbstractRequest.m; sourceTree = "<group>"; };
+		886BF705D6D0B0EB125401A7B56A27B8 /* QCloudSupervisorySession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudSupervisorySession.h; sourceTree = "<group>"; };
+		8C3F07F097518DDCD4C79E7954A67100 /* QCloudHTTPTaskDelayManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudHTTPTaskDelayManager.m; sourceTree = "<group>"; };
+		8C54C328F381A04DD74BFB0F1DEA5F08 /* QCloudModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudModel.h; sourceTree = "<group>"; };
+		8CEAA8B05B9A2A49B378A5C0592C27FA /* QCloudMainBundle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudMainBundle.m; sourceTree = "<group>"; };
+		8EC7E63093C9CEA4F272E29C10D53738 /* QCloudSupervisory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudSupervisory.h; sourceTree = "<group>"; };
+		90CDE4F6366E67C6C6942EF7367257B4 /* QCloudAuthentationV4Creator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudAuthentationV4Creator.h; sourceTree = "<group>"; };
+		91372535DBCD73A8BDC96559BA3F19DA /* QCloudCoreVersion.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudCoreVersion.m; sourceTree = "<group>"; };
+		930155D8E145C2E48FFEC857A00D23C7 /* QCloudServiceConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudServiceConfiguration.h; sourceTree = "<group>"; };
+		9417C04553B11D2267C40FF7306A80F7 /* NSString+QCloudSHA.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+QCloudSHA.h"; sourceTree = "<group>"; };
+		95DF11A58FEB50087E9923148CA151F2 /* QCloudSHAPart.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudSHAPart.m; sourceTree = "<group>"; };
+		9804882FA697F64B3F127889A7B42ED6 /* MTA+Account.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MTA+Account.h"; sourceTree = "<group>"; };
+		9A4E4A8F5340FB2D01CD7ECBF25D35F7 /* QCloudEndPoint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudEndPoint.h; sourceTree = "<group>"; };
+		9ACD26379D81457AE0749FA66FAD5FC6 /* QCloudURLSessionTaskData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudURLSessionTaskData.h; sourceTree = "<group>"; };
+		9C6532523671CF2942561EAF02BD7E13 /* QCloudHttpDNS.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudHttpDNS.m; sourceTree = "<group>"; };
+		9C9360F8938557D4C28631791721EEA1 /* NSError+QCloudNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSError+QCloudNetworking.m"; sourceTree = "<group>"; };
+		9F6E003AD0AED91222984FEAEC34C846 /* QCloudBizHTTPRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudBizHTTPRequest.m; sourceTree = "<group>"; };
+		A1A906814825D7719C05CA65D875A9BA /* QCloudHTTPMultiDataStream.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudHTTPMultiDataStream.h; sourceTree = "<group>"; };
+		A2CBB2D433411049E789A3F8C055501D /* QCloudAbstractRequest_FakeRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudAbstractRequest_FakeRequest.h; sourceTree = "<group>"; };
+		A39F286BE9BF61A07E0A383F6A773670 /* QCloudWeakProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudWeakProxy.h; sourceTree = "<group>"; };
+		A4FA2165C34D415C318C2A6321BB9199 /* QCloudNetProfile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudNetProfile.m; sourceTree = "<group>"; };
+		A55151FA9BDB64CFD8858130B3F21912 /* QCloudMediaPath.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudMediaPath.h; sourceTree = "<group>"; };
+		A5598C857015554B48A07C975334DB57 /* QCloudHTTPSessionManager_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudHTTPSessionManager_Private.h; sourceTree = "<group>"; };
+		A5F25B3880ED93564F5A9ED29AC24E1E /* QCloudOperationQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudOperationQueue.h; sourceTree = "<group>"; };
+		A7C20EA4F10E2264460D164BEA2FFD9C /* QCloudHTTPRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudHTTPRequest.m; sourceTree = "<group>"; };
+		A8855EA8AF768E1DFC4D0D9B7EA7AE1B /* QCloudAuthentationV5Creator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudAuthentationV5Creator.m; sourceTree = "<group>"; };
+		A8E425654A0C840BD7C6D25F5385E7F6 /* QCloudProgrameDefines.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudProgrameDefines.m; sourceTree = "<group>"; };
+		A9B67AC80936FF8E032E89B1692204B8 /* QCloudObjectModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudObjectModel.h; sourceTree = "<group>"; };
+		AA92422B5B89AAAFBADC1E5F858C4862 /* QCloudFakeRequestOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudFakeRequestOperation.m; sourceTree = "<group>"; };
+		AAE86CDBAF3C77CC35F5618122A1A5DE /* QCLOUDRestNet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCLOUDRestNet.h; sourceTree = "<group>"; };
+		AB0AEAE9F71A9AF612C98B6A6AEAAE36 /* QCloudTestUtility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudTestUtility.h; sourceTree = "<group>"; };
+		AC979117670775C78A097079256E4FF5 /* QCloudFCUUID.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudFCUUID.h; sourceTree = "<group>"; };
+		AE7E186267073C9B03CD18327790DC39 /* QCloudCredentailFenceQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudCredentailFenceQueue.m; sourceTree = "<group>"; };
+		AFFFD6A7266A96A4D579D393121351CF /* QCloudCore-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QCloudCore-umbrella.h"; sourceTree = "<group>"; };
+		B056BCF1E872E1443886D46E1D82F373 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		B05C7DF243BC1F9EF49F3D1FFBF76DBA /* QCloudUniversalPath.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudUniversalPath.h; sourceTree = "<group>"; };
+		B1CB11C1280023EF91C9FA1C1F74CA1E /* QCloudBundlePath.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudBundlePath.m; sourceTree = "<group>"; };
+		B1CD07C4DFC268A2A5D278CF1EB553DB /* QCloudHTTPRequest_SessionPrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudHTTPRequest_SessionPrivate.h; sourceTree = "<group>"; };
+		B2673DDDDE89B8B0A9FFD68759C92D5A /* QCloudWeakProxy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudWeakProxy.m; sourceTree = "<group>"; };
+		B2698EE26C2C9DFFC8AC98815A7234CA /* QCloudBizHTTPRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudBizHTTPRequest.h; sourceTree = "<group>"; };
+		B2A0A75B089FF14D7DD89710BF806710 /* QCloudEnv.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudEnv.m; sourceTree = "<group>"; };
+		B2D785007368C06CF3B923225CA07938 /* QCloudCore.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = QCloudCore.modulemap; sourceTree = "<group>"; };
+		B5268F66D557DA20AF2038BB7D9FF9E1 /* QCloudXMLDictionary.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudXMLDictionary.m; sourceTree = "<group>"; };
+		B61D8CAFD480E8A2E270B882E63E8DA7 /* QCloudUploadPartRequestRetryHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudUploadPartRequestRetryHandler.h; sourceTree = "<group>"; };
+		B99C5D9DA26B3CF6A23CAC27B67E6541 /* COSXMLGetSignatureTool.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = COSXMLGetSignatureTool.h; sourceTree = "<group>"; };
+		B9A894F67A5F89D35A364BD394B11E55 /* QCloudEncryt.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudEncryt.h; sourceTree = "<group>"; };
+		BDBA88120E031765CA2CE919D6F38998 /* QCloudLogModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudLogModel.h; sourceTree = "<group>"; };
+		BEBD5E57BA7844CA5616EE02FC2B015B /* QCloudMediaPath.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudMediaPath.m; sourceTree = "<group>"; };
+		BFAF3BBD7A419C3EFB0F32C395584505 /* QCloudCredential.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudCredential.m; sourceTree = "<group>"; };
+		BFB63E661BF494867D83386B1C32E676 /* QCloudSupervisoryRecord.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudSupervisoryRecord.h; sourceTree = "<group>"; };
+		BFC4AA7B44DE6DDEC208F5FBA16E235C /* QCloudMainBundle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudMainBundle.h; sourceTree = "<group>"; };
+		BFF1FC84FB4482EC15FA0E7760F161CF /* UIDevice+QCloudFCUUID.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+QCloudFCUUID.m"; sourceTree = "<group>"; };
+		C04112FDAC8B0EA53359C708643591FD /* QCloudReachability.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudReachability.h; sourceTree = "<group>"; };
+		C1235FE41A754ED8599365AAC8B3A661 /* QCloudHTTPRetryHanlder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudHTTPRetryHanlder.h; sourceTree = "<group>"; };
+		C2E581DAC7DF98CABED6948C1B03B814 /* QCloudNetResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudNetResponse.h; sourceTree = "<group>"; };
+		C3BCBA80E4D75E546DAE2B0EDBF6576A /* QCloudLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudLogger.m; sourceTree = "<group>"; };
+		C501ADF93C36343A1FA5368545D52AFA /* QCloudAuthentationCreator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudAuthentationCreator.h; sourceTree = "<group>"; };
+		C5CBF304A4BB3E87C92384998DF34CD9 /* NSDate+QCLOUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSDate+QCLOUD.h"; sourceTree = "<group>"; };
+		C696122DB6359B13CA315EC5D867C268 /* NSDate+QCloudComapre.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSDate+QCloudComapre.m"; sourceTree = "<group>"; };
+		C90FAE9923ED74E0FD794ED8FCE2FC1D /* QCloudHTTPTaskDelayManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudHTTPTaskDelayManager.h; sourceTree = "<group>"; };
+		C9B70670A1CE28CE7559F2A1B44C5127 /* QCloudClientContext.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudClientContext.h; sourceTree = "<group>"; };
+		CB819ACA2F622C9B49A95E7A1F4A2531 /* QCloudXMLWriter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudXMLWriter.h; sourceTree = "<group>"; };
+		CC1C9B8BAB438D7403C192F5899932AA /* QCloudUniversalFixedPath.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudUniversalFixedPath.h; sourceTree = "<group>"; };
+		CDB835E1DB25A356811075F3BA1567F4 /* QCloudSandboxPath.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudSandboxPath.h; sourceTree = "<group>"; };
+		CE186D37B6C98CF655B9973AA6A92A57 /* QCloudBundlePath.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudBundlePath.h; sourceTree = "<group>"; };
+		CF5B2B5B1AE159811C398DF4E872F989 /* UIImage+QCloudBundle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+QCloudBundle.h"; sourceTree = "<group>"; };
+		D0843CF25223AE79DFFDA1029C7AE985 /* QCloudEncryt.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = QCloudEncryt.mm; sourceTree = "<group>"; };
+		D445607424EB997A361D1FABCB76967C /* QCloudSandboxPath.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudSandboxPath.m; sourceTree = "<group>"; };
+		D4BA36930673579D3FA15B35106B9835 /* QCloudFileUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudFileUtils.m; sourceTree = "<group>"; };
+		D4BE5DF1CB0392232182759829612B64 /* QCloudHTTPSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudHTTPSessionManager.h; sourceTree = "<group>"; };
+		D637C88625A6E0DA0F4D62A5A6ACD003 /* QCloudThreadSafeMutableDictionary.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudThreadSafeMutableDictionary.m; sourceTree = "<group>"; };
+		D653364B86192E7B3188FF45F42B3F45 /* QCloudLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudLogger.h; sourceTree = "<group>"; };
+		D6C14ECBE7F4228175F37BCCFE1E9819 /* QCloudXMLWriter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudXMLWriter.m; sourceTree = "<group>"; };
+		D80B4B29370ABE219F82F6B0A0C59318 /* SimplePing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SimplePing.h; sourceTree = "<group>"; };
+		D9623A6BF5C1AB805AF66BAA1AEECD7E /* QCloudSDKModuleManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudSDKModuleManager.h; sourceTree = "<group>"; };
+		DAA1E0D6039BAF0838B6007C9CDD42A3 /* QCloudCoreVersion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudCoreVersion.h; sourceTree = "<group>"; };
+		DD48C42DE59A5B6FF5E9D227105DE795 /* QCloudUniversalPathFactory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudUniversalPathFactory.h; sourceTree = "<group>"; };
+		E100CE7CE2B75012FA08072845A5700A /* QCloudHTTPRequestOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudHTTPRequestOperation.m; sourceTree = "<group>"; };
+		E21B18DA3965098456F70DB2E0362E6F /* UIDevice+QCloudFCUUID.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIDevice+QCloudFCUUID.h"; sourceTree = "<group>"; };
+		E29E6110E7A6B19C289AE7BD719C7322 /* QCloudUniversalPath.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudUniversalPath.m; sourceTree = "<group>"; };
+		E4564AD52CB5FA62BB0217858CFF367C /* QCloudUploadPartRequestRetryHandler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudUploadPartRequestRetryHandler.m; sourceTree = "<group>"; };
+		E5706AEEEC2AF5799216099BFC19F571 /* COSXMLGetSignatureTool.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = COSXMLGetSignatureTool.m; sourceTree = "<group>"; };
+		E8EDE712BCE9DC29DC3A41CF3C98F0F7 /* QCloudOperationQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudOperationQueue.m; sourceTree = "<group>"; };
+		E9719B5D3754AB9BFA12966687DC5E55 /* QCloudFakeRequestOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudFakeRequestOperation.h; sourceTree = "<group>"; };
+		E9D8BB012F50BD7A648048D8AAC0F72C /* QCloudMultiDelegateProxy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudMultiDelegateProxy.m; sourceTree = "<group>"; };
+		EBE486A8D26CE6FC6D64D203EEF508CF /* QCloudLoggerOutput.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudLoggerOutput.m; sourceTree = "<group>"; };
+		ED5753DE6CAC310965D375A54CA7A791 /* QCloudAbstractRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudAbstractRequest.h; sourceTree = "<group>"; };
+		EF7AB6571ADD9F1A9F515E10710B313B /* QCloudRequestOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudRequestOperation.m; sourceTree = "<group>"; };
+		F0A35FF79A4DB5B1FDD4ABB6DC36C419 /* NSHTTPCookie+QCloudNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSHTTPCookie+QCloudNetworking.h"; sourceTree = "<group>"; };
+		F1F7D0D4BB7026965458B6DBC8779E4C /* NSDate+QCloudComapre.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSDate+QCloudComapre.h"; sourceTree = "<group>"; };
+		F30D5130E73C5C5803BA14741C6CCDD6 /* QCloudHttpMetrics.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudHttpMetrics.m; sourceTree = "<group>"; };
+		F4C582FA8EAB27974EF7758BC1C3B426 /* QCloudClientContext.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudClientContext.m; sourceTree = "<group>"; };
+		F65FA872F2A13F6CA54473FE28F18111 /* QCloudFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudFileLogger.h; sourceTree = "<group>"; };
+		F67ED40B85E6EECE87F5AF51CEBF5DBC /* NSError+QCloudNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSError+QCloudNetworking.h"; sourceTree = "<group>"; };
+		F74A2491F74525465A08438D6D9090EB /* QCloudHTTPSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudHTTPSessionManager.m; sourceTree = "<group>"; };
+		F79B643FE8B7DD2EBA0A2D0D12940EA8 /* QCloudError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudError.h; sourceTree = "<group>"; };
+		F8AA7DF6397B2FEADA3908582C025CD6 /* QCloudSignatureProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudSignatureProvider.h; sourceTree = "<group>"; };
+		FA19E2178A8A1380AED23DAE27EFC666 /* QCloudHosts.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudHosts.m; sourceTree = "<group>"; };
+		FA5C4634A63E3E8825986FAADBFC2169 /* QCloudServiceConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = QCloudServiceConfiguration.m; sourceTree = "<group>"; };
+		FA7A8B96425C1411502136A71B7EA426 /* QCloudCore.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = QCloudCore.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		FB5E49B53C29E3C156DC5C1F759121CA /* QCloudResponseSerializer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = QCloudResponseSerializer.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5E640FF090961219B83E77C3C5DDACF3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				593E4B2D0E1306A543EB9B678CEB5933 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0101B6FDE2EA7AC4C0DCAD7C3D90D5EE /* Reader */ = {
+			isa = PBXGroup;
+			children = (
+				70653A0D9F16574B9204DB4720D0D677 /* QCloudXMLDictionary.h */,
+				B5268F66D557DA20AF2038BB7D9FF9E1 /* QCloudXMLDictionary.m */,
+			);
+			name = Reader;
+			path = Reader;
+			sourceTree = "<group>";
+		};
+		17DE8B41DB5F16C1441D85B7C9D623B4 /* Retry */ = {
+			isa = PBXGroup;
+			children = (
+				C1235FE41A754ED8599365AAC8B3A661 /* QCloudHTTPRetryHanlder.h */,
+				689AF43A336B5F9F7D8C5B6BD22A19B2 /* QCloudHTTPRetryHanlder.m */,
+				C90FAE9923ED74E0FD794ED8FCE2FC1D /* QCloudHTTPTaskDelayManager.h */,
+				8C3F07F097518DDCD4C79E7954A67100 /* QCloudHTTPTaskDelayManager.m */,
+				B61D8CAFD480E8A2E270B882E63E8DA7 /* QCloudUploadPartRequestRetryHandler.h */,
+				E4564AD52CB5FA62BB0217858CFF367C /* QCloudUploadPartRequestRetryHandler.m */,
+			);
+			name = Retry;
+			path = Retry;
+			sourceTree = "<group>";
+		};
+		18B3A66A54D908BD9AAAB07E3B5F9B64 /* SessionSupport */ = {
+			isa = PBXGroup;
+			children = (
+				4859FA2831929F83A0A9A4DA6BD9011A /* NSObject+HTTPHeadersContainer.h */,
+				6AF747AD4474CB38B4ABB280FA0E6657 /* NSObject+HTTPHeadersContainer.m */,
+				B1CD07C4DFC268A2A5D278CF1EB553DB /* QCloudHTTPRequest_SessionPrivate.h */,
+				D4BE5DF1CB0392232182759829612B64 /* QCloudHTTPSessionManager.h */,
+				F74A2491F74525465A08438D6D9090EB /* QCloudHTTPSessionManager.m */,
+				9ACD26379D81457AE0749FA66FAD5FC6 /* QCloudURLSessionTaskData.h */,
+				158D1B92E1B55E6B2C1C234F67E75782 /* QCloudURLSessionTaskData.m */,
+			);
+			name = SessionSupport;
+			path = SessionSupport;
+			sourceTree = "<group>";
+		};
+		1D09DFCB1D8E37DD7C0BF7D8272F2295 /* Default */ = {
+			isa = PBXGroup;
+			children = (
+				EBCF0697B9BB04ABD02F1BEE3A82CC2E /* Base */,
+				433128916CA9C29627429C30F25B7AE6 /* Frameworks */,
+				898D277C6319E1FE7486AE105054821B /* QualityAssurance */,
+			);
+			name = Default;
+			sourceTree = "<group>";
+		};
+		1E2C5934D2BF6248C9DDC5821AF0BF5C /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				F65FA872F2A13F6CA54473FE28F18111 /* QCloudFileLogger.h */,
+				6F9D5DCB16A3A92413AC21388E677E2F /* QCloudFileLogger.m */,
+				31B0A423CA7EC81165FACC95CCF27725 /* QCloudFileZipper.h */,
+				0B4DE9EF50379001B96EB7AAE518F13A /* QCloudFileZipper.m */,
+				D653364B86192E7B3188FF45F42B3F45 /* QCloudLogger.h */,
+				C3BCBA80E4D75E546DAE2B0EDBF6576A /* QCloudLogger.m */,
+				3770032DC80ABC03F48470DCED82CAD1 /* QCloudLoggerOutput.h */,
+				EBE486A8D26CE6FC6D64D203EEF508CF /* QCloudLoggerOutput.m */,
+				BDBA88120E031765CA2CE919D6F38998 /* QCloudLogModel.h */,
+				00F5A96AA770E4395AD2D0BD87BD1627 /* QCloudLogModel.m */,
+				BAE029F0783DDF7F55C519EC131CBE1F /* Encryt */,
+			);
+			name = Logger;
+			path = Logger;
+			sourceTree = "<group>";
+		};
+		2153229A029A521C3DCA68D8D03A12F9 /* XML */ = {
+			isa = PBXGroup;
+			children = (
+				F7032A2115F96A86F607315D29BD544F /* XMLDictionary */,
+			);
+			name = XML;
+			path = XML;
+			sourceTree = "<group>";
+		};
+		243D4FBC434964A29118E36D29957E4C /* TestUtility */ = {
+			isa = PBXGroup;
+			children = (
+				AB0AEAE9F71A9AF612C98B6A6AEAAE36 /* QCloudTestUtility.h */,
+				7FB47746B5EBF545496F50BBA20C7954 /* QCloudTestUtility.m */,
+			);
+			name = TestUtility;
+			path = TestUtility;
+			sourceTree = "<group>";
+		};
+		278926BB487E8FFFADB5B155142194A5 /* QCloudCategory */ = {
+			isa = PBXGroup;
+			children = (
+				C5CBF304A4BB3E87C92384998DF34CD9 /* NSDate+QCLOUD.h */,
+				0361EF51B962462C988114D7BB6C2102 /* NSDate+QCLOUD.m */,
+				635AE3BC3C0AC7028EE9D7C5C3F80E18 /* NSDate+QCloudInternetDateTime.h */,
+				1FCCC1446940CFF989783FDC74F8728A /* NSDate+QCloudInternetDateTime.m */,
+			);
+			name = QCloudCategory;
+			path = QCloudCategory;
+			sourceTree = "<group>";
+		};
+		28959899E90D1E1758F0A442EB4AD83C /* QCloudSecret */ = {
+			isa = PBXGroup;
+			children = (
+				9417C04553B11D2267C40FF7306A80F7 /* NSString+QCloudSHA.h */,
+				12EC3AB6C328DE9F0F108F8ADEC13693 /* NSString+QCloudSHA.mm */,
+			);
+			name = QCloudSecret;
+			path = QCloudSecret;
+			sourceTree = "<group>";
+		};
+		290F5A56624FD37CA634CA24FD0EA09D /* Writer */ = {
+			isa = PBXGroup;
+			children = (
+				CB819ACA2F622C9B49A95E7A1F4A2531 /* QCloudXMLWriter.h */,
+				D6C14ECBE7F4228175F37BCCFE1E9819 /* QCloudXMLWriter.m */,
+			);
+			name = Writer;
+			path = Writer;
+			sourceTree = "<group>";
+		};
+		2BC7843BA0B904E88C1BE3DFFAC18EE3 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				FA7A8B96425C1411502136A71B7EA426 /* QCloudCore.podspec */,
+				4656C18266F8EEE4DE536450D5C3C664 /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		2DAEC948970F0D3035A0DC616995ACC9 /* Serializer */ = {
+			isa = PBXGroup;
+			children = (
+				6699A557856B8C98F0D87E6ECE6D46AA /* QCloudRequestSerializer.h */,
+				2FCC782C741E8EF614D4AC349324E78E /* QCloudRequestSerializer.m */,
+				FB5E49B53C29E3C156DC5C1F759121CA /* QCloudResponseSerializer.h */,
+				7557C08C9645E2703AEE0DD366E87C73 /* QCloudResponseSerializer.m */,
+				01B902C366C1827209F35AE7D145FCC4 /* QCloudURLHelper.h */,
+				6A43F5A9E1BCED5BF29F5BF750A92837 /* QCloudURLHelper.m */,
+				2153229A029A521C3DCA68D8D03A12F9 /* XML */,
+			);
+			name = Serializer;
+			path = Serializer;
+			sourceTree = "<group>";
+		};
+		2E95EFF5D1787547982E7CC55AA19942 /* QCLOUDRestNet */ = {
+			isa = PBXGroup;
+			children = (
+				AAE86CDBAF3C77CC35F5618122A1A5DE /* QCLOUDRestNet.h */,
+				F4C92D5EFA176C1C993AFAD211AFA15C /* API */,
+				EEC214FADF53681EB7C806D448ACECA7 /* CoreRequest */,
+				4C49A10285F77AF6386AC2290F5B3B09 /* DataForm */,
+				A793B45CE00F8897550A1492B3C42778 /* DNSCache */,
+				97608BF220FC40892DC412F04C5BA748 /* Error */,
+				DF268C0573810331644916C0981F4682 /* Operations */,
+				D8868F405AE12F61E5BD8D74B5D937E5 /* Profile */,
+				89FAB67B3CADD0F467EEC8EB089F68AA /* QCloudEnv */,
+				28959899E90D1E1758F0A442EB4AD83C /* QCloudSecret */,
+				4E44A5AFA7D7D13E7ACE582FB9237E0D /* reachability */,
+				17DE8B41DB5F16C1441D85B7C9D623B4 /* Retry */,
+				18B3A66A54D908BD9AAAB07E3B5F9B64 /* SessionSupport */,
+				BEADC8BC6046A720DCD43261F1C3C7D1 /* TimeOutAdapter */,
+				641A7E3ADA7D7889EBA448AEDC3FDBB7 /* URLTools */,
+			);
+			name = QCLOUDRestNet;
+			path = QCLOUDRestNet;
+			sourceTree = "<group>";
+		};
+		397EEE85E3140BD65D1A7AEBBB4A09E2 /* QCLOUDObjectModel */ = {
+			isa = PBXGroup;
+			children = (
+				0EB178A5FF7B1941A1AC5DF79E0D22A5 /* NSObject+QCloudModel.h */,
+				806F3D901DEFBBF8679B1163CA75F5CE /* NSObject+QCloudModel.m */,
+				35BB84885361D0C0C461DFDDEBFB68BF /* QCloudClassInfo.h */,
+				0BD6D997A77A617C6C0AD9D47BB8CEEB /* QCloudClassInfo.m */,
+				A9B67AC80936FF8E032E89B1692204B8 /* QCloudObjectModel.h */,
+			);
+			name = QCLOUDObjectModel;
+			path = QCLOUDObjectModel;
+			sourceTree = "<group>";
+		};
+		3DA91EB4CB3F268A221A28324AE6DEAE /* QCloudClientBase */ = {
+			isa = PBXGroup;
+			children = (
+				C9B70670A1CE28CE7559F2A1B44C5127 /* QCloudClientContext.h */,
+				F4C582FA8EAB27974EF7758BC1C3B426 /* QCloudClientContext.m */,
+				91D722F8170AF7D6A4FEF72CF6FD5C3D /* Authentation */,
+				ABADBEE9775117CD05D775EEA1173816 /* Request */,
+				A7E125210B6FFE3B5B158CC08590E311 /* Service */,
+			);
+			name = QCloudClientBase;
+			path = QCloudClientBase;
+			sourceTree = "<group>";
+		};
+		3DDE60F700FC214D4FABC9FD05919BFC /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				B056BCF1E872E1443886D46E1D82F373 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		433128916CA9C29627429C30F25B7AE6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4C49A10285F77AF6386AC2290F5B3B09 /* DataForm */ = {
+			isa = PBXGroup;
+			children = (
+				4428492B8DDC2C3E4A238D5873A18524 /* QCloudFileOffsetBody.h */,
+				64DA05CC8B3E4861142600F75ADD8DDE /* QCloudFileOffsetBody.m */,
+				0666438A33522945F18A0BC39C2BD4C0 /* QCloudFileOffsetStream.h */,
+				104CFEB93A861DDCE4C59DF19ECC0A64 /* QCloudFileOffsetStream.m */,
+				4BDEA4D617E6FDEA347FC764039AD685 /* QCloudHTTPBodyPart.h */,
+				708B5B171C254D8C2A55E3E90EA63157 /* QCloudHTTPBodyPart.m */,
+				A1A906814825D7719C05CA65D875A9BA /* QCloudHTTPMultiDataStream.h */,
+				64A353B043AE6895B5C42B409C9E08AE /* QCloudHTTPMultiDataStream.m */,
+			);
+			name = DataForm;
+			path = DataForm;
+			sourceTree = "<group>";
+		};
+		4E44A5AFA7D7D13E7ACE582FB9237E0D /* reachability */ = {
+			isa = PBXGroup;
+			children = (
+				42C6533D4BB179C8F276A4873EEE876F /* QCloudNetEnv.h */,
+				4161BC578D5529286BEE99D956157E43 /* QCloudNetEnv.m */,
+				C04112FDAC8B0EA53359C708643591FD /* QCloudReachability.h */,
+				3045B9EE8F8464580658D56B162D0B2A /* QCloudReachability.m */,
+			);
+			name = reachability;
+			path = reachability;
+			sourceTree = "<group>";
+		};
+		5DEACB937B6C7C4AD610471ABA015C26 /* DateTools */ = {
+			isa = PBXGroup;
+			children = (
+				F1F7D0D4BB7026965458B6DBC8779E4C /* NSDate+QCloudComapre.h */,
+				C696122DB6359B13CA315EC5D867C268 /* NSDate+QCloudComapre.m */,
+			);
+			name = DateTools;
+			path = DateTools;
+			sourceTree = "<group>";
+		};
+		641A7E3ADA7D7889EBA448AEDC3FDBB7 /* URLTools */ = {
+			isa = PBXGroup;
+			children = (
+				31D882FB7687D54B00C158B942E265AC /* QCloudURLTools.h */,
+				48670AF5DC06C06E1A2A32440D342087 /* QCloudURLTools.m */,
+			);
+			name = URLTools;
+			path = URLTools;
+			sourceTree = "<group>";
+		};
+		6E0EAF5EFC09F1ADD36FBCFC67AF92ED /* QCloudCore */ = {
+			isa = PBXGroup;
+			children = (
+				1D09DFCB1D8E37DD7C0BF7D8272F2295 /* Default */,
+				2BC7843BA0B904E88C1BE3DFFAC18EE3 /* Pod */,
+				9CAD29841C8EB75220C8615F18675A56 /* Support Files */,
+			);
+			name = QCloudCore;
+			path = ../../../Libs/QCloudCore;
+			sourceTree = "<group>";
+		};
+		748C7E914BD652219B1EE6D0AE6549E4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3DDE60F700FC214D4FABC9FD05919BFC /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8155AB0976383BCF1A47142B9B01966E /* QCLOUDFileUtils */ = {
+			isa = PBXGroup;
+			children = (
+				7172AAC0CD4D5F4F726DE53E935C0E74 /* QCloudFileUtils.h */,
+				D4BA36930673579D3FA15B35106B9835 /* QCloudFileUtils.m */,
+				8C54C328F381A04DD74BFB0F1DEA5F08 /* QCloudModel.h */,
+				007BE273ACED0B573E9A4B72C5984666 /* QCloudModel.m */,
+				2EFD76AC8C8A1668E3CE0AAF82A16144 /* QCloudSHAPart.h */,
+				95DF11A58FEB50087E9923148CA151F2 /* QCloudSHAPart.m */,
+			);
+			name = QCLOUDFileUtils;
+			path = QCLOUDFileUtils;
+			sourceTree = "<group>";
+		};
+		898D277C6319E1FE7486AE105054821B /* QualityAssurance */ = {
+			isa = PBXGroup;
+			children = (
+				86DD57FD1E45B858B7B620E3522F3D40 /* libmtasdk.a */,
+				263A24643C5538F36B6D1EC6410B7E7C /* MTA.h */,
+				9804882FA697F64B3F127889A7B42ED6 /* MTA+Account.h */,
+				61CCFE8141438DE65219FA6439B34340 /* MTAConfig.h */,
+				6D61D300D4B738CCC9176A637BD3349D /* MTACrashReporter.h */,
+			);
+			name = QualityAssurance;
+			path = Pod/Classes/QualityAssurance;
+			sourceTree = "<group>";
+		};
+		89FAB67B3CADD0F467EEC8EB089F68AA /* QCloudEnv */ = {
+			isa = PBXGroup;
+			children = (
+				54EB01E0E2BFE34AB5D9E0399FBF4312 /* QCloudEnv.h */,
+				B2A0A75B089FF14D7DD89710BF806710 /* QCloudEnv.m */,
+			);
+			name = QCloudEnv;
+			path = QCloudEnv;
+			sourceTree = "<group>";
+		};
+		8AF0174BE60419745DF5DE6191E6533B /* FCUUID */ = {
+			isa = PBXGroup;
+			children = (
+				AC979117670775C78A097079256E4FF5 /* QCloudFCUUID.h */,
+				42E9B4A6760CAE2BDCBDC63A6D7597A4 /* QCloudFCUUID.m */,
+				E21B18DA3965098456F70DB2E0362E6F /* UIDevice+QCloudFCUUID.h */,
+				BFF1FC84FB4482EC15FA0E7760F161CF /* UIDevice+QCloudFCUUID.m */,
+			);
+			name = FCUUID;
+			path = FCUUID;
+			sourceTree = "<group>";
+		};
+		91D722F8170AF7D6A4FEF72CF6FD5C3D /* Authentation */ = {
+			isa = PBXGroup;
+			children = (
+				C501ADF93C36343A1FA5368545D52AFA /* QCloudAuthentationCreator.h */,
+				4F155CF4347D07DF6929B24BCB1806CC /* QCloudAuthentationCreator.m */,
+				90CDE4F6366E67C6C6942EF7367257B4 /* QCloudAuthentationV4Creator.h */,
+				565B7E63681B174DF8A2DCED91A37E79 /* QCloudAuthentationV4Creator.mm */,
+				3893EC3D06882D67AC8993CFBFED3247 /* QCloudAuthentationV5Creator.h */,
+				A8855EA8AF768E1DFC4D0D9B7EA7AE1B /* QCloudAuthentationV5Creator.m */,
+				503345887BFBF354F273906D1E8DBD28 /* QCloudCredentailFenceQueue.h */,
+				AE7E186267073C9B03CD18327790DC39 /* QCloudCredentailFenceQueue.m */,
+				83248C9D50EB4205C24E3A543470B815 /* QCloudCredential.h */,
+				BFAF3BBD7A419C3EFB0F32C395584505 /* QCloudCredential.m */,
+				441A0A9F76BBF9F02CDFCA094BCB4C96 /* QCloudSignature.h */,
+				6F928D6179930ADFD439DD27946F1535 /* QCloudSignature.m */,
+				3D1CBDAAE7E6358C81DD555FCE7FDC67 /* QCloudSignatureFields.h */,
+				516B530E3CD8AC2D65D2BAB3CC42458A /* QCloudSignatureFields.m */,
+				F8AA7DF6397B2FEADA3908582C025CD6 /* QCloudSignatureProvider.h */,
+				5EEF0B5F0AC9459A8B5CED5A92003BF6 /* QCloudUICKeyChainStore.h */,
+				7C6F244377FF11E16ACD7E3F7F841F7A /* QCloudUICKeyChainStore.m */,
+			);
+			name = Authentation;
+			path = Authentation;
+			sourceTree = "<group>";
+		};
+		97608BF220FC40892DC412F04C5BA748 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				F67ED40B85E6EECE87F5AF51CEBF5DBC /* NSError+QCloudNetworking.h */,
+				9C9360F8938557D4C28631791721EEA1 /* NSError+QCloudNetworking.m */,
+			);
+			name = Error;
+			path = Error;
+			sourceTree = "<group>";
+		};
+		9AB06083D930601353E615FC5AA89D3F /* Bolts-Promise */ = {
+			isa = PBXGroup;
+			children = (
+				3222C19F746F5C38DFC18C495E9F4322 /* QCloudThreadSafeMutableDictionary.h */,
+				D637C88625A6E0DA0F4D62A5A6ACD003 /* QCloudThreadSafeMutableDictionary.m */,
+			);
+			name = "Bolts-Promise";
+			path = "Bolts-Promise";
+			sourceTree = "<group>";
+		};
+		9CAD29841C8EB75220C8615F18675A56 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B2D785007368C06CF3B923225CA07938 /* QCloudCore.modulemap */,
+				11F18F299B9A3C04BFFEB0F1B4E3E9FF /* QCloudCore-dummy.m */,
+				312399AB12C57B96704DAE205EC33457 /* QCloudCore-Info.plist */,
+				77B262214F81E5AB1B64D0CA5803B9C1 /* QCloudCore-prefix.pch */,
+				AFFFD6A7266A96A4D579D393121351CF /* QCloudCore-umbrella.h */,
+				21648119B9B91EF465F68CA93F61B87A /* QCloudCore.debug.xcconfig */,
+				187EC4F7C09CBF939000EA22937DEEB0 /* QCloudCore.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../../Products/QCloudCOSXMLSwfitDemo/Pods/Target Support Files/QCloudCore";
+			sourceTree = "<group>";
+		};
+		A793B45CE00F8897550A1492B3C42778 /* DNSCache */ = {
+			isa = PBXGroup;
+			children = (
+				6578A3A27D47936A7BFD02B779245B6D /* QCloudDomain.h */,
+				1A56442280DEFB7D7CA97E9849A2744A /* QCloudDomain.m */,
+				3D0D860EE3417D196CF00F7738AE9187 /* QCloudHosts.h */,
+				FA19E2178A8A1380AED23DAE27EFC666 /* QCloudHosts.m */,
+				54F13F3B3017BAF5F69A97D529CEAB60 /* QCloudHttpDNS.h */,
+				9C6532523671CF2942561EAF02BD7E13 /* QCloudHttpDNS.m */,
+				6193DC1B3A15A0E39D57BACF9F4C59D4 /* QCloudPingTester.h */,
+				2F099E4C81BEABA2765F3712C9186C6A /* QCloudPingTester.m */,
+				D80B4B29370ABE219F82F6B0A0C59318 /* SimplePing.h */,
+				4AC4C6EFACD3A67CF918A30908672156 /* SimplePing.m */,
+			);
+			name = DNSCache;
+			path = DNSCache;
+			sourceTree = "<group>";
+		};
+		A7E125210B6FFE3B5B158CC08590E311 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				9A4E4A8F5340FB2D01CD7ECBF25D35F7 /* QCloudEndPoint.h */,
+				384D0D451B85EC183EAFCA7FBF6B00EC /* QCloudEndPoint.m */,
+				F79B643FE8B7DD2EBA0A2D0D12940EA8 /* QCloudError.h */,
+				198E5E71AA6459F17C9A26920550873D /* QCloudError.m */,
+			);
+			name = Service;
+			path = Service;
+			sourceTree = "<group>";
+		};
+		ABADBEE9775117CD05D775EEA1173816 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				A2CBB2D433411049E789A3F8C055501D /* QCloudAbstractRequest_FakeRequest.h */,
+				B2698EE26C2C9DFFC8AC98815A7234CA /* QCloudBizHTTPRequest.h */,
+				9F6E003AD0AED91222984FEAEC34C846 /* QCloudBizHTTPRequest.m */,
+				C2E581DAC7DF98CABED6948C1B03B814 /* QCloudNetResponse.h */,
+				4D386AF4158A31E3F798B840BA6C2289 /* QCloudNetResponse.m */,
+				36B4D35C58EA3B693E6E57D1FDC5EB86 /* QCloudService.h */,
+				40C315E37EEBCED6EE2AD50197272B6F /* QCloudService.m */,
+				930155D8E145C2E48FFEC857A00D23C7 /* QCloudServiceConfiguration.h */,
+				FA5C4634A63E3E8825986FAADBFC2169 /* QCloudServiceConfiguration.m */,
+				6F97CDDCAFAD7B1A7E41ABEAA6A2667A /* QCloudServiceConfiguration_Private.h */,
+			);
+			name = Request;
+			path = Request;
+			sourceTree = "<group>";
+		};
+		BAE029F0783DDF7F55C519EC131CBE1F /* Encryt */ = {
+			isa = PBXGroup;
+			children = (
+				B9A894F67A5F89D35A364BD394B11E55 /* QCloudEncryt.h */,
+				D0843CF25223AE79DFFDA1029C7AE985 /* QCloudEncryt.mm */,
+			);
+			name = Encryt;
+			path = Encryt;
+			sourceTree = "<group>";
+		};
+		BC0C6331E3E57A46AEEC25F711826532 /* ObjectFack */ = {
+			isa = PBXGroup;
+			children = (
+				6611FD4C9A31188A0DB730607F41C46B /* QCloudMultiDelegateProxy.h */,
+				E9D8BB012F50BD7A648048D8AAC0F72C /* QCloudMultiDelegateProxy.m */,
+				A39F286BE9BF61A07E0A383F6A773670 /* QCloudWeakProxy.h */,
+				B2673DDDDE89B8B0A9FFD68759C92D5A /* QCloudWeakProxy.m */,
+			);
+			name = ObjectFack;
+			path = ObjectFack;
+			sourceTree = "<group>";
+		};
+		BEADC8BC6046A720DCD43261F1C3C7D1 /* TimeOutAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				461D940593045812DDB2BC7C092106B4 /* QCloudIntelligenceTimeOutAdapter.h */,
+				53BAFD51C1F70FFF2EB23EBFA922CA3D /* QCloudIntelligenceTimeOutAdapter.m */,
+			);
+			name = TimeOutAdapter;
+			path = TimeOutAdapter;
+			sourceTree = "<group>";
+		};
+		C2B77F44677631FE91A40C607BB1D84C /* PathUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				CE186D37B6C98CF655B9973AA6A92A57 /* QCloudBundlePath.h */,
+				B1CB11C1280023EF91C9FA1C1F74CA1E /* QCloudBundlePath.m */,
+				A55151FA9BDB64CFD8858130B3F21912 /* QCloudMediaPath.h */,
+				BEBD5E57BA7844CA5616EE02FC2B015B /* QCloudMediaPath.m */,
+				CDB835E1DB25A356811075F3BA1567F4 /* QCloudSandboxPath.h */,
+				D445607424EB997A361D1FABCB76967C /* QCloudSandboxPath.m */,
+				411186F8F79884319B099D3A61D3EEAA /* QCloudUniversalAdjustablePath.h */,
+				00D02A7C10BDFD7CADF6C42E61DD88D0 /* QCloudUniversalAdjustablePath.m */,
+				CC1C9B8BAB438D7403C192F5899932AA /* QCloudUniversalFixedPath.h */,
+				35841B6209D602AD0EA915E7DA4A84AF /* QCloudUniversalFixedPath.m */,
+				B05C7DF243BC1F9EF49F3D1FFBF76DBA /* QCloudUniversalPath.h */,
+				E29E6110E7A6B19C289AE7BD719C7322 /* QCloudUniversalPath.m */,
+				580985F8D31B019C7266093434A26069 /* QCloudUniversalPathConstants.h */,
+				DD48C42DE59A5B6FF5E9D227105DE795 /* QCloudUniversalPathFactory.h */,
+				0799CBDC4B3AD647A182262FC8EA85EF /* QCloudUniversalPathFactory.m */,
+			);
+			name = PathUtilities;
+			path = PathUtilities;
+			sourceTree = "<group>";
+		};
+		D8868F405AE12F61E5BD8D74B5D937E5 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				2BE5E8E04751095E19524148A7E7E13C /* QCloudHttpMetrics.h */,
+				F30D5130E73C5C5803BA14741C6CCDD6 /* QCloudHttpMetrics.m */,
+				014A34F8D0D952E6EC359906DC65BA57 /* QCloudNetProfile.h */,
+				A4FA2165C34D415C318C2A6321BB9199 /* QCloudNetProfile.m */,
+			);
+			name = Profile;
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		DE53F70DBD89113B4A802E918AB4E6BE /* QCloudBundle */ = {
+			isa = PBXGroup;
+			children = (
+				5D53756C46DD4B2350ADDA4E8D0D5FD9 /* QCloudBundle.h */,
+				BFC4AA7B44DE6DDEC208F5FBA16E235C /* QCloudMainBundle.h */,
+				8CEAA8B05B9A2A49B378A5C0592C27FA /* QCloudMainBundle.m */,
+				CF5B2B5B1AE159811C398DF4E872F989 /* UIImage+QCloudBundle.h */,
+				10D5D5CA61B894BFF7A05FCAB8BB4DC3 /* UIImage+QCloudBundle.m */,
+			);
+			name = QCloudBundle;
+			path = QCloudBundle;
+			sourceTree = "<group>";
+		};
+		DF268C0573810331644916C0981F4682 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				E9719B5D3754AB9BFA12966687DC5E55 /* QCloudFakeRequestOperation.h */,
+				AA92422B5B89AAAFBADC1E5F858C4862 /* QCloudFakeRequestOperation.m */,
+				118C50487956E22A16B617D261F7A622 /* QCloudHTTPRequestOperation.h */,
+				E100CE7CE2B75012FA08072845A5700A /* QCloudHTTPRequestOperation.m */,
+				A5598C857015554B48A07C975334DB57 /* QCloudHTTPSessionManager_Private.h */,
+				A5F25B3880ED93564F5A9ED29AC24E1E /* QCloudOperationQueue.h */,
+				E8EDE712BCE9DC29DC3A41CF3C98F0F7 /* QCloudOperationQueue.m */,
+				6F0B25B9D0B2899851A2D43A86ACFB71 /* QCloudRequestOperation.h */,
+				EF7AB6571ADD9F1A9F515E10710B313B /* QCloudRequestOperation.m */,
+			);
+			name = Operations;
+			path = Operations;
+			sourceTree = "<group>";
+		};
+		E5FCE1C65ACD5C9A421F4BE8F8D1E59E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A1B3DCC885C41FAAC78676BD3F70FC1 /* QCloudCore.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EB37356C8364013C19B17E081C0AC979 = {
+			isa = PBXGroup;
+			children = (
+				748C7E914BD652219B1EE6D0AE6549E4 /* Frameworks */,
+				E5FCE1C65ACD5C9A421F4BE8F8D1E59E /* Products */,
+				6E0EAF5EFC09F1ADD36FBCFC67AF92ED /* QCloudCore */,
+			);
+			sourceTree = "<group>";
+		};
+		EBCF0697B9BB04ABD02F1BEE3A82CC2E /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				5921CAA8B97F7F431372C07601BC1E41 /* QCloudCore.h */,
+				DAA1E0D6039BAF0838B6007C9CDD42A3 /* QCloudCoreVersion.h */,
+				91372535DBCD73A8BDC96559BA3F19DA /* QCloudCoreVersion.m */,
+				9AB06083D930601353E615FC5AA89D3F /* Bolts-Promise */,
+				5DEACB937B6C7C4AD610471ABA015C26 /* DateTools */,
+				8AF0174BE60419745DF5DE6191E6533B /* FCUUID */,
+				1E2C5934D2BF6248C9DDC5821AF0BF5C /* Logger */,
+				BC0C6331E3E57A46AEEC25F711826532 /* ObjectFack */,
+				C2B77F44677631FE91A40C607BB1D84C /* PathUtilities */,
+				DE53F70DBD89113B4A802E918AB4E6BE /* QCloudBundle */,
+				278926BB487E8FFFADB5B155142194A5 /* QCloudCategory */,
+				3DA91EB4CB3F268A221A28324AE6DEAE /* QCloudClientBase */,
+				8155AB0976383BCF1A47142B9B01966E /* QCLOUDFileUtils */,
+				397EEE85E3140BD65D1A7AEBBB4A09E2 /* QCLOUDObjectModel */,
+				FF14FD3D97CB3D5E7532847C50921CCD /* QCLOUDProgramDefines */,
+				2E95EFF5D1787547982E7CC55AA19942 /* QCLOUDRestNet */,
+				EC6A5467BE3CD937E7D994EE3AB94288 /* Supervisory */,
+			);
+			name = Base;
+			path = Pod/Classes/Base;
+			sourceTree = "<group>";
+		};
+		EC6A5467BE3CD937E7D994EE3AB94288 /* Supervisory */ = {
+			isa = PBXGroup;
+			children = (
+				D9623A6BF5C1AB805AF66BAA1AEECD7E /* QCloudSDKModuleManager.h */,
+				397252888932B5BF0B8E0E2825422169 /* QCloudSDKModuleManager.m */,
+				8EC7E63093C9CEA4F272E29C10D53738 /* QCloudSupervisory.h */,
+				804BB18781E6682977ED885CA17FE171 /* QCloudSupervisory.m */,
+				BFB63E661BF494867D83386B1C32E676 /* QCloudSupervisoryRecord.h */,
+				36C5C0FF461F0CA9A5E121FC588DE96E /* QCloudSupervisoryRecord.m */,
+				886BF705D6D0B0EB125401A7B56A27B8 /* QCloudSupervisorySession.h */,
+				2530DC3E2D480B410D3B83998146EEAB /* QCloudSupervisorySession.m */,
+			);
+			name = Supervisory;
+			path = Supervisory;
+			sourceTree = "<group>";
+		};
+		EEC214FADF53681EB7C806D448ACECA7 /* CoreRequest */ = {
+			isa = PBXGroup;
+			children = (
+				B99C5D9DA26B3CF6A23CAC27B67E6541 /* COSXMLGetSignatureTool.h */,
+				E5706AEEEC2AF5799216099BFC19F571 /* COSXMLGetSignatureTool.m */,
+				F0A35FF79A4DB5B1FDD4ABB6DC36C419 /* NSHTTPCookie+QCloudNetworking.h */,
+				00FFB787C88D1E632F98304C03759F22 /* NSHTTPCookie+QCloudNetworking.m */,
+				ED5753DE6CAC310965D375A54CA7A791 /* QCloudAbstractRequest.h */,
+				86EDD2583FE25E81C70BCA50F4B1786B /* QCloudAbstractRequest.m */,
+				7282450AE596E26A74D57BC5D1675079 /* QCloudHTTPRequest.h */,
+				A7C20EA4F10E2264460D164BEA2FFD9C /* QCloudHTTPRequest.m */,
+				320DA251B525C14D2104B274DEB2AABA /* QCloudHTTPRequest_RequestID.h */,
+				27B90EB9CF350B666E48C30021BA832E /* QCloudHTTPRequestDelegate.h */,
+				431FB10D702B7EB32A04A6ECF9375F15 /* QCloudRequestData.h */,
+				7EB14B79FD8DB47B7AD359A12342E840 /* QCloudRequestData.m */,
+				2DAEC948970F0D3035A0DC616995ACC9 /* Serializer */,
+			);
+			name = CoreRequest;
+			path = CoreRequest;
+			sourceTree = "<group>";
+		};
+		F4C92D5EFA176C1C993AFAD211AFA15C /* API */ = {
+			isa = PBXGroup;
+			children = (
+				685351E9F65E069F5197CB0955D2A000 /* QCloudNetworkingAPI.h */,
+			);
+			name = API;
+			path = API;
+			sourceTree = "<group>";
+		};
+		F7032A2115F96A86F607315D29BD544F /* XMLDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				0101B6FDE2EA7AC4C0DCAD7C3D90D5EE /* Reader */,
+				290F5A56624FD37CA634CA24FD0EA09D /* Writer */,
+			);
+			name = XMLDictionary;
+			path = XMLDictionary;
+			sourceTree = "<group>";
+		};
+		FF14FD3D97CB3D5E7532847C50921CCD /* QCLOUDProgramDefines */ = {
+			isa = PBXGroup;
+			children = (
+				3C7B8B790666077246BC617D4E7E7259 /* QCloudProgrameDefines.h */,
+				A8E425654A0C840BD7C6D25F5385E7F6 /* QCloudProgrameDefines.m */,
+				243D4FBC434964A29118E36D29957E4C /* TestUtility */,
+			);
+			name = QCLOUDProgramDefines;
+			path = QCLOUDProgramDefines;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		BBF15D93F140C6489B52F137D8BFD6BA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1B21C5DF95A8E623CB61C6AED6081B1 /* COSXMLGetSignatureTool.h in Headers */,
+				8A328CFC2CAFBFD362665D12014EBE3C /* MTA+Account.h in Headers */,
+				5AF466E37D7DBDDEAB85F2F944DFB7CD /* MTA.h in Headers */,
+				02DEDFC7906552D52A29179DAC354FBF /* MTAConfig.h in Headers */,
+				DF03D21CFC3D02619DF93D83307A4CCE /* MTACrashReporter.h in Headers */,
+				F6B263262AC27C0858C78FA74DE0E99A /* NSDate+QCLOUD.h in Headers */,
+				E27D634F83CAED81665CA62D468EF73A /* NSDate+QCloudComapre.h in Headers */,
+				757007C8CA6B7CF2285647AAA5CF9BAA /* NSDate+QCloudInternetDateTime.h in Headers */,
+				BDD71510BC0F382C81D43BC08DEE6F5A /* NSError+QCloudNetworking.h in Headers */,
+				D35DD98F045D2D76D3DDF7D1788DE66C /* NSHTTPCookie+QCloudNetworking.h in Headers */,
+				4CCC5C5A50863E2BEE1C81AF0D030884 /* NSObject+HTTPHeadersContainer.h in Headers */,
+				A75BA3CBC3AC2E4CBC980AF04DF10E46 /* NSObject+QCloudModel.h in Headers */,
+				8C506BE18901D7B69853F8E301C36727 /* NSString+QCloudSHA.h in Headers */,
+				DE7508721441EDC4C3D3DDAFDECF03D0 /* QCloudAbstractRequest.h in Headers */,
+				4A8E3F99118E4B67FD689F4C830581A8 /* QCloudAbstractRequest_FakeRequest.h in Headers */,
+				984B9FBE7A2DC86A3851983B429FB108 /* QCloudAuthentationCreator.h in Headers */,
+				8CCABC2F0360361C11B53DAEF79FD702 /* QCloudAuthentationV4Creator.h in Headers */,
+				AA73C2D514E886FE8E979003CDC72C8A /* QCloudAuthentationV5Creator.h in Headers */,
+				DC36696E4005F59497022A6654E4DA30 /* QCloudBizHTTPRequest.h in Headers */,
+				C263A8E997F0CA1C6C7687AB70D4DF45 /* QCloudBundle.h in Headers */,
+				C566392073F1114D8C5C2DB70F696427 /* QCloudBundlePath.h in Headers */,
+				F70A88B72576C93A6949032A438036FB /* QCloudClassInfo.h in Headers */,
+				844A0E02674CB3BC0AE38F004146BBC2 /* QCloudClientContext.h in Headers */,
+				CA2FD72A4335F2396A01CB0C88AE1569 /* QCloudCore-umbrella.h in Headers */,
+				1CDA0681ED5150E5AAB5286E678F32B5 /* QCloudCore.h in Headers */,
+				ED6D00917AE986FB74796F2A949D7F89 /* QCloudCoreVersion.h in Headers */,
+				CF4BB46ED7E11104D7710D34FD7E3F30 /* QCloudCredentailFenceQueue.h in Headers */,
+				28A565C25C9C73C2AAE3262DF4715052 /* QCloudCredential.h in Headers */,
+				AA2B873A06320DF3A0A2F11624C3FD20 /* QCloudDomain.h in Headers */,
+				5B547E13908113EAE3902354421D34DF /* QCloudEncryt.h in Headers */,
+				06586A5DC70494B6A887A299FFA51C41 /* QCloudEndPoint.h in Headers */,
+				469A20B8782CE1E4A002C70B9EA7D985 /* QCloudEnv.h in Headers */,
+				B6D97FD575F5FBD1C16725ADAF71F0E8 /* QCloudError.h in Headers */,
+				44D3F381F640463A8C7952A4E9535B5E /* QCloudFakeRequestOperation.h in Headers */,
+				F19BC8674B80A95E8768C5C04CCCF3BE /* QCloudFCUUID.h in Headers */,
+				9CC4440E5E280A1CAD092A213768D5C6 /* QCloudFileLogger.h in Headers */,
+				73E1999174944B9645A9F27CD8378233 /* QCloudFileOffsetBody.h in Headers */,
+				20264AA39D1612FB9CCC41F16DA373A8 /* QCloudFileOffsetStream.h in Headers */,
+				46FCDE49288AFD61BE7AB2B34BA6F478 /* QCloudFileUtils.h in Headers */,
+				E3E5FADF8722FADC7EE3350E550B22AB /* QCloudFileZipper.h in Headers */,
+				5B5EA20CA8B7F067F94CDBBBEA3B5171 /* QCloudHosts.h in Headers */,
+				A58793537262CA85F79449EBC9EFE7F5 /* QCloudHTTPBodyPart.h in Headers */,
+				70022605D67CBF8F09EA506116D954DB /* QCloudHttpDNS.h in Headers */,
+				5407F5D226192D88079A637DBD97E1F3 /* QCloudHttpMetrics.h in Headers */,
+				AE248300845D09BCC103E04DC15F45B1 /* QCloudHTTPMultiDataStream.h in Headers */,
+				456239AEF0F0E94DEC24612B22D9C998 /* QCloudHTTPRequest.h in Headers */,
+				846DDE5F0496D0CA26254F5F6FEE7147 /* QCloudHTTPRequest_RequestID.h in Headers */,
+				A9DFBACC7308D485FEF2AAA4E0BFAD57 /* QCloudHTTPRequest_SessionPrivate.h in Headers */,
+				7DE048A51CA91E135EB74579A1F29490 /* QCloudHTTPRequestDelegate.h in Headers */,
+				94593E2502A6AEF371D0567A25EEF321 /* QCloudHTTPRequestOperation.h in Headers */,
+				FBD2C6BD9505FC7CC94D41CD257C0F67 /* QCloudHTTPRetryHanlder.h in Headers */,
+				97CE0F58E8EBF35650903C52B60D8CDF /* QCloudHTTPSessionManager.h in Headers */,
+				A607AC250E3B503BE6EBC722F7DFB273 /* QCloudHTTPSessionManager_Private.h in Headers */,
+				A7F052D97DCBC211C495D8EE9211B619 /* QCloudHTTPTaskDelayManager.h in Headers */,
+				9ECA4F7986B1F0922A1210CCA4C2FC2F /* QCloudIntelligenceTimeOutAdapter.h in Headers */,
+				9DC063010FEF61F25AB2BA81D00EE530 /* QCloudLogger.h in Headers */,
+				FC94111B7D873BFC02AF854F4D0EA1D1 /* QCloudLoggerOutput.h in Headers */,
+				1BA6E872E2616323D27039384C151A57 /* QCloudLogModel.h in Headers */,
+				A5E0DA8D67A345EA5E6D6766CE9BAAAA /* QCloudMainBundle.h in Headers */,
+				87127AB537870D2B141366B5A7822499 /* QCloudMediaPath.h in Headers */,
+				1729830619C46EE242AA9607759E2867 /* QCloudModel.h in Headers */,
+				A0C7E3CA2F6EF537FAF98828DDC4D8FF /* QCloudMultiDelegateProxy.h in Headers */,
+				8CB7A5CF208056F24CFE591D80857B51 /* QCloudNetEnv.h in Headers */,
+				8DEDA264457711B6CBF0B9AF6A50A919 /* QCloudNetProfile.h in Headers */,
+				AFB9BE6B6615575CFD55063A6DA33F37 /* QCloudNetResponse.h in Headers */,
+				B1B3FF7BA8F2E590F3DBA97046F20065 /* QCloudNetworkingAPI.h in Headers */,
+				EE1DDA6D7717C4DD97B3A77AB474B55A /* QCloudObjectModel.h in Headers */,
+				66A9E584499EF042D1C44FF332DE83EF /* QCloudOperationQueue.h in Headers */,
+				CCDD945BA2566714E4F80B759073762B /* QCloudPingTester.h in Headers */,
+				4C5443D15EA073E5F4E939C51F6A0637 /* QCloudProgrameDefines.h in Headers */,
+				DFDD5FEA0A87503EF952BBBA77FB5961 /* QCloudReachability.h in Headers */,
+				F0D01BF502A4C0C2704C184BFEF09863 /* QCloudRequestData.h in Headers */,
+				6F90C82420C6339F8F1E8FCEA594E191 /* QCloudRequestOperation.h in Headers */,
+				F504DD5747C1F58F129C1BA61E7AFB00 /* QCloudRequestSerializer.h in Headers */,
+				64B9BB356197AAB30DC2836A1ECC459E /* QCloudResponseSerializer.h in Headers */,
+				0468D38E2BDE9D796A73094202161AC6 /* QCLOUDRestNet.h in Headers */,
+				7CED3E56139A392736947E1B9FB71DAE /* QCloudSandboxPath.h in Headers */,
+				A436F027C6259B138D25A3098C2EBB15 /* QCloudSDKModuleManager.h in Headers */,
+				9965DBD2C0F42F37FC6033599CE27108 /* QCloudService.h in Headers */,
+				1AC58AB10F53AD5587E0A66066E96B70 /* QCloudServiceConfiguration.h in Headers */,
+				116BB8BD7F1A7BC78C3A7EA19AB4675C /* QCloudServiceConfiguration_Private.h in Headers */,
+				0F217F3348205195216F3B2EA37BBB15 /* QCloudSHAPart.h in Headers */,
+				3776076FF0BFB51A47F0DD325F1A51DB /* QCloudSignature.h in Headers */,
+				179B7536396BC4653F7D5013BB4CFAA9 /* QCloudSignatureFields.h in Headers */,
+				D25151435BEFDC6F4A67BE9FD5CA23CD /* QCloudSignatureProvider.h in Headers */,
+				CA9E9DDC786A33B922BA5C478A6EAFB5 /* QCloudSupervisory.h in Headers */,
+				5CB8B5EA18607D8A5696B81140CCB352 /* QCloudSupervisoryRecord.h in Headers */,
+				0B03FEDD566F356C32CC0533079A29F6 /* QCloudSupervisorySession.h in Headers */,
+				3EB38C259AD642276DA07FF31136A20C /* QCloudTestUtility.h in Headers */,
+				55FD8A1CAFE0EC0A1269CF4E24A207C5 /* QCloudThreadSafeMutableDictionary.h in Headers */,
+				7866FE72821E35CE5E44A7D0FA0826C3 /* QCloudUICKeyChainStore.h in Headers */,
+				653BD7204147576134DF58AC35FDBCD0 /* QCloudUniversalAdjustablePath.h in Headers */,
+				F34101CC538FF06A85EA501A368FB134 /* QCloudUniversalFixedPath.h in Headers */,
+				1B9940D42F4AF03E33AC983FF44770A6 /* QCloudUniversalPath.h in Headers */,
+				148A88238194FBBE3FE237ADA337491F /* QCloudUniversalPathConstants.h in Headers */,
+				C255B60B32CD6DF11A64BA7852F687D7 /* QCloudUniversalPathFactory.h in Headers */,
+				0C59A267DABAD7339107BB34ABF4A705 /* QCloudUploadPartRequestRetryHandler.h in Headers */,
+				F1B8C374914AA3A7D7B615E8808774B3 /* QCloudURLHelper.h in Headers */,
+				F13DF1FE35BDE608EE2DD3D55938EF94 /* QCloudURLSessionTaskData.h in Headers */,
+				60606253C39EF6A8010259ABDF84C962 /* QCloudURLTools.h in Headers */,
+				4B6790AF6A3A89787BF05DDF3EC523FF /* QCloudWeakProxy.h in Headers */,
+				1802126034CF4826AED84E8FC3CC2D3F /* QCloudXMLDictionary.h in Headers */,
+				4191BF5E9A31195E27AD046C0396D697 /* QCloudXMLWriter.h in Headers */,
+				028ABFEAD307D8B5ACB78D958E0945D5 /* SimplePing.h in Headers */,
+				F83309B13BF30D15592111E79A9D5CD6 /* UIDevice+QCloudFCUUID.h in Headers */,
+				D677DCBF8A02AD5C87F669C4F7FEBAF8 /* UIImage+QCloudBundle.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		CF64B7382F147DB658B06131381A88EA /* QCloudCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BB2C10B1228A9136DAD1BAB2EFBA867 /* Build configuration list for PBXNativeTarget "QCloudCore" */;
+			buildPhases = (
+				BBF15D93F140C6489B52F137D8BFD6BA /* Headers */,
+				8FEBEAEC30D65ABEB1315E22C0E1FB7D /* Sources */,
+				5E640FF090961219B83E77C3C5DDACF3 /* Frameworks */,
+				0F89ECB7672168AFEC3EB1A03CFE6716 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QCloudCore;
+			productName = QCloudCore;
+			productReference = 2A1B3DCC885C41FAAC78676BD3F70FC1 /* QCloudCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F2B9C4F11D123E6FB32858E053CC1AF6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+			};
+			buildConfigurationList = E563403E8844662B9EA2DA71837504E6 /* Build configuration list for PBXProject "QCloudCore" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EB37356C8364013C19B17E081C0AC979;
+			productRefGroup = E5FCE1C65ACD5C9A421F4BE8F8D1E59E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CF64B7382F147DB658B06131381A88EA /* QCloudCore */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0F89ECB7672168AFEC3EB1A03CFE6716 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8FEBEAEC30D65ABEB1315E22C0E1FB7D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C76E2875B2CD755F756745EA29E53F9 /* COSXMLGetSignatureTool.m in Sources */,
+				1161C54F36ABA8C6688CB8D5215F94C0 /* libmtasdk.a in Sources */,
+				3E73765BCF66B52FDDF97BA1A66D8D8C /* NSDate+QCLOUD.m in Sources */,
+				9EC02887621DA2ED8CB479B2329EB0A4 /* NSDate+QCloudComapre.m in Sources */,
+				434C22817D712F12D315DBE6FE5AA4DF /* NSDate+QCloudInternetDateTime.m in Sources */,
+				F7D5346FA44251E6C25E975952E2EC24 /* NSError+QCloudNetworking.m in Sources */,
+				1720C172789FEE36B5A08B62A45181E1 /* NSHTTPCookie+QCloudNetworking.m in Sources */,
+				86015D8B876807C37E587CA9EE0DBF6C /* NSObject+HTTPHeadersContainer.m in Sources */,
+				ADFB065A785B7A09471E2B187FDC7E08 /* NSObject+QCloudModel.m in Sources */,
+				827B9627354A42D1D07802B67507BC81 /* NSString+QCloudSHA.mm in Sources */,
+				05DE91B967B71D010D66B761CCF9E3D0 /* QCloudAbstractRequest.m in Sources */,
+				84AD1DD427BCF0EBFCE10E5EABA936C9 /* QCloudAuthentationCreator.m in Sources */,
+				8F2624C9BE0A274EFA49DDCA37D1ED65 /* QCloudAuthentationV4Creator.mm in Sources */,
+				4BD10EF73DBC6ACA9FE430625E95C3AB /* QCloudAuthentationV5Creator.m in Sources */,
+				6547FB757F1A990E90FE36477B03AFCD /* QCloudBizHTTPRequest.m in Sources */,
+				DC4ADBF5D95FCDF58C8FBF23BEAB99CD /* QCloudBundlePath.m in Sources */,
+				AF585B9F45A561797B9DE0B2090C9908 /* QCloudClassInfo.m in Sources */,
+				C9B2BC6798013EC8D245D70C209D2CF5 /* QCloudClientContext.m in Sources */,
+				1219884C3676CFEC2C14EC7AD4C9D39A /* QCloudCore-dummy.m in Sources */,
+				F461A23094F0281CC8C23115DAB70EDB /* QCloudCoreVersion.m in Sources */,
+				AC29F97AF4D7E100E5A6DA8CC57691C9 /* QCloudCredentailFenceQueue.m in Sources */,
+				1C9FD002B82E4314A65889DC7C6CC3E6 /* QCloudCredential.m in Sources */,
+				B8FAB00B5B77B5A11999621357F5AC2C /* QCloudDomain.m in Sources */,
+				0F03DBF438EA445F71398DC4331E6C20 /* QCloudEncryt.mm in Sources */,
+				75D747EBC38CC614E3B3A7C82B8F5514 /* QCloudEndPoint.m in Sources */,
+				D1CE5BAAC293706EF2704A4FD510BE2B /* QCloudEnv.m in Sources */,
+				F95C84717C2739BCBB5C12EFA7CC2D23 /* QCloudError.m in Sources */,
+				D6B3F68A27822AC05D382B10357C017A /* QCloudFakeRequestOperation.m in Sources */,
+				60168EF07B0F56604E68840115B9D9B4 /* QCloudFCUUID.m in Sources */,
+				D06786B8C9D4A247FC8738AA961AD699 /* QCloudFileLogger.m in Sources */,
+				0381CB601961EE8ABA0EF42893344FA1 /* QCloudFileOffsetBody.m in Sources */,
+				C64FEBE601E251C3D7A74E7C39B4DF78 /* QCloudFileOffsetStream.m in Sources */,
+				57745BFBEFFFD1FFC6C5BA4BE8E9DC67 /* QCloudFileUtils.m in Sources */,
+				6D5EB8D9AEC9E80C0C6D5DAE7180578C /* QCloudFileZipper.m in Sources */,
+				DD2B295620CC294388C6ADA4CD5E319B /* QCloudHosts.m in Sources */,
+				CDDEF7F81C14E3DAC941CDFF3BBE2571 /* QCloudHTTPBodyPart.m in Sources */,
+				5799D81ECE3DE6912BC6B94C7DDAD47A /* QCloudHttpDNS.m in Sources */,
+				AC3FFF3A09810A50BEA5425A91F98DE9 /* QCloudHttpMetrics.m in Sources */,
+				628253F639E2363297B44DC5A697D097 /* QCloudHTTPMultiDataStream.m in Sources */,
+				205407DEF521766132359A37CE160EB1 /* QCloudHTTPRequest.m in Sources */,
+				66ED4FAEEBEAF8EFC5A84F59CAA2CE81 /* QCloudHTTPRequestOperation.m in Sources */,
+				05C4AF439859CDA1C84929C00F945CC0 /* QCloudHTTPRetryHanlder.m in Sources */,
+				020CA02E9F140B823BF7D89617359092 /* QCloudHTTPSessionManager.m in Sources */,
+				3809A91A0883972D7B2CB8C1E0A7D2A6 /* QCloudHTTPTaskDelayManager.m in Sources */,
+				3DDC257A2F740ED88728C5CD0342BCEF /* QCloudIntelligenceTimeOutAdapter.m in Sources */,
+				8ACFE1DDF84F852ADCF717A3F207C317 /* QCloudLogger.m in Sources */,
+				1324A48A084308F7AD8091B6356ECE7E /* QCloudLoggerOutput.m in Sources */,
+				AF715F7912A51DBAC9A15A9F1E0FC595 /* QCloudLogModel.m in Sources */,
+				AEAA231C0C9C4BFABD887805C5558CD0 /* QCloudMainBundle.m in Sources */,
+				3751CAC1676490739637B390D08E002B /* QCloudMediaPath.m in Sources */,
+				85624433F85CB740E0A75150735EE771 /* QCloudModel.m in Sources */,
+				BB7832B6E72BF224ADC98D465A189842 /* QCloudMultiDelegateProxy.m in Sources */,
+				3CB578FF5B11DFFDCD1927409F5305A2 /* QCloudNetEnv.m in Sources */,
+				A78434BE7A1F92D5416330B488E21294 /* QCloudNetProfile.m in Sources */,
+				5848B429C01EDA74D92007EA39892A25 /* QCloudNetResponse.m in Sources */,
+				BEEC861F2F6FBB41FE653D442251099A /* QCloudOperationQueue.m in Sources */,
+				63B3DB3C530CE006ED556E7E1265DB2F /* QCloudPingTester.m in Sources */,
+				8D47BE20087C5652E012F44825D57ECD /* QCloudProgrameDefines.m in Sources */,
+				21D7168EB0B38ACDDCB7D6B156BD0E5A /* QCloudReachability.m in Sources */,
+				EEE77231758A0E7C473C3CC1C11921B3 /* QCloudRequestData.m in Sources */,
+				BA875BB64CE91A7FF8A829B90B3D7A0B /* QCloudRequestOperation.m in Sources */,
+				9F4F252A8CDA6512902E4EACD004A34F /* QCloudRequestSerializer.m in Sources */,
+				5D620747F35FA278DCC93053064576B9 /* QCloudResponseSerializer.m in Sources */,
+				1E517454B6CEF3DED656A1F39C321C30 /* QCloudSandboxPath.m in Sources */,
+				6F05561CFBBC0C087243CAFC7915C605 /* QCloudSDKModuleManager.m in Sources */,
+				02339939A2E961C5C6D281DEA00AAD00 /* QCloudService.m in Sources */,
+				965C949F9ADE69461ADDD876B7820BE2 /* QCloudServiceConfiguration.m in Sources */,
+				8346B7554DB906C61B08CBC5C5DAF1FB /* QCloudSHAPart.m in Sources */,
+				13975B0D092C546C4027A39C2F372573 /* QCloudSignature.m in Sources */,
+				D6BC96364EC7A7A914E8DA162DBDFBF8 /* QCloudSignatureFields.m in Sources */,
+				A5DB6214C063810A8E3981772D5CAD7A /* QCloudSupervisory.m in Sources */,
+				8C6A4C209A06F95D1A23643385E29920 /* QCloudSupervisoryRecord.m in Sources */,
+				4353370F5826E62AA28ECF1DF00CC362 /* QCloudSupervisorySession.m in Sources */,
+				3B65640F63422F29C1B07FFDEAF4A598 /* QCloudTestUtility.m in Sources */,
+				8C0661DABC323E5B5121FB00360A9B46 /* QCloudThreadSafeMutableDictionary.m in Sources */,
+				B1A19107DA9BE70E468DE2B322853ABF /* QCloudUICKeyChainStore.m in Sources */,
+				DAA2AC04DC04C27F50F420A49D077226 /* QCloudUniversalAdjustablePath.m in Sources */,
+				9BA092D036F3FB920F0CE2BD46FA7794 /* QCloudUniversalFixedPath.m in Sources */,
+				21F63C99AF19EC8357411F491EBCB473 /* QCloudUniversalPath.m in Sources */,
+				7B87F5F5D8162485FB31E6DCF06EB09F /* QCloudUniversalPathFactory.m in Sources */,
+				99A4567E39A617DFFCC1E5FF7C694121 /* QCloudUploadPartRequestRetryHandler.m in Sources */,
+				B2DC25362774C9E5E4F185744F892D7B /* QCloudURLHelper.m in Sources */,
+				29B48F56508DE3924EC34493BC7FC3CE /* QCloudURLSessionTaskData.m in Sources */,
+				E32FB44C9F0B36315AB7300696BC3EAB /* QCloudURLTools.m in Sources */,
+				BD6B11D88F9AD65D88BE83B17F4BBBBF /* QCloudWeakProxy.m in Sources */,
+				7486884770DD136B0379FC6DAEA4180E /* QCloudXMLDictionary.m in Sources */,
+				19EC68A0A9AF3677262585181B2B3774 /* QCloudXMLWriter.m in Sources */,
+				2C97FD5867ADCA5280403054563193EB /* SimplePing.m in Sources */,
+				D74D654C233B253FE7138919E65C0E4F /* UIDevice+QCloudFCUUID.m in Sources */,
+				A23DD354744E83B2E2C767E63B996FFE /* UIImage+QCloudBundle.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1B059BA7FF94C425E6E24FB0889FC4F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		26C9B62C5866C58A45F9E88AADD87DA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21648119B9B91EF465F68CA93F61B87A /* QCloudCore.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/QCloudCore/QCloudCore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/QCloudCore/QCloudCore-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/QCloudCore/QCloudCore.modulemap";
+				PRODUCT_MODULE_NAME = QCloudCore;
+				PRODUCT_NAME = QCloudCore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		30AAD806AFFC17647A325D301C120705 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 187EC4F7C09CBF939000EA22937DEEB0 /* QCloudCore.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/QCloudCore/QCloudCore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/QCloudCore/QCloudCore-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/QCloudCore/QCloudCore.modulemap";
+				PRODUCT_MODULE_NAME = QCloudCore;
+				PRODUCT_NAME = QCloudCore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		39C1866D79C73700A49AEC69FA5B263F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8BB2C10B1228A9136DAD1BAB2EFBA867 /* Build configuration list for PBXNativeTarget "QCloudCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26C9B62C5866C58A45F9E88AADD87DA1 /* Debug */,
+				30AAD806AFFC17647A325D301C120705 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E563403E8844662B9EA2DA71837504E6 /* Build configuration list for PBXProject "QCloudCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B059BA7FF94C425E6E24FB0889FC4F6 /* Debug */,
+				39C1866D79C73700A49AEC69FA5B263F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F2B9C4F11D123E6FB32858E053CC1AF6 /* Project object */;
+}

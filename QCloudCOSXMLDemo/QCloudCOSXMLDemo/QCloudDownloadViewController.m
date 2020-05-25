@@ -7,14 +7,15 @@
 //
 
 #import "QCloudDownloadViewController.h"
-#import <QCloudCore/QCloudCore.h>
+
 #import <QCloudCOSXML/QCloudCOSXML.h>
 #import "QCloudCOSXMLContants.h"
 #import "DownloadTableViewCell.h"
-#import "TestCommonDefine.h"
 #import "QCloudCOSXMLConfiguration.h"
 #import "QCloudDownloadFinishViewController.h"
+
  NSString* const REUSE_IDENTIFIER = @"BUCKET_TABLE_VIEW_CELL";
+
 @interface QCloudDownloadViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView* bucketTableView;
 @property (nonatomic, strong) NSMutableArray<QCloudBucketContents*>* contentsArray;
@@ -48,11 +49,13 @@
 
 #pragma mark - data related
 - (void)fetchData {
+    
     [self.indicatorView startAnimating];
     QCloudGetBucketRequest* request = [QCloudGetBucketRequest new];
     request.bucket = [QCloudCOSXMLConfiguration sharedInstance].currentBucket;
     request.maxKeys = 1000;
     __weak typeof(self) weakSelf = self;
+    
     [request setFinishBlock:^(QCloudListBucketResult * _Nonnull result, NSError * _Nonnull error) {
         weakSelf.contentsArray = [result.contents mutableCopy];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -60,7 +63,7 @@
             [weakSelf.indicatorView stopAnimating ];
         });
     }];
-//    [[QCloudCOSXMLService defaultCOSXML] GetBucket:request];
+    
     [[QCloudCOSXMLConfiguration sharedInstance].currentService GetBucket:request];
 }
 
@@ -75,7 +78,6 @@
     request.downloadingURL =  [self tempFileURLWithName:objectKey];
     [request setFinishBlock:finishBlock];
     [request setDownProcessBlock:progressBlock];
-//    [[QCloudCOSXMLService defaultCOSXML] GetObject:request];
     [[QCloudCOSXMLConfiguration sharedInstance].currentService GetObject:request];
 }
 
@@ -96,7 +98,7 @@
     return cell;
 }
 
-#pragma mark - table view delegate
+#pragma mark - table view delegate 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -140,16 +142,6 @@
         _contentsArray = [NSMutableArray new];
     }
     return _contentsArray;
-}
-- (UIActivityIndicatorView*)indicatorView {
-    if (!_indicatorView) {
-        _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        _indicatorView.hidesWhenStopped = YES;
-        _indicatorView.color = [UIColor blackColor];
-        CGPoint centerPoint = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2);
-        _indicatorView.center = centerPoint;
-    }
-    return _indicatorView;
 }
 
 - (NSURL*)tempFileURL {

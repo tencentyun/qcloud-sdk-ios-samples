@@ -1,0 +1,20 @@
+{
+  "name": "QCloudCOSXML-Swift",
+  "version": "0.1.0",
+  "summary": "QCloudCOSXML-Swift 腾讯云iOS-SDK组件",
+  "description": "TODO: Add long description of the pod here.aaa",
+  "homepage": "https://cloud.tencent.com/",
+  "license": "MIT",
+  "authors": {
+    "QCloudTerminalLab": "g_PDTC_storage_DEV_terminallab@tencent.com"
+  },
+  "source": {
+    "git": "http://git.code.oa.com/qcloud-terminal/QCloudCOSXML-Swift.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "Pod/Classes/**/*",
+  "static_framework": true
+}

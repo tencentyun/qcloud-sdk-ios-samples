@@ -20,13 +20,8 @@
 }
 
 - (NSArray *)availableRegions {
-  return   @[@"ap-beijing-1",@"ap-beijing",@"ap-shanghai",@"ap-guangzhou",@"ap-chengdu",@"ap-chongqing",@"ap-singapore",@"ap-hongkong",@"eu-frankfurt",@"ap-mumbai",@"ap-seoul",@"na-siliconvalley",@"na-ashburn"];
+  return   @[@"ap-beijing",@"ap-shanghai",@"ap-guangzhou",@"ap-chengdu",@"ap-chongqing",@"ap-singapore",@"ap-hongkong",@"eu-frankfurt",@"ap-mumbai",@"ap-seoul",@"na-siliconvalley",@"na-ashburn"];
 }
-
-- (NSString *)currentBucket {
-    return [self bucketInRegion:self.currentRegion];
-}
-
 
 - (QCloudCOSXMLService *)currentService {
     return [QCloudCOSXMLService cosxmlServiceForKey:self.currentRegion];
@@ -38,7 +33,7 @@
 
 - (NSString *)currentRegion {
     if (!_currentRegion) {
-        _currentRegion = @"ap-beijing-1";
+        _currentRegion = kRegion;
     }
     return _currentRegion;
 }

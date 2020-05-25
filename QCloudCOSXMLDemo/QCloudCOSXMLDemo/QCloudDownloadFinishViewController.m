@@ -34,7 +34,7 @@
     activityViewController = [[UIActivityViewController alloc] initWithActivityItems:[itemsToShare copy] applicationActivities:nil];
     activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact];
     activityViewController.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
-        NSLog(@"Share via system result %llu",completed);
+        NSLog(@"Share via system result %d",completed);
     };
     [self presentViewController:activityViewController animated:YES completion:nil];
 }

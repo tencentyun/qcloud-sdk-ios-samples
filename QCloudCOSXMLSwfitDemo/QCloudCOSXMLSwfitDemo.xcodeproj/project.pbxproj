@@ -15,16 +15,28 @@
 		7F00FF902390B14300E189C2 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F00FF8F2390B14300E189C2 /* utils.swift */; };
 		7F00FF922391001200E189C2 /* cos_config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F00FF912391001200E189C2 /* cos_config.swift */; };
 		7F00FF942391042300E189C2 /* QCloudCOSXMLServiceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F00FF932391042300E189C2 /* QCloudCOSXMLServiceConfiguration.swift */; };
-		7F00FF982391092400E189C2 /* NSURL+FileExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F00FF972391092400E189C2 /* NSURL+FileExtension.m */; };
 		7F3772C8238E073A005E53D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3772C7238E073A005E53D7 /* AppDelegate.swift */; };
 		7F3772CC238E073A005E53D7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3772CB238E073A005E53D7 /* ViewController.swift */; };
 		7F3772CF238E073A005E53D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F3772CD238E073A005E53D7 /* Main.storyboard */; };
 		7F3772D1238E073C005E53D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F3772D0238E073C005E53D7 /* Assets.xcassets */; };
 		7F3772D4238E073C005E53D7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F3772D2238E073C005E53D7 /* LaunchScreen.storyboard */; };
 		7F3772DF238E073C005E53D7 /* QCloudCOSXMLSwfitDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3772DE238E073C005E53D7 /* QCloudCOSXMLSwfitDemoTests.swift */; };
+		7F3772EC238F6713005E53D7 /* COS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3772EB238F6713005E53D7 /* COS.swift */; };
 		7F5848F523911F9200CC65BB /* QCloudFileDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5848F423911F9200CC65BB /* QCloudFileDetailController.swift */; };
 		7F5848F72391202100CC65BB /* QCloudDownloadedFileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5848F62391202100CC65BB /* QCloudDownloadedFileInfo.swift */; };
+		7FA4B68523A388A30022CAC6 /* Bucketest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA4B68423A388A30022CAC6 /* Bucketest.swift */; };
 		C73CFBD799EA4993F46DA253 /* Pods_QCloudCOSXMLSwfitDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C34C08569C1392765FE25C /* Pods_QCloudCOSXMLSwfitDemoTests.framework */; };
+		D2B700A32475138C00F59994 /* QCloudMyBucketListCtor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B700A22475138C00F59994 /* QCloudMyBucketListCtor.swift */; };
+		D2B700B324751FB900F59994 /* QCCouldMyBucketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B700B224751FB900F59994 /* QCCouldMyBucketCell.swift */; };
+		D2B700B52476160100F59994 /* QCloudCreateBucketCtor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B700B42476160100F59994 /* QCloudCreateBucketCtor.swift */; };
+		D2B700B924764C0400F59994 /* QCloudFileListCtor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B700B824764C0400F59994 /* QCloudFileListCtor.swift */; };
+		D2B700C12476553C00F59994 /* BucketFileItemViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B700BF2476553C00F59994 /* BucketFileItemViewCell.swift */; };
+		D2B700C824766EA700F59994 /* QCloudUploadNewCtor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B700C724766EA700F59994 /* QCloudUploadNewCtor.swift */; };
+		D2B700CA247692A700F59994 /* QCloudDownLoadNewCtor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B700C9247692A700F59994 /* QCloudDownLoadNewCtor.swift */; };
+		D2B7013B247B5FB900F59994 /* NSURL+FileExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B70135247B5FB900F59994 /* NSURL+FileExtension.m */; };
+		D2B7013C247B5FB900F59994 /* QCloudBucketContents+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B70136247B5FB900F59994 /* QCloudBucketContents+Addition.m */; };
+		D2B7013D247B5FB900F59994 /* UIViewController+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B70138247B5FB900F59994 /* UIViewController+Loading.m */; };
+		D2B7013E247B5FB900F59994 /* NSString+UINCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B70139247B5FB900F59994 /* NSString+UINCategory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,8 +60,6 @@
 		7F00FF912391001200E189C2 /* cos_config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cos_config.swift; sourceTree = "<group>"; };
 		7F00FF932391042300E189C2 /* QCloudCOSXMLServiceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCloudCOSXMLServiceConfiguration.swift; sourceTree = "<group>"; };
 		7F00FF952391092300E189C2 /* QCloudCOSXMLSwfitDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QCloudCOSXMLSwfitDemo-Bridging-Header.h"; sourceTree = "<group>"; };
-		7F00FF962391092400E189C2 /* NSURL+FileExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSURL+FileExtension.h"; path = "../../QCloudCOSXMLDemo/QCloudCOSXMLDemo/NSURL+FileExtension.h"; sourceTree = "<group>"; };
-		7F00FF972391092400E189C2 /* NSURL+FileExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURL+FileExtension.m"; path = "../../QCloudCOSXMLDemo/QCloudCOSXMLDemo/NSURL+FileExtension.m"; sourceTree = "<group>"; };
 		7F3772C4238E073A005E53D7 /* QCloudCOSXMLSwfitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QCloudCOSXMLSwfitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3772C7238E073A005E53D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F3772CB238E073A005E53D7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,10 +70,28 @@
 		7F3772DA238E073C005E53D7 /* QCloudCOSXMLSwfitDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QCloudCOSXMLSwfitDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3772DE238E073C005E53D7 /* QCloudCOSXMLSwfitDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCloudCOSXMLSwfitDemoTests.swift; sourceTree = "<group>"; };
 		7F3772E0238E073C005E53D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F3772EB238F6713005E53D7 /* COS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COS.swift; sourceTree = "<group>"; };
 		7F5848F423911F9200CC65BB /* QCloudFileDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCloudFileDetailController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		7F5848F62391202100CC65BB /* QCloudDownloadedFileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCloudDownloadedFileInfo.swift; sourceTree = "<group>"; };
+		7FA4B68423A388A30022CAC6 /* Bucketest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bucketest.swift; sourceTree = "<group>"; };
 		A70B13D3387CEE32A023A3D6 /* Pods-QCloudCOSXMLSwfitDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QCloudCOSXMLSwfitDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-QCloudCOSXMLSwfitDemoTests/Pods-QCloudCOSXMLSwfitDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A96B45D409879DFF449A628B /* Pods-QCloudCOSXMLSwfitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QCloudCOSXMLSwfitDemo.debug.xcconfig"; path = "Target Support Files/Pods-QCloudCOSXMLSwfitDemo/Pods-QCloudCOSXMLSwfitDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		D2B700A22475138C00F59994 /* QCloudMyBucketListCtor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCloudMyBucketListCtor.swift; sourceTree = "<group>"; };
+		D2B700B1247517F800F59994 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		D2B700B224751FB900F59994 /* QCCouldMyBucketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCCouldMyBucketCell.swift; sourceTree = "<group>"; };
+		D2B700B42476160100F59994 /* QCloudCreateBucketCtor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCloudCreateBucketCtor.swift; sourceTree = "<group>"; };
+		D2B700B824764C0400F59994 /* QCloudFileListCtor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCloudFileListCtor.swift; sourceTree = "<group>"; };
+		D2B700BF2476553C00F59994 /* BucketFileItemViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketFileItemViewCell.swift; sourceTree = "<group>"; };
+		D2B700C724766EA700F59994 /* QCloudUploadNewCtor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCloudUploadNewCtor.swift; sourceTree = "<group>"; };
+		D2B700C9247692A700F59994 /* QCloudDownLoadNewCtor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCloudDownLoadNewCtor.swift; sourceTree = "<group>"; };
+		D2B70133247B5FB900F59994 /* NSURL+FileExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+FileExtension.h"; sourceTree = "<group>"; };
+		D2B70134247B5FB900F59994 /* QCloudBucketContents+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QCloudBucketContents+Addition.h"; sourceTree = "<group>"; };
+		D2B70135247B5FB900F59994 /* NSURL+FileExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+FileExtension.m"; sourceTree = "<group>"; };
+		D2B70136247B5FB900F59994 /* QCloudBucketContents+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QCloudBucketContents+Addition.m"; sourceTree = "<group>"; };
+		D2B70137247B5FB900F59994 /* NSString+UINCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UINCategory.h"; sourceTree = "<group>"; };
+		D2B70138247B5FB900F59994 /* UIViewController+Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Loading.m"; sourceTree = "<group>"; };
+		D2B70139247B5FB900F59994 /* NSString+UINCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UINCategory.m"; sourceTree = "<group>"; };
+		D2B7013A247B5FB900F59994 /* UIViewController+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Loading.h"; sourceTree = "<group>"; };
 		D3C7C516894178B065E111F3 /* Pods-QCloudCOSXMLSwfitDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QCloudCOSXMLSwfitDemoTests.release.xcconfig"; path = "Target Support Files/Pods-QCloudCOSXMLSwfitDemoTests/Pods-QCloudCOSXMLSwfitDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		D9F2BFB4CEE0893FA7E11E48 /* Pods-QCloudCOSXMLSwfitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QCloudCOSXMLSwfitDemo.release.xcconfig"; path = "Target Support Files/Pods-QCloudCOSXMLSwfitDemo/Pods-QCloudCOSXMLSwfitDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,16 +150,14 @@
 		7F3772C6238E073A005E53D7 /* QCloudCOSXMLSwfitDemo */ = {
 			isa = PBXGroup;
 			children = (
-				7F00FF962391092400E189C2 /* NSURL+FileExtension.h */,
-				7F00FF972391092400E189C2 /* NSURL+FileExtension.m */,
+				D2B700A4247513F700F59994 /* Category */,
+				D2B700A12473F6AA00F59994 /* BucketModule */,
+				D2B700A02473F69000F59994 /* DownloadModule */,
+				D2B7009F2473F67400F59994 /* UploadModule */,
+				D2B7009E2473F65D00F59994 /* HomeModule */,
 				7F3772C7238E073A005E53D7 /* AppDelegate.swift */,
 				7F3772CB238E073A005E53D7 /* ViewController.swift */,
 				7F00FF87238FE56600E189C2 /* QCloudCOSXMLRegionsController.swift */,
-				7F00FF8B238FED2500E189C2 /* QCloudTransferController.swift */,
-				7F00FF8D238FEEC000E189C2 /* QCloudDownloadController.swift */,
-				7F5848F423911F9200CC65BB /* QCloudFileDetailController.swift */,
-				7F00FF89238FEC8000E189C2 /* QCloudUploadController.swift */,
-				7F5848F62391202100CC65BB /* QCloudDownloadedFileInfo.swift */,
 				7F00FF932391042300E189C2 /* QCloudCOSXMLServiceConfiguration.swift */,
 				7F00FF8F2390B14300E189C2 /* utils.swift */,
 				7F00FF912391001200E189C2 /* cos_config.swift */,
@@ -139,7 +165,9 @@
 				7F3772D0238E073C005E53D7 /* Assets.xcassets */,
 				7F3772D2238E073C005E53D7 /* LaunchScreen.storyboard */,
 				7F3772D5238E073C005E53D7 /* Info.plist */,
+				7F3772EB238F6713005E53D7 /* COS.swift */,
 				7F00FF952391092300E189C2 /* QCloudCOSXMLSwfitDemo-Bridging-Header.h */,
+				D2B700B1247517F800F59994 /* PrefixHeader.pch */,
 			);
 			path = QCloudCOSXMLSwfitDemo;
 			sourceTree = "<group>";
@@ -147,6 +175,7 @@
 		7F3772DD238E073C005E53D7 /* QCloudCOSXMLSwfitDemoTests */ = {
 			isa = PBXGroup;
 			children = (
+				7FA4B68423A388A30022CAC6 /* Bucketest.swift */,
 				7F3772DE238E073C005E53D7 /* QCloudCOSXMLSwfitDemoTests.swift */,
 				7F3772E0238E073C005E53D7 /* Info.plist */,
 			);
@@ -160,6 +189,61 @@
 				46C34C08569C1392765FE25C /* Pods_QCloudCOSXMLSwfitDemoTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D2B7009E2473F65D00F59994 /* HomeModule */ = {
+			isa = PBXGroup;
+			children = (
+				D2B700A22475138C00F59994 /* QCloudMyBucketListCtor.swift */,
+				D2B700B224751FB900F59994 /* QCCouldMyBucketCell.swift */,
+				7F00FF8B238FED2500E189C2 /* QCloudTransferController.swift */,
+			);
+			path = HomeModule;
+			sourceTree = "<group>";
+		};
+		D2B7009F2473F67400F59994 /* UploadModule */ = {
+			isa = PBXGroup;
+			children = (
+				D2B700C724766EA700F59994 /* QCloudUploadNewCtor.swift */,
+				7F00FF89238FEC8000E189C2 /* QCloudUploadController.swift */,
+			);
+			path = UploadModule;
+			sourceTree = "<group>";
+		};
+		D2B700A02473F69000F59994 /* DownloadModule */ = {
+			isa = PBXGroup;
+			children = (
+				D2B700C9247692A700F59994 /* QCloudDownLoadNewCtor.swift */,
+				7F00FF8D238FEEC000E189C2 /* QCloudDownloadController.swift */,
+				7F5848F62391202100CC65BB /* QCloudDownloadedFileInfo.swift */,
+				7F5848F423911F9200CC65BB /* QCloudFileDetailController.swift */,
+			);
+			path = DownloadModule;
+			sourceTree = "<group>";
+		};
+		D2B700A12473F6AA00F59994 /* BucketModule */ = {
+			isa = PBXGroup;
+			children = (
+				D2B700B42476160100F59994 /* QCloudCreateBucketCtor.swift */,
+				D2B700B824764C0400F59994 /* QCloudFileListCtor.swift */,
+				D2B700BF2476553C00F59994 /* BucketFileItemViewCell.swift */,
+			);
+			path = BucketModule;
+			sourceTree = "<group>";
+		};
+		D2B700A4247513F700F59994 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				D2B70137247B5FB900F59994 /* NSString+UINCategory.h */,
+				D2B70139247B5FB900F59994 /* NSString+UINCategory.m */,
+				D2B70133247B5FB900F59994 /* NSURL+FileExtension.h */,
+				D2B70135247B5FB900F59994 /* NSURL+FileExtension.m */,
+				D2B70134247B5FB900F59994 /* QCloudBucketContents+Addition.h */,
+				D2B70136247B5FB900F59994 /* QCloudBucketContents+Addition.m */,
+				D2B7013A247B5FB900F59994 /* UIViewController+Loading.h */,
+				D2B70138247B5FB900F59994 /* UIViewController+Loading.m */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,18 +397,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2B700B52476160100F59994 /* QCloudCreateBucketCtor.swift in Sources */,
 				7F00FF942391042300E189C2 /* QCloudCOSXMLServiceConfiguration.swift in Sources */,
+				D2B7013E247B5FB900F59994 /* NSString+UINCategory.m in Sources */,
 				7F00FF88238FE56600E189C2 /* QCloudCOSXMLRegionsController.swift in Sources */,
 				7F00FF8E238FEEC000E189C2 /* QCloudDownloadController.swift in Sources */,
 				7F3772CC238E073A005E53D7 /* ViewController.swift in Sources */,
 				7F00FF8C238FED2500E189C2 /* QCloudTransferController.swift in Sources */,
+				D2B700B324751FB900F59994 /* QCCouldMyBucketCell.swift in Sources */,
 				7F00FF8A238FEC8000E189C2 /* QCloudUploadController.swift in Sources */,
 				7F00FF922391001200E189C2 /* cos_config.swift in Sources */,
+				D2B7013C247B5FB900F59994 /* QCloudBucketContents+Addition.m in Sources */,
 				7F3772C8238E073A005E53D7 /* AppDelegate.swift in Sources */,
 				7F5848F72391202100CC65BB /* QCloudDownloadedFileInfo.swift in Sources */,
 				7F5848F523911F9200CC65BB /* QCloudFileDetailController.swift in Sources */,
-				7F00FF982391092400E189C2 /* NSURL+FileExtension.m in Sources */,
+				7F3772EC238F6713005E53D7 /* COS.swift in Sources */,
+				D2B700C824766EA700F59994 /* QCloudUploadNewCtor.swift in Sources */,
+				D2B700C12476553C00F59994 /* BucketFileItemViewCell.swift in Sources */,
 				7F00FF902390B14300E189C2 /* utils.swift in Sources */,
+				D2B7013B247B5FB900F59994 /* NSURL+FileExtension.m in Sources */,
+				D2B700CA247692A700F59994 /* QCloudDownLoadNewCtor.swift in Sources */,
+				D2B7013D247B5FB900F59994 /* UIViewController+Loading.m in Sources */,
+				D2B700A32475138C00F59994 /* QCloudMyBucketListCtor.swift in Sources */,
+				D2B700B924764C0400F59994 /* QCloudFileListCtor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +427,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FA4B68523A388A30022CAC6 /* Bucketest.swift in Sources */,
 				7F3772DF238E073C005E53D7 /* QCloudCOSXMLSwfitDemoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,6 +583,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/QCloudCOSXMLSwfitDemo/PrefixHeader.pch";
 				INFOPLIST_FILE = QCloudCOSXMLSwfitDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -508,6 +606,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/QCloudCOSXMLSwfitDemo/PrefixHeader.pch";
 				INFOPLIST_FILE = QCloudCOSXMLSwfitDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

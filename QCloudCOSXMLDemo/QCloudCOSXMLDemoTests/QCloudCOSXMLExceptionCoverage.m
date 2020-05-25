@@ -10,22 +10,7 @@
 #import "TestCommonDefine.h"
 #import <XCTest/XCTest.h>
 #import <QCloudCOSXML/QCloudCOSXML.h>
-#import <QCloudCore/QCloudServiceConfiguration_Private.h>
-#import <QCloudCore/QCloudAuthentationCreator.h>
-#import <QCloudCore/QCloudCredential.h>
-#import  "NSObject+QCloudModel.h"
-#import "QCloudCOSAccountTypeEnum.h"
-#import "QCloudCompleteMultipartUploadInfo.h"
-#import "QCloudDeleteInfo.h"
-#import "QCloudDeleteObjectInfo.h"
-#import "QCloudListMultipartRequest.h"
-#import "QCloudCompleteMultipartUploadRequest.h"
-#import "QCloudAbortMultipfartUploadRequest.h"
-#import "QCloudListMultipartUploadsResult.h"
-#import "QCloudUploadPartRequest.h"
-#import "QCloudAppendObjectRequest.h"
-#import "QCloudOwner.h"
-#import "QCloudCOSXMLStatusEnum.h"
+#import <QCloudCOSXML/QCloudCompleteMultipartUploadInfo.h>
 @interface QCloudCOSXMLExceptionCoverage : XCTestCase
 
 @end
@@ -80,6 +65,7 @@
 
 
 - (void)testTypeNum {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testTypeNum");
     XCTAssertEqual(QCloudCOSAccountTypeDumpFromString(@"RootAccount"),0);
     XCTAssertEqual(QCloudCOSAccountTypeDumpFromString(@"SubAccount"),1);
     
@@ -88,6 +74,7 @@
 }
 
 - (void)testStorateEnum {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testStorateEnum");
     XCTAssertEqual(QCloudCOSStorageClassDumpFromString(@"Standard"),0);
     XCTAssertEqual(QCloudCOSStorageClassDumpFromString(@"Standard_IA"),1);
     
@@ -98,6 +85,7 @@
 }
 
 - (void)testDeleteMultipartInfo {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testDeleteMultipartInfo");
     QCloudCompleteMultipartUploadInfo* prefix = [QCloudCompleteMultipartUploadInfo new];
     NSDictionary* inputDict = @{@"Part":@"afsd"};
     id output = [prefix performSelector:@selector(modelCustomWillTransformFromDictionary:) withObject:nil];
@@ -133,6 +121,7 @@
 }
 
 - (void)testDeleteInfo {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testDeleteInfo");
     QCloudDeleteInfo* prefix = [QCloudDeleteInfo new];
     NSDictionary* inputDict = @{@"Object":@"afsd"};
     id output = [prefix performSelector:@selector(modelCustomWillTransformFromDictionary:) withObject:nil];
@@ -168,6 +157,7 @@
 }
 
 - (void)testDeleteObjectInfo {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testDeleteObjectInfo");
     QCloudDeleteObjectInfo* info = [[QCloudDeleteObjectInfo alloc] init];
     XCTAssertNil([info performSelector:@selector(modelCustomWillTransformFromDictionary:
                                                              ) withObject:nil]);
@@ -178,6 +168,7 @@
 
 
 - (void)testDeleteResult {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testDeleteResult");
     QCloudDeleteResult* prefix = [QCloudDeleteResult new];
     NSDictionary* inputDict = @{@"Deleted":@"afsd"};
     id output = [prefix performSelector:@selector(modelCustomWillTransformFromDictionary:) withObject:nil];
@@ -216,6 +207,7 @@
 
 
 - (void)testCORSRule {
+    QCloudLogInfo(@"karQCloudCOSXMLExceptionCoverageis:testCORSRule");
     QCloudCORSRule* rule = [[QCloudCORSRule alloc] init];
     NSDictionary* inputDict = @{@"AllowedMethod":@"HEAD"};
     id output = [rule performSelector:@selector(modelCustomWillTransformFromDictionary:) withObject:nil];
@@ -255,6 +247,7 @@
 
 
 - (void)testInitMultipartRequestBuildRequestData {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testInitMultipartRequestBuildRequestData");
     QCloudInitiateMultipartUploadRequest* request = [[QCloudInitiateMultipartUploadRequest alloc] init];
     request.cacheControl = @"cacheControl";
     request.contentDisposition = @"contentDisposition";
@@ -282,6 +275,7 @@
 }
 
 - (void)testCoverListMultipartRequest {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverListMultipartRequest");
     QCloudListMultipartRequest* request = [[QCloudListMultipartRequest alloc] init];
     NSError* error = [NSError errorWithDomain:@"com.test.domain" code:404 userInfo:nil];
     XCTAssert(![request buildURLRequest:&error]);
@@ -296,6 +290,7 @@
 }
 
 - (void)testCoverCompleteMultipartUploadRequest {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverCompleteMultipartUploadRequest");
     QCloudCompleteMultipartUploadRequest* request = [[QCloudCompleteMultipartUploadRequest alloc] init];
     NSError* error = [NSError errorWithDomain:@"com.test.domain" code:404 userInfo:nil];
     XCTAssert(![request buildURLRequest:&error]);
@@ -310,6 +305,7 @@
 }
 
 - (void)testCoverOptionsObjectRequest {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverOptionsObjectRequest");
     QCloudOptionsObjectRequest* request = [[QCloudOptionsObjectRequest alloc] init];
     NSError* error = [NSError errorWithDomain:@"com.test.domain" code:404 userInfo:nil];
     XCTAssert(![request buildURLRequest:&error]);
@@ -324,6 +320,7 @@
 }
 
 - (void)testCoverAbortMultipartUploadRequest {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverAbortMultipartUploadRequest");
     QCloudAbortMultipfartUploadRequest* request = [[QCloudAbortMultipfartUploadRequest alloc] init];
     NSError* error = [NSError errorWithDomain:@"com.test.domain" code:404 userInfo:nil];
     XCTAssert(![request buildURLRequest:&error]);
@@ -336,6 +333,7 @@
 }
 
 - (void)testCoverListMultipartUploadResult {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverListMultipartUploadResult");
     QCloudListMultipartUploadsResult* request = [[QCloudListMultipartUploadsResult alloc] init];
     NSDictionary* testInput = @{@"Upload":[NSNull null]};
     XCTAssert([[request performSelector:@selector(modelCustomWillTransformFromDictionary:) withObject:testInput] isKindOfClass:[NSDictionary class]]);
@@ -347,14 +345,15 @@
 }
 
 - (void)tetCoverUploadPartRequest {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:tetCoverUploadPartRequest");
     QCloudUploadPartRequest* request = [[QCloudUploadPartRequest alloc] init];
     NSError* error ;
     XCTAssert(![request buildURLRequest:&error]);
     error = nil;
-    request.object = @"testObject";
+    request.object = @"karis:testObject";
     XCTAssert(![request buildURLRequest:&error]);
     error = nil;
-    request.bucket = @"testBucket";
+    request.bucket = @"karis:testBucket";
     XCTAssert(![request buildURLRequest:&error]);
     error = nil;
     request.uploadId  = @"uploadIDTest";
@@ -364,6 +363,7 @@
 }
 
 - (void)testCoverAppendObjectRequest {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverAppendObjectRequest");
     QCloudAppendObjectRequest* request = [[QCloudAppendObjectRequest alloc] init];
     NSError* error = [NSError errorWithDomain:@"com.test.domain" code:404 userInfo:nil];
     XCTAssert(![request buildURLRequest:&error]);
@@ -398,6 +398,7 @@
 
 
 - (void)testFormateBucket {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testFormateBucket");
     NSString* appID = @"1253653367";
     NSString* input1 = @"test";
     NSString* input2 = @"test-1253653367";
@@ -418,6 +419,7 @@
 }
 
 - (void)testCoverQCloudOwner {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverQCloudOwner");
     QCloudOwner* owner = [[QCloudOwner alloc] init];
     XCTAssert([QCloudOwner performSelector:@selector(modelCustomPropertyMapper)]);
     XCTAssertNil([owner performSelector:@selector(modelCustomWillTransformFromDictionary:) withObject:nil]);
@@ -427,6 +429,7 @@
 }
 
 - (void)testCoverQCloudCOSXMLStatusEnum {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverQCloudCOSXMLStatusEnum");
    XCTAssert(QCloudCOSXMLStatusDumpFromString(@"Enabled") == QCloudCOSXMLStatusEnabled);
    XCTAssert(QCloudCOSXMLStatusDumpFromString(@"Disable") == QCloudCOSXMLStatusDisabled);
    XCTAssert([QCloudCOSXMLStatusTransferToString(QCloudCOSXMLStatusEnabled) isEqualToString:@"Enabled"]);
@@ -434,6 +437,7 @@
 }
 
 - (void)testCoverLifeCycleStatusEnum {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverLifeCycleStatusEnum");
     XCTAssert(QCloudLifecycleStatueDumpFromString(@"Enabled") == QCloudLifecycleStatueEnabled);
     XCTAssert(QCloudLifecycleStatueDumpFromString(@"Disabled") == QCloudLifecycleStatueDisabled);
     XCTAssert([QCloudLifecycleStatueTransferToString(QCloudLifecycleStatueEnabled) isEqualToString:@"Enabled"]);
@@ -442,6 +446,7 @@
 
 
 - (void)testCoverNonCurrentVersionTransition {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverNonCurrentVersionTransition");
     XCTAssert([QCloudNoncurrentVersionTransition performSelector:@selector(modelCustomPropertyMapper)]);
     QCloudNoncurrentVersionTransition* transition = [[QCloudNoncurrentVersionTransition alloc] init];
     XCTAssert([transition performSelector:@selector(modelCustomTransformToDictionary:) withObject:nil]);
@@ -450,6 +455,7 @@
 }
 
 - (void)testCoverNonCurrentVersionExpiration {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverNonCurrentVersionExpiration");
     XCTAssert([QCloudNoncurrentVersionExpiration performSelector:@selector(modelCustomPropertyMapper)]);
     QCloudNoncurrentVersionExpiration* expiration = [[QCloudNoncurrentVersionExpiration alloc] init];
     XCTAssert([expiration performSelector:@selector(modelCustomTransformToDictionary:) withObject:nil]);
@@ -458,6 +464,7 @@
 }
 
 - (void)testCoverMultipartUploadContent {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverMultipartUploadContent");
     XCTAssert([QCloudListMultipartUploadContent performSelector:@selector(modelCustomPropertyMapper)]);
     QCloudListMultipartUploadContent* content = [[QCloudListMultipartUploadContent alloc] init];
     NSDictionary* inputDictionray = @{@"StorageClass":@(0)};
@@ -468,6 +475,7 @@
 }
 
 - (void)testCoverLifecycleExpiration {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverLifecycleExpiration");
     QCloudLifecycleExpiration* expiration = [[QCloudLifecycleExpiration alloc] init];
     XCTAssert([QCloudLifecycleExpiration performSelector:@selector(modelCustomPropertyMapper)]);
     XCTAssert([expiration performSelector:@selector(modelCustomTransformToDictionary:) withObject:nil]);
@@ -475,6 +483,7 @@
 }
 
 - (void)testCoverLifeCycleTag {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverLifeCycleTag");
     XCTAssert([QCloudLifecycleTag performSelector:@selector(modelCustomPropertyMapper)]);
     QCloudLifecycleTag* tag = [[QCloudLifecycleTag alloc] init];
     XCTAssert([tag performSelector:@selector(modelCustomTransformToDictionary:) withObject:nil]);
@@ -483,6 +492,7 @@
 }
 
 - (void)testCoverLifeCycleRuleAnd {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverLifeCycleRuleAnd");
     XCTAssert([QCloudLifecycleRuleFilterAnd performSelector:@selector(modelCustomPropertyMapper)]);
     QCloudLifecycleRuleFilterAnd* ruleFilterAnd = [[QCloudLifecycleRuleFilterAnd alloc] init];
     XCTAssert([ruleFilterAnd performSelector:@selector(modelCustomTransformToDictionary:) withObject:nil]);
@@ -491,6 +501,7 @@
 }
 
 - (void)testCoverLifecycleAbortMultipartUpload {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverLifecycleAbortMultipartUpload");
     QCloudLifecycleAbortIncompleteMultipartUpload* abortUpload = [[QCloudLifecycleAbortIncompleteMultipartUpload alloc] init];
     XCTAssert([QCloudLifecycleAbortIncompleteMultipartUpload performSelector:@selector(modelCustomPropertyMapper)]);
     XCTAssert([abortUpload performSelector:@selector(modelCustomTransformToDictionary:) withObject:[NSDictionary dictionary]]);
@@ -499,6 +510,7 @@
 }
 
 - (void)testCoverGetObjectRequest {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverGetObjectRequest");
     QCloudGetObjectRequest* request = [[QCloudGetObjectRequest alloc] init];
 
     request.responseContentType = @"response-contentType";
@@ -527,6 +539,7 @@
 }
 
 - (void)testCoverPutObjectCopyRequest {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverPutObjectCopyRequest");
     QCloudPutObjectCopyRequest* request = [[QCloudPutObjectCopyRequest alloc] init];
     NSError* error;
     XCTAssert(![request buildRequestData:&error]);
@@ -551,6 +564,7 @@
 }
 
 - (void)testCoverCOSPermissionDump {
+    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverCOSPermissionDump");
     XCTAssert(QCloudCOSPermissionDumpFromString(@"READ") == QCloudCOSPermissionRead);
     XCTAssert(QCloudCOSPermissionDumpFromString(@"WRITE") == QCloudCOSPermissionWrite);
     XCTAssert(QCloudCOSPermissionDumpFromString(@"FULL_CONTROL") == QCloudCOSPermissionFullControl);
