@@ -16,11 +16,12 @@
 pod install
 ```
 然后打开对应的 xcworkspace 文件，即可运行我们的 Demo。    
-> 对于 MoblieLine 的 Demo, 还需要加入配置文件后运行，详细操作可以参考官网文档。
-> 对于QCloudCOSXMLDemo，QCloudCOSXMLSwfitDemo还需配置相关参数，如下：
-> QCloudCOSXMLDemo：为oc版本demo，需要在Key.json文件中配置 secretID，secretKey，appId；
->QCloudCOSXMLSwfitDemo：QCloudCOSXMLSwfitDemo：为swift版本demo，需要在 cos_config.swift 文件中配置 secretID，secretKey，appId ；
->两者功能一直，包含功能有：存储桶创建、文件上传、下载、文件列表展示等等；
+- 对于 MoblieLine 的 Demo, 还需要加入配置文件后运行，详细操作可以参考官网文档；
+- 对于QCloudCOSXMLDemo，QCloudCOSXMLSwfitDemo还需配置相关参数，如下；
+>  QCloudCOSXMLDemo：为oc版本demo，需要在Key.json文件中配置 secretID，secretKey，appId；
+> QCloudCOSXMLSwfitDemo：QCloudCOSXMLSwfitDemo：为swift版本demo，需要在 cos_config.swift 文件中配置 secretID，secretKey，appId ；
+> 两者功能一致，包含功能有：存储桶创建、文件上传、下载、文件列表展示等等。
+
 # License
 腾讯云存储 SDK for iOS 以及 Demo 都通过 MIT License 发布。    
 Tencent Cloud SDK for iOS and samples are released under the MIT license.
