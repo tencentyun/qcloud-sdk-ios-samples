@@ -35,8 +35,8 @@
 - (void)signatureWithFields:(QCloudSignatureFields *)fileds request:(QCloudBizHTTPRequest *)request urlRequest:(NSMutableURLRequest *)urlRequst compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock {
     
     QCloudCredential* credential = [QCloudCredential new];
-    credential.secretID = @"AKIDTmqfJivoU6XllcsfroX3KNBl7JGzvt0s";
-    credential.secretKey = @"mR1eJvUvKi2EDyWu40kHZdYJrBHApGUV";
+    credential.secretID = @"secretID";
+    credential.secretKey = @"secretKey";
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc] initWithCredential:credential];
     QCloudSignature* signature =  [creator signatureForData:urlRequst];
     continueBlock(signature, nil);
