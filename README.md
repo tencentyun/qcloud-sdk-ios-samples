@@ -10,13 +10,18 @@
 - 基于 COS XML API 封装的 SDK （V5 SDK）
 - 基于 COS JSON API 封装的 SDK (V4 SDK, 不建议新接入用户使用，推荐使用V5的SDK)
 - 腾讯移动开发平台（MobileLine）
+
+
 # 如何运行我们的 Demo
 本仓库包含了 iOS 版本的腾讯云存储 SDK 的 Demo，您可以下载具体的具体的Demo来进行体验。Demo 里采用了 cocoapods 的方式集成 SDK，您只需要在 Demo 的Podfile 所在目录中运行
 ```
 pod install
 ```
 然后打开对应的 xcworkspace 文件，即可运行我们的 Demo。    
-> 对于 MoblieLine 的 Demo, 还需要加入配置文件后运行，详细操作可以参考官网文档。
+> 对于 QCloudCOSXMLDemo，运行前需要在 Key.json 文件中配置您腾讯云账号的 secretID，secretKey，appId
+> 对于 QCloudCOSXMLSwfitDemo，运行前需要在 cos_config.swift 文件中配置您腾讯云账号的 secretID，secretKey，appId 
+> 对于 MoblieLine 的 Demo, 需要加入配置文件后运行，详细操作可以参考官网文档。
+
 # License
 腾讯云存储 SDK for iOS 以及 Demo 都通过 MIT License 发布。    
 Tencent Cloud SDK for iOS and samples are released under the MIT license.
