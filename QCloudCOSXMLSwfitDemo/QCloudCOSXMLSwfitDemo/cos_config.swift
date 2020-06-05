@@ -10,6 +10,7 @@ import Foundation
 /**
 请配置SecretID、SecretKey、APPID
  */
-let SECRET_KEY = ;
-let SECRET_ID = ;
-let APPID =
+
+let SECRET_KEY = "";
+let SECRET_ID = "";
+let APPID = "";

@@ -5,14 +5,13 @@
 //  Created by erichmzhang(张恒铭) on 01/12/2017.
 //  Copyright © 2017 Tencent. All rights reserved.
 //
-
+#import "QCloudCOSXMLVersion.h"
 #import "QCloudCOSXMLTestUtility.h"
+#import <QCloudCOSXML/QCloudCOSXML.h>
 #define kTestObejectPrefix @"objectcanbedelete"
 #define kTestBucketPrefix  @"btcbd"
 #import "TestCommonDefine.h"
 #import "QCloudTestTempVariables.h"
-#import "QCloudCOSXMLVersion.h"
-#import "QCloudAbortMultipfartUploadRequest.h"
 @interface QCloudCOSXMLTestUtility()
 @property (nonatomic, strong) dispatch_semaphore_t  semaphore;
 @end
@@ -98,42 +97,7 @@
     dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     return bucketName;
 }
--(void)deleteOject:(NSString *)testBucket{
-    __block dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    __block NSArray<QCloudBucketContents*>* listBucketContents;
-    QCloudGetBucketRequest* getBucketRequest = [[QCloudGetBucketRequest alloc] init];
-    getBucketRequest.bucket = testBucket;
-    getBucketRequest.maxKeys = 500;
-    [getBucketRequest setFinishBlock:^(QCloudListBucketResult * _Nonnull result, NSError * _Nonnull error) {
-        listBucketContents = result.contents;
-        dispatch_semaphore_signal(semaphore);
-    }];
-    [self.cosxmlService GetBucket:getBucketRequest];
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 
-    
-    
-    QCloudDeleteMultipleObjectRequest* deleteMultipleObjectRequest = [[QCloudDeleteMultipleObjectRequest alloc] init];
-    deleteMultipleObjectRequest.bucket = testBucket;
-    deleteMultipleObjectRequest.deleteObjects = [[QCloudDeleteInfo alloc] init];
-    NSMutableArray* deleteObjectInfoArray = [[NSMutableArray alloc] init];
-    for (QCloudBucketContents* bucketContents in listBucketContents) {
-        QCloudDeleteObjectInfo* objctInfo = [[QCloudDeleteObjectInfo alloc] init];
-        objctInfo.key = bucketContents.key;
-        [deleteObjectInfoArray addObject:objctInfo];
-    }
-    deleteMultipleObjectRequest.deleteObjects.objects = [deleteObjectInfoArray copy];
-    [deleteMultipleObjectRequest setFinishBlock:^(QCloudDeleteResult * _Nonnull result, NSError * _Nonnull error) {
-        if (error == nil) {
-            NSLog(@"Delete ALL Object Success!");
-        } else {
-            NSLog(@"Delete all object fail! error:%@",error);
-        }
-        dispatch_semaphore_signal(semaphore);
-    }];
-    [self.cosxmlService DeleteMultipleObject:deleteMultipleObjectRequest];
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-}
 - (void)deleteTestBucket:(NSString*)testBucket {
     __block dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     __block NSArray<QCloudBucketContents*>* listBucketContents;
@@ -272,6 +236,7 @@
 
 #if QCloudCOSXMLModuleVersionNumber >= 502000
 - (void)deleteAllTestBuckets {
+    [self deleteAllBucketsWithPrefix:@"bucketcanbedelete"];
     [self deleteAllBucketsWithPrefix:kTestBucketPrefix];
 }
 

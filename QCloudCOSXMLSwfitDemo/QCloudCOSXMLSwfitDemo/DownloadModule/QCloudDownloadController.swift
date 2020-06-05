@@ -11,15 +11,9 @@ import QCloudCOSXML
 class  QCloudDownloadController: UIViewController,UITableViewDelegate,UITableViewDataSource{
    
     
-    
-    
-    
     var tableView:UITableView!;
     var fileLists = Array<Any>.init();
-    var indicatorView:UIActivityIndicatorView!;
-   
-    
-  
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
         self.setUpContent();
@@ -27,7 +21,7 @@ class  QCloudDownloadController: UIViewController,UITableViewDelegate,UITableVie
         self.indicatorView.startAnimating();
         let getBucketRequest = QCloudGetBucketRequest.init();
         getBucketRequest.maxKeys = 1000;
-        getBucketRequest.bucket = QCloudCOSXMLServiceConfiguration.shared.currentBucket();
+        getBucketRequest.bucket = QCloudCOSXMLServiceConfiguration.shared.currentBucket!;
         getBucketRequest.setFinish { (result, error) in
             DispatchQueue.main.async {
                 
@@ -77,7 +71,7 @@ class  QCloudDownloadController: UIViewController,UITableViewDelegate,UITableVie
         let name = self.fileLists[indexPath.row];
         let beforeDate = NSDate.now;
         let getObjectReq = QCloudGetObjectRequest.init();
-        getObjectReq.bucket = QCloudCOSXMLServiceConfiguration.shared.currentBucket();
+        getObjectReq.bucket = QCloudCOSXMLServiceConfiguration.shared.currentBucket!;
         getObjectReq.object = name as! String;
         getObjectReq.downloadingURL = self.tempFilePath(fileName: name as! String);
         getObjectReq.finishBlock = {(result,error) in
@@ -101,7 +95,7 @@ class  QCloudDownloadController: UIViewController,UITableViewDelegate,UITableVie
     }
     
    
-    func tempFilePath(fileName:String) -> URL {
+   func tempFilePath(fileName:String) -> URL {
         return URL.init(string: NSTemporaryDirectory())!.appendingPathComponent(fileName);
     }
 }

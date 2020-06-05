@@ -34,7 +34,7 @@
     [self.textLabel setText:cellContent.key];
     
     int count = 0;
-    int size = cellContent.size;
+    long size = cellContent.size;
     while (size>=1024 && count <6) {
         size = size / 1024;
         count++;
@@ -61,7 +61,7 @@
         default:
             break;
     }
-    [self.detailTextLabel setText:[NSString stringWithFormat:@"时间：%@ 大小:%d%@",cellContent.lastModified,size,countDescription]];
+    [self.detailTextLabel setText:[NSString stringWithFormat:@"时间：%@ 大小:%ld%@",cellContent.lastModified,size,countDescription]];
 }
 
 

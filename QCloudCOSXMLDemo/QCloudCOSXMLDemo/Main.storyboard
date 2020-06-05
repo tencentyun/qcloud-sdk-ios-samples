@@ -1,62 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fyS-Rq-O7K">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Cloud Download Finish View Controller-->
-        <scene sceneID="cxb-K8-cM1">
-            <objects>
-                <viewController storyboardIdentifier="QCloudDownloadFinishViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RnR-XJ-MoF" customClass="QCloudDownloadFinishViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="FbE-sZ-yRz"/>
-                        <viewControllerLayoutGuide type="bottom" id="WQI-a1-9CK"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="hi4-Tb-62K">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="下载信息" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IVv-Ie-juL">
-                                <rect key="frame" x="16" y="0.0" width="343" height="591"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CIE-O2-Woq">
-                                <rect key="frame" x="133.5" y="599" width="108" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="108" id="8de-hy-5Ir"/>
-                                    <constraint firstAttribute="height" constant="30" id="mvc-NA-3I8"/>
-                                </constraints>
-                                <state key="normal" title="用其它应用打开"/>
-                                <connections>
-                                    <action selector="onHandleOpenViaOtherApplicationButtonClicked:" destination="RnR-XJ-MoF" eventType="touchUpInside" id="PgP-eU-N3i"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="IVv-Ie-juL" firstAttribute="leading" secondItem="hi4-Tb-62K" secondAttribute="leading" constant="16" id="50L-ia-Rf8"/>
-                            <constraint firstAttribute="trailing" secondItem="IVv-Ie-juL" secondAttribute="trailing" constant="16" id="52x-SG-RXE"/>
-                            <constraint firstItem="CIE-O2-Woq" firstAttribute="top" secondItem="IVv-Ie-juL" secondAttribute="bottom" constant="8" id="EWJ-Wb-CUQ"/>
-                            <constraint firstItem="IVv-Ie-juL" firstAttribute="centerX" secondItem="CIE-O2-Woq" secondAttribute="centerX" id="NBN-6D-tKc"/>
-                            <constraint firstItem="CIE-O2-Woq" firstAttribute="centerX" secondItem="hi4-Tb-62K" secondAttribute="centerX" id="PE7-ql-AjN"/>
-                            <constraint firstItem="WQI-a1-9CK" firstAttribute="top" secondItem="CIE-O2-Woq" secondAttribute="bottom" constant="38" id="arf-9M-JdY"/>
-                            <constraint firstItem="IVv-Ie-juL" firstAttribute="top" secondItem="FbE-sZ-yRz" secondAttribute="bottom" id="sNe-6u-Kc5"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="DownloadImformationTextView" destination="IVv-Ie-juL" id="ynD-q1-aIV"/>
-                        <outlet property="openWithOtherApplicationButton" destination="CIE-O2-Woq" id="qwq-7a-aKi"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="v9I-Rg-5y4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2535" y="1513"/>
-        </scene>
         <!--Root View Controller-->
         <scene sceneID="U6h-Ng-tZQ">
             <objects>

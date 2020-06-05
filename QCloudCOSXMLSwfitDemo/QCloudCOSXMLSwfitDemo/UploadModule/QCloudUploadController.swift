@@ -23,7 +23,7 @@ class QCloudUploadController: UIViewController,UIImagePickerControllerDelegate,U
     var bucket:String = "demo-ap-guangzhou";
     override func viewDidLoad() {
         super.viewDidLoad();
-        self.bucket = QCloudCOSXMLServiceConfiguration.shared.currentBucket();
+        self.bucket = QCloudCOSXMLServiceConfiguration.shared.currentBucket!;
         self.view.backgroundColor = .white;
         let item = UIBarButtonItem(title: "相册", style:.plain, target: self, action:#selector(selectImage))
         item.tintColor = .black;
@@ -79,6 +79,7 @@ class QCloudUploadController: UIViewController,UIImagePickerControllerDelegate,U
     //开始上传
     @objc func startUpload(){
         
+
         print("start upload");
         self.uploadRequest = QCloudCOSXMLUploadObjectRequest.init();
         self.uploadRequest.body = self.uploadFilePath as AnyObject
@@ -101,7 +102,9 @@ class QCloudUploadController: UIViewController,UIImagePickerControllerDelegate,U
         var error:NSError?;
         print("pause upload");
         self.resumedData =  self.uploadRequest.cancel(byProductingResumeData: &error) as QCloudCOSXMLUploadObjectResumeData;
-
+        if self.resumedData != nil {
+            let request = QCloudCOSXMLUploadObjectRequest<AnyObject>.init(request: self.resumedData as Data?);
+        }
     }
     
     //续传
@@ -131,7 +134,7 @@ class QCloudUploadController: UIViewController,UIImagePickerControllerDelegate,U
         let fileSize = uploadRequest.body.fileSizeWithUnit();
         let fileSizeSmallerThan1024 = uploadRequest.body.fileSizeSmallerThan1024();
         let fileSizeCount = uploadRequest.body.fileSizeCount();
-     
+        
         uploadRequest.setFinish { (result, error) in
             self.uploadRequest = nil;
             DispatchQueue.main.async {

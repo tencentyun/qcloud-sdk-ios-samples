@@ -3,11 +3,23 @@
 require 'pathname'
 source  "https://github.com/CocoaPods/Specs"
 use_frameworks!
+install! 'cocoapods', generate_multiple_pod_projects: true
+def libpod(name)
+ pod name ,path:"../../Libs/#{name}"
+
+end
+
+def bizpod(name)
+ pod name ,path:"../../BisnessComponents/COSXML/#{name}"
+
+end
 
 target 'QCloudCOSXMLSwfitDemo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-pod 'QCloudCOSXML'
+#
+ libpod 'QCloudCore'
+ bizpod 'QCloudCOSXML'
 
   target 'QCloudCOSXMLSwfitDemoTests' do
     inherit! :search_paths

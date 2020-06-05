@@ -11,7 +11,9 @@ import QCloudCOSXML
 class QCloudCOSXMLRegionsController:UIViewController,
 UITableViewDelegate,UITableViewDataSource{
     
-    var regions = ["ap-beijing-1","ap-beijing","ap-shanghai","ap-guangzhou","ap-chengdu","ap-chongqing","ap-singapore","ap-hongkong","eu-frankfurt","ap-mumbai","ap-seoul","na-siliconvalley","na-ashburn"];
+    var selectRegion : BlockOneParams?;
+    
+    var regions = ["ap-beijing","ap-shanghai","ap-guangzhou","ap-chengdu","ap-chongqing","ap-singapore","ap-hongkong","eu-frankfurt","ap-mumbai","ap-seoul","na-siliconvalley","na-ashburn"];
     
     
     override func viewDidLoad() {
@@ -21,6 +23,10 @@ UITableViewDelegate,UITableViewDataSource{
         tableView.delegate = self;
         tableView.dataSource = self;
         view.addSubview(tableView);
+        
+
+        let leftItem : UIBarButtonItem = UIBarButtonItem.init(title: "取消", style: UIBarButtonItem.Style.plain, target: self , action: #selector(cancelSelect));
+        self.navigationItem.leftBarButtonItem = leftItem;
         
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,16 +49,17 @@ UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("click");
-        let tranferController = QCloudTransferController.init();
+        
         let region = self.regions[indexPath.row];
-        tranferController.title = region;
-        var configuration:QCloudServiceConfiguration?
-        configuration = QCloudCOSXMLService.defaultCOSXML().configuration.copy() as? QCloudServiceConfiguration;
-        configuration?.endpoint.regionName = region;
-        QCloudCOSXMLService.registerCOSXML(with: configuration!, withKey: region);
-        QCloudCOSTransferMangerService.registerCOSTransferManger(with: configuration!, withKey: region)
-        QCloudCOSXMLServiceConfiguration.shared.currentRegion = region;
-        self.navigationController?.pushViewController(QCloudTransferController(), animated: true);
+        if self.selectRegion != nil{
+            self.selectRegion!(region as NSObject);
+        }
+        self.dismiss(animated: true, completion: nil);
+        
+    }
+    
+    @objc func cancelSelect() {
+        self.dismiss(animated: true, completion: nil);
     }
     
 }

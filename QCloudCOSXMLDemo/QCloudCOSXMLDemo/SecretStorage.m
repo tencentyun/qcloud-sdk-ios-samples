@@ -25,6 +25,7 @@
     NSDictionary* dict = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
     self.secretID = dict[@"secretID"];
     self.secretKey = dict[@"secretKey"];
+    self.appID = dict[@"appId"];
     return  self;
 }
 @end

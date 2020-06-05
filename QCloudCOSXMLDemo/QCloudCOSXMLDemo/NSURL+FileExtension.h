@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NSURL (FileExtension)
+
 - (unsigned long long)fileSizeInContent;
 - (NSString*)fileSizeWithUnit ;
 - (NSString*)fileSizeCount;
