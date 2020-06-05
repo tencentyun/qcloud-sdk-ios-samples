@@ -19,7 +19,9 @@ pod install
 ```
 然后打开对应的 xcworkspace 文件，即可运行我们的 Demo。    
 > 对于 QCloudCOSXMLDemo，运行前需要在 Key.json 文件中配置您腾讯云账号的 secretID，secretKey，appId
+
 > 对于 QCloudCOSXMLSwfitDemo，运行前需要在 cos_config.swift 文件中配置您腾讯云账号的 secretID，secretKey，appId 
+
 > 对于 MoblieLine 的 Demo, 需要加入配置文件后运行，详细操作可以参考官网文档。
 
 # License
