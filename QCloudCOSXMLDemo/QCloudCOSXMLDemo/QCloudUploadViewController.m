@@ -51,10 +51,10 @@
     self.title = @"上传";
     self.tabBarController.navigationItem.rightBarButtonItems = @[rightItem];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self setUpContent];
+    [self setupContent];
     
 }
--(void)setUpContent{
+-(void)setupContent{
     self.imagePreviewView = [[UIImageView alloc] init];
     [self.view addSubview:self.imagePreviewView];
     
