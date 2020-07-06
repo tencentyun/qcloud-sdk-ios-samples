@@ -6,19 +6,19 @@ class GetService: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -48,55 +48,55 @@ class GetService: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
 
     // 获取存储桶列表
     func getService() {
-      let exception = XCTestExpectation.init(description: "getService");
+        let exception = XCTestExpectation.init(description: "getService");
       
-      //.cssg-snippet-body-start:[swift-get-service]
-      let getServiceReq = QCloudGetServiceRequest.init();
-      getServiceReq.setFinish{(result,error) in
-          if result == nil {
-              print(error!);
-          } else {
-              //从 result 中获取返回信息
-              print(result!);
-          }}
-      QCloudCOSXMLService.defaultCOSXML().getService(getServiceReq);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-get-service]
+        let getServiceReq = QCloudGetServiceRequest.init();
+        getServiceReq.setFinish{(result,error) in
+            if result == nil {
+                print(error!);
+            } else {
+                //从 result 中获取返回信息
+                print(result!);
+            }}
+        QCloudCOSXMLService.defaultCOSXML().getService(getServiceReq);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 获取地域的存储桶列表
     func getRegionalService() {
-      let exception = XCTestExpectation.init(description: "getRegionalService");
+        let exception = XCTestExpectation.init(description: "getRegionalService");
       
-      //.cssg-snippet-body-start:[swift-get-regional-service]
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-get-regional-service]
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 计算签名
     func getAuthorization() {
-      let exception = XCTestExpectation.init(description: "getAuthorization");
+        let exception = XCTestExpectation.init(description: "getAuthorization");
       
-      //.cssg-snippet-body-start:[swift-get-authorization]
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-get-authorization]
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     func testGetService() {
-      // 获取存储桶列表
-      self.getService();
-      // 获取地域的存储桶列表
-      self.getRegionalService();
-      // 计算签名
-      self.getAuthorization();
+        // 获取存储桶列表
+        self.getService();
+        // 获取地域的存储桶列表
+        self.getRegionalService();
+        // 计算签名
+        self.getAuthorization();
     }
 }

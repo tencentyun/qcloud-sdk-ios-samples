@@ -1,7 +1,7 @@
 import XCTest
 import QCloudCOSXML
 
-class PutObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDelegate{
+class ModifyObjectProperty: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDelegate{
 
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
@@ -46,23 +46,11 @@ class PutObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     }
 
 
-    // 简单上传对象
-    func putObject() {
-        let exception = XCTestExpectation.init(description: "putObject");
+    // 修改对象元数据
+    func modifyObjectMetadata() {
+        let exception = XCTestExpectation.init(description: "modifyObjectMetadata");
       
-        //.cssg-snippet-body-start:[swift-put-object]
-        let putObject = QCloudPutObjectRequest<AnyObject>.init();
-        putObject.bucket = "examplebucket-1250000000";
-        let dataBody:NSData? = "wrwrwrwrwrw".data(using: .utf8) as NSData?;
-        putObject.body =  dataBody!;
-        putObject.object = "exampleobject";
-        putObject.finishBlock = {(result,error) in
-            if error != nil{
-                print(error!);
-            }else{
-                print(result!);
-            }}
-        QCloudCOSXMLService.defaultCOSXML().putObject(putObject);
+        //.cssg-snippet-body-start:[swift-modify-object-metadata]
         
         //.cssg-snippet-body-end
 
@@ -70,8 +58,22 @@ class PutObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     }
 
 
-    func testPutObject() {
-        // 简单上传对象
-        self.putObject();
+    // 修改对象存储类型
+    func modifyObjectStorageClass() {
+        let exception = XCTestExpectation.init(description: "modifyObjectStorageClass");
+      
+        //.cssg-snippet-body-start:[swift-modify-object-storage-class]
+        
+        //.cssg-snippet-body-end
+
+        self.wait(for: [exception], timeout: 100);
+    }
+
+
+    func testModifyObjectProperty() {
+        // 修改对象元数据
+        self.modifyObjectMetadata();
+        // 修改对象存储类型
+        self.modifyObjectStorageClass();
     }
 }

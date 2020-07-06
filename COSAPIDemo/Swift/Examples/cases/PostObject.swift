@@ -6,19 +6,19 @@ class PostObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -48,18 +48,18 @@ class PostObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
 
     // POST 方式上传对象
     func postObject() {
-      let exception = XCTestExpectation.init(description: "postObject");
+        let exception = XCTestExpectation.init(description: "postObject");
       
-      //.cssg-snippet-body-start:[swift-post-object]
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-post-object]
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     func testPostObject() {
-      // POST 方式上传对象
-      self.postObject();
+        // POST 方式上传对象
+        self.postObject();
     }
 }

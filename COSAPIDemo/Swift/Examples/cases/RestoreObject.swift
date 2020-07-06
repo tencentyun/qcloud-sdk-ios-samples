@@ -6,19 +6,19 @@ class RestoreObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -48,31 +48,31 @@ class RestoreObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
 
     // 恢复归档对象
     func restoreObject() {
-      let exception = XCTestExpectation.init(description: "restoreObject");
+        let exception = XCTestExpectation.init(description: "restoreObject");
       
-      //.cssg-snippet-body-start:[swift-restore-object]
-      let restore = QCloudPostObjectRestoreRequest.init();
-      restore.bucket = "examplebucket-1250000000";
-      restore.object = "exampleobject";
-      restore.restoreRequest.days = 10;
-      restore.restoreRequest.casJobParameters.tier = .standard;
-      restore.finishBlock = {(result,error)in
-          if error != nil{
-              print(error!)
-          }else{
-              //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
-              print(result!);
-          }}
-      QCloudCOSXMLService.defaultCOSXML().postObjectRestore(restore);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-restore-object]
+        let restore = QCloudPostObjectRestoreRequest.init();
+        restore.bucket = "examplebucket-1250000000";
+        restore.object = "exampleobject";
+        restore.restoreRequest.days = 10;
+        restore.restoreRequest.casJobParameters.tier = .standard;
+        restore.finishBlock = {(result,error)in
+            if error != nil{
+                print(error!)
+            }else{
+                //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+                print(result!);
+            }}
+        QCloudCOSXMLService.defaultCOSXML().postObjectRestore(restore);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     func testRestoreObject() {
-      // 恢复归档对象
-      self.restoreObject();
+        // 恢复归档对象
+        self.restoreObject();
     }
 }

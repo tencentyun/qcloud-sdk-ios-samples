@@ -6,19 +6,19 @@ class CopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -46,31 +46,45 @@ class CopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
     }
 
 
-    // 简单拷贝对象
+    // 复制对象时保留对象属性
     func copyObject() {
-      let exception = XCTestExpectation.init(description: "copyObject");
+        let exception = XCTestExpectation.init(description: "copyObject");
       
-      //.cssg-snippet-body-start:[swift-copy-object]
-      let putObjectCopy = QCloudPutObjectCopyRequest.init();
-      putObjectCopy.bucket = "examplebucket-1250000000";
-      putObjectCopy.object = "exampleobject";
-      putObjectCopy.objectCopySource = "sourcebucket-1250000000.cos.COS_REGION.myqcloud.com/sourceObject";
-      putObjectCopy.setFinish { (result, error) in
-          if error != nil{
-              print(error!);
-          }else{
-              print(result!);
-          }}
-      QCloudCOSXMLService.defaultCOSXML().putObjectCopy(putObjectCopy);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-copy-object]
+        let putObjectCopy = QCloudPutObjectCopyRequest.init();
+        putObjectCopy.bucket = "examplebucket-1250000000";
+        putObjectCopy.object = "exampleobject";
+        putObjectCopy.objectCopySource = "sourcebucket-1250000000.cos.COS_REGION.myqcloud.com/sourceObject";
+        putObjectCopy.setFinish { (result, error) in
+            if error != nil{
+                print(error!);
+            }else{
+                print(result!);
+            }}
+        QCloudCOSXMLService.defaultCOSXML().putObjectCopy(putObjectCopy);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
+    }
+
+
+    // 复制对象时替换对象属性
+    func copyObjectReplaced() {
+        let exception = XCTestExpectation.init(description: "copyObjectReplaced");
+      
+        //.cssg-snippet-body-start:[swift-copy-object-replaced]
+        
+        //.cssg-snippet-body-end
+
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     func testCopyObject() {
-      // 简单拷贝对象
-      self.copyObject();
+        // 复制对象时保留对象属性
+        self.copyObject();
+        // 复制对象时替换对象属性
+        self.copyObjectReplaced();
     }
 }

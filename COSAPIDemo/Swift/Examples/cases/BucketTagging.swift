@@ -6,19 +6,19 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -48,91 +48,91 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
 
     // 设置存储桶标签
     func putBucketTagging() {
-      let exception = XCTestExpectation.init(description: "putBucketTagging");
+        let exception = XCTestExpectation.init(description: "putBucketTagging");
       
-      //.cssg-snippet-body-start:[swift-put-bucket-tagging]
-      let req = QCloudPutBucketTaggingRequest.init();
-      req.bucket = "examplebucket-1250000000";
-      let taggings = QCloudBucketTagging.init();
-      let tagSet = QCloudBucketTagSet.init();
-      taggings.tagSet = tagSet;
-      let tag1 = QCloudBucketTag.init();
-      tag1.key = "age";
-      tag1.value = "20";
-      
-      let tag2 = QCloudBucketTag.init();
-      tag2.key = "name";
-      tag2.value = "karis";
-      tagSet.tag = [tag1,tag2];
-      req.taggings = taggings;
-      req.finishBlock = {(result,error) in
-      
-          if error != nil{
-              print(error!);
-          }else{
-              print( result!);
-          }
-      }
-      QCloudCOSXMLService.defaultCOSXML().putBucketTagging(req);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-put-bucket-tagging]
+        let req = QCloudPutBucketTaggingRequest.init();
+        req.bucket = "examplebucket-1250000000";
+        let taggings = QCloudBucketTagging.init();
+        let tagSet = QCloudBucketTagSet.init();
+        taggings.tagSet = tagSet;
+        let tag1 = QCloudBucketTag.init();
+        tag1.key = "age";
+        tag1.value = "20";
+        
+        let tag2 = QCloudBucketTag.init();
+        tag2.key = "name";
+        tag2.value = "karis";
+        tagSet.tag = [tag1,tag2];
+        req.taggings = taggings;
+        req.finishBlock = {(result,error) in
+        
+            if error != nil{
+                print(error!);
+            }else{
+                print( result!);
+            }
+        }
+        QCloudCOSXMLService.defaultCOSXML().putBucketTagging(req);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 获取存储桶标签
     func getBucketTagging() {
-      let exception = XCTestExpectation.init(description: "getBucketTagging");
+        let exception = XCTestExpectation.init(description: "getBucketTagging");
       
-      //.cssg-snippet-body-start:[swift-get-bucket-tagging]
-      let req = QCloudGetBucketTaggingRequest.init();
-      req.bucket = "examplebucket-1250000000";
-      req.setFinish { (result, error) in
-      
-          if error != nil{
-              print(error!);
-          }else{
-              print( result!);
-          }
-      };
-      QCloudCOSXMLService.defaultCOSXML().getBucketTagging(req);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-get-bucket-tagging]
+        let req = QCloudGetBucketTaggingRequest.init();
+        req.bucket = "examplebucket-1250000000";
+        req.setFinish { (result, error) in
+        
+            if error != nil{
+                print(error!);
+            }else{
+                print( result!);
+            }
+        };
+        QCloudCOSXMLService.defaultCOSXML().getBucketTagging(req);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 删除存储桶标签
     func deleteBucketTagging() {
-      let exception = XCTestExpectation.init(description: "deleteBucketTagging");
+        let exception = XCTestExpectation.init(description: "deleteBucketTagging");
       
-      //.cssg-snippet-body-start:[swift-delete-bucket-tagging]
-      let req = QCloudDeleteBucketTaggingRequest.init();
-      req.bucket = "examplebucket-1250000000";
-      req.finishBlock =  { (result, error) in
-      
-          if error != nil{
-              print(error!);
-          }else{
-              print( result!);
-          }
-      };
-      QCloudCOSXMLService.defaultCOSXML().deleteBucketTagging(req);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-delete-bucket-tagging]
+        let req = QCloudDeleteBucketTaggingRequest.init();
+        req.bucket = "examplebucket-1250000000";
+        req.finishBlock =  { (result, error) in
+        
+            if error != nil{
+                print(error!);
+            }else{
+                print( result!);
+            }
+        };
+        QCloudCOSXMLService.defaultCOSXML().deleteBucketTagging(req);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     func testBucketTagging() {
-      // 设置存储桶标签
-      self.putBucketTagging();
-      // 获取存储桶标签
-      self.getBucketTagging();
-      // 删除存储桶标签
-      self.deleteBucketTagging();
+        // 设置存储桶标签
+        self.putBucketTagging();
+        // 获取存储桶标签
+        self.getBucketTagging();
+        // 删除存储桶标签
+        self.deleteBucketTagging();
     }
 }

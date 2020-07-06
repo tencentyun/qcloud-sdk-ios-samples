@@ -6,19 +6,19 @@ class PutBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -48,41 +48,41 @@ class PutBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
 
     // 创建存储桶
     func putBucket() {
-      let exception = XCTestExpectation.init(description: "putBucket");
+        let exception = XCTestExpectation.init(description: "putBucket");
       
-      //.cssg-snippet-body-start:[swift-put-bucket]
-      let putBucketReq = QCloudPutBucketRequest.init();
-      putBucketReq.bucket = "examplebucket-1250000000";
-      putBucketReq.finishBlock = {(result,error) in
-          if error != nil {
-              print(error!);
-          } else {
-              print(result!);
-          }}
-      QCloudCOSXMLService.defaultCOSXML().putBucket(putBucketReq);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-put-bucket]
+        let putBucketReq = QCloudPutBucketRequest.init();
+        putBucketReq.bucket = "examplebucket-1250000000";
+        putBucketReq.finishBlock = {(result,error) in
+            if error != nil {
+                print(error!);
+            } else {
+                print(result!);
+            }}
+        QCloudCOSXMLService.defaultCOSXML().putBucket(putBucketReq);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 创建存储桶并且授予存储桶权限
     func putBucketAndGrantAcl() {
-      let exception = XCTestExpectation.init(description: "putBucketAndGrantAcl");
+        let exception = XCTestExpectation.init(description: "putBucketAndGrantAcl");
       
-      //.cssg-snippet-body-start:[swift-put-bucket-and-grant-acl]
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-put-bucket-and-grant-acl]
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     func testPutBucket() {
-      // 创建存储桶
-      self.putBucket();
-      // 创建存储桶并且授予存储桶权限
-      self.putBucketAndGrantAcl();
+        // 创建存储桶
+        self.putBucket();
+        // 创建存储桶并且授予存储桶权限
+        self.putBucketAndGrantAcl();
     }
 }

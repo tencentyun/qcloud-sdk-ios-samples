@@ -6,19 +6,19 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -48,115 +48,115 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
 
     // 设置存储桶跨域规则
     func putBucketCors() {
-      let exception = XCTestExpectation.init(description: "putBucketCors");
+        let exception = XCTestExpectation.init(description: "putBucketCors");
       
-      //.cssg-snippet-body-start:[swift-put-bucket-cors]
-      let putBucketCorsReq = QCloudPutBucketCORSRequest.init();
-      
-      let corsConfig = QCloudCORSConfiguration.init();
-      
-      let rule = QCloudCORSRule.init();
-      rule.identifier = "swift-sdk";
-      rule.allowedHeader = ["origin","host","accept","content-type","authorization"];
-      rule.exposeHeader = "Etag";
-      rule.allowedMethod = ["GET","PUT","POST", "DELETE", "HEAD"];
-      rule.maxAgeSeconds = 3600;
-      rule.allowedOrigin = "*";
-      
-      corsConfig.rules = [rule];
-      
-      putBucketCorsReq.corsConfiguration = corsConfig;
-      putBucketCorsReq.bucket = "examplebucket-1250000000";
-      putBucketCorsReq.finishBlock = {(result,error) in
-          if error != nil{
-              print(error!);
-          }else{
-              print(result!);
-          }}
-      
-      QCloudCOSXMLService.defaultCOSXML().putBucketCORS(putBucketCorsReq);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-put-bucket-cors]
+        let putBucketCorsReq = QCloudPutBucketCORSRequest.init();
+        
+        let corsConfig = QCloudCORSConfiguration.init();
+        
+        let rule = QCloudCORSRule.init();
+        rule.identifier = "swift-sdk";
+        rule.allowedHeader = ["origin","host","accept","content-type","authorization"];
+        rule.exposeHeader = "Etag";
+        rule.allowedMethod = ["GET","PUT","POST", "DELETE", "HEAD"];
+        rule.maxAgeSeconds = 3600;
+        rule.allowedOrigin = "*";
+        
+        corsConfig.rules = [rule];
+        
+        putBucketCorsReq.corsConfiguration = corsConfig;
+        putBucketCorsReq.bucket = "examplebucket-1250000000";
+        putBucketCorsReq.finishBlock = {(result,error) in
+            if error != nil{
+                print(error!);
+            }else{
+                print(result!);
+            }}
+        
+        QCloudCOSXMLService.defaultCOSXML().putBucketCORS(putBucketCorsReq);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 获取存储桶跨域规则
     func getBucketCors() {
-      let exception = XCTestExpectation.init(description: "getBucketCors");
+        let exception = XCTestExpectation.init(description: "getBucketCors");
       
-      //.cssg-snippet-body-start:[swift-get-bucket-cors]
-      let  getBucketCorsRes = QCloudGetBucketCORSRequest.init();
-      getBucketCorsRes.bucket = "examplebucket-1250000000";
-      getBucketCorsRes.setFinish { (corsConfig, error) in
-          if error != nil{
-              print(error!);
-          }else{
-              print(corsConfig!);
-          }}
-      QCloudCOSXMLService.defaultCOSXML().getBucketCORS(getBucketCorsRes);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-get-bucket-cors]
+        let  getBucketCorsRes = QCloudGetBucketCORSRequest.init();
+        getBucketCorsRes.bucket = "examplebucket-1250000000";
+        getBucketCorsRes.setFinish { (corsConfig, error) in
+            if error != nil{
+                print(error!);
+            }else{
+                print(corsConfig!);
+            }}
+        QCloudCOSXMLService.defaultCOSXML().getBucketCORS(getBucketCorsRes);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 实现 Object 跨域访问配置的预请求
     func optionObject() {
-      let exception = XCTestExpectation.init(description: "optionObject");
+        let exception = XCTestExpectation.init(description: "optionObject");
       
-      //.cssg-snippet-body-start:[swift-option-object]
-      let optionsObject = QCloudOptionsObjectRequest.init();
-      optionsObject.object = "exampleobject";
-      optionsObject.origin = "http://www.qcloud.com";
-      optionsObject.accessControlRequestMethod = "GET";
-      optionsObject.accessControlRequestHeaders = "origin";
-      optionsObject.bucket = "examplebucket-1250000000";
-      optionsObject.finishBlock = {(result,error) in
-          if error != nil{
-              print(error!);
-          }else{
-              print(result!);
-          }}
-      QCloudCOSXMLService.defaultCOSXML().optionsObject(optionsObject);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-option-object]
+        let optionsObject = QCloudOptionsObjectRequest.init();
+        optionsObject.object = "exampleobject";
+        optionsObject.origin = "http://www.qcloud.com";
+        optionsObject.accessControlRequestMethod = "GET";
+        optionsObject.accessControlRequestHeaders = "origin";
+        optionsObject.bucket = "examplebucket-1250000000";
+        optionsObject.finishBlock = {(result,error) in
+            if error != nil{
+                print(error!);
+            }else{
+                print(result!);
+            }}
+        QCloudCOSXMLService.defaultCOSXML().optionsObject(optionsObject);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 删除存储桶跨域规则
     func deleteBucketCors() {
-      let exception = XCTestExpectation.init(description: "deleteBucketCors");
+        let exception = XCTestExpectation.init(description: "deleteBucketCors");
       
-      //.cssg-snippet-body-start:[swift-delete-bucket-cors]
-      let deleteBucketCorsRequest = QCloudDeleteBucketCORSRequest.init();
-      deleteBucketCorsRequest.bucket = "examplebucket-1250000000";
-      deleteBucketCorsRequest.finishBlock = {(result,error) in
-          if error != nil{
-              print(error!);
-          }else{
-              print(result!);
-          }}
-      QCloudCOSXMLService.defaultCOSXML().deleteBucketCORS(deleteBucketCorsRequest);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-delete-bucket-cors]
+        let deleteBucketCorsRequest = QCloudDeleteBucketCORSRequest.init();
+        deleteBucketCorsRequest.bucket = "examplebucket-1250000000";
+        deleteBucketCorsRequest.finishBlock = {(result,error) in
+            if error != nil{
+                print(error!);
+            }else{
+                print(result!);
+            }}
+        QCloudCOSXMLService.defaultCOSXML().deleteBucketCORS(deleteBucketCorsRequest);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     func testBucketCORS() {
-      // 设置存储桶跨域规则
-      self.putBucketCors();
-      // 获取存储桶跨域规则
-      self.getBucketCors();
-      // 实现 Object 跨域访问配置的预请求
-      self.optionObject();
-      // 删除存储桶跨域规则
-      self.deleteBucketCors();
+        // 设置存储桶跨域规则
+        self.putBucketCors();
+        // 获取存储桶跨域规则
+        self.getBucketCors();
+        // 实现 Object 跨域访问配置的预请求
+        self.optionObject();
+        // 删除存储桶跨域规则
+        self.deleteBucketCors();
     }
 }

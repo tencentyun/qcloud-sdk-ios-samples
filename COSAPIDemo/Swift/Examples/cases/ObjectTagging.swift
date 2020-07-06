@@ -6,19 +6,19 @@ class ObjectTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -48,46 +48,46 @@ class ObjectTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
 
     // 设置对象标签
     func putObjectTagging() {
-      let exception = XCTestExpectation.init(description: "putObjectTagging");
+        let exception = XCTestExpectation.init(description: "putObjectTagging");
       
-      //.cssg-snippet-body-start:[swift-put-object-tagging]
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-put-object-tagging]
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 获取对象标签
     func getObjectTagging() {
-      let exception = XCTestExpectation.init(description: "getObjectTagging");
+        let exception = XCTestExpectation.init(description: "getObjectTagging");
       
-      //.cssg-snippet-body-start:[swift-get-object-tagging]
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-get-object-tagging]
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 删除对象标签
     func deleteObjectTagging() {
-      let exception = XCTestExpectation.init(description: "deleteObjectTagging");
+        let exception = XCTestExpectation.init(description: "deleteObjectTagging");
       
-      //.cssg-snippet-body-start:[swift-delete-object-tagging]
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-delete-object-tagging]
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     func testObjectTagging() {
-      // 设置对象标签
-      self.putObjectTagging();
-      // 获取对象标签
-      self.getObjectTagging();
-      // 删除对象标签
-      self.deleteObjectTagging();
+        // 设置对象标签
+        self.putObjectTagging();
+        // 获取对象标签
+        self.getObjectTagging();
+        // 删除对象标签
+        self.deleteObjectTagging();
     }
 }

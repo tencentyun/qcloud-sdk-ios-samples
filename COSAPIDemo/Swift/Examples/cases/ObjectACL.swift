@@ -6,19 +6,19 @@ class ObjectACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -48,56 +48,56 @@ class ObjectACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
 
     // 设置对象 ACL
     func putObjectAcl() {
-      let exception = XCTestExpectation.init(description: "putObjectAcl");
+        let exception = XCTestExpectation.init(description: "putObjectAcl");
       
-      //.cssg-snippet-body-start:[swift-put-object-acl]
-      let putObjectACl = QCloudPutObjectACLRequest.init();
-      putObjectACl.bucket = "examplebucket-1250000000";
-      putObjectACl.object = "exampleobject";
-      let grantString = "id=\"1250000000\"";
-      putObjectACl.grantFullControl = grantString;
-      putObjectACl.finishBlock = {(result,error)in
-          if error != nil{
-              print(error!)
-          }else{
-              //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
-              print(result!);
-          }}
-      QCloudCOSXMLService.defaultCOSXML().putObjectACL(putObjectACl);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-put-object-acl]
+        let putObjectACl = QCloudPutObjectACLRequest.init();
+        putObjectACl.bucket = "examplebucket-1250000000";
+        putObjectACl.object = "exampleobject";
+        let grantString = "id=\"1250000000\"";
+        putObjectACl.grantFullControl = grantString;
+        putObjectACl.finishBlock = {(result,error)in
+            if error != nil{
+                print(error!)
+            }else{
+                //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+                print(result!);
+            }}
+        QCloudCOSXMLService.defaultCOSXML().putObjectACL(putObjectACl);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 获取对象 ACL
     func getObjectAcl() {
-      let exception = XCTestExpectation.init(description: "getObjectAcl");
+        let exception = XCTestExpectation.init(description: "getObjectAcl");
       
-      //.cssg-snippet-body-start:[swift-get-object-acl]
-      let getObjectACL = QCloudGetObjectACLRequest.init();
-      getObjectACL.bucket = "examplebucket-1250000000";
-      getObjectACL.object = "exampleobject";
-      getObjectACL.setFinish { (result, error) in
-          if error != nil{
-              print(error!)
-          }else{
-              //可以从 result 的 accessControlList 中获取对象的 ACL
-              print(result!.accessControlList);
-          }}
-      QCloudCOSXMLService.defaultCOSXML().getObjectACL(getObjectACL);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-get-object-acl]
+        let getObjectACL = QCloudGetObjectACLRequest.init();
+        getObjectACL.bucket = "examplebucket-1250000000";
+        getObjectACL.object = "exampleobject";
+        getObjectACL.setFinish { (result, error) in
+            if error != nil{
+                print(error!)
+            }else{
+                //可以从 result 的 accessControlList 中获取对象的 ACL
+                print(result!.accessControlList);
+            }}
+        QCloudCOSXMLService.defaultCOSXML().getObjectACL(getObjectACL);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     func testObjectACL() {
-      // 设置对象 ACL
-      self.putObjectAcl();
-      // 获取对象 ACL
-      self.getObjectAcl();
+        // 设置对象 ACL
+        self.putObjectAcl();
+        // 获取对象 ACL
+        self.getObjectAcl();
     }
 }

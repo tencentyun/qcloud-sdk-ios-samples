@@ -6,19 +6,19 @@ class HeadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -48,28 +48,28 @@ class HeadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
 
     // 获取对象信息
     func headObject() {
-      let exception = XCTestExpectation.init(description: "headObject");
+        let exception = XCTestExpectation.init(description: "headObject");
       
-      //.cssg-snippet-body-start:[swift-head-object]
-      let headObject = QCloudHeadObjectRequest.init();
-      headObject.bucket = "examplebucket-1250000000";
-      headObject.object  = "exampleobject";
-      headObject.finishBlock =  {(result,error) in
-          if error != nil{
-              print(error!);
-          }else{
-              print(result!);
-          }}
-      QCloudCOSXMLService.defaultCOSXML().headObject(headObject);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-head-object]
+        let headObject = QCloudHeadObjectRequest.init();
+        headObject.bucket = "examplebucket-1250000000";
+        headObject.object  = "exampleobject";
+        headObject.finishBlock =  {(result,error) in
+            if error != nil{
+                print(error!);
+            }else{
+                print(result!);
+            }}
+        QCloudCOSXMLService.defaultCOSXML().headObject(headObject);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     func testHeadObject() {
-      // 获取对象信息
-      self.headObject();
+        // 获取对象信息
+        self.headObject();
     }
 }

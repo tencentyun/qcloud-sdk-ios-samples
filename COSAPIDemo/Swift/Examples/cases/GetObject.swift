@@ -6,19 +6,19 @@ class GetObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -48,32 +48,32 @@ class GetObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
 
     // 下载对象
     func getObject() {
-      let exception = XCTestExpectation.init(description: "getObject");
+        let exception = XCTestExpectation.init(description: "getObject");
       
-      //.cssg-snippet-body-start:[swift-get-object]
-      let getObject = QCloudGetObjectRequest.init();
-      getObject.bucket = "examplebucket-1250000000";
-      getObject.object = "exampleobject";
-      getObject.downloadingURL = URL.init(string: NSTemporaryDirectory())!.appendingPathComponent(getObject.object);
-      getObject.finishBlock = {(result,error) in
-          if error != nil{
-              print(error!);
-          }else{
-              print(result!);
-          }};
-      getObject.downProcessBlock = {(bytesDownload, totalBytesDownload,  totalBytesExpectedToDownload) in
-          print("totalBytesDownload:\(totalBytesDownload) totalBytesExpectedToDownload:\(totalBytesExpectedToDownload)");
-      }
-      QCloudCOSXMLService.defaultCOSXML().getObject(getObject);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-get-object]
+        let getObject = QCloudGetObjectRequest.init();
+        getObject.bucket = "examplebucket-1250000000";
+        getObject.object = "exampleobject";
+        getObject.downloadingURL = URL.init(string: NSTemporaryDirectory())!.appendingPathComponent(getObject.object);
+        getObject.finishBlock = {(result,error) in
+            if error != nil{
+                print(error!);
+            }else{
+                print(result!);
+            }};
+        getObject.downProcessBlock = {(bytesDownload, totalBytesDownload,  totalBytesExpectedToDownload) in
+            print("totalBytesDownload:\(totalBytesDownload) totalBytesExpectedToDownload:\(totalBytesExpectedToDownload)");
+        }
+        QCloudCOSXMLService.defaultCOSXML().getObject(getObject);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     func testGetObject() {
-      // 下载对象
-      self.getObject();
+        // 下载对象
+        self.getObject();
     }
 }

@@ -6,19 +6,19 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -48,65 +48,65 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
 
     // 设置存储桶源站
     func putBucketDomain() {
-      let exception = XCTestExpectation.init(description: "putBucketDomain");
+        let exception = XCTestExpectation.init(description: "putBucketDomain");
       
-      //.cssg-snippet-body-start:[swift-put-bucket-domain]
-      let req = QCloudPutBucketDomainRequest.init();
-      req.bucket = "examplebucket-1250000000";
-      
-      let config = QCloudDomainConfiguration.init();
-      let rule = QCloudDomainRule.init();
-      rule.status = .enabled;
-      rule.name = "www.baidu.com";
-      rule.replace = .txt;
-      rule.type = .rest;
-      config.rules = [rule];
-      req.domain = config;
-      req.finishBlock = {(result,error) in
-      
-          if error != nil{
-              print(error!);
-          }else{
-              print( result!);
-          }
-      
-      }
-      QCloudCOSXMLService.defaultCOSXML().putBucketDomain(req);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-put-bucket-domain]
+        let req = QCloudPutBucketDomainRequest.init();
+        req.bucket = "examplebucket-1250000000";
+        
+        let config = QCloudDomainConfiguration.init();
+        let rule = QCloudDomainRule.init();
+        rule.status = .enabled;
+        rule.name = "www.baidu.com";
+        rule.replace = .txt;
+        rule.type = .rest;
+        config.rules = [rule];
+        req.domain = config;
+        req.finishBlock = {(result,error) in
+        
+            if error != nil{
+                print(error!);
+            }else{
+                print( result!);
+            }
+        
+        }
+        QCloudCOSXMLService.defaultCOSXML().putBucketDomain(req);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 获取存储桶源站
     func getBucketDomain() {
-      let exception = XCTestExpectation.init(description: "getBucketDomain");
+        let exception = XCTestExpectation.init(description: "getBucketDomain");
       
-      //.cssg-snippet-body-start:[swift-get-bucket-domain]
-      let req = QCloudGetBucketDomainRequest.init();
-      req.bucket = "examplebucket-1250000000";
-      
-      req.finishBlock = {(result,error) in
-      
-          if error != nil{
-              print(error!);
-          }else{
-              print( result!);
-          }
-      }
-      QCloudCOSXMLService.defaultCOSXML().getBucketDomain(req);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-get-bucket-domain]
+        let req = QCloudGetBucketDomainRequest.init();
+        req.bucket = "examplebucket-1250000000";
+        
+        req.finishBlock = {(result,error) in
+        
+            if error != nil{
+                print(error!);
+            }else{
+                print( result!);
+            }
+        }
+        QCloudCOSXMLService.defaultCOSXML().getBucketDomain(req);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     func testBucketDomain() {
-      // 设置存储桶源站
-      self.putBucketDomain();
-      // 获取存储桶源站
-      self.getBucketDomain();
+        // 设置存储桶源站
+        self.putBucketDomain();
+        // 获取存储桶源站
+        self.getBucketDomain();
     }
 }

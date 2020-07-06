@@ -7,21 +7,22 @@
 #import <QCloudCOSXML/QCloudCompleteMultipartUploadInfo.h>
 
 
-@interface CopyObject : XCTestCase <QCloudSignatureProvider, QCloudCredentailFenceQueueDelegate>
+@interface ModifyObjectProperty : XCTestCase <QCloudSignatureProvider, QCloudCredentailFenceQueueDelegate>
 
 @property (nonatomic) QCloudCredentailFenceQueue* credentialFenceQueue;
 
 @end
 
-@implementation CopyObject
+@implementation ModifyObjectProperty
 
 - (void)setUp {
     // 注册默认的 COS 服务
     QCloudServiceConfiguration* configuration = [QCloudServiceConfiguration new];
-    configuration.appID = @"1250000000";
+    configuration.appID = @"1253653367";
     configuration.signatureProvider = self;
     QCloudCOSXMLEndPoint* endpoint = [[QCloudCOSXMLEndPoint alloc] init];
     endpoint.regionName = @"ap-guangzhou";//服务地域名称，可用的地域请参考注释
+    endpoint.useHTTPS = true;
     configuration.endpoint = endpoint;
     [QCloudCOSXMLService registerDefaultCOSXMLWithConfiguration:configuration];
     [QCloudCOSTransferMangerService registerDefaultCOSTransferMangerWithConfiguration:configuration];
@@ -62,21 +63,12 @@
 }
 
 /**
- * 简单拷贝对象
+ * 修改对象元数据
  */
-- (void)copyObject {
-    XCTestExpectation* exp = [self expectationWithDescription:@"copyObject"];
+- (void)modifyObjectMetadata {
+    XCTestExpectation* exp = [self expectationWithDescription:@"modifyObjectMetadata"];
 
-    //.cssg-snippet-body-start:[objc-copy-object]
-    QCloudPutObjectCopyRequest* request = [[QCloudPutObjectCopyRequest alloc] init];
-    request.bucket = @"examplebucket-1250000000";
-    request.object = @"exampleobject";
-    //源对象所在的路径
-    request.objectCopySource = @"sourcebucket-1250000000.cos.COS_REGION.myqcloud.com/sourceObject";
-    [request setFinishBlock:^(QCloudCopyObjectResult * _Nonnull result, NSError * _Nonnull error) {
-        //result 返回具体信息
-    }];
-    [[QCloudCOSXMLService defaultCOSXML]  PutObjectCopy:request];
+    //.cssg-snippet-body-start:[modify-object-metadata]
     
     //.cssg-snippet-body-end
 
@@ -84,12 +76,12 @@
 }
 
 /**
- * 复制对象时替换对象属性
+ * 修改对象存储类型
  */
-- (void)copyObjectReplaced {
-    XCTestExpectation* exp = [self expectationWithDescription:@"copyObjectReplaced"];
+- (void)modifyObjectStorageClass {
+    XCTestExpectation* exp = [self expectationWithDescription:@"modifyObjectStorageClass"];
 
-    //.cssg-snippet-body-start:[objc-copy-object-replaced]
+    //.cssg-snippet-body-start:[modify-object-storage-class]
     
     //.cssg-snippet-body-end
 
@@ -97,12 +89,12 @@
 }
 
 
-- (void)testCopyObject {
-    // 简单拷贝对象
-    [self copyObject];
-    
-    // 复制对象时替换对象属性
-    [self copyObjectReplaced];
+- (void)testModifyObjectProperty {
+    // 修改对象元数据
+    [self modifyObjectMetadata];
+        
+    // 修改对象存储类型
+    [self modifyObjectStorageClass];
         
 }
 

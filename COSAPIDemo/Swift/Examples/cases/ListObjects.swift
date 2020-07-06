@@ -6,19 +6,19 @@ class ListObjects: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueue
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -48,56 +48,56 @@ class ListObjects: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueue
 
     // 获取对象列表
     func getBucket() {
-      let exception = XCTestExpectation.init(description: "getBucket");
+        let exception = XCTestExpectation.init(description: "getBucket");
       
-      //.cssg-snippet-body-start:[swift-get-bucket]
-      let getBucketReq = QCloudGetBucketRequest.init();
-      getBucketReq.bucket = "examplebucket-1250000000";
-      getBucketReq.maxKeys = 1000;
-      getBucketReq.setFinish { (result, error) in
-          if error != nil{
-              print(error!);
-          }else{
-              print( result!.commonPrefixes);
-          }}
-      QCloudCOSXMLService.defaultCOSXML().getBucket(getBucketReq);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-get-bucket]
+        let getBucketReq = QCloudGetBucketRequest.init();
+        getBucketReq.bucket = "examplebucket-1250000000";
+        getBucketReq.maxKeys = 1000;
+        getBucketReq.setFinish { (result, error) in
+            if error != nil{
+                print(error!);
+            }else{
+                print( result!.commonPrefixes);
+            }}
+        QCloudCOSXMLService.defaultCOSXML().getBucket(getBucketReq);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 获取第二页对象列表
     func getBucketNextPage() {
-      let exception = XCTestExpectation.init(description: "getBucketNextPage");
+        let exception = XCTestExpectation.init(description: "getBucketNextPage");
       
-      //.cssg-snippet-body-start:[swift-get-bucket-next-page]
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-get-bucket-next-page]
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 获取对象列表与子目录
     func getBucketWithDelimiter() {
-      let exception = XCTestExpectation.init(description: "getBucketWithDelimiter");
+        let exception = XCTestExpectation.init(description: "getBucketWithDelimiter");
       
-      //.cssg-snippet-body-start:[swift-get-bucket-with-delimiter]
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-get-bucket-with-delimiter]
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     func testListObjects() {
-      // 获取对象列表
-      self.getBucket();
-      // 获取第二页对象列表
-      self.getBucketNextPage();
-      // 获取对象列表与子目录
-      self.getBucketWithDelimiter();
+        // 获取对象列表
+        self.getBucket();
+        // 获取第二页对象列表
+        self.getBucketNextPage();
+        // 获取对象列表与子目录
+        self.getBucketWithDelimiter();
     }
 }

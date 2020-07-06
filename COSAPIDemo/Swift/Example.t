@@ -6,19 +6,19 @@ class {{name}}: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDel
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -49,21 +49,21 @@ class {{name}}: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDel
 
     // {{description}}
     func {{name}}() {
-      let exception = XCTestExpectation.init(description: "{{name}}");
+        let exception = XCTestExpectation.init(description: "{{name}}");
       
-      {{{startTag}}}
-      {{{snippet}}}
-      {{{endTag}}}
+        {{{startTag}}}
+        {{{snippet}}}
+        {{{endTag}}}
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
     {{/methods}}
 
     func test{{name}}() {
-      {{#methods}}
-      // {{description}}
-      self.{{name}}();
-      {{/methods}}
+        {{#methods}}
+        // {{description}}
+        self.{{name}}();
+        {{/methods}}
     }
 }

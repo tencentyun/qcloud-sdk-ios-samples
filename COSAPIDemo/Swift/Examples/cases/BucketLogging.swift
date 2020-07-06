@@ -6,19 +6,19 @@ class BucketLogging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -48,67 +48,67 @@ class BucketLogging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
 
     // 开启存储桶日志服务
     func putBucketLogging() {
-      let exception = XCTestExpectation.init(description: "putBucketLogging");
+        let exception = XCTestExpectation.init(description: "putBucketLogging");
       
-      //.cssg-snippet-body-start:[swift-put-bucket-logging]
-      let req = QCloudPutBucketLoggingRequest.init();
-      
-      let status = QCloudBucketLoggingStatus.init();
-      
-      let loggingEnabled = QCloudLoggingEnabled.init();
-      
-      loggingEnabled.targetBucket = "examplebucket-1250000000";
-      
-      loggingEnabled.targetPrefix = "";
-      status.loggingEnabled = loggingEnabled;
-      req.bucketLoggingStatus = status;
-      req.bucket = "examplebucket-1250000000";
-      req.finishBlock = {(result,error) in
-      
-          if error != nil{
-              print(error!);
-          }else{
-              print( result!);
-          }
-      }
-      
-      QCloudCOSXMLService.defaultCOSXML().putBucketLogging(req);
-      
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-put-bucket-logging]
+        let req = QCloudPutBucketLoggingRequest.init();
+        
+        let status = QCloudBucketLoggingStatus.init();
+        
+        let loggingEnabled = QCloudLoggingEnabled.init();
+        
+        loggingEnabled.targetBucket = "examplebucket-1250000000";
+        
+        loggingEnabled.targetPrefix = "";
+        status.loggingEnabled = loggingEnabled;
+        req.bucketLoggingStatus = status;
+        req.bucket = "examplebucket-1250000000";
+        req.finishBlock = {(result,error) in
+        
+            if error != nil{
+                print(error!);
+            }else{
+                print( result!);
+            }
+        }
+        
+        QCloudCOSXMLService.defaultCOSXML().putBucketLogging(req);
+        
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 获取存储桶日志服务
     func getBucketLogging() {
-      let exception = XCTestExpectation.init(description: "getBucketLogging");
+        let exception = XCTestExpectation.init(description: "getBucketLogging");
       
-      //.cssg-snippet-body-start:[swift-get-bucket-logging]
-      let req = QCloudGetBucketLoggingRequest.init();
-      req.bucket = "examplebucket-1250000000";
-      req.setFinish { (result, error) in
-      
-          if error != nil{
-              print(error!);
-          }else{
-              print( result!);
-          }
-      };
-      QCloudCOSXMLService.defaultCOSXML().getBucketLogging(req);
-      
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-get-bucket-logging]
+        let req = QCloudGetBucketLoggingRequest.init();
+        req.bucket = "examplebucket-1250000000";
+        req.setFinish { (result, error) in
+        
+            if error != nil{
+                print(error!);
+            }else{
+                print( result!);
+            }
+        };
+        QCloudCOSXMLService.defaultCOSXML().getBucketLogging(req);
+        
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     func testBucketLogging() {
-      // 开启存储桶日志服务
-      self.putBucketLogging();
-      // 获取存储桶日志服务
-      self.getBucketLogging();
+        // 开启存储桶日志服务
+        self.putBucketLogging();
+        // 获取存储桶日志服务
+        self.getBucketLogging();
     }
 }

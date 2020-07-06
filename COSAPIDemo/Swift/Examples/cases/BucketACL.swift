@@ -6,19 +6,19 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -48,54 +48,54 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
 
     // 设置存储桶 ACL
     func putBucketAcl() {
-      let exception = XCTestExpectation.init(description: "putBucketAcl");
+        let exception = XCTestExpectation.init(description: "putBucketAcl");
       
-      //.cssg-snippet-body-start:[swift-put-bucket-acl]
-      let putBucketACLReq = QCloudPutBucketACLRequest.init();
-      putBucketACLReq.bucket = "examplebucket-1250000000";
-      let appTD = "1131975903";//授予全新的账号 ID
-      let ownerIdentifier = "qcs::cam::uin/\(appTD):uin/\(appTD)";
-      let grantString = "id=\"\(ownerIdentifier)\"";
-      putBucketACLReq.grantWrite = grantString;
-      putBucketACLReq.finishBlock = {(result,error) in
-          if error != nil{
-              print(error!);
-          }else{
-              print(result!);
-          }}
-      QCloudCOSXMLService.defaultCOSXML().putBucketACL(putBucketACLReq);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-put-bucket-acl]
+        let putBucketACLReq = QCloudPutBucketACLRequest.init();
+        putBucketACLReq.bucket = "examplebucket-1250000000";
+        let appTD = "1131975903";//授予全新的账号 ID
+        let ownerIdentifier = "qcs::cam::uin/\(appTD):uin/\(appTD)";
+        let grantString = "id=\"\(ownerIdentifier)\"";
+        putBucketACLReq.grantWrite = grantString;
+        putBucketACLReq.finishBlock = {(result,error) in
+            if error != nil{
+                print(error!);
+            }else{
+                print(result!);
+            }}
+        QCloudCOSXMLService.defaultCOSXML().putBucketACL(putBucketACLReq);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 获取存储桶 ACL
     func getBucketAcl() {
-      let exception = XCTestExpectation.init(description: "getBucketAcl");
+        let exception = XCTestExpectation.init(description: "getBucketAcl");
       
-      //.cssg-snippet-body-start:[swift-get-bucket-acl]
-      let getBucketACLReq = QCloudGetBucketACLRequest.init();
-      getBucketACLReq.bucket = "examplebucket-1250000000";
-      getBucketACLReq.setFinish { (result, error) in
-          if error != nil{
-              print(error!);
-          }else{
-              print(result!);
-          }}
-      QCloudCOSXMLService.defaultCOSXML().getBucketACL(getBucketACLReq)
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-get-bucket-acl]
+        let getBucketACLReq = QCloudGetBucketACLRequest.init();
+        getBucketACLReq.bucket = "examplebucket-1250000000";
+        getBucketACLReq.setFinish { (result, error) in
+            if error != nil{
+                print(error!);
+            }else{
+                print(result!);
+            }}
+        QCloudCOSXMLService.defaultCOSXML().getBucketACL(getBucketACLReq)
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     func testBucketACL() {
-      // 设置存储桶 ACL
-      self.putBucketAcl();
-      // 获取存储桶 ACL
-      self.getBucketAcl();
+        // 设置存储桶 ACL
+        self.putBucketAcl();
+        // 获取存储桶 ACL
+        self.getBucketAcl();
     }
 }

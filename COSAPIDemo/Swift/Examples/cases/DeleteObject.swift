@@ -6,19 +6,19 @@ class DeleteObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
 
     override func setUp() {
-      let config = QCloudServiceConfiguration.init();
-      config.signatureProvider = self;
-      config.appID = "1253653367";
-      let endpoint = QCloudCOSXMLEndPoint.init();
-      endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
-      endpoint.useHTTPS = true;
-      config.endpoint = endpoint;
-      QCloudCOSXMLService.registerDefaultCOSXML(with: config);
-      QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
+        let config = QCloudServiceConfiguration.init();
+        config.signatureProvider = self;
+        config.appID = "1253653367";
+        let endpoint = QCloudCOSXMLEndPoint.init();
+        endpoint.regionName = "ap-guangzhou";//服务地域名称，可用的地域请参考注释
+        endpoint.useHTTPS = true;
+        config.endpoint = endpoint;
+        QCloudCOSXMLService.registerDefaultCOSXML(with: config);
+        QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
 
-      // 脚手架用于获取临时密钥
-      self.credentialFenceQueue = QCloudCredentailFenceQueue();
-      self.credentialFenceQueue?.delegate = self;
+        // 脚手架用于获取临时密钥
+        self.credentialFenceQueue = QCloudCredentailFenceQueue();
+        self.credentialFenceQueue?.delegate = self;
     }
 
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
@@ -48,62 +48,62 @@ class DeleteObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
 
     // 删除对象
     func deleteObject() {
-      let exception = XCTestExpectation.init(description: "deleteObject");
+        let exception = XCTestExpectation.init(description: "deleteObject");
       
-      //.cssg-snippet-body-start:[swift-delete-object]
-      let deleteObject = QCloudDeleteObjectRequest.init();
-      deleteObject.bucket = "examplebucket-1250000000";
-      deleteObject.object = "exampleobject";
-      deleteObject.finishBlock = {(result,error)in
-          if error != nil{
-              print(error!);
-          }else{
-              print(result!);
-          }}
-      QCloudCOSXMLService.defaultCOSXML().deleteObject(deleteObject);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-delete-object]
+        let deleteObject = QCloudDeleteObjectRequest.init();
+        deleteObject.bucket = "examplebucket-1250000000";
+        deleteObject.object = "exampleobject";
+        deleteObject.finishBlock = {(result,error)in
+            if error != nil{
+                print(error!);
+            }else{
+                print(result!);
+            }}
+        QCloudCOSXMLService.defaultCOSXML().deleteObject(deleteObject);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 删除多个对象
     func deleteMultiObject() {
-      let exception = XCTestExpectation.init(description: "deleteMultiObject");
+        let exception = XCTestExpectation.init(description: "deleteMultiObject");
       
-      //.cssg-snippet-body-start:[swift-delete-multi-object]
-      let mutipleDel = QCloudDeleteMultipleObjectRequest.init();
-      mutipleDel.bucket = "examplebucket-1250000000";
-      
-      let info1 = QCloudDeleteObjectInfo.init();
-      info1.key = "exampleobject";
-      let info2 = QCloudDeleteObjectInfo.init();
-      
-      
-      let deleteInfos = QCloudDeleteInfo.init();
-      deleteInfos.objects = [info1];
-      deleteInfos.quiet = false;
-      mutipleDel.deleteObjects = deleteInfos;
-      
-      mutipleDel.setFinish { (result, error) in
-          if error != nil{
-              print(error!);
-          }else{
-              print(result!);
-          }}
-      QCloudCOSXMLService.defaultCOSXML().deleteMultipleObject(mutipleDel);
-      
-      //.cssg-snippet-body-end
+        //.cssg-snippet-body-start:[swift-delete-multi-object]
+        let mutipleDel = QCloudDeleteMultipleObjectRequest.init();
+        mutipleDel.bucket = "examplebucket-1250000000";
+        
+        let info1 = QCloudDeleteObjectInfo.init();
+        info1.key = "exampleobject";
+        let info2 = QCloudDeleteObjectInfo.init();
+        
+        
+        let deleteInfos = QCloudDeleteInfo.init();
+        deleteInfos.objects = [info1];
+        deleteInfos.quiet = false;
+        mutipleDel.deleteObjects = deleteInfos;
+        
+        mutipleDel.setFinish { (result, error) in
+            if error != nil{
+                print(error!);
+            }else{
+                print(result!);
+            }}
+        QCloudCOSXMLService.defaultCOSXML().deleteMultipleObject(mutipleDel);
+        
+        //.cssg-snippet-body-end
 
-      self.wait(for: [exception], timeout: 100);
+        self.wait(for: [exception], timeout: 100);
     }
 
 
     func testDeleteObject() {
-      // 删除对象
-      self.deleteObject();
-      // 删除多个对象
-      self.deleteMultiObject();
+        // 删除对象
+        self.deleteObject();
+        // 删除多个对象
+        self.deleteMultiObject();
     }
 }
