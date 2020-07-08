@@ -59,7 +59,11 @@ class HeadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
                 print(error!);
             }else{
                 print(result!);
-            }}
+            }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
+        }
         QCloudCOSXMLService.defaultCOSXML().headObject(headObject);
         
         //.cssg-snippet-body-end

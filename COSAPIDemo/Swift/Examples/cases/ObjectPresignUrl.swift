@@ -2,9 +2,9 @@ import XCTest
 import QCloudCOSXML
 
 class ObjectPresignUrl: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDelegate{
-
+    
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
-
+    
     override func setUp() {
         let config = QCloudServiceConfiguration.init();
         config.signatureProvider = self;
@@ -15,12 +15,12 @@ class ObjectPresignUrl: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
         config.endpoint = endpoint;
         QCloudCOSXMLService.registerDefaultCOSXML(with: config);
         QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
-
+        
         // 脚手架用于获取临时密钥
         self.credentialFenceQueue = QCloudCredentailFenceQueue();
         self.credentialFenceQueue?.delegate = self;
     }
-
+    
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
         let cre = QCloudCredential.init();
         //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
@@ -33,7 +33,7 @@ class ObjectPresignUrl: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
         let auth = QCloudAuthentationV5Creator.init(credential: cre);
         continueBlock(auth,nil);
     }
-
+    
     func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
@@ -44,41 +44,60 @@ class ObjectPresignUrl: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
             }
         })
     }
-
-
+    
+    
     // 获取预签名下载链接
     func getPresignDownloadUrl() {
         let exception = XCTestExpectation.init(description: "getPresignDownloadUrl");
-      
+        
         //.cssg-snippet-body-start:[swift-get-presign-download-url]
         let getPresign  = QCloudGetPresignedURLRequest.init();
         getPresign.bucket = "examplebucket-1250000000" ;
+        //使用预签名 URL 的请求的 HTTP 方法。有效值（大小写敏感）为：@"GET"、@"PUT"、@"POST"、@"DELETE"
         getPresign.httpMethod = "GET";
         getPresign.object = "exampleobject";
         getPresign.setFinish { (result, error) in
             if error == nil{
                 print(result?.presienedURL as Any);
-            }}
+            }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
+        }
         QCloudCOSXMLService.defaultCOSXML().getPresignedURL(getPresign);
         
         //.cssg-snippet-body-end
-
+        
         self.wait(for: [exception], timeout: 100);
     }
-
-
+    
+    
     // 获取预签名上传链接
     func getPresignUploadUrl() {
         let exception = XCTestExpectation.init(description: "getPresignUploadUrl");
-      
+        
         //.cssg-snippet-body-start:[swift-get-presign-upload-url]
+        let getPresign  = QCloudGetPresignedURLRequest.init();
+        getPresign.bucket = "examplebucket-1250000000" ;
+        //使用预签名 URL 的请求的 HTTP 方法。有效值（大小写敏感）为：@"GET"、@"PUT"、@"POST"、@"DELETE"
+        getPresign.httpMethod = "PUT";
+        getPresign.object = "exampleobject";
+        getPresign.setFinish { (result, error) in
+            if error == nil{
+                print(result?.presienedURL as Any);
+            }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
+        }
+        QCloudCOSXMLService.defaultCOSXML().getPresignedURL(getPresign);
         
         //.cssg-snippet-body-end
-
+        
         self.wait(for: [exception], timeout: 100);
     }
-
-
+    
+    
     func testObjectPresignUrl() {
         // 获取预签名下载链接
         self.getPresignDownloadUrl();

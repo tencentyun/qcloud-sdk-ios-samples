@@ -58,9 +58,15 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         let rule = QCloudDomainRule.init();
         rule.status = .enabled;
         rule.name = "www.baidu.com";
+        
+        //替换已存在的配置、有效值CNAME/TXT 填写则强制校验域名所有权之后，再下发配置
         rule.replace = .txt;
         rule.type = .rest;
+        
+        //规则描述集合的数组
         config.rules = [rule];
+        
+        //域名配置的规则
         req.domain = config;
         req.finishBlock = {(result,error) in
         
@@ -69,6 +75,9 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
             }else{
                 print( result!);
             }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
         
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketDomain(req);
@@ -94,6 +103,9 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
             }else{
                 print( result!);
             }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketDomain(req);
         

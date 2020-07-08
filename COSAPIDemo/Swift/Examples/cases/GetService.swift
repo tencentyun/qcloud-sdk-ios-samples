@@ -51,6 +51,10 @@ class GetService: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         let exception = XCTestExpectation.init(description: "getService");
       
         //.cssg-snippet-body-start:[swift-get-service]
+        
+        //获取所属账户的所有存储空间列表的方法.
+           //通过使用帯 Authorization 签名认证的请求，可以获取签名中 APPID 所属账户的所有存储空间列
+           //表 (Bucket list).
         let getServiceReq = QCloudGetServiceRequest.init();
         getServiceReq.setFinish{(result,error) in
             if result == nil {
@@ -58,7 +62,11 @@ class GetService: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
             } else {
                 //从 result 中获取返回信息
                 print(result!);
-            }}
+            }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
+        }
         QCloudCOSXMLService.defaultCOSXML().getService(getServiceReq);
         
         //.cssg-snippet-body-end

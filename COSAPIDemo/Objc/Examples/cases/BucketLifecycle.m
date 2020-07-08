@@ -154,7 +154,7 @@
     
     request.bucket = @"examplebucket-1250000000";
     [request setFinishBlock:^(QCloudLifecycleConfiguration* deleteResult, NSError* error) {
-        //error 返回删除结果
+        // 返回删除结果
         [exp fulfill];
         XCTAssertNil(error);
         XCTAssertNotNil(deleteResult);

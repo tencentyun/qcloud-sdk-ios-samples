@@ -56,13 +56,27 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         let appTD = "1131975903";//授予全新的账号 ID
         let ownerIdentifier = "qcs::cam::uin/\(appTD):uin/\(appTD)";
         let grantString = "id=\"\(ownerIdentifier)\"";
+        //赋予被授权者写权限
         putBucketACLReq.grantWrite = grantString;
+        
+        //赋予被授权者读权限
+        putBucketACLReq.grantRead = grantString;
+        
+        //赋予被授权者读写权限 grantFullControl == grantRead + grantWrite
+        putBucketACLReq.grantFullControl = grantString;
+        
         putBucketACLReq.finishBlock = {(result,error) in
+            //QCloudACLPolicy 中包含了 Bucket 的 ACL 信息
             if error != nil{
                 print(error!);
             }else{
                 print(result!);
-            }}
+            }
+            
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
+        }
         QCloudCOSXMLService.defaultCOSXML().putBucketACL(putBucketACLReq);
         
         //.cssg-snippet-body-end
@@ -77,13 +91,20 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
       
         //.cssg-snippet-body-start:[swift-get-bucket-acl]
         let getBucketACLReq = QCloudGetBucketACLRequest.init();
+        
+        // 格式：BucketName-APPID
         getBucketACLReq.bucket = "examplebucket-1250000000";
+        
         getBucketACLReq.setFinish { (result, error) in
             if error != nil{
                 print(error!);
             }else{
                 print(result!);
-            }}
+            }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
+        }
         QCloudCOSXMLService.defaultCOSXML().getBucketACL(getBucketACLReq)
         
         //.cssg-snippet-body-end

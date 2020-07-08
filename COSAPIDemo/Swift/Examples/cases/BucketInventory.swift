@@ -53,22 +53,55 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         //.cssg-snippet-body-start:[swift-put-bucket-inventory]
         let putReq = QCloudPutBucketInventoryRequest.init();
         putReq.bucket = "examplebucket-1250000000";
+        
+        //清单任务的名称
         putReq.inventoryID = "list1";
+        
+        //用户在请求体中使用 XML 语言设置清单任务的具体配置信息。配置信息包括清单任务分析的对象，
+        //分析的频次，分析的维度，分析结果的格式及存储的位置等信息。
         let config = QCloudInventoryConfiguration.init();
+        
+        //清单的名称，与请求参数中的 id 对应
         config.identifier = "list1";
+        
+        //清单是否启用的标识：
+        //如果设置为 true，清单功能将生效
+        //如果设置为 false，将不生成任何清单
         config.isEnabled = "True";
+        
+        //描述存放清单结果的信息
         let des = QCloudInventoryDestination.init();
         let btDes = QCloudInventoryBucketDestination.init();
+        
+        //清单分析结果的文件形式，可选项为 CSV 格式
         btDes.cs = "CSV";
+        
+        //存储桶的所有者 ID
         btDes.account = "1278687956";
+        
+        //清单分析结果的存储桶名
         btDes.bucket  = "qcs::cos:ap-guangzhou::examplebucket-1250000000";
+        
+        //清单分析结果的前缀
         btDes.prefix = "list1";
+        
+        //COS 托管密钥的加密方式
         let enc = QCloudInventoryEncryption.init();
         enc.ssecos = "";
+        
+        //为清单结果提供服务端加密的选项
         btDes.encryption = enc;
+
+        //清单结果导出后存放的存储桶信息
         des.bucketDestination = btDes;
+        
+        //描述存放清单结果的信息
         config.destination = des;
+        
+        //配置清单任务周期
         let sc = QCloudInventorySchedule.init();
+        
+        //清单任务周期，可选项为按日或者按周，枚举值：Daily、Weekly
         sc.frequency = "Daily";
         config.schedule = sc;
         let fileter = QCloudInventoryFilter.init();
@@ -76,7 +109,13 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         config.filter = fileter;
         config.includedObjectVersions = .all;
         let fields = QCloudInventoryOptionalFields.init();
-        fields.field = [ "Size","LastModifiedDate","ETag","StorageClass","IsMultipartUploaded","ReplicationStatus"];
+        fields.field = [ "Size",
+                         "LastModifiedDate",
+                         "ETag",
+                         "StorageClass",
+                         "IsMultipartUploaded",
+                         "ReplicationStatus"];
+        //设置清单结果中应包含的分析项目
         config.optionalFields = fields;
         putReq.inventoryConfiguration = config;
         
@@ -87,6 +126,9 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
             }else{
                 print( result!);
             }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
         }
         
         QCloudCOSXMLService.defaultCOSXML().putBucketInventory(putReq);
@@ -105,6 +147,7 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         //.cssg-snippet-body-start:[swift-get-bucket-inventory]
         let req = QCloudGetBucketInventoryRequest.init();
         req.bucket = "examplebucket-1250000000";
+        //清单任务的名称
         req.inventoryID = "list1";
         req.setFinish {(result,error) in
         
@@ -113,6 +156,9 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
             }else{
                 print( result!);
             }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketInventory(req);
         
@@ -130,6 +176,7 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         //.cssg-snippet-body-start:[swift-delete-bucket-inventory]
         let delReq = QCloudDeleteBucketInventoryRequest.init();
         delReq.bucket = "examplebucket-1250000000";
+        //清单任务的名称
         delReq.inventoryID = "list1";
         delReq.finishBlock = {(result,error) in
         
@@ -138,6 +185,9 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
             }else{
                 print( result!);
             }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
         }
         
         QCloudCOSXMLService.defaultCOSXML().deleteBucketInventory(delReq);

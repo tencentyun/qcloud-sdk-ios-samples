@@ -2,9 +2,9 @@ import XCTest
 import QCloudCOSXML
 
 class ListObjectsVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDelegate{
-
+    
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
-
+    
     override func setUp() {
         let config = QCloudServiceConfiguration.init();
         config.signatureProvider = self;
@@ -15,12 +15,12 @@ class ListObjectsVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentail
         config.endpoint = endpoint;
         QCloudCOSXMLService.registerDefaultCOSXML(with: config);
         QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
-
+        
         // 脚手架用于获取临时密钥
         self.credentialFenceQueue = QCloudCredentailFenceQueue();
         self.credentialFenceQueue?.delegate = self;
     }
-
+    
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
         let cre = QCloudCredential.init();
         //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
@@ -33,7 +33,7 @@ class ListObjectsVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentail
         let auth = QCloudAuthentationV5Creator.init(credential: cre);
         continueBlock(auth,nil);
     }
-
+    
     func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
@@ -44,32 +44,72 @@ class ListObjectsVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentail
             }
         })
     }
-
-
+    
+    
     // 获取对象多版本列表第一页数据
     func listObjectsVersioning() {
         let exception = XCTestExpectation.init(description: "listObjectsVersioning");
-      
-        //.cssg-snippet-body-start:[swift-list-objects-versioning]
         
+        //.cssg-snippet-body-start:[swift-list-objects-versioning]
+        let listObjectVersionsRequest :QCloudListObjectVersionsRequest = QCloudListObjectVersionsRequest();
+        
+        //存储桶名称
+        listObjectVersionsRequest.bucket = "bucketname";
+        
+        //存储桶所在的地域
+        listObjectVersionsRequest.regionName = "bucketlocation";
+        
+        //一次请求多少条数据
+        listObjectVersionsRequest.maxKeys = 1000;
+        
+        listObjectVersionsRequest.setFinish { (result, error) in
+            //result.deleteMarker; // 已删除的文件
+            //result.versionContent;  对象版本条目
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
+        }
+        
+        QCloudCOSXMLService.defaultCOSXML().listObjectVersions(listObjectVersionsRequest);
         //.cssg-snippet-body-end
-
+        
         self.wait(for: [exception], timeout: 100);
     }
-
-
+    
+    
     // 获取对象多版本列表下一页数据
     func listObjectsVersioningNextPage() {
         let exception = XCTestExpectation.init(description: "listObjectsVersioningNextPage");
-      
-        //.cssg-snippet-body-start:[swift-list-objects-versioning-next-page]
         
+        //.cssg-snippet-body-start:[swift-list-objects-versioning-next-page]
+        let listObjectVersionsRequest :QCloudListObjectVersionsRequest = QCloudListObjectVersionsRequest();
+        
+        //存储桶名称
+        listObjectVersionsRequest.bucket = "bucketname";
+        
+        //存储桶所在的地域
+        listObjectVersionsRequest.regionName = "bucketlocation";
+        
+        //一页请求数据条目数
+        listObjectVersionsRequest.maxKeys = 100;
+        
+        //已经请求的总条目数
+        listObjectVersionsRequest.marker = "100";
+        listObjectVersionsRequest.setFinish { (result, error) in
+            //result.deleteMarker; // 已删除的文件
+            //result.versionContent;  对象版本条目
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
+        }
+        
+        QCloudCOSXMLService.defaultCOSXML().listObjectVersions(listObjectVersionsRequest);
         //.cssg-snippet-body-end
-
+        
         self.wait(for: [exception], timeout: 100);
     }
-
-
+    
+    
     func testListObjectsVersioning() {
         // 获取对象多版本列表第一页数据
         self.listObjectsVersioning();

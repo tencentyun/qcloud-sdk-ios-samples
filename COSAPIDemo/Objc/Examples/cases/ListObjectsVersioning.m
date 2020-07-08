@@ -90,6 +90,7 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
         
     }];
     
+    [[QCloudCOSXMLService defaultCOSXML] ListObjectVersions:listObjectVersionsRequest];
     //.cssg-snippet-body-end
     
     [self waitForExpectationsWithTimeout:80 handler:nil];
@@ -114,7 +115,7 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
     listObjectVersionsRequest.maxKeys = 100;
     
     //已经请求的总条目数
-    listObjectVersionsRequest.marker = @"100"
+    listObjectVersionsRequest.marker = @"100";
     [listObjectVersionsRequest setFinishBlock:^(QCloudListVersionsResult * _Nonnull result, NSError * _Nonnull error) {
         
         //result.deleteMarker; // 已删除的文件
@@ -125,6 +126,7 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
         
     }];
     
+    [[QCloudCOSXMLService defaultCOSXML] ListObjectVersions:listObjectVersionsRequest];
     //.cssg-snippet-body-end
     
     [self waitForExpectationsWithTimeout:80 handler:nil];

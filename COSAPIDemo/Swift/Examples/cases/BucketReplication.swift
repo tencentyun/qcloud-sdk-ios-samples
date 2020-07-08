@@ -34,7 +34,10 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
         continueBlock(auth,nil);
     }
 
-    func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
+    func signature(with fileds: QCloudSignatureFields!,
+                       request: QCloudBizHTTPRequest!,
+          urlRequest urlRequst: NSMutableURLRequest!,
+       compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
                 continueBlock(nil,error!);
@@ -46,7 +49,10 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
     }
 
 
-    // 设置存储桶跨地域复制规则
+    /**
+    * 用于向已启用版本控制的存储桶中配置跨地域复制规则。如果存储桶已经配置了跨地域复制规则，那么该请
+    * 求会替换现有配置。
+    */
     func putBucketReplication() {
         let exception = XCTestExpectation.init(description: "putBucketReplication");
       
@@ -54,18 +60,27 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
         let putBucketReplication = QCloudPutBucketReplicationRequest.init();
         putBucketReplication.bucket = "examplebucket-1250000000";
         
+        //说明所有跨地域配置信息
         let config = QCloudBucketReplicationConfiguation.init();
         config.role = "qcs::cam::uin/100000000001:uin/100000000001";
         
+        //发起者身份标示
         let rule = QCloudBucketReplicationRule.init();
+        
+        //用来标注具体 Rule 的名称
         rule.identifier = "swift";
         rule.status = .enabled;
-        
+
+        //资源标识符
         let destination = QCloudBucketReplicationDestination.init();
         let destinationBucket = "destinationbucket-1250000000";
         let region = "ap-beijing";
         destination.bucket = "qcs::cos:\(region)::\(destinationBucket)";
+        
+        //目标存储桶信息
         rule.destination = destination;
+        
+        //前缀匹配策略，不可重叠，重叠返回错误。前缀匹配根目录为空
         rule.prefix = "a";
         
         config.rule = [rule];
@@ -73,11 +88,16 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
         putBucketReplication.configuation = config;
         
         putBucketReplication.finishBlock = {(result,error) in
+            //可以从 outputObject 中获取服务器返回的 header 信息
                 if error != nil{
                     print(error!);
                 }else{
                     print(result!);
-                }}
+                }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
+        }
         QCloudCOSXMLService.defaultCOSXML().putBucketRelication(putBucketReplication);
         
         //.cssg-snippet-body-end
@@ -86,7 +106,9 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
     }
 
 
-    // 获取存储桶跨地域复制规则
+    /**
+    * 接口用于查询存储桶中用户跨地域复制配置信息。用户发起该请求时需获得请求签名，表明该请求已获得许可。
+    */
     func getBucketReplication() {
         let exception = XCTestExpectation.init(description: "getBucketReplication");
       
@@ -98,7 +120,11 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
                 print(error!);
             }else{
                 print(config!);
-            }}
+            }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(config);
+        }
         QCloudCOSXMLService.defaultCOSXML().getBucketReplication(getBucketReplication);
         
         //.cssg-snippet-body-end
@@ -107,7 +133,9 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
     }
 
 
-    // 删除存储桶跨地域复制规则
+    /**
+    * 用来删除存储桶中的跨地域复制配置。用户发起该请求时需获得请求签名，表明该请求已获得许可。
+    */
     func deleteBucketReplication() {
         let exception = XCTestExpectation.init(description: "deleteBucketReplication");
       
@@ -119,7 +147,11 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
                 print(error!);
             }else{
                 print(result!);
-            }}
+            }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
+        }
         QCloudCOSXMLService.defaultCOSXML().deleteBucketReplication(deleteBucketReplication);
         
         //.cssg-snippet-body-end

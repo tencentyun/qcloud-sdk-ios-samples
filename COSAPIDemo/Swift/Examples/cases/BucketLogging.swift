@@ -53,12 +53,16 @@ class BucketLogging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         //.cssg-snippet-body-start:[swift-put-bucket-logging]
         let req = QCloudPutBucketLoggingRequest.init();
         
+        //说明日志记录配置的状态，如果无子节点信息则意为关闭日志记录
         let status = QCloudBucketLoggingStatus.init();
         
+        //存储桶 logging 设置的具体信息，主要是目标存储桶
         let loggingEnabled = QCloudLoggingEnabled.init();
         
+        //存放日志的目标存储桶，可以是同一个存储桶（但不推荐），或同一账户下、同一地域的存储桶
         loggingEnabled.targetBucket = "examplebucket-1250000000";
         
+        //日志存放在目标存储桶的指定路径
         loggingEnabled.targetPrefix = "";
         status.loggingEnabled = loggingEnabled;
         req.bucketLoggingStatus = status;
@@ -70,6 +74,9 @@ class BucketLogging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
             }else{
                 print( result!);
             }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
         }
         
         QCloudCOSXMLService.defaultCOSXML().putBucketLogging(req);
@@ -87,6 +94,8 @@ class BucketLogging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
       
         //.cssg-snippet-body-start:[swift-get-bucket-logging]
         let req = QCloudGetBucketLoggingRequest.init();
+        
+        //目标桶名称
         req.bucket = "examplebucket-1250000000";
         req.setFinish { (result, error) in
         
@@ -95,6 +104,9 @@ class BucketLogging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
             }else{
                 print( result!);
             }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
         };
         QCloudCOSXMLService.defaultCOSXML().getBucketLogging(req);
         

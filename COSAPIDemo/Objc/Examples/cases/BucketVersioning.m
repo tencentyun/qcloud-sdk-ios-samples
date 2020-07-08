@@ -68,7 +68,6 @@
  * 2:开启版本控制功能后，只能暂停，不能关闭。
  * 3:设置版本控制状态值为 Enabled 或者 Suspended，表示开启版本控制和暂停版本控制。
  * 4:设置存储桶的版本控制功能，您需要有存储桶的写权限。
- *
  */
 - (void)putBucketVersioning {
     XCTestExpectation* exp = [self expectationWithDescription:@"putBucketVersioning"];

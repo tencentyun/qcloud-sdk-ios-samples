@@ -52,13 +52,19 @@ class DeleteBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
       
         //.cssg-snippet-body-start:[swift-delete-bucket]
         let deleteBucketReq = QCloudDeleteBucketRequest.init();
+        //存储桶名称，命名格式：BucketName-APPID
         deleteBucketReq.bucket = "examplebucket-1250000000";
         deleteBucketReq.finishBlock = {(result,error) in
+            //可以从 outputObject 中获取服务器返回的 header 信息
             if error != nil{
                 print(error!);
             }else{
                 print(result!);
-            }}
+            }
+            exception.fulfill();
+                       XCTAssertNil(error);
+                       XCTAssertNotNil(result)
+        }
         QCloudCOSXMLService.defaultCOSXML().deleteBucket(deleteBucketReq);
         
         //.cssg-snippet-body-end

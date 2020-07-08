@@ -56,30 +56,52 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         
         let config = QCloudLifecycleConfiguration.init();
         
+        //规则描述
         let rule = QCloudLifecycleRule.init();
+        
+        //用于唯一地标识规则
         rule.identifier = "swift";
+        
+        //指明规则是否启用，枚举值：Enabled，Disabled
         rule.status = .enabled;
         
+        //Filter 用于描述规则影响的 Object 集合
         let fileter = QCloudLifecycleRuleFilter.init();
+        
+        //指定规则所适用的前缀。匹配前缀的对象受该规则影响，Prefix 最多只能有一个
         fileter.prefix = "0";
         
+        //Filter 用于描述规则影响的 Object 集合
         rule.filter = fileter;
         
+        //规则转换属性，对象何时转换为 Standard_IA 或 Archive
         let transition = QCloudLifecycleTransition.init();
+        
+        //指明规则对应的动作在对象最后的修改日期过后多少天操作：
         transition.days = 100;
+        
+        //指定 Object 转储到的目标存储类型，枚举值： STANDARD_IA，ARCHIVE
         transition.storageClass = .standardIA;
         
         rule.transition = transition;
         
         putBucketLifecycleReq.lifeCycle = config;
+        
+        //生命周期配置
         putBucketLifecycleReq.lifeCycle.rules = [rule];
         
         putBucketLifecycleReq.finishBlock = {(result,error) in
+            
+            //可以从 outputObject 中获取服务器返回的 header 信息
             if error != nil{
                 print(error!);
             }else{
                 print(result!);
-            }}
+            }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
+        }
         QCloudCOSXMLService.defaultCOSXML().putBucketLifecycle(putBucketLifecycleReq);
         
         //.cssg-snippet-body-end
@@ -96,11 +118,17 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         let getBucketLifeCycle = QCloudGetBucketLifecycleRequest.init();
         getBucketLifeCycle.bucket = "examplebucket-1250000000";
         getBucketLifeCycle.setFinish { (config, error) in
+            
+            // 可以从 result 中获取返回信息
             if error != nil{
                 print(error!);
             }else{
                 print(config!);
-            }};
+            }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(config);
+        };
         QCloudCOSXMLService.defaultCOSXML().getBucketLifecycle(getBucketLifeCycle);
         
         //.cssg-snippet-body-end
@@ -121,7 +149,11 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
                 print(error!);
             }else{
                 print(result!);
-            }};
+            }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
+        };
         QCloudCOSXMLService.defaultCOSXML().deleteBucketLifeCycle(deleteBucketLifeCycle);
         
         //.cssg-snippet-body-end

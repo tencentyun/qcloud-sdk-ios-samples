@@ -56,24 +56,41 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         let corsConfig = QCloudCORSConfiguration.init();
         
         let rule = QCloudCORSRule.init();
+        
+        // 配置规则的 ID
         rule.identifier = "swift-sdk";
+        
+        // 在发送 OPTIONS 请求时告知服务端，接下来的请求可以使用哪些自定义的 HTTP 请求头部，支持通配符 *
         rule.allowedHeader = ["origin","host","accept","content-type","authorization"];
         rule.exposeHeader = "Etag";
+        
+        // 允许的 HTTP 操作，例如：GET，PUT，HEAD，POST，DELETE
         rule.allowedMethod = ["GET","PUT","POST", "DELETE", "HEAD"];
+        
+        // 设置 OPTIONS 请求得到结果的有效期
         rule.maxAgeSeconds = 3600;
+        
+        // 允许的访问来源，支持通配符 *，格式为：协议://域名[:端口]
         rule.allowedOrigin = "*";
         
         corsConfig.rules = [rule];
         
         putBucketCorsReq.corsConfiguration = corsConfig;
+        
+        //格式：BucketName-APPID
         putBucketCorsReq.bucket = "examplebucket-1250000000";
         putBucketCorsReq.finishBlock = {(result,error) in
+            //可以从 outputObject 中获取服务器返回的 header 信息
             if error != nil{
                 print(error!);
             }else{
                 print(result!);
-            }}
-        
+            }
+            
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
+        }
         QCloudCOSXMLService.defaultCOSXML().putBucketCORS(putBucketCorsReq);
         
         //.cssg-snippet-body-end
@@ -88,13 +105,19 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
       
         //.cssg-snippet-body-start:[swift-get-bucket-cors]
         let  getBucketCorsRes = QCloudGetBucketCORSRequest.init();
+        //格式：BucketName-APPID
         getBucketCorsRes.bucket = "examplebucket-1250000000";
         getBucketCorsRes.setFinish { (corsConfig, error) in
+            //CORS 设置封装在 corsConfig 中
             if error != nil{
                 print(error!);
             }else{
                 print(corsConfig!);
-            }}
+            }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(corsConfig);
+        }
         QCloudCOSXMLService.defaultCOSXML().getBucketCORS(getBucketCorsRes);
         
         //.cssg-snippet-body-end
@@ -110,16 +133,26 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         //.cssg-snippet-body-start:[swift-option-object]
         let optionsObject = QCloudOptionsObjectRequest.init();
         optionsObject.object = "exampleobject";
+        
+        //模拟跨域访问的请求来源域名
         optionsObject.origin = "http://www.qcloud.com";
         optionsObject.accessControlRequestMethod = "GET";
         optionsObject.accessControlRequestHeaders = "origin";
+        
+        //存储桶名称，格式：BucketName-APPID
         optionsObject.bucket = "examplebucket-1250000000";
         optionsObject.finishBlock = {(result,error) in
+            //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
             if error != nil{
                 print(error!);
             }else{
                 print(result!);
-            }}
+            }
+            
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
+        }
         QCloudCOSXMLService.defaultCOSXML().optionsObject(optionsObject);
         
         //.cssg-snippet-body-end
@@ -136,11 +169,16 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         let deleteBucketCorsRequest = QCloudDeleteBucketCORSRequest.init();
         deleteBucketCorsRequest.bucket = "examplebucket-1250000000";
         deleteBucketCorsRequest.finishBlock = {(result,error) in
+            //可以从 outputObject 中获取服务器返回的 header 信息
             if error != nil{
                 print(error!);
             }else{
                 print(result!);
-            }}
+            }
+            exception.fulfill();
+            XCTAssertNil(error);
+            XCTAssertNotNil(result);
+        }
         QCloudCOSXMLService.defaultCOSXML().deleteBucketCORS(deleteBucketCorsRequest);
         
         //.cssg-snippet-body-end

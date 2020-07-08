@@ -77,7 +77,6 @@
     //将作为对象的元数据返回
     initrequest.cacheControl = @"cacheControl";
     
-    
     initrequest.contentDisposition = @"contentDisposition";
     
     
@@ -90,7 +89,7 @@
     //赋予被授权者写的权限
     initrequest.grantWrite = @"grantWrite";
     
-    //赋予被授权者读写权限。
+    //赋予被授权者读写权限。 grantFullControl == grantWrite + grantRead
     initrequest.grantFullControl = @"grantFullControl";
     
     [initrequest setFinishBlock:^(QCloudInitiateMultipartUploadResult* outputObject,

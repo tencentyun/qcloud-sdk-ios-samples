@@ -112,31 +112,7 @@
     XCTestExpectation* exp = [self expectationWithDescription:@"transferUploadBytes"];
     
     //.cssg-snippet-body-start:[objc-transfer-upload-bytes]
-    QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
-    put.object = @"文件名.jpg";
-    put.bucket = @"bucket名";
-    //需要上传的对象内容。可以传入NSData*或者NSURL*类型的变量
-    put.body =  [NSData dataWithContentsOfFile:@"文件路径"];
-    [put setSendProcessBlock:^(int64_t bytesSent,
-                               int64_t totalBytesSent,
-                               int64_t totalBytesExpectedToSend) {
-        
-        //      bytesSent       一次上传的字节数，
-        //      totalBytesSent  总共上传的字节数
-        //      totalBytesExpectedToSend 文件一共多少字节
-        
-        NSLog(@"upload %lld totalSend %lld aim %lld",
-              bytesSent, totalBytesSent, totalBytesExpectedToSend);
-    }];
-    
-    
-    [put setFinishBlock:^(id outputObject, NSError *error) {
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
-    }];
-    [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
+   
     //.cssg-snippet-body-end
     
     [self waitForExpectationsWithTimeout:80 handler:nil];
@@ -186,8 +162,6 @@
     XCTestExpectation* exp = [self expectationWithDescription:@"transferDownloadObject"];
     
     //.cssg-snippet-body-start:[objc-transfer-download-object]
-    
-
     QCloudCOSXMLDownloadObjectRequest * request = [QCloudCOSXMLDownloadObjectRequest new];
     
     request.object = @"quic_large_object";

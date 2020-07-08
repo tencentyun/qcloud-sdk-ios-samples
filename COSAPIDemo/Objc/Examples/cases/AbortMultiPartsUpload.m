@@ -68,9 +68,7 @@
  * 初始化分块上传的方法
  *
  * 使用分块上传对象时，首先要进行初始化分片上传操作，获取对应分块上传的 uploadId，用于后续上传操
- * 作.分块上传适合于在弱网络或高带宽环境下上传较大的对象.SDK 支持自行切分对象并分别调用
- * uploadPart(UploadPartRequest)或者
- * uploadPartAsync(UploadPartRequest, CosXmlResultListener)上传各 个分块.
+ * 作.分块上传适合于在弱网络或高带宽环境下上传较大的对象.
  */
 - (void)initMultiUpload {
     XCTestExpectation* exp = [self expectationWithDescription:@"initMultiUpload"];
