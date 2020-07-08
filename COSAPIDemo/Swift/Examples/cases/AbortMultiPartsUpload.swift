@@ -38,9 +38,9 @@ class AbortMultiPartsUpload: XCTestCase,QCloudSignatureProvider,QCloudCredentail
     }
     
     func signature(with fileds: QCloudSignatureFields!,
-                   request: QCloudBizHTTPRequest!, urlRequest
-        urlRequst: NSMutableURLRequest!, compelete
-        continueBlock: QCloudHTTPAuthentationContinueBlock!) {
+                   request: QCloudBizHTTPRequest!,
+                   urlRequest urlRequst: NSMutableURLRequest!,
+                   compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
                 continueBlock(nil,error!);

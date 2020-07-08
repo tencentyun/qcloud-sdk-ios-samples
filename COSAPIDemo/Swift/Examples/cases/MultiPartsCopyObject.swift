@@ -5,7 +5,7 @@ class MultiPartsCopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
     
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
     var uploadId : String?;
-    var parts :Array<Any>?;
+    var parts :Array<QCloudMultipartInfo>?;
     
     
     override func setUp() {
@@ -24,7 +24,8 @@ class MultiPartsCopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
         self.credentialFenceQueue?.delegate = self;
     }
     
-    func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
+    func fenceQueue(_ queue: QCloudCredentailFenceQueue!,
+                    requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
         let cre = QCloudCredential.init();
         //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
         cre.secretID = "COS_SECRETID";
@@ -37,7 +38,10 @@ class MultiPartsCopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
         continueBlock(auth,nil);
     }
     
-    func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
+    func signature(with fileds: QCloudSignatureFields!,
+                       request: QCloudBizHTTPRequest!,
+          urlRequest urlRequst: NSMutableURLRequest!,
+       compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
                 continueBlock(nil,error!);

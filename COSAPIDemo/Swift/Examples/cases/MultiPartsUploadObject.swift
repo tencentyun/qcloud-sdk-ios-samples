@@ -27,7 +27,8 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
         self.credentialFenceQueue?.delegate = self;
     }
     
-    func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
+    func fenceQueue(_ queue: QCloudCredentailFenceQueue!,
+                    requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
         let cre = QCloudCredential.init();
         //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
         cre.secretID = "COS_SECRETID";
@@ -40,7 +41,10 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
         continueBlock(auth,nil);
     }
     
-    func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
+    func signature(with fileds: QCloudSignatureFields!,
+                   request: QCloudBizHTTPRequest!,
+                   urlRequest urlRequst: NSMutableURLRequest!,
+                   compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
                 continueBlock(nil,error!);
@@ -140,7 +144,7 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
         uploadPart.uploadId = "exampleUploadId";
         uploadPart.uploadId = self.uploadId!;
         
-        let dataBody:NSData? = "wrwrwrwrwrwwrwrwrwrwrwwrwrwrwrwrwwrwrwrwrwrwwrwrwrwrwrwwrwrwrwrwrwwrwrwrwrwrwwrwrwrwrwrwwrwrwrwrwrwwrwrwrwrwrwwrwrwrwrwrwwrwrwrwrwrwwrwrwrwrwrw"
+        let dataBody:NSData? = "wrwrwrwrwrwwrwrwrwrwrwwwrwrw"
             .data(using: .utf8) as NSData?;
         uploadPart.body = dataBody!;
         uploadPart.setFinish { (result, error) in

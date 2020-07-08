@@ -21,7 +21,8 @@ class GetObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         self.credentialFenceQueue?.delegate = self;
     }
     
-    func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
+    func fenceQueue(_ queue: QCloudCredentailFenceQueue!,
+                    requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
         let cre = QCloudCredential.init();
         //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
         cre.secretID = "COS_SECRETID";
@@ -34,7 +35,10 @@ class GetObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         continueBlock(auth,nil);
     }
     
-    func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
+    func signature(with fileds: QCloudSignatureFields!,
+                   request: QCloudBizHTTPRequest!,
+                   urlRequest urlRequst: NSMutableURLRequest!,
+                   compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
                 continueBlock(nil,error!);
@@ -73,7 +77,7 @@ class GetObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
             //      totalBytesDownload  总过接受的字节数
             //      totalBytesExpectedToDownload 文件一共多少字节
             //下载过程中的进度
-            print("totalBytesDownload:\(totalBytesDownload) totalBytesExpectedToDownload:\(totalBytesExpectedToDownload)");
+            print("totalBytesDownload:\(totalBytesDownload)totalBytesExpectedToDownload:\(totalBytesExpectedToDownload)");
         }
         QCloudCOSXMLService.defaultCOSXML().getObject(getObject);
         
