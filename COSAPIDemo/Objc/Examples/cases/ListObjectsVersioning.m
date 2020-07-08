@@ -80,7 +80,8 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
     
     //一页请求数据条目数
     listObjectVersionsRequest.maxKeys = 1000;
-    [listObjectVersionsRequest setFinishBlock:^(QCloudListVersionsResult * _Nonnull result, NSError * _Nonnull error) {
+    [listObjectVersionsRequest setFinishBlock:^(QCloudListVersionsResult * _Nonnull result,
+                                                NSError * _Nonnull error) {
         
         //result.deleteMarker; // 已删除的文件
         //result.versionContent;  对象版本条目
@@ -116,7 +117,8 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
     
     //已经请求的总条目数
     listObjectVersionsRequest.marker = @"100";
-    [listObjectVersionsRequest setFinishBlock:^(QCloudListVersionsResult * _Nonnull result, NSError * _Nonnull error) {
+    [listObjectVersionsRequest setFinishBlock:^(QCloudListVersionsResult * _Nonnull result,
+                                                NSError * _Nonnull error) {
         
         //result.deleteMarker; // 已删除的文件
         //result.versionContent;  对象版本条目

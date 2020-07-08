@@ -51,7 +51,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {

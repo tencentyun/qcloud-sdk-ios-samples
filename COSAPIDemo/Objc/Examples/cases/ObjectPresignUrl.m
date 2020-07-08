@@ -51,7 +51,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -76,7 +77,8 @@
     
     getPresignedURLRequest.object = @"exampleobject";
     
-    [getPresignedURLRequest setFinishBlock:^(QCloudGetPresignedURLResult * _Nonnull result, NSError * _Nonnull error) {
+    [getPresignedURLRequest setFinishBlock:^(QCloudGetPresignedURLResult * _Nonnull result,
+                                             NSError * _Nonnull error) {
         
         //预签名 URL
         NSString* presignedURL = result.presienedURL;
@@ -108,7 +110,8 @@
     
     getPresignedURLRequest.object = @"exampleobject";
     
-    [getPresignedURLRequest setFinishBlock:^(QCloudGetPresignedURLResult * _Nonnull result, NSError * _Nonnull error) {
+    [getPresignedURLRequest setFinishBlock:^(QCloudGetPresignedURLResult * _Nonnull result,
+                                             NSError * _Nonnull error) {
         
         //预签名 URL
         NSString* presignedURL = result.presienedURL;

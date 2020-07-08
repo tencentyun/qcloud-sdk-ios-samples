@@ -51,7 +51,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -112,7 +113,8 @@
     //文件所在桶
     request.bucket = @"examplebucket-1250000000";
     __block QCloudACLPolicy* policy;
-    [request setFinishBlock:^(QCloudACLPolicy * _Nonnull result, NSError * _Nonnull error) {
+    [request setFinishBlock:^(QCloudACLPolicy * _Nonnull result,
+                              NSError * _Nonnull error) {
         policy = result;
         
         // result.accessControlList; 被授权者与权限的信息

@@ -51,7 +51,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -92,7 +93,8 @@
     //指定源文件的 versionID，只有开启或开启后暂停的存储桶，才会响应此参数
     request.versionID = @"";
     
-    [request setFinishBlock:^(QCloudCopyObjectResult * _Nonnull result, NSError * _Nonnull error) {
+    [request setFinishBlock:^(QCloudCopyObjectResult * _Nonnull result,
+                              NSError * _Nonnull error) {
         //result 返回具体信息
         
         [exp fulfill];
@@ -145,7 +147,8 @@
     //指定源文件的 versionID，只有开启或开启后暂停的存储桶，才会响应此参数
     request.versionID = @"";
     
-    [request setFinishBlock:^(QCloudCopyObjectResult * _Nonnull result, NSError * _Nonnull error) {
+    [request setFinishBlock:^(QCloudCopyObjectResult * _Nonnull result,
+                              NSError * _Nonnull error) {
         //result 返回具体信息
         
         [exp fulfill];

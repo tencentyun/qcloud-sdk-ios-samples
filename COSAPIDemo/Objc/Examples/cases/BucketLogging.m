@@ -110,7 +110,8 @@
     
     //目标桶名称
     getReq.bucket = @"examplebucket-1250000000";
-    [getReq setFinishBlock:^(QCloudBucketLoggingStatus * _Nonnull result, NSError * _Nonnull error) {
+    [getReq setFinishBlock:^(QCloudBucketLoggingStatus * _Nonnull result,
+                             NSError * _Nonnull error) {
         NSLog(@"getReq result = %@",result.loggingEnabled.targetBucket);
     
         

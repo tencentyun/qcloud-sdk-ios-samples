@@ -53,7 +53,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -200,7 +201,8 @@
     //在初始化分块上传的响应中，会返回一个唯一的描述符（upload ID）
     request.uploadId = @"exampleUploadId";
     
-    [request setFinishBlock:^(QCloudListPartsResult * _Nonnull result, NSError * _Nonnull error) {
+    [request setFinishBlock:^(QCloudListPartsResult * _Nonnull result,
+                              NSError * _Nonnull error) {
         //从 result 中获取已上传分块信息
         
         [exp fulfill];
@@ -245,7 +247,8 @@
     partInfo.parts = [parts copy];
     completeRequst.parts = partInfo;
     
-    [completeRequst setFinishBlock:^(QCloudUploadObjectResult * _Nonnull result, NSError * _Nonnull error) {
+    [completeRequst setFinishBlock:^(QCloudUploadObjectResult * _Nonnull result,
+                                     NSError * _Nonnull error) {
         //从 result 中获取上传结果
         
         [exp fulfill];
