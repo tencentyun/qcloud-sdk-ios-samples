@@ -68,9 +68,17 @@
     XCTestExpectation* exp = [self expectationWithDescription:@"getService"];
 
     //.cssg-snippet-body-start:[objc-get-service]
+    
+    //获取所属账户的所有存储空间列表的方法.
+    //通过使用帯 Authorization 签名认证的请求，可以获取签名中 APPID 所属账户的所有存储空间列
+    //表 (Bucket list).
     QCloudGetServiceRequest* request = [[QCloudGetServiceRequest alloc] init];
-    [request setFinishBlock:^(QCloudListAllMyBucketsResult* result, NSError* error) {
+    [request setFinishBlock:^(QCloudListAllMyBucketsResult* result,
+                              NSError* error) {
         //从 result 中获取返回信息
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetService:request];
     

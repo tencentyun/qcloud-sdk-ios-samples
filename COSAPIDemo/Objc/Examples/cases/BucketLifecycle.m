@@ -25,7 +25,7 @@
     configuration.endpoint = endpoint;
     [QCloudCOSXMLService registerDefaultCOSXMLWithConfiguration:configuration];
     [QCloudCOSTransferMangerService registerDefaultCOSTransferMangerWithConfiguration:configuration];
-
+    
     // 脚手架用于获取临时密钥
     self.credentialFenceQueue = [QCloudCredentailFenceQueue new];
     self.credentialFenceQueue.delegate = self;
@@ -42,7 +42,7 @@
     credential.startDate = [[[NSDateFormatter alloc] init] dateFromString:@"startTime"]; // 单位是秒
     credential.experationDate = [[[NSDateFormatter alloc] init] dateFromString:@"expiredTime"];
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc]
-        initWithCredential:credential];
+                                            initWithCredential:credential];
     continueBlock(creator, nil);
 }
 
@@ -66,33 +66,56 @@
  */
 - (void)putBucketLifecycle {
     XCTestExpectation* exp = [self expectationWithDescription:@"putBucketLifecycle"];
-
+    
     //.cssg-snippet-body-start:[objc-put-bucket-lifecycle]
     QCloudPutBucketLifecycleRequest* request = [QCloudPutBucketLifecycleRequest new];
     request.bucket = @"examplebucket-1250000000";
-    __block QCloudLifecycleConfiguration* lifecycleConfiguration = [[QCloudLifecycleConfiguration
-        alloc] init];
+    __block QCloudLifecycleConfiguration* lifecycleConfiguration =
+    [[QCloudLifecycleConfiguration alloc] init];
+    
+    //规则描述
     QCloudLifecycleRule* rule = [[QCloudLifecycleRule alloc] init];
+    
+    //用于唯一地标识规则
     rule.identifier = @"identifier";
+    
+    //指明规则是否启用，枚举值：Enabled，Disabled
     rule.status = QCloudLifecycleStatueEnabled;
+    
+    //Filter 用于描述规则影响的 Object 集合
     QCloudLifecycleRuleFilter* filter = [[QCloudLifecycleRuleFilter alloc] init];
+    
+    //指定规则所适用的前缀。匹配前缀的对象受该规则影响，Prefix 最多只能有一个
     filter.prefix = @"0";
+    
+    //Filter 用于描述规则影响的 Object 集合
     rule.filter = filter;
     
+    //规则转换属性，对象何时转换为 Standard_IA 或 Archive
     QCloudLifecycleTransition* transition = [[QCloudLifecycleTransition alloc] init];
+    
+    //指明规则对应的动作在对象最后的修改日期过后多少天操作：
     transition.days = 100;
+    
+    //指定 Object 转储到的目标存储类型，枚举值： STANDARD_IA，ARCHIVE
     transition.storageClass = QCloudCOSStorageStandardIA;
     rule.transition = transition;
     request.lifeCycle = lifecycleConfiguration;
+    
+    //生命周期配置
     request.lifeCycle.rules = @[rule];
     [request setFinishBlock:^(id outputObject, NSError* error) {
         //可以从 outputObject 中获取服务器返回的 header 信息
+        
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(outputObject);
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] PutBucketLifecycle:request];
     
     //.cssg-snippet-body-end
-
+    
     [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
@@ -101,17 +124,21 @@
  */
 - (void)getBucketLifecycle {
     XCTestExpectation* exp = [self expectationWithDescription:@"getBucketLifecycle"];
-
+    
     //.cssg-snippet-body-start:[objc-get-bucket-lifecycle]
     QCloudGetBucketLifecycleRequest* request = [QCloudGetBucketLifecycleRequest new];
     request.bucket = @"examplebucket-1250000000";
     [request setFinishBlock:^(QCloudLifecycleConfiguration* result,NSError* error) {
         // 可以从 result 中获取返回信息
+        
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetBucketLifecycle:request];
     
     //.cssg-snippet-body-end
-
+    
     [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
@@ -120,17 +147,22 @@
  */
 - (void)deleteBucketLifecycle {
     XCTestExpectation* exp = [self expectationWithDescription:@"deleteBucketLifecycle"];
-
+    
     //.cssg-snippet-body-start:[objc-delete-bucket-lifecycle]
-    QCloudDeleteBucketLifeCycleRequest* request = [[QCloudDeleteBucketLifeCycleRequest alloc ] init];
+    QCloudDeleteBucketLifeCycleRequest* request =
+    [[QCloudDeleteBucketLifeCycleRequest alloc ] init];
+    
     request.bucket = @"examplebucket-1250000000";
     [request setFinishBlock:^(QCloudLifecycleConfiguration* deleteResult, NSError* error) {
         //error 返回删除结果
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(deleteResult);
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucketLifeCycle:request];
     
     //.cssg-snippet-body-end
-
+    
     [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
@@ -138,13 +170,13 @@
 - (void)testBucketLifecycle {
     // 设置存储桶生命周期
     [self putBucketLifecycle];
-        
+    
     // 获取存储桶生命周期
     [self getBucketLifecycle];
-        
+    
     // 删除存储桶生命周期
     [self deleteBucketLifecycle];
-        
+    
 }
 
 @end

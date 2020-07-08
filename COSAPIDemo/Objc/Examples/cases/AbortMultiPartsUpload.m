@@ -7,7 +7,8 @@
 #import <QCloudCOSXML/QCloudCompleteMultipartUploadInfo.h>
 
 
-@interface AbortMultiPartsUpload : XCTestCase <QCloudSignatureProvider, QCloudCredentailFenceQueueDelegate>
+@interface AbortMultiPartsUpload : XCTestCase <QCloudSignatureProvider,
+                                               QCloudCredentailFenceQueueDelegate>
 
 @property (nonatomic) QCloudCredentailFenceQueue* credentialFenceQueue;
 
@@ -31,7 +32,8 @@
     self.credentialFenceQueue.delegate = self;
 }
 
-- (void) fenceQueue:(QCloudCredentailFenceQueue * )queue requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
+- (void) fenceQueue:(QCloudCredentailFenceQueue * )queue
+    requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
 {
     QCloudCredential* credential = [QCloudCredential new];
     //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
@@ -51,7 +53,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -62,21 +65,33 @@
 }
 
 /**
- * 初始化分片上传
+ * 初始化分块上传的方法
+ *
+ * 使用分块上传对象时，首先要进行初始化分片上传操作，获取对应分块上传的 uploadId，用于后续上传操
+ * 作.分块上传适合于在弱网络或高带宽环境下上传较大的对象.SDK 支持自行切分对象并分别调用
+ * uploadPart(UploadPartRequest)或者
+ * uploadPartAsync(UploadPartRequest, CosXmlResultListener)上传各 个分块.
  */
 - (void)initMultiUpload {
     XCTestExpectation* exp = [self expectationWithDescription:@"initMultiUpload"];
 
     //.cssg-snippet-body-start:[objc-init-multi-upload]
     QCloudInitiateMultipartUploadRequest* initrequest = [QCloudInitiateMultipartUploadRequest new];
-    initrequest.bucket = @"examplebucket-1250000000";
-    initrequest.object = @"exampleobject";
     
-    [initrequest setFinishBlock:^(QCloudInitiateMultipartUploadResult* outputObject, NSError *error) {
+    initrequest.bucket = @"examplebucket-1250000000"; // 上传文件目标桶
+    initrequest.object = @"exampleobject"; //上传的文件
+    
+    [initrequest setFinishBlock:^(QCloudInitiateMultipartUploadResult* outputObject,
+                                  NSError *error) {
         //获取分块上传的 uploadId，后续的上传都需要这个 ID，请保存以备后续使用
-        @"exampleUploadId" = outputObject.uploadId;
+         outputObject.uploadId = @"exampleUploadId";
+        
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(outputObject);
     }];
     
+    //初始化上传
     [[QCloudCOSXMLService defaultCOSXML] InitiateMultipartUpload:initrequest];
     
     //.cssg-snippet-body-end
@@ -86,19 +101,29 @@
 
 /**
  * 终止分片上传任务
+ *
+ * 舍弃一个分块上传且删除已上传的分片块的方法.COS 支持舍弃一个分块上传且删除已上传的分片块.
+ * 注意，已上传但是未终止的分片块会占用存储空间进 而产生存储费用.因此，建议及时完成分块上传
+ * 或者舍弃分块上传.
  */
 - (void)abortMultiUpload {
     XCTestExpectation* exp = [self expectationWithDescription:@"abortMultiUpload"];
 
     //.cssg-snippet-body-start:[objc-abort-multi-upload]
     QCloudAbortMultipfartUploadRequest *abortRequest = [QCloudAbortMultipfartUploadRequest new];
+    
+    //存储桶名称
     abortRequest.object = @"exampleobject";
     abortRequest.bucket = @"examplebucket-1250000000";
-    //本次要查询的分块上传的 uploadId，可从初始化分块上传的请求结果 QCloudInitiateMultipartUploadResult 中得到
+    
+    //本次要终止的分块上传的 uploadId，可从初始化分块上传的请求结果 QCloudInitiateMultipartUploadResult 中得到
     abortRequest.uploadId = @"exampleUploadId";
     
     [abortRequest setFinishBlock:^(id outputObject, NSError *error) {
         //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(outputObject);
     }];
     
     [[QCloudCOSXMLService defaultCOSXML]AbortMultipfartUpload:abortRequest];

@@ -11,6 +11,8 @@
 
 @property (nonatomic) QCloudCredentailFenceQueue* credentialFenceQueue;
 
+@property (nonatomic,copy)NSArray <QCloudMultipartInfo *>* parts;
+
 @end
 
 @implementation MultiPartsUploadObject
@@ -25,7 +27,7 @@
     configuration.endpoint = endpoint;
     [QCloudCOSXMLService registerDefaultCOSXMLWithConfiguration:configuration];
     [QCloudCOSTransferMangerService registerDefaultCOSTransferMangerWithConfiguration:configuration];
-
+    
     // 脚手架用于获取临时密钥
     self.credentialFenceQueue = [QCloudCredentailFenceQueue new];
     self.credentialFenceQueue.delegate = self;
@@ -42,7 +44,7 @@
     credential.startDate = [[[NSDateFormatter alloc] init] dateFromString:@"startTime"]; // 单位是秒
     credential.experationDate = [[[NSDateFormatter alloc] init] dateFromString:@"expiredTime"];
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc]
-        initWithCredential:credential];
+                                            initWithCredential:credential];
     continueBlock(creator, nil);
 }
 
@@ -66,43 +68,79 @@
  */
 - (void)initMultiUpload {
     XCTestExpectation* exp = [self expectationWithDescription:@"initMultiUpload"];
-
+    
     //.cssg-snippet-body-start:[objc-init-multi-upload]
     QCloudInitiateMultipartUploadRequest* initrequest = [QCloudInitiateMultipartUploadRequest new];
     initrequest.bucket = @"examplebucket-1250000000";
     initrequest.object = @"exampleobject";
     
-    [initrequest setFinishBlock:^(QCloudInitiateMultipartUploadResult* outputObject, NSError *error) {
+    //将作为对象的元数据返回
+    initrequest.cacheControl = @"cacheControl";
+    
+    
+    initrequest.contentDisposition = @"contentDisposition";
+    
+    
+    //定义 Object 的 ACL 属性。有效值：private，public-read-write，public-read；默认值：private
+    initrequest.accessControlList = @"public";
+    
+    //赋予被授权者读的权限。
+    initrequest.grantRead = @"grantRead";
+    
+    //赋予被授权者写的权限
+    initrequest.grantWrite = @"grantWrite";
+    
+    //赋予被授权者读写权限。
+    initrequest.grantFullControl = @"grantFullControl";
+    
+    [initrequest setFinishBlock:^(QCloudInitiateMultipartUploadResult* outputObject,
+                                  NSError *error) {
         //获取分块上传的 uploadId，后续的上传都需要这个 ID，请保存以备后续使用
-        @"exampleUploadId" = outputObject.uploadId;
+        outputObject.uploadId = @"exampleUploadId";
+        
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(outputObject);
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] InitiateMultipartUpload:initrequest];
     
     //.cssg-snippet-body-end
-
+    
     [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
- * 列出所有未完成的分片上传任务
+ * 查询存储桶（Bucket）中正在进行中的分块上传对象的方法.
+ *
+ * COS 支持查询 Bucket 中有哪些正在进行中的分块上传对象，单次请求操作最多列出 1000 个正在进行中的 分块上传对象.
  */
 - (void)listMultiUpload {
     XCTestExpectation* exp = [self expectationWithDescription:@"listMultiUpload"];
-
+    
     //.cssg-snippet-body-start:[objc-list-multi-upload]
     QCloudListBucketMultipartUploadsRequest* uploads = [QCloudListBucketMultipartUploadsRequest new];
     uploads.bucket = @"examplebucket-1250000000";
+    
+    //桶所在地域
+    uploads.regionName = @"bucket.location";
+    
+    //设置最大返回的 multipart 数量，合法取值从 1 到 1000
     uploads.maxUploads = 100;
     
-    [uploads setFinishBlock:^(QCloudListMultipartUploadsResult* result, NSError *error) {
+    [uploads setFinishBlock:^(QCloudListMultipartUploadsResult* result,
+                              NSError *error) {
         //可以从 result 中返回分块信息
+        
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] ListBucketMultipartUploads:uploads];
     
     //.cssg-snippet-body-end
-
+    
     [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
@@ -111,7 +149,7 @@
  */
 - (void)uploadPart {
     XCTestExpectation* exp = [self expectationWithDescription:@"uploadPart"];
-
+    
     //.cssg-snippet-body-start:[objc-upload-part]
     QCloudUploadPartRequest* request = [QCloudUploadPartRequest new];
     request.bucket = @"examplebucket-1250000000";
@@ -135,21 +173,27 @@
         part.partNumber = @"1";
         // 保存起来用于最好完成上传时使用
         self.parts = @[part];
+        
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(outputObject);
     }];
     
     [[QCloudCOSXMLService defaultCOSXML]  UploadPart:request];
     
     //.cssg-snippet-body-end
-
+    
     [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
- * 列出已上传的分片
+ * 查询特定分块上传中的已上传的块的方法.
+ * COS 支持查询特定分块上传中的已上传的块, 即可以 罗列出指定 UploadId 所属的所有已上传成功的分块.
+ * 因此，基于此可以完成续传功能.
  */
 - (void)listParts {
     XCTestExpectation* exp = [self expectationWithDescription:@"listParts"];
-
+    
     //.cssg-snippet-body-start:[objc-list-parts]
     QCloudListMultipartRequest* request = [QCloudListMultipartRequest new];
     request.object = @"exampleobject";
@@ -159,12 +203,16 @@
     
     [request setFinishBlock:^(QCloudListPartsResult * _Nonnull result, NSError * _Nonnull error) {
         //从 result 中获取已上传分块信息
+        
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] ListMultipart:request];
     
     //.cssg-snippet-body-end
-
+    
     [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
@@ -173,7 +221,7 @@
  */
 - (void)completeMultiUpload {
     XCTestExpectation* exp = [self expectationWithDescription:@"completeMultiUpload"];
-
+    
     //.cssg-snippet-body-start:[objc-complete-multi-upload]
     QCloudCompleteMultipartUploadRequest *completeRequst = [QCloudCompleteMultipartUploadRequest new];
     completeRequst.object = @"exampleobject";
@@ -182,17 +230,34 @@
     completeRequst.uploadId = @"exampleUploadId";
     //已上传分块的信息
     QCloudCompleteMultipartUploadInfo *partInfo = [QCloudCompleteMultipartUploadInfo new];
-    partInfo.parts = self.parts;
+    NSMutableArray * parts = [self.parts mutableCopy];
+    // 对已上传的块进行排序
+    [parts sortUsingComparator:^NSComparisonResult(QCloudMultipartInfo*  _Nonnull obj1,
+                                                   QCloudMultipartInfo*  _Nonnull obj2) {
+        int a = obj1.partNumber.intValue;
+        int b = obj2.partNumber.intValue;
+        
+        if (a < b) {
+            return NSOrderedAscending;
+        } else {
+            return NSOrderedDescending;
+        }
+    }];
+    partInfo.parts = [parts copy];
     completeRequst.parts = partInfo;
     
     [completeRequst setFinishBlock:^(QCloudUploadObjectResult * _Nonnull result, NSError * _Nonnull error) {
         //从 result 中获取上传结果
+        
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] CompleteMultipartUpload:completeRequst];
     
     //.cssg-snippet-body-end
-
+    
     [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
@@ -200,19 +265,19 @@
 - (void)testMultiPartsUploadObject {
     // 初始化分片上传
     [self initMultiUpload];
-        
+    
     // 列出所有未完成的分片上传任务
     [self listMultiUpload];
-        
+    
     // 上传一个分片
     [self uploadPart];
-        
+    
     // 列出已上传的分片
     [self listParts];
-        
+    
     // 完成分片上传任务
     [self completeMultiUpload];
-        
+    
 }
 
 @end

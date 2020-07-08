@@ -62,7 +62,10 @@
 }
 
 /**
- * 获取存储桶信息
+ * HEAD Bucket 请求可以确认该存储桶是否存在，是否有权限访问。有以下几种情况：
+ * 存储桶存在且有读取权限，返回 HTTP 状态码为200。
+ * 无存储桶读取权限，返回 HTTP 状态码为403。
+ * 存储桶不存在，返回 HTTP 状态码为404。
  */
 - (void)headBucket {
     XCTestExpectation* exp = [self expectationWithDescription:@"headBucket"];
@@ -72,6 +75,14 @@
     request.bucket = @"examplebucket-1250000000";
     [request setFinishBlock:^(id outputObject, NSError* error) {
         //可以从 outputObject 中获取服务器返回的 header 信息
+        //  x-cos-bucket-az-type    存储桶 AZ 类型，当存储桶为多 AZ 存储桶时返回此头部，
+        //  值固定为 MAZ。
+        
+        //  x-cos-bucket-region    存储桶所在地域。枚举值请参见 地域和访问域名 文档，
+        //   例如 ap-beijing，ap-hongkong，eu-frankfurt 等
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(outputObject);
     }];
     [[QCloudCOSXMLService defaultCOSXML] HeadBucket:request];
     

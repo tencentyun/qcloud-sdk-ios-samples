@@ -25,7 +25,7 @@
     configuration.endpoint = endpoint;
     [QCloudCOSXMLService registerDefaultCOSXMLWithConfiguration:configuration];
     [QCloudCOSTransferMangerService registerDefaultCOSTransferMangerWithConfiguration:configuration];
-
+    
     // 脚手架用于获取临时密钥
     self.credentialFenceQueue = [QCloudCredentailFenceQueue new];
     self.credentialFenceQueue.delegate = self;
@@ -42,7 +42,7 @@
     credential.startDate = [[[NSDateFormatter alloc] init] dateFromString:@"startTime"]; // 单位是秒
     credential.experationDate = [[[NSDateFormatter alloc] init] dateFromString:@"expiredTime"];
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc]
-        initWithCredential:credential];
+                                            initWithCredential:credential];
     continueBlock(creator, nil);
 }
 
@@ -66,59 +66,78 @@
  */
 - (void)putBucketWebsite {
     XCTestExpectation* exp = [self expectationWithDescription:@"putBucketWebsite"];
-
+    
     //.cssg-snippet-body-start:[objc-put-bucket-website]
     NSString *bucket = @"examplebucket-1250000000";
-       NSString * regionName = @"ap-chengdu";
+    NSString * regionName = @"ap-chengdu";
     
-       NSString *indexDocumentSuffix = @"index.html";
-       NSString *errorDocKey = @"error.html";
-       NSString *derPro = @"https";
-       int errorCode = 451;
-       NSString * replaceKeyPrefixWith = @"404.html";
-       QCloudPutBucketWebsiteRequest *putReq = [QCloudPutBucketWebsiteRequest new];
-       putReq.bucket = bucket;
+    NSString *indexDocumentSuffix = @"index.html";
+    NSString *errorDocKey = @"error.html";
+    NSString *derPro = @"https";
+    int errorCode = 451;
+    NSString * replaceKeyPrefixWith = @"404.html";
+    QCloudPutBucketWebsiteRequest *putReq = [QCloudPutBucketWebsiteRequest new];
+    putReq.bucket = bucket;
     
-       QCloudWebsiteConfiguration *config = [QCloudWebsiteConfiguration new];
+    QCloudWebsiteConfiguration *config = [QCloudWebsiteConfiguration new];
     
-       QCloudWebsiteIndexDocument *indexDocument = [QCloudWebsiteIndexDocument new];
-       indexDocument.suffix = indexDocumentSuffix;
-       config.indexDocument = indexDocument;
+    QCloudWebsiteIndexDocument *indexDocument = [QCloudWebsiteIndexDocument new];
     
-       QCloudWebisteErrorDocument *errDocument = [QCloudWebisteErrorDocument new];
-       errDocument.key = errorDocKey;
-       config.errorDocument = errDocument;
+    //指定索引文档的对象键后缀。例如指定为index.html，那么当访问到存储桶的根目录时，会自动返回
+    //index.html 的内容，或者当访问到article/目录时，会自动返回 article/index.html的内容
+    indexDocument.suffix = indexDocumentSuffix;
+    //索引文档配置
+    config.indexDocument = indexDocument;
     
+    //错误文档配置
+    QCloudWebisteErrorDocument *errDocument = [QCloudWebisteErrorDocument new];
+    errDocument.key = errorDocKey;
+    //指定通用错误文档的对象键，当发生错误且未命中重定向规则中的错误码重定向时，将返回该对象键的内容
+    config.errorDocument = errDocument;
     
-       QCloudWebsiteRedirectAllRequestsTo *redir = [QCloudWebsiteRedirectAllRequestsTo new];
-       redir.protocol  = @"https";
-       config.redirectAllRequestsTo = redir;
-    
-    
-       QCloudWebsiteRoutingRule *rule = [QCloudWebsiteRoutingRule new];
-       QCloudWebsiteCondition *contition = [QCloudWebsiteCondition new];
-       contition.httpErrorCodeReturnedEquals = errorCode;
-       rule.condition = contition;
-    
-       QCloudWebsiteRedirect *webRe = [QCloudWebsiteRedirect new];
-       webRe.protocol = @"https";
-       webRe.replaceKeyPrefixWith = replaceKeyPrefixWith;
-       rule.redirect = webRe;
-    
-       QCloudWebsiteRoutingRules *routingRules = [QCloudWebsiteRoutingRules new];
-       routingRules.routingRule = @[rule];
-       config.rules = routingRules;
-       putReq.websiteConfiguration  = config;
+    //重定向所有请求配置
+    QCloudWebsiteRedirectAllRequestsTo *redir = [QCloudWebsiteRedirectAllRequestsTo new];
+    redir.protocol  = derPro;
+    //指定重定向所有请求的目标协议，只能设置为 https
+    config.redirectAllRequestsTo = redir;
     
     
-       [putReq setFinishBlock:^(id outputObject, NSError *error) {
+    //单条重定向规则配置
+    QCloudWebsiteRoutingRule *rule = [QCloudWebsiteRoutingRule new];
     
-       }];
+    //重定向规则的条件配置
+    QCloudWebsiteCondition *contition = [QCloudWebsiteCondition new];
+    contition.httpErrorCodeReturnedEquals = errorCode;
+    rule.condition = contition;
     
-       [[QCloudCOSXMLService defaultCOSXML] PutBucketWebsite:putReq];
+    //重定向规则的具体重定向目标配置
+    QCloudWebsiteRedirect *webRe = [QCloudWebsiteRedirect new];
+    webRe.protocol = derPro;
+    
+    //指定重定向规则的具体重定向目标的对象键，替换方式为替换原始请求中所匹配到的前缀部分，
+    //仅可在 Condition 为 KeyPrefixEquals 时设置
+    webRe.replaceKeyPrefixWith = replaceKeyPrefixWith;
+    rule.redirect = webRe;
+    
+    QCloudWebsiteRoutingRules *routingRules = [QCloudWebsiteRoutingRules new];
+    routingRules.routingRule = @[rule];
+    
+    //重定向规则配置，最多设置100条 RoutingRule
+    config.rules = routingRules;
+    putReq.websiteConfiguration  = config;
+    
+    
+    [putReq setFinishBlock:^(id outputObject, NSError *error) {
+        
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(outputObject);
+    }];
+    
+    [[QCloudCOSXMLService defaultCOSXML] PutBucketWebsite:putReq];
     
     //.cssg-snippet-body-end
-
+    
     [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
@@ -127,18 +146,22 @@
  */
 - (void)getBucketWebsite {
     XCTestExpectation* exp = [self expectationWithDescription:@"getBucketWebsite"];
-
+    
     //.cssg-snippet-body-start:[objc-get-bucket-website]
     QCloudGetBucketWebsiteRequest *getReq = [QCloudGetBucketWebsiteRequest new];
     getReq.bucket = @"examplebucket-1250000000";
-    [getReq setFinishBlock:^(QCloudWebsiteConfiguration *  result, NSError * error) {
-    
+    [getReq setFinishBlock:^(QCloudWebsiteConfiguration *  result,
+                             NSError * error) {
+        
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetBucketWebsite:getReq];
     
     
     //.cssg-snippet-body-end
-
+    
     [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
@@ -147,18 +170,21 @@
  */
 - (void)deleteBucketWebsite {
     XCTestExpectation* exp = [self expectationWithDescription:@"deleteBucketWebsite"];
-
+    
     //.cssg-snippet-body-start:[objc-delete-bucket-website]
     QCloudDeleteBucketWebsiteRequest *delReq = [QCloudDeleteBucketWebsiteRequest new];
-    delReq.bucket = "examplebucket-1250000000";
+    delReq.bucket = @"examplebucket-1250000000";
     [delReq setFinishBlock:^(id outputObject, NSError *error) {
-    
+        
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(outputObject);
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucketWebsite:delReq];
     
     
     //.cssg-snippet-body-end
-
+    
     [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
@@ -166,13 +192,13 @@
 - (void)testBucketWebsite {
     // 设置存储桶静态网站
     [self putBucketWebsite];
-        
+    
     // 获取存储桶静态网站
     [self getBucketWebsite];
-        
+    
     // 删除存储桶静态网站
     [self deleteBucketWebsite];
-        
+    
 }
 
 @end

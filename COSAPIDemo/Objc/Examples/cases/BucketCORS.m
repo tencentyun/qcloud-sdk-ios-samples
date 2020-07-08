@@ -31,7 +31,8 @@
     self.credentialFenceQueue.delegate = self;
 }
 
-- (void) fenceQueue:(QCloudCredentailFenceQueue * )queue requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
+- (void) fenceQueue:(QCloudCredentailFenceQueue * )queue
+    requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
 {
     QCloudCredential* credential = [QCloudCredential new];
     //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
@@ -51,7 +52,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -72,17 +74,32 @@
     QCloudCORSConfiguration* cors = [QCloudCORSConfiguration new];
     
     QCloudCORSRule* rule = [QCloudCORSRule new];
+    
+    // 配置规则的 ID
     rule.identifier = @"sdk";
+    
+    // 在发送 OPTIONS 请求时告知服务端，接下来的请求可以使用哪些自定义的 HTTP 请求头部，支持通配符 *
     rule.allowedHeader = @[@"origin",@"host",@"accept",@"content-type",@"authorization"];
     rule.exposeHeader = @"ETag";
+    
+    // 允许的 HTTP 操作，例如：GET，PUT，HEAD，POST，DELETE
     rule.allowedMethod = @[@"GET",@"PUT",@"POST", @"DELETE", @"HEAD"];
+    
+    // 设置 OPTIONS 请求得到结果的有效期
     rule.maxAgeSeconds = 3600;
+    
+    // 允许的访问来源，支持通配符 *，格式为：协议://域名[:端口]
     rule.allowedOrigin = @"http://cloud.tencent.com";
     cors.rules = @[rule];
     putCORS.corsConfiguration = cors;
+    
+    //格式：BucketName-APPID
     putCORS.bucket = @"examplebucket-1250000000";
     [putCORS setFinishBlock:^(id outputObject, NSError *error) {
         //可以从 outputObject 中获取服务器返回的 header 信息
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(outputObject);
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] PutBucketCORS:putCORS];
@@ -100,10 +117,16 @@
 
     //.cssg-snippet-body-start:[objc-get-bucket-cors]
     QCloudGetBucketCORSRequest* corsReqeust = [QCloudGetBucketCORSRequest new];
+    
+    //格式：BucketName-APPID
     corsReqeust.bucket = @"examplebucket-1250000000";
     
-    [corsReqeust setFinishBlock:^(QCloudCORSConfiguration * _Nonnull result, NSError * _Nonnull error) {
+    [corsReqeust setFinishBlock:^(QCloudCORSConfiguration * _Nonnull result,
+                                  NSError * _Nonnull error) {
         //CORS 设置封装在 result 中
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] GetBucketCORS:corsReqeust];
@@ -121,14 +144,23 @@
 
     //.cssg-snippet-body-start:[objc-option-object]
     QCloudOptionsObjectRequest* request = [[QCloudOptionsObjectRequest alloc] init];
+    
+    //存储桶名称，格式：BucketName-APPID
     request.bucket =@"examplebucket-1250000000";
+    
+    //模拟跨域访问的请求来源域名
     request.origin = @"http://cloud.tencent.com";
     request.accessControlRequestMethod = @"GET";
     request.accessControlRequestHeaders = @"host";
+    
+    //对象位于存储桶中的位置标识符，即对象键
     request.object = @"exampleobject";
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
         //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(outputObject);
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] OptionsObject:request];
@@ -149,6 +181,9 @@
     deleteCORS.bucket = @"examplebucket-1250000000";
     [deleteCORS setFinishBlock:^(id outputObject, NSError *error) {
         //可以从 outputObject 中获取服务器返回的 header 信息
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(outputObject);
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucketCORS:deleteCORS];
     

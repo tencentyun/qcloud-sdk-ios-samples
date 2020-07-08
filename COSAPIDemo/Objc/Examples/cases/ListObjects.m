@@ -25,7 +25,7 @@
     configuration.endpoint = endpoint;
     [QCloudCOSXMLService registerDefaultCOSXMLWithConfiguration:configuration];
     [QCloudCOSTransferMangerService registerDefaultCOSTransferMangerWithConfiguration:configuration];
-
+    
     // 脚手架用于获取临时密钥
     self.credentialFenceQueue = [QCloudCredentailFenceQueue new];
     self.credentialFenceQueue.delegate = self;
@@ -42,7 +42,7 @@
     credential.startDate = [[[NSDateFormatter alloc] init] dateFromString:@"startTime"]; // 单位是秒
     credential.experationDate = [[[NSDateFormatter alloc] init] dateFromString:@"expiredTime"];
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc]
-        initWithCredential:credential];
+                                            initWithCredential:credential];
     continueBlock(creator, nil);
 }
 
@@ -62,24 +62,33 @@
 }
 
 /**
- * 获取对象列表
+ * 查询存储桶（Bucket) 下的部分或者全部对象的方法.
  */
 - (void)getBucket {
     XCTestExpectation* exp = [self expectationWithDescription:@"getBucket"];
-
+    
     //.cssg-snippet-body-start:[objc-get-bucket]
     QCloudGetBucketRequest* request = [QCloudGetBucketRequest new];
     request.bucket = @"examplebucket-1250000000";
+    
+    //    单次返回的最大条目数量，默认1000
     request.maxKeys = 1000;
     
     [request setFinishBlock:^(QCloudListBucketResult * result, NSError* error) {
         // result 返回具体信息
+        //QCloudListBucketResult.contents 桶内文件数组
+        //QCloudListBucketResult.commonPrefixes 桶内文件夹数组
+        
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
+        
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] GetBucket:request];
     
     //.cssg-snippet-body-end
-
+    
     [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
@@ -88,11 +97,42 @@
  */
 - (void)getBucketNextPage {
     XCTestExpectation* exp = [self expectationWithDescription:@"getBucketNextPage"];
-
+    
     //.cssg-snippet-body-start:[objc-get-bucket-next-page]
+    QCloudGetBucketRequest* request = [QCloudGetBucketRequest new];
+    request.bucket = @"examplebucket-1250000000";
+    
+    //    单次返回的最大条目数量，默认1000
+    request.maxKeys = 1000;
+    
+    //    前缀匹配，用来规定返回的文件前缀地址
+    request.prefix = @"self.prefix";
+    
+    //    定界符为一个符号，如果有 Prefix，则将 Prefix 到 delimiter 之间的相同路径归为一类，
+    //    定义为 Common Prefix，然后列出所有 Common Prefix。如果没有 Prefix，则从路径起点开始
+    //    delimiter:路径分隔符 固定为 /
+    request.delimiter = @"/";
+    
+    //分页参数 默认以UTF-8二进制顺序列出条目，所有列出条目从marker开始
+    request.marker = @"上一页标识";
+    //pagesize
+    request.maxKeys = 10;
+    
+    [request setFinishBlock:^(QCloudListBucketResult * result, NSError* error) {
+        // result 返回具体信息
+        //QCloudListBucketResult.contents 桶内文件数组
+        //QCloudListBucketResult.commonPrefixes 桶内文件夹数组
+        
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
+        
+    }];
+    
+    [[QCloudCOSXMLService defaultCOSXML] GetBucket:request];
     
     //.cssg-snippet-body-end
-
+    
     [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
@@ -100,12 +140,41 @@
  * 获取对象列表与子目录
  */
 - (void)getBucketWithDelimiter {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketWithDelimiter"];
+    XCTestExpectation* exp = [self expectationWithDescription:@"getBucket"];
 
     //.cssg-snippet-body-start:[objc-get-bucket-with-delimiter]
+    QCloudGetBucketRequest* request = [QCloudGetBucketRequest new];
+    request.bucket = @"examplebucket-1250000000";
+    
+    //    单次返回的最大条目数量，默认1000
+    request.maxKeys = 1000;
+    
+    //    前缀匹配，用来规定返回的文件前缀地址
+    request.prefix = @"self.prefix";
+    
+    //    定界符为一个符号，如果有 Prefix，则将 Prefix 到 delimiter 之间的相同路径归为一类，
+    //    定义为 Common Prefix，然后列出所有 Common Prefix。如果没有 Prefix，则从路径起点开始
+    //    delimiter:路径分隔符 固定为 /
+    request.delimiter = @"/";
+    
+    //分页参数
+    request.marker = @"上一页标识";
+    
+    [request setFinishBlock:^(QCloudListBucketResult * result, NSError* error) {
+        // result 返回具体信息
+        //QCloudListBucketResult.contents 桶内文件数组
+        //QCloudListBucketResult.commonPrefixes 桶内文件夹数组
+        
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
+        
+    }];
+    
+    [[QCloudCOSXMLService defaultCOSXML] GetBucket:request];
     
     //.cssg-snippet-body-end
-
+    
     [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
@@ -113,13 +182,13 @@
 - (void)testListObjects {
     // 获取对象列表
     [self getBucket];
-        
+    
     // 获取第二页对象列表
     [self getBucketNextPage];
-        
+    
     // 获取对象列表与子目录
     [self getBucketWithDelimiter];
-        
+    
 }
 
 @end

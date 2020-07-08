@@ -25,13 +25,14 @@
     configuration.endpoint = endpoint;
     [QCloudCOSXMLService registerDefaultCOSXMLWithConfiguration:configuration];
     [QCloudCOSTransferMangerService registerDefaultCOSTransferMangerWithConfiguration:configuration];
-
+    
     // 脚手架用于获取临时密钥
     self.credentialFenceQueue = [QCloudCredentailFenceQueue new];
     self.credentialFenceQueue.delegate = self;
 }
 
-- (void) fenceQueue:(QCloudCredentailFenceQueue * )queue requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
+- (void) fenceQueue:(QCloudCredentailFenceQueue * )queue
+    requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
 {
     QCloudCredential* credential = [QCloudCredential new];
     //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
@@ -42,7 +43,7 @@
     credential.startDate = [[[NSDateFormatter alloc] init] dateFromString:@"startTime"]; // 单位是秒
     credential.experationDate = [[[NSDateFormatter alloc] init] dateFromString:@"expiredTime"];
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc]
-        initWithCredential:credential];
+                                            initWithCredential:credential];
     continueBlock(creator, nil);
 }
 
@@ -66,26 +67,39 @@
  */
 - (void)putBucketDomain {
     XCTestExpectation* exp = [self expectationWithDescription:@"putBucketDomain"];
-
-    //.cssg-snippet-body-start:[objc-put-bucket-domain]
-    QCloudPutBucketDomainRequest *req = [QCloudPutBucketDomainRequest new];
-        req.bucket = @"examplebucket-1250000000";
-        QCloudDomainConfiguration *config = [QCloudDomainConfiguration new];
-        QCloudDomainRule *rule = [QCloudDomainRule new];
-        rule.status = QCloudDomainStatueEnabled;
-        rule.name = @"www.baidu.com";
-        rule.replace = QCloudCOSDomainReplaceTypeTxt;
-        rule.type = QCloudCOSDomainTypeRest;
-        config.rules = @[rule];
-        req.domain  = config;
-        [req setFinishBlock:^(id outputObject, NSError *error) {
     
-        }];
-          [[QCloudCOSXMLService defaultCOSXML]PutBucketDomain:req];
+    //.cssg-snippet-body-start:[objc-put-bucket-domain]
+    
+    QCloudPutBucketDomainRequest *req = [QCloudPutBucketDomainRequest new];
+    
+    req.bucket = @"examplebucket-1250000000";
+    QCloudDomainConfiguration *config = [QCloudDomainConfiguration new];
+    QCloudDomainRule *rule = [QCloudDomainRule new];
+    
+    rule.status = QCloudDomainStatueEnabled;
+    rule.name = @"www.baidu.com";
+    
+    //替换已存在的配置、有效值CNAME/TXT 填写则强制校验域名所有权之后，再下发配置
+    rule.replace = QCloudCOSDomainReplaceTypeTxt;
+    rule.type = QCloudCOSDomainTypeRest;
+    
+    //规则描述集合的数组
+    config.rules = @[rule];
+    
+    //域名配置的规则
+    req.domain  = config;
+    
+    [req setFinishBlock:^(id outputObject, NSError *error) {
+        
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(outputObject);
+    }];
+    [[QCloudCOSXMLService defaultCOSXML]PutBucketDomain:req];
     
     
     //.cssg-snippet-body-end
-
+    
     [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
@@ -94,18 +108,21 @@
  */
 - (void)getBucketDomain {
     XCTestExpectation* exp = [self expectationWithDescription:@"getBucketDomain"];
-
+    
     //.cssg-snippet-body-start:[objc-get-bucket-domain]
     QCloudGetBucketDomainRequest *getReq =  [QCloudGetBucketDomainRequest new];
     getReq.bucket = @"examplebucket-1250000000";
-    [getReq setFinishBlock:^(QCloudDomainConfiguration * _Nonnull result, NSError * _Nonnull error) {
-    
+    [getReq setFinishBlock:^(QCloudDomainConfiguration * _Nonnull result,
+                             NSError * _Nonnull error) {
+        
+        [exp fulfill];
+        XCTAssertNil(error);
+        XCTAssertNotNil(result);
     }];
     [[QCloudCOSXMLService defaultCOSXML]GetBucketDomain:getReq];
     
-    
     //.cssg-snippet-body-end
-
+    
     [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
@@ -113,10 +130,10 @@
 - (void)testBucketDomain {
     // 设置存储桶源站
     [self putBucketDomain];
-        
+    
     // 获取存储桶源站
     [self getBucketDomain];
-        
+    
 }
 
 @end
