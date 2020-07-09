@@ -75,6 +75,7 @@
     request.bucket = @"examplebucket-1250000000";
     [request setFinishBlock:^(id outputObject, NSError* error) {
         //可以从 outputObject 中获取服务器返回的 header 信息
+        NSDictionary * result = (NSDictionary *)outputObject;
         //  x-cos-bucket-az-type    存储桶 AZ 类型，当存储桶为多 AZ 存储桶时返回此头部，
         //  值固定为 MAZ。
         

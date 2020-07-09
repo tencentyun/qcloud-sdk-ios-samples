@@ -88,7 +88,8 @@
     
     
     [put setFinishBlock:^(id outputObject, NSError *error) {
-      
+      //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+      NSDictionary * result = (NSDictionary *)outputObject;
     }];
     
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];

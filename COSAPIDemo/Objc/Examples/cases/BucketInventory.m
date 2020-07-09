@@ -136,7 +136,8 @@
     config.optionalFields = fields;
     putReq.inventoryConfiguration = config;
     [putReq setFinishBlock:^(id outputObject, NSError *error) {
-        
+        //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+        NSDictionary * result = (NSDictionary *)outputObject;
 
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucketInventory:putReq];
@@ -176,7 +177,8 @@
     //清单任务的名称
     delReq.inventoryID = @"list1";
     [delReq setFinishBlock:^(id outputObject, NSError *error) {
-    
+    //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+    NSDictionary * result = (NSDictionary *)outputObject;
         
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucketInventory:delReq];
