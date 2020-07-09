@@ -68,7 +68,6 @@
  */
 - (void)putBucketAcl {
     
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketAcl"];
 
     //.cssg-snippet-body-start:[objc-put-bucket-acl]
     QCloudPutBucketACLRequest* putACL = [QCloudPutBucketACLRequest new];
@@ -91,24 +90,20 @@
     
     [putACL setFinishBlock:^(id outputObject, NSError *error) {
         //可以从 outputObject 中获取服务器返回的 header 信息
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        NSDictionary * result = (NSDictionary *)outputObject;
+
     }];
     // 设置acl
     [[QCloudCOSXMLService defaultCOSXML] PutBucketACL:putACL];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 获取存储桶 ACL
  */
 - (void)getBucketAcl {
-    
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketAcl"];
     
     //.cssg-snippet-body-start:[objc-get-bucket-acl]
     
@@ -120,16 +115,13 @@
     [getBucketACl setFinishBlock:^(QCloudACLPolicy * _Nonnull result,
                                            NSError * _Nonnull error) {
         //QCloudACLPolicy 中包含了 Bucket 的 ACL 信息
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+        
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] GetBucketACL:getBucketACl];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

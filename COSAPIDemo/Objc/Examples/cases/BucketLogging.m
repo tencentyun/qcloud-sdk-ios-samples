@@ -67,7 +67,6 @@
  * 开启存储桶日志服务
  */
 - (void)putBucketLogging {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketLogging"];
 
     //.cssg-snippet-body-start:[objc-put-bucket-logging]
     QCloudPutBucketLoggingRequest *request = [QCloudPutBucketLoggingRequest new];
@@ -87,23 +86,19 @@
     request.bucketLoggingStatus = status;
     request.bucket = @"examplebucket-1250000000";
     [request setFinishBlock:^(id outputObject, NSError *error) {
-    
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+       //outputObject 包含所有的响应 http 头部
+       NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucketLogging:request];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 获取存储桶日志服务
  */
 - (void)getBucketLogging {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketLogging"];
 
     //.cssg-snippet-body-start:[objc-get-bucket-logging]
     QCloudGetBucketLoggingRequest *getReq = [QCloudGetBucketLoggingRequest new];
@@ -114,16 +109,11 @@
                              NSError * _Nonnull error) {
         NSLog(@"getReq result = %@",result.loggingEnabled.targetBucket);
     
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
     }];
     [[QCloudCOSXMLService defaultCOSXML]GetBucketLogging:getReq];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

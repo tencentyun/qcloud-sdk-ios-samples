@@ -54,7 +54,6 @@ class BucketWebsite: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
      * 设置存储桶静态网站
      */
     func putBucketWebsite() {
-        let exception = XCTestExpectation.init(description: "putBucketWebsite");
         
         //.cssg-snippet-body-start:[swift-put-bucket-website]
         let req = QCloudPutBucketWebsiteRequest.init();
@@ -124,16 +123,12 @@ class BucketWebsite: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
                 print( result!);
             }
             
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result)
-            
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketWebsite(req);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     
@@ -141,7 +136,6 @@ class BucketWebsite: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
      * 获取存储桶静态网站
      */
     func getBucketWebsite() {
-        let exception = XCTestExpectation.init(description: "getBucketWebsite");
         
         //.cssg-snippet-body-start:[swift-get-bucket-website]
         let req = QCloudGetBucketWebsiteRequest.init();
@@ -154,21 +148,18 @@ class BucketWebsite: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
             }else{
                 print( result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result)
+                
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketWebsite(req);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     
     // 删除存储桶静态网站
     func deleteBucketWebsite() {
-        let exception = XCTestExpectation.init(description: "deleteBucketWebsite");
         
         //.cssg-snippet-body-start:[swift-delete-bucket-website]
         let delReq = QCloudDeleteBucketWebsiteRequest.init();
@@ -180,16 +171,14 @@ class BucketWebsite: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
             }else{
                 print( result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result)
+               
+               
+                
         }
         
         QCloudCOSXMLService.defaultCOSXML().deleteBucketWebsite(delReq);
         
         //.cssg-snippet-body-end
-        
-        self.wait(for: [exception], timeout: 100);
     }
     
     

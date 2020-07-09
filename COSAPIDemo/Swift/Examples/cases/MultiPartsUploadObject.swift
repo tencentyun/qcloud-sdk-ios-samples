@@ -58,7 +58,6 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
     
     // 初始化分片上传
     func initMultiUpload() {
-        let exception = XCTestExpectation.init(description: "initMultiUpload");
         
         //.cssg-snippet-body-start:[swift-init-multi-upload]
         let initRequest = QCloudInitiateMultipartUploadRequest.init();
@@ -91,21 +90,20 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
                 self.uploadId = result!.uploadId;
                 print(result!.uploadId);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().initiateMultipartUpload(initRequest);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     
     // 列出所有未完成的分片上传任务
     func listMultiUpload() {
-        let exception = XCTestExpectation.init(description: "listMultiUpload");
         
         //.cssg-snippet-body-start:[swift-list-multi-upload]
         let listParts = QCloudListBucketMultipartUploadsRequest.init();
@@ -117,21 +115,20 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
             }else{
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().listBucketMultipartUploads(listParts);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     
     // 上传一个分片
     func uploadPart() {
-        let exception = XCTestExpectation.init(description: "uploadPart");
         
         //.cssg-snippet-body-start:[swift-upload-part]
         
@@ -158,9 +155,9 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
                 // 保存起来用于最好完成上传时使用
                 self.parts = [mutipartInfo];
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         uploadPart.sendProcessBlock = {(bytesSent,totalBytesSent,totalBytesExpectedToSend) in
             //上传进度信息
@@ -171,7 +168,7 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     
@@ -181,7 +178,6 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
      * COS 支持查询 Bucket 中有哪些正在进行中的分块上传对象，单次请求操作最多列出 1000 个正在进行中的 分块上传对象.
      */
     func listParts() {
-        let exception = XCTestExpectation.init(description: "listParts");
         
         //.cssg-snippet-body-start:[swift-list-parts]
         let req = QCloudListMultipartRequest.init();
@@ -199,22 +195,22 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
                 //从 result 中获取已上传分块信息
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         
         QCloudCOSXMLService.defaultCOSXML().listMultipart(req);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     
     // 完成分片上传任务
     func completeMultiUpload() {
-        let exception = XCTestExpectation.init(description: "completeMultiUpload");
+
         
         //.cssg-snippet-body-start:[swift-complete-multi-upload]
         let  complete = QCloudCompleteMultipartUploadRequest.init();
@@ -245,15 +241,15 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
                 //从 result 中获取上传结果
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().completeMultipartUpload(complete);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     

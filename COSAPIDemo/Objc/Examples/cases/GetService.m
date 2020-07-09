@@ -66,7 +66,6 @@
  * 获取存储桶列表
  */
 - (void)getService {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getService"];
 
     //.cssg-snippet-body-start:[objc-get-service]
     
@@ -77,41 +76,38 @@
     [request setFinishBlock:^(QCloudListAllMyBucketsResult* result,
                               NSError* error) {
         //从 result 中获取返回信息
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+        
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetService:request];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 获取地域的存储桶列表
  */
 - (void)getRegionalService {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getRegionalService"];
+    
 
     //.cssg-snippet-body-start:[objc-get-regional-service]
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 /**
  * 计算签名
  */
 - (void)getAuthorization {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getAuthorization"];
+    
 
     //.cssg-snippet-body-start:[objc-get-authorization]
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 

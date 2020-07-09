@@ -66,7 +66,6 @@
  * 设置存储桶静态网站
  */
 - (void)putBucketWebsite {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketWebsite"];
     
     //.cssg-snippet-body-start:[objc-put-bucket-website]
     NSString *bucket = @"examplebucket-1250000000";
@@ -129,24 +128,20 @@
     
     
     [putReq setFinishBlock:^(id outputObject, NSError *error) {
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] PutBucketWebsite:putReq];
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 获取存储桶静态网站
  */
 - (void)getBucketWebsite {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketWebsite"];
     
     //.cssg-snippet-body-start:[objc-get-bucket-website]
     QCloudGetBucketWebsiteRequest *getReq = [QCloudGetBucketWebsiteRequest new];
@@ -154,39 +149,32 @@
     [getReq setFinishBlock:^(QCloudWebsiteConfiguration *  result,
                              NSError * error) {
         
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetBucketWebsite:getReq];
     
     
     //.cssg-snippet-body-end
-    
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+
 }
 
 /**
  * 删除存储桶静态网站
  */
 - (void)deleteBucketWebsite {
-    XCTestExpectation* exp = [self expectationWithDescription:@"deleteBucketWebsite"];
     
     //.cssg-snippet-body-start:[objc-delete-bucket-website]
     QCloudDeleteBucketWebsiteRequest *delReq = [QCloudDeleteBucketWebsiteRequest new];
     delReq.bucket = @"examplebucket-1250000000";
     [delReq setFinishBlock:^(id outputObject, NSError *error) {
         
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucketWebsite:delReq];
     
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

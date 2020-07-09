@@ -52,7 +52,7 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
 
     // 设置存储桶清单任务
     func putBucketInventory() {
-        let exception = XCTestExpectation.init(description: "putBucketInventory");
+        
       
         //.cssg-snippet-body-start:[swift-put-bucket-inventory]
         let putReq = QCloudPutBucketInventoryRequest.init();
@@ -130,9 +130,7 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
             }else{
                 print( result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+       
         }
         
         QCloudCOSXMLService.defaultCOSXML().putBucketInventory(putReq);
@@ -140,13 +138,12 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 获取存储桶清单任务
     func getBucketInventory() {
-        let exception = XCTestExpectation.init(description: "getBucketInventory");
+
       
         //.cssg-snippet-body-start:[swift-get-bucket-inventory]
         let req = QCloudGetBucketInventoryRequest.init();
@@ -160,22 +157,20 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
             }else{
                 print( result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+    
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketInventory(req);
         
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+
     }
 
 
     // 删除存储桶清单任务
     func deleteBucketInventory() {
-        let exception = XCTestExpectation.init(description: "deleteBucketInventory");
+        
       
         //.cssg-snippet-body-start:[swift-delete-bucket-inventory]
         let delReq = QCloudDeleteBucketInventoryRequest.init();
@@ -189,9 +184,7 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
             }else{
                 print( result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+            
         }
         
         QCloudCOSXMLService.defaultCOSXML().deleteBucketInventory(delReq);
@@ -199,7 +192,7 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+        
     }
 
 

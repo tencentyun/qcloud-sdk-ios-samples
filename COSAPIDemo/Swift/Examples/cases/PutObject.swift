@@ -53,7 +53,7 @@ class PutObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     
     // 简单上传对象
     func putObject() {
-        let exception = XCTestExpectation.init(description: "putObject");
+        
         
         //.cssg-snippet-body-start:[swift-put-object]
         let putObject = QCloudPutObjectRequest<AnyObject>.init();
@@ -67,15 +67,15 @@ class PutObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
             }else{
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().putObject(putObject);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     

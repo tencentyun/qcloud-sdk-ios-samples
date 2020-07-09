@@ -66,7 +66,6 @@
  * 下载对象
  */
 - (void)getObject {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getObject"];
 
     //.cssg-snippet-body-start:[objc-get-object]
     QCloudGetObjectRequest* request = [QCloudGetObjectRequest new];
@@ -81,10 +80,7 @@
     
     [request setFinishBlock:^(id outputObject, NSError *error) {
         //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [request setDownProcessBlock:^(int64_t bytesDownload, int64_t totalBytesDownload,
         int64_t totalBytesExpectedToDownload) {
@@ -98,8 +94,6 @@
     [[QCloudCOSXMLService defaultCOSXML] GetObject:request];
     
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

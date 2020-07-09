@@ -59,7 +59,7 @@ class AbortMultiPartsUpload: XCTestCase,QCloudSignatureProvider,QCloudCredentail
      * 作.分块上传适合于在弱网络或高带宽环境下上传较大的对象
      */
     func initMultiUpload() {
-        let exception = XCTestExpectation.init(description: "initMultiUpload");
+        
         
         //.cssg-snippet-body-start:[swift-init-multi-upload]
         let initRequest = QCloudInitiateMultipartUploadRequest.init();
@@ -74,15 +74,13 @@ class AbortMultiPartsUpload: XCTestCase,QCloudSignatureProvider,QCloudCredentail
                 self.uploadId = result!.uploadId;
                 print(result!.uploadId);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+            
         }
         QCloudCOSXMLService.defaultCOSXML().initiateMultipartUpload(initRequest);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+        
     }
     
     
@@ -94,7 +92,7 @@ class AbortMultiPartsUpload: XCTestCase,QCloudSignatureProvider,QCloudCredentail
      * 或者舍弃分块上传.
      */
     func abortMultiUpload() {
-        let exception = XCTestExpectation.init(description: "abortMultiUpload");
+        
         
         //.cssg-snippet-body-start:[swift-abort-multi-upload]
         let abort = QCloudAbortMultipfartUploadRequest.init();
@@ -114,15 +112,13 @@ class AbortMultiPartsUpload: XCTestCase,QCloudSignatureProvider,QCloudCredentail
                 //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+            
         }
         QCloudCOSXMLService.defaultCOSXML().abortMultipfartUpload(abort);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+
     }
     
     

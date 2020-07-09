@@ -68,7 +68,6 @@
  * 初始化分片上传
  */
 - (void)initMultiUpload {
-    XCTestExpectation* exp = [self expectationWithDescription:@"initMultiUpload"];
     
     //.cssg-snippet-body-start:[objc-init-multi-upload]
     QCloudInitiateMultipartUploadRequest* initrequest = [QCloudInitiateMultipartUploadRequest new];
@@ -98,16 +97,12 @@
         //获取分块上传的 uploadId，后续的上传都需要这个 ID，请保存以备后续使用
         outputObject.uploadId = @"exampleUploadId";
         
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] InitiateMultipartUpload:initrequest];
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
@@ -116,7 +111,6 @@
  * COS 支持查询 Bucket 中有哪些正在进行中的分块上传对象，单次请求操作最多列出 1000 个正在进行中的 分块上传对象.
  */
 - (void)listMultiUpload {
-    XCTestExpectation* exp = [self expectationWithDescription:@"listMultiUpload"];
     
     //.cssg-snippet-body-start:[objc-list-multi-upload]
     QCloudListBucketMultipartUploadsRequest* uploads = [QCloudListBucketMultipartUploadsRequest new];
@@ -131,24 +125,20 @@
     [uploads setFinishBlock:^(QCloudListMultipartUploadsResult* result,
                               NSError *error) {
         //可以从 result 中返回分块信息
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+    
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] ListBucketMultipartUploads:uploads];
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 /**
  * 上传一个分片
  */
 - (void)uploadPart {
-    XCTestExpectation* exp = [self expectationWithDescription:@"uploadPart"];
     
     //.cssg-snippet-body-start:[objc-upload-part]
     QCloudUploadPartRequest* request = [QCloudUploadPartRequest new];
@@ -173,17 +163,13 @@
         part.partNumber = @"1";
         // 保存起来用于最好完成上传时使用
         self.parts = @[part];
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+   
     }];
     
     [[QCloudCOSXMLService defaultCOSXML]  UploadPart:request];
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
@@ -192,7 +178,6 @@
  * 因此，基于此可以完成续传功能.
  */
 - (void)listParts {
-    XCTestExpectation* exp = [self expectationWithDescription:@"listParts"];
     
     //.cssg-snippet-body-start:[objc-list-parts]
     QCloudListMultipartRequest* request = [QCloudListMultipartRequest new];
@@ -204,24 +189,19 @@
     [request setFinishBlock:^(QCloudListPartsResult * _Nonnull result,
                               NSError * _Nonnull error) {
         //从 result 中获取已上传分块信息
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+    
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] ListMultipart:request];
     
     //.cssg-snippet-body-end
-    
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+
 }
 
 /**
  * 完成分片上传任务
  */
 - (void)completeMultiUpload {
-    XCTestExpectation* exp = [self expectationWithDescription:@"completeMultiUpload"];
     
     //.cssg-snippet-body-start:[objc-complete-multi-upload]
     QCloudCompleteMultipartUploadRequest *completeRequst = [QCloudCompleteMultipartUploadRequest new];
@@ -250,17 +230,13 @@
     [completeRequst setFinishBlock:^(QCloudUploadObjectResult * _Nonnull result,
                                      NSError * _Nonnull error) {
         //从 result 中获取上传结果
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+       
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] CompleteMultipartUpload:completeRequst];
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

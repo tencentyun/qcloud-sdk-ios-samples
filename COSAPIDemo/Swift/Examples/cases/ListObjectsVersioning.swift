@@ -52,7 +52,6 @@ class ListObjectsVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentail
     
     // 获取对象多版本列表第一页数据
     func listObjectsVersioning() {
-        let exception = XCTestExpectation.init(description: "listObjectsVersioning");
         
         //.cssg-snippet-body-start:[swift-list-objects-versioning]
         let listObjectVersionsRequest :QCloudListObjectVersionsRequest = QCloudListObjectVersionsRequest();
@@ -69,21 +68,17 @@ class ListObjectsVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentail
         listObjectVersionsRequest.setFinish { (result, error) in
             //result.deleteMarker; // 已删除的文件
             //result.versionContent;  对象版本条目
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
         }
         
         QCloudCOSXMLService.defaultCOSXML().listObjectVersions(listObjectVersionsRequest);
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
     }
     
     
     // 获取对象多版本列表下一页数据
     func listObjectsVersioningNextPage() {
-        let exception = XCTestExpectation.init(description: "listObjectsVersioningNextPage");
         
         //.cssg-snippet-body-start:[swift-list-objects-versioning-next-page]
         let listObjectVersionsRequest :QCloudListObjectVersionsRequest = QCloudListObjectVersionsRequest();
@@ -102,15 +97,15 @@ class ListObjectsVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentail
         listObjectVersionsRequest.setFinish { (result, error) in
             //result.deleteMarker; // 已删除的文件
             //result.versionContent;  对象版本条目
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         
         QCloudCOSXMLService.defaultCOSXML().listObjectVersions(listObjectVersionsRequest);
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     

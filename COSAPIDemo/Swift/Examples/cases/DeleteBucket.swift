@@ -52,7 +52,6 @@ class DeleteBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
 
     // 删除存储桶
     func deleteBucket() {
-        let exception = XCTestExpectation.init(description: "deleteBucket");
       
         //.cssg-snippet-body-start:[swift-delete-bucket]
         let deleteBucketReq = QCloudDeleteBucketRequest.init();
@@ -65,15 +64,11 @@ class DeleteBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
             }else{
                 print(result!);
             }
-            exception.fulfill();
-                       XCTAssertNil(error);
-                       XCTAssertNotNil(result)
         }
         QCloudCOSXMLService.defaultCOSXML().deleteBucket(deleteBucketReq);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
     }
 
 

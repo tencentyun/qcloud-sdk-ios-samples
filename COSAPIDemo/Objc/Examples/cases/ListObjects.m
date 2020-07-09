@@ -66,7 +66,6 @@
  * 查询存储桶（Bucket) 下的部分或者全部对象的方法.
  */
 - (void)getBucket {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucket"];
     
     //.cssg-snippet-body-start:[objc-get-bucket]
     QCloudGetBucketRequest* request = [QCloudGetBucketRequest new];
@@ -79,10 +78,7 @@
         // result 返回具体信息
         //QCloudListBucketResult.contents 桶内文件数组
         //QCloudListBucketResult.commonPrefixes 桶内文件夹数组
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+  
         
     }];
     
@@ -90,14 +86,12 @@
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 获取第二页对象列表
  */
 - (void)getBucketNextPage {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketNextPage"];
     
     //.cssg-snippet-body-start:[objc-get-bucket-next-page]
     QCloudGetBucketRequest* request = [QCloudGetBucketRequest new];
@@ -112,25 +106,19 @@
         // result 返回具体信息
         //QCloudListBucketResult.contents 桶内文件数组
         //QCloudListBucketResult.commonPrefixes 桶内文件夹数组
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+       
         
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] GetBucket:request];
     
     //.cssg-snippet-body-end
-    
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 获取对象列表与子目录
  */
 - (void)getBucketWithDelimiter {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucket"];
 
     //.cssg-snippet-body-start:[objc-get-bucket-with-delimiter]
     QCloudGetBucketRequest* request = [QCloudGetBucketRequest new];
@@ -154,10 +142,7 @@
         // result 返回具体信息
         //QCloudListBucketResult.contents 桶内文件数组
         //QCloudListBucketResult.commonPrefixes 桶内文件夹数组
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+
         
     }];
     
@@ -165,7 +150,6 @@
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

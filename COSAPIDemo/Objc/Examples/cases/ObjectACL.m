@@ -66,7 +66,6 @@
  * 设置对象访问权限控制列表
  */
 - (void)putObjectAcl {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putObjectAcl"];
 
     //.cssg-snippet-body-start:[objc-put-object-acl]
     QCloudPutObjectACLRequest* request = [QCloudPutObjectACLRequest new];
@@ -85,24 +84,18 @@
     
     [request setFinishBlock:^(id outputObject, NSError *error) {
         //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] PutObjectACL:request];
     
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 查询对象访问权限控制列表
  */
 - (void)getObjectAcl {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getObjectAcl"];
 
     //.cssg-snippet-body-start:[objc-get-object-acl]
     QCloudGetObjectACLRequest *request = [QCloudGetObjectACLRequest new];
@@ -119,17 +112,12 @@
         
         // result.accessControlList; 被授权者与权限的信息
         // result.owner; 持有者的信息
-
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] GetObjectACL:request];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

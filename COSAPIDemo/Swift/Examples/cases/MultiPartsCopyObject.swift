@@ -62,7 +62,7 @@ class MultiPartsCopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
      * uploadPartAsync(UploadPartRequest, CosXmlResultListener)上传各 个分块.
      */
     func initMultiUpload() {
-        let exception = XCTestExpectation.init(description: "initMultiUpload");
+        
         
         //.cssg-snippet-body-start:[swift-init-multi-upload]
         let initRequest = QCloudInitiateMultipartUploadRequest.init();
@@ -80,9 +80,7 @@ class MultiPartsCopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
                 self.uploadId = result!.uploadId;
                 print(result!.uploadId);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+
         }
         
         //初始化上传
@@ -90,7 +88,7 @@ class MultiPartsCopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     
@@ -103,7 +101,7 @@ class MultiPartsCopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
      * 并修改其中的元数据,复制对象时，默认将继承原对象的元数据，但创建日期将会按新对象的时间计算.
      */
     func uploadPartCopy() {
-        let exception = XCTestExpectation.init(description: "uploadPartCopy");
+        
         
         //.cssg-snippet-body-start:[swift-upload-part-copy]
         let req = QCloudUploadPartCopyRequest.init();
@@ -131,15 +129,15 @@ class MultiPartsCopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
                 self.parts = [mutipartInfo];
             }
             
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().uploadPartCopy(req);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     
@@ -151,7 +149,7 @@ class MultiPartsCopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
      * 用来校验块的准 确性.
      */
     func completeMultiUpload() {
-        let exception = XCTestExpectation.init(description: "completeMultiUpload");
+    
         
         //.cssg-snippet-body-start:[swift-complete-multi-upload]
         let  complete = QCloudCompleteMultipartUploadRequest.init();
@@ -183,15 +181,15 @@ class MultiPartsCopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
                 //从 result 中获取上传结果
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().completeMultipartUpload(complete);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     

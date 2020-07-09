@@ -71,7 +71,6 @@
  * 4:设置存储桶的版本控制功能，您需要有存储桶的写权限。
  */
 - (void)putBucketVersioning {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketVersioning"];
 
     //.cssg-snippet-body-start:[objc-put-bucket-versioning]
     //开启版本控制
@@ -89,16 +88,12 @@
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
         //可以从 outputObject 中获取服务器返回的 header 信息
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucketVersioning:request];
     
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
@@ -109,7 +104,6 @@
  *  2:有三种版本控制状态：未启用版本控制、启用版本控制和暂停版本控制。
  */
 - (void)getBucketVersioning {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketVersioning"];
 
     //.cssg-snippet-body-start:[objc-get-bucket-versioning]
     QCloudGetBucketVersioningRequest* request =
@@ -120,16 +114,13 @@
     [request setFinishBlock:^(QCloudBucketVersioningConfiguration* result,
                               NSError* error) {
         
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+    
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] GetBucketVersioning:request];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

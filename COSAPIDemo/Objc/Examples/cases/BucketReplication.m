@@ -68,7 +68,7 @@
  * 求会替换现有配置。
  */
 - (void)putBucketReplication {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketReplication"];
+    
 
     //.cssg-snippet-body-start:[objc-put-bucket-replication]
     QCloudPutBucketReplicationRequest* request = [[QCloudPutBucketReplicationRequest alloc] init];
@@ -104,23 +104,20 @@
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
         //可以从 outputObject 中获取服务器返回的 header 信息
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucketRelication:request];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 接口用于查询存储桶中用户跨地域复制配置信息。用户发起该请求时需获得请求签名，表明该请求已获得许可。
  */
 - (void)getBucketReplication {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketReplication"];
+    
 
     //.cssg-snippet-body-start:[objc-get-bucket-replication]
     QCloudGetBucketReplicationRequest* request = [[QCloudGetBucketReplicationRequest alloc] init];
@@ -128,24 +125,20 @@
     
     [request setFinishBlock:^(QCloudBucketReplicationConfiguation* result,
                               NSError* error) {
-        //可以从 result 中获取返回信息
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
+       
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetBucketReplication:request];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 用来删除存储桶中的跨地域复制配置。用户发起该请求时需获得请求签名，表明该请求已获得许可。
  */
 - (void)deleteBucketReplication {
-    XCTestExpectation* exp = [self expectationWithDescription:@"deleteBucketReplication"];
 
     //.cssg-snippet-body-start:[objc-delete-bucket-replication]
     QCloudDeleteBucketReplicationRequest* request =
@@ -154,17 +147,13 @@
     request.bucket = @"examplebucket-1250000000";
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
-        //可以从 outputObject 中获取服务器返回的 header 信息
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucketReplication:request];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

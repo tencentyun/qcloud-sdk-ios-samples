@@ -55,7 +55,6 @@ class ModifyObjectProperty: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
      * 然后自定义元数据，复制成功以后，删除源文件；
      */
     func modifyObjectMetadata() {
-        let exception = XCTestExpectation.init(description: "modifyObjectMetadata");
         
         //.cssg-snippet-body-start:[swift-modify-object-metadata]
         let request : QCloudPutObjectCopyRequest = QCloudPutObjectCopyRequest();
@@ -85,21 +84,19 @@ class ModifyObjectProperty: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
         request.versionID = "versionID";
         request.setFinish { (result, error) in
             //result 返回具体信息
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
         }
         
         QCloudCOSXMLService.defaultCOSXML().putObjectCopy(request);
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     
     // 修改对象存储类型
     func modifyObjectStorageClass() {
-        let exception = XCTestExpectation.init(description: "modifyObjectStorageClass");
+        
         
         //.cssg-snippet-body-start:[swift-modify-object-storage-class]
         let request : QCloudPutObjectCopyRequest = QCloudPutObjectCopyRequest();
@@ -120,15 +117,15 @@ class ModifyObjectProperty: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
         request.versionID = "versionID";
         request.setFinish { (result, error) in
             //result 返回具体信息
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         
         QCloudCOSXMLService.defaultCOSXML().putObjectCopy(request);
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     

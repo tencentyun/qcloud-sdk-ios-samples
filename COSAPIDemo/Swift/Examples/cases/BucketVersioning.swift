@@ -59,7 +59,7 @@ class BucketVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
     * 4:设置存储桶的版本控制功能，您需要有存储桶的写权限。
     */
     func putBucketVersioning() {
-        let exception = XCTestExpectation.init(description: "putBucketVersioning");
+
       
         //.cssg-snippet-body-start:[swift-put-bucket-versioning]
         //开启版本控制
@@ -82,15 +82,13 @@ class BucketVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
             }else{
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketVersioning(putBucketVersioning);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 
@@ -102,7 +100,6 @@ class BucketVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
     *  2:有三种版本控制状态：未启用版本控制、启用版本控制和暂停版本控制。
     */
     func getBucketVersioning() {
-        let exception = XCTestExpectation.init(description: "getBucketVersioning");
       
         //.cssg-snippet-body-start:[swift-get-bucket-versioning]
         let getBucketVersioning = QCloudGetBucketVersioningRequest.init();
@@ -115,16 +112,12 @@ class BucketVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
             }else{
                 print(config!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(config);
-
+               
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketVersioning(getBucketVersioning);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
     }
 
 

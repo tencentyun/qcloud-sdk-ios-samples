@@ -52,7 +52,7 @@ class BucketLogging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
 
     // 开启存储桶日志服务
     func putBucketLogging() {
-        let exception = XCTestExpectation.init(description: "putBucketLogging");
+        
       
         //.cssg-snippet-body-start:[swift-put-bucket-logging]
         let req = QCloudPutBucketLoggingRequest.init();
@@ -78,9 +78,7 @@ class BucketLogging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
             }else{
                 print( result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+          
         }
         
         QCloudCOSXMLService.defaultCOSXML().putBucketLogging(req);
@@ -88,13 +86,13 @@ class BucketLogging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+        
     }
 
 
     // 获取存储桶日志服务
     func getBucketLogging() {
-        let exception = XCTestExpectation.init(description: "getBucketLogging");
+        
       
         //.cssg-snippet-body-start:[swift-get-bucket-logging]
         let req = QCloudGetBucketLoggingRequest.init();
@@ -108,16 +106,14 @@ class BucketLogging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
             }else{
                 print( result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
         };
         QCloudCOSXMLService.defaultCOSXML().getBucketLogging(req);
         
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 

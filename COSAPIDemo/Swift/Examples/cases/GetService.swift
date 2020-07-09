@@ -52,7 +52,6 @@ class GetService: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
 
     // 获取存储桶列表
     func getService() {
-        let exception = XCTestExpectation.init(description: "getService");
       
         //.cssg-snippet-body-start:[swift-get-service]
         
@@ -67,39 +66,38 @@ class GetService: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
                 //从 result 中获取返回信息
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().getService(getServiceReq);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 
     // 获取地域的存储桶列表
     func getRegionalService() {
-        let exception = XCTestExpectation.init(description: "getRegionalService");
       
         //.cssg-snippet-body-start:[swift-get-regional-service]
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 
     // 计算签名
     func getAuthorization() {
-        let exception = XCTestExpectation.init(description: "getAuthorization");
+        
       
         //.cssg-snippet-body-start:[swift-get-authorization]
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 

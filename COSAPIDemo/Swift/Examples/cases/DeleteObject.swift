@@ -52,7 +52,6 @@ class DeleteObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
     
     // 删除对象
     func deleteObject() {
-        let exception = XCTestExpectation.init(description: "deleteObject");
         
         //.cssg-snippet-body-start:[swift-delete-object]
         let deleteObject = QCloudDeleteObjectRequest.init();
@@ -69,21 +68,19 @@ class DeleteObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
             }else{
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result)
+               
+               
+                
         }
         QCloudCOSXMLService.defaultCOSXML().deleteObject(deleteObject);
         
         //.cssg-snippet-body-end
-        
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     
     // 删除多个对象
     func deleteMultiObject() {
-        let exception = XCTestExpectation.init(description: "deleteMultiObject");
         
         //.cssg-snippet-body-start:[swift-delete-multi-object]
         let mutipleDel = QCloudDeleteMultipleObjectRequest.init();
@@ -119,16 +116,12 @@ class DeleteObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
             }else{
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result)
-            
+               
         }
         QCloudCOSXMLService.defaultCOSXML().deleteMultipleObject(mutipleDel);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
     }
     
     

@@ -66,7 +66,6 @@
  * 用于为存储桶设置键值对作为存储桶标签，可以协助您管理已有的存储桶资源，并通过标签进行成本管理。
  */
 - (void)putBucketTagging {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketTagging"];
     
     //.cssg-snippet-body-start:[objc-put-bucket-tagging]
     QCloudPutBucketTaggingRequest *putReq = [QCloudPutBucketTaggingRequest new];
@@ -97,23 +96,20 @@
     putReq.taggings = taggings;
     
     [putReq setFinishBlock:^(id outputObject, NSError *error) {
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucketTagging:putReq];
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 /**
  * 用于查询指定存储桶下已有的存储桶标签。
  */
 - (void)getBucketTagging {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketTagging"];
     
     //.cssg-snippet-body-start:[objc-get-bucket-tagging]
     QCloudGetBucketTaggingRequest *getReq = [QCloudGetBucketTaggingRequest new];
@@ -121,23 +117,20 @@
     //存储桶名称
     getReq.bucket = @"examplebucket-1250000000";
     [getReq setFinishBlock:^(QCloudBucketTagging * result, NSError * error) {
+
         
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetBucketTagging:getReq];
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 用于删除指定存储桶下已有的存储桶标签。
  */
 - (void)deleteBucketTagging {
-    XCTestExpectation* exp = [self expectationWithDescription:@"deleteBucketTagging"];
+    
     
     //.cssg-snippet-body-start:[objc-delete-bucket-tagging]
     QCloudDeleteBucketTaggingRequest *delReq = [QCloudDeleteBucketTaggingRequest new];
@@ -145,16 +138,13 @@
     //存储桶名称
     delReq.bucket =  @"examplebucket-1250000000";
     [delReq setFinishBlock:^(id outputObject, NSError *error) {
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucketTagging:delReq];
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

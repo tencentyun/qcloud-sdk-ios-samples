@@ -52,7 +52,6 @@ class GetObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     
     // 下载对象
     func getObject() {
-        let exception = XCTestExpectation.init(description: "getObject");
         
         //.cssg-snippet-body-start:[swift-get-object]
         let getObject = QCloudGetObjectRequest.init();
@@ -68,9 +67,9 @@ class GetObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
             }else{
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result)
+               
+               
+                
         };
         getObject.downProcessBlock = {(bytesDownload, totalBytesDownload,  totalBytesExpectedToDownload) in
             //      bytesDownload       一次下载的字节数，
@@ -83,7 +82,7 @@ class GetObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     

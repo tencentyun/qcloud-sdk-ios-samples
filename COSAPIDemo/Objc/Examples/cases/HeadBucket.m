@@ -69,7 +69,6 @@
  * 存储桶不存在，返回 HTTP 状态码为404。
  */
 - (void)headBucket {
-    XCTestExpectation* exp = [self expectationWithDescription:@"headBucket"];
 
     //.cssg-snippet-body-start:[objc-head-bucket]
     QCloudHeadBucketRequest* request = [QCloudHeadBucketRequest new];
@@ -81,15 +80,12 @@
         
         //  x-cos-bucket-region    存储桶所在地域。枚举值请参见 地域和访问域名 文档，
         //   例如 ap-beijing，ap-hongkong，eu-frankfurt 等
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+    
     }];
     [[QCloudCOSXMLService defaultCOSXML] HeadBucket:request];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

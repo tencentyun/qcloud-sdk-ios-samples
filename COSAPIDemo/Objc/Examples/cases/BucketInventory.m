@@ -67,7 +67,6 @@
  * 设置存储桶清单任务
  */
 - (void)putBucketInventory {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketInventory"];
     
     //.cssg-snippet-body-start:[objc-put-bucket-inventory]
     QCloudPutBucketInventoryRequest *putReq = [QCloudPutBucketInventoryRequest new];
@@ -138,22 +137,17 @@
     putReq.inventoryConfiguration = config;
     [putReq setFinishBlock:^(id outputObject, NSError *error) {
         
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucketInventory:putReq];
     
     //.cssg-snippet-body-end
-    
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 获取存储桶清单任务
  */
 - (void)getBucketInventory {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketInventory"];
 
     //.cssg-snippet-body-start:[objc-get-bucket-inventory]
     QCloudGetBucketInventoryRequest *getReq = [QCloudGetBucketInventoryRequest new];
@@ -163,22 +157,17 @@
     getReq.inventoryID = @"list1";
     [getReq setFinishBlock:^(QCloudInventoryConfiguration * _Nonnull result, NSError * _Nonnull error) {
     
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetBucketInventory:getReq];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 删除存储桶清单任务
  */
 - (void)deleteBucketInventory {
-    XCTestExpectation* exp = [self expectationWithDescription:@"deleteBucketInventory"];
 
     //.cssg-snippet-body-start:[objc-delete-bucket-inventory]
     QCloudDeleteBucketInventoryRequest *delReq = [QCloudDeleteBucketInventoryRequest new];
@@ -188,16 +177,13 @@
     delReq.inventoryID = @"list1";
     [delReq setFinishBlock:^(id outputObject, NSError *error) {
     
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucketInventory:delReq];
     
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

@@ -68,7 +68,6 @@
  * 然后自定义元数据，复制成功以后，删除源文件；
  */
 - (void)modifyObjectMetadata {
-    XCTestExpectation* exp = [self expectationWithDescription:@"modifyObjectMetadata"];
     
     //.cssg-snippet-body-start:[modify-object-metadata]
     QCloudPutObjectCopyRequest* request = [[QCloudPutObjectCopyRequest alloc] init];
@@ -101,22 +100,17 @@
                               NSError * _Nonnull error) {
         //result 返回具体信息
         
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
     }];
     [[QCloudCOSXMLService defaultCOSXML]  PutObjectCopy:request];
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 修改对象存储类型
  */
 - (void)modifyObjectStorageClass {
-    XCTestExpectation* exp = [self expectationWithDescription:@"modifyObjectStorageClass"];
     
     //.cssg-snippet-body-start:[modify-object-storage-class]
     QCloudPutObjectCopyRequest* request = [[QCloudPutObjectCopyRequest alloc] init];
@@ -152,16 +146,12 @@
     [request setFinishBlock:^(QCloudCopyObjectResult * _Nonnull result,
                               NSError * _Nonnull error) {
         //result 返回具体信息
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+       
     }];
     [[QCloudCOSXMLService defaultCOSXML]  PutObjectCopy:request];
     
     //.cssg-snippet-body-end
-    
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+
 }
 
 

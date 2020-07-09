@@ -53,7 +53,7 @@ class RestoreObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
     
     // 恢复归档对象
     func restoreObject() {
-        let exception = XCTestExpectation.init(description: "restoreObject");
+        
         
         //.cssg-snippet-body-start:[swift-restore-object]
         let restore = QCloudPostObjectRestoreRequest.init();
@@ -72,15 +72,15 @@ class RestoreObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
                 //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().postObjectRestore(restore);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     

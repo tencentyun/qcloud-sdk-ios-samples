@@ -66,7 +66,6 @@
  * 删除存储桶
  */
 - (void)deleteBucket {
-    XCTestExpectation* exp = [self expectationWithDescription:@"deleteBucket"];
 
     //.cssg-snippet-body-start:[objc-delete-bucket]
     QCloudDeleteBucketRequest* request = [[QCloudDeleteBucketRequest alloc ] init];
@@ -75,15 +74,11 @@
     request.bucket = @"examplebucket-1250000000";
     [request setFinishBlock:^(id outputObject,NSError*error) {
         //可以从 outputObject 中获取服务器返回的 header 信息
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucket:request];
     
     //.cssg-snippet-body-end
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

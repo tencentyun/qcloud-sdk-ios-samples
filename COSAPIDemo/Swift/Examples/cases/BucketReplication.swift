@@ -55,7 +55,7 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
     * 求会替换现有配置。
     */
     func putBucketReplication() {
-        let exception = XCTestExpectation.init(description: "putBucketReplication");
+        
       
         //.cssg-snippet-body-start:[swift-put-bucket-replication]
         let putBucketReplication = QCloudPutBucketReplicationRequest.init();
@@ -95,15 +95,15 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
                 }else{
                     print(result!);
                 }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketRelication(putBucketReplication);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 
@@ -111,7 +111,7 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
     * 接口用于查询存储桶中用户跨地域复制配置信息。用户发起该请求时需获得请求签名，表明该请求已获得许可。
     */
     func getBucketReplication() {
-        let exception = XCTestExpectation.init(description: "getBucketReplication");
+        
       
         //.cssg-snippet-body-start:[swift-get-bucket-replication]
         let getBucketReplication = QCloudGetBucketReplicationRequest.init();
@@ -122,15 +122,13 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
             }else{
                 print(config!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(config);
+               
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketReplication(getBucketReplication);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 
@@ -138,7 +136,6 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
     * 用来删除存储桶中的跨地域复制配置。用户发起该请求时需获得请求签名，表明该请求已获得许可。
     */
     func deleteBucketReplication() {
-        let exception = XCTestExpectation.init(description: "deleteBucketReplication");
       
         //.cssg-snippet-body-start:[swift-delete-bucket-replication]
         let deleteBucketReplication = QCloudDeleteBucketReplicationRequest.init();
@@ -149,15 +146,13 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
             }else{
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+
         }
         QCloudCOSXMLService.defaultCOSXML().deleteBucketReplication(deleteBucketReplication);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 

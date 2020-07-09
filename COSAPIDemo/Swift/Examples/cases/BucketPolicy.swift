@@ -52,37 +52,36 @@ class BucketPolicy: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
 
     // 设置存储桶 Policy
     func putBucketPolicy() {
-        let exception = XCTestExpectation.init(description: "putBucketPolicy");
       
         //.cssg-snippet-body-start:[swift-put-bucket-policy]
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 
     // 获取存储桶 Policy
     func getBucketPolicy() {
-        let exception = XCTestExpectation.init(description: "getBucketPolicy");
+        
       
         //.cssg-snippet-body-start:[swift-get-bucket-policy]
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 
     // 删除存储桶 Policy
     func deleteBucketPolicy() {
-        let exception = XCTestExpectation.init(description: "deleteBucketPolicy");
+        
       
         //.cssg-snippet-body-start:[swift-delete-bucket-policy]
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 

@@ -54,7 +54,6 @@ class ListObjects: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueue
      * 查询存储桶（Bucket) 下的部分或者全部对象的方法.
      */
     func getBucket() {
-        let exception = XCTestExpectation.init(description: "getBucket");
         
         //.cssg-snippet-body-start:[swift-get-bucket]
         let getBucketReq = QCloudGetBucketRequest.init();
@@ -73,21 +72,20 @@ class ListObjects: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueue
             }else{
                 print( result!.commonPrefixes);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().getBucket(getBucketReq);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     
     // 获取第二页对象列表
     func getBucketNextPage() {
-        let exception = XCTestExpectation.init(description: "getBucketNextPage");
         
         //.cssg-snippet-body-start:[swift-get-bucket-next-page]
         let getBucketReq = QCloudGetBucketRequest.init();
@@ -109,20 +107,19 @@ class ListObjects: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueue
             }else{
                 print( result!.commonPrefixes);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().getBucket(getBucketReq);
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     
     // 获取对象列表与子目录
     func getBucketWithDelimiter() {
-        let exception = XCTestExpectation.init(description: "getBucketWithDelimiter");
         
         //.cssg-snippet-body-start:[swift-get-bucket-with-delimiter]
         let getBucketReq = QCloudGetBucketRequest.init();
@@ -153,14 +150,14 @@ class ListObjects: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueue
             }else{
                 print( result!.commonPrefixes);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().getBucket(getBucketReq);
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     

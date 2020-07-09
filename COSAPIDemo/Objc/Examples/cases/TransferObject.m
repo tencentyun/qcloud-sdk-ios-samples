@@ -66,7 +66,6 @@
  * 高级接口上传对象
  */
 - (void)transferUploadFile {
-    XCTestExpectation* exp = [self expectationWithDescription:@"transferUploadFile"];
     
     //.cssg-snippet-body-start:[objc-transfer-upload-file]
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
@@ -89,10 +88,7 @@
     
     
     [put setFinishBlock:^(id outputObject, NSError *error) {
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+      
     }];
     
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
@@ -101,28 +97,27 @@
     [put cancel];
     
     //.cssg-snippet-body-end
-    
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+
 }
 
 /**
  * 高级接口上传字节数组
  */
 - (void)transferUploadBytes {
-    XCTestExpectation* exp = [self expectationWithDescription:@"transferUploadBytes"];
+    
     
     //.cssg-snippet-body-start:[objc-transfer-upload-bytes]
    
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 /**
  * 高级接口流式上传
  */
 - (void)transferUploadStream {
-    XCTestExpectation* exp = [self expectationWithDescription:@"transferUploadStream"];
+    
     
     //.cssg-snippet-body-start:[objc-transfer-upload-stream]
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
@@ -144,22 +139,18 @@
     
     
     [put setFinishBlock:^(id outputObject, NSError *error) {
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 高级接口下载对象
  */
 - (void)transferDownloadObject {
-    XCTestExpectation* exp = [self expectationWithDescription:@"transferDownloadObject"];
     
     //.cssg-snippet-body-start:[objc-transfer-download-object]
     QCloudCOSXMLDownloadObjectRequest * request = [QCloudCOSXMLDownloadObjectRequest new];
@@ -178,11 +169,8 @@
     
     //下载完成
     [request setFinishBlock:^(id outputObject, NSError *error) {
-        //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     
     //下载中
@@ -202,14 +190,12 @@
     [request cancel];
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 高级接口拷贝对象
  */
 - (void)transferCopyObject {
-    XCTestExpectation* exp = [self expectationWithDescription:@"transferCopyObject"];
     
     //.cssg-snippet-body-start:[objc-transfer-copy-object]
     QCloudCOSXMLCopyObjectRequest* request = [[QCloudCOSXMLCopyObjectRequest alloc] init];
@@ -233,20 +219,18 @@
     [request cancel];
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 批量上传任务
  */
 - (void)batchUploadObjects {
-    XCTestExpectation* exp = [self expectationWithDescription:@"batchUploadObjects"];
     
+
     //.cssg-snippet-body-start:[objc-batch-upload-objects]
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

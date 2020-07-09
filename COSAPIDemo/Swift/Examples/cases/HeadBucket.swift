@@ -57,7 +57,6 @@ class HeadBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
     * 存储桶不存在，返回 HTTP 状态码为404。
     */
     func headBucket() {
-        let exception = XCTestExpectation.init(description: "headBucket");
       
         //.cssg-snippet-body-start:[swift-head-bucket]
         let headBucketReq = QCloudHeadBucketRequest.init();
@@ -74,15 +73,13 @@ class HeadBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
             }else{
                 print( result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
         }
         QCloudCOSXMLService.defaultCOSXML().headBucket(headBucketReq);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 

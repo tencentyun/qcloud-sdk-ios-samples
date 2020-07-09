@@ -66,29 +66,25 @@
  * 创建存储桶
  */
 - (void)putBucket {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucket"];
     
     //.cssg-snippet-body-start:[objc-put-bucket]
     QCloudPutBucketRequest* request = [QCloudPutBucketRequest new];
     request.bucket = @"examplebucket-1250000000"; //additional actions after finishing
     [request setFinishBlock:^(id outputObject, NSError* error) {
         //可以从 outputObject 中获取服务器返回的 header 信息
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucket:request];
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 /**
  * 创建存储桶并且授予存储桶权限
  */
 - (void)putBucketAndGrantAcl {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketAndGrantAcl"];
     
     //.cssg-snippet-body-start:[objc-put-bucket-and-grant-acl]
     QCloudPutBucketRequest* request = [QCloudPutBucketRequest new];
@@ -112,15 +108,12 @@
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
         //可以从 outputObject 中获取服务器返回的 header 信息
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucket:request];
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

@@ -53,7 +53,7 @@ class PutBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     
     // 创建存储桶
     func putBucket() {
-        let exception = XCTestExpectation.init(description: "putBucket");
+        
         
         //.cssg-snippet-body-start:[swift-put-bucket]
         let putBucketReq = QCloudPutBucketRequest.init();
@@ -65,21 +65,21 @@ class PutBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
             } else {
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().putBucket(putBucketReq);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     
     // 创建存储桶并且授予存储桶权限
     func putBucketAndGrantAcl() {
-        let exception = XCTestExpectation.init(description: "putBucketAndGrantAcl");
+        
         
         //.cssg-snippet-body-start:[swift-put-bucket-and-grant-acl]
         
@@ -107,14 +107,14 @@ class PutBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
             } else {
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().putBucket(putBucketReq);
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     

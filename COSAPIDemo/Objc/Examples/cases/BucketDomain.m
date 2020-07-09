@@ -66,7 +66,6 @@
  * 设置存储桶源站
  */
 - (void)putBucketDomain {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketDomain"];
     
     //.cssg-snippet-body-start:[objc-put-bucket-domain]
     
@@ -90,24 +89,21 @@
     req.domain  = config;
     
     [req setFinishBlock:^(id outputObject, NSError *error) {
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
         
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
     }];
     [[QCloudCOSXMLService defaultCOSXML]PutBucketDomain:req];
     
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 获取存储桶源站
  */
 - (void)getBucketDomain {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketDomain"];
     
     //.cssg-snippet-body-start:[objc-get-bucket-domain]
     QCloudGetBucketDomainRequest *getReq =  [QCloudGetBucketDomainRequest new];
@@ -115,15 +111,12 @@
     [getReq setFinishBlock:^(QCloudDomainConfiguration * _Nonnull result,
                              NSError * _Nonnull error) {
         
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+       
     }];
     [[QCloudCOSXMLService defaultCOSXML]GetBucketDomain:getReq];
     
     //.cssg-snippet-body-end
-    
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+
 }
 
 

@@ -66,39 +66,37 @@
  * 设置存储桶 Policy
  */
 - (void)putBucketPolicy {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketPolicy"];
 
     //.cssg-snippet-body-start:[objc-put-bucket-policy]
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 获取存储桶 Policy
  */
 - (void)getBucketPolicy {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketPolicy"];
+    
 
     //.cssg-snippet-body-start:[objc-get-bucket-policy]
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 /**
  * 删除存储桶 Policy
  */
 - (void)deleteBucketPolicy {
-    XCTestExpectation* exp = [self expectationWithDescription:@"deleteBucketPolicy"];
+    
 
     //.cssg-snippet-body-start:[objc-delete-bucket-policy]
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 

@@ -52,7 +52,6 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
 
     // 设置存储桶源站
     func putBucketDomain() {
-        let exception = XCTestExpectation.init(description: "putBucketDomain");
       
         //.cssg-snippet-body-start:[swift-put-bucket-domain]
         let req = QCloudPutBucketDomainRequest.init();
@@ -79,22 +78,19 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
             }else{
                 print( result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+
         
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketDomain(req);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 获取存储桶源站
     func getBucketDomain() {
-        let exception = XCTestExpectation.init(description: "getBucketDomain");
+        
       
         //.cssg-snippet-body-start:[swift-get-bucket-domain]
         let req = QCloudGetBucketDomainRequest.init();
@@ -107,15 +103,15 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
             }else{
                 print( result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketDomain(req);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 

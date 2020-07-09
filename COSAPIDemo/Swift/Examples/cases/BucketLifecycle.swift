@@ -52,7 +52,7 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
 
     // 设置存储桶生命周期
     func putBucketLifecycle() {
-        let exception = XCTestExpectation.init(description: "putBucketLifecycle");
+        
       
         //.cssg-snippet-body-start:[swift-put-bucket-lifecycle]
         let putBucketLifecycleReq = QCloudPutBucketLifecycleRequest.init();
@@ -102,21 +102,19 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
             }else{
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+          
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketLifecycle(putBucketLifecycleReq);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+        
     }
 
 
     // 获取存储桶生命周期
     func getBucketLifecycle() {
-        let exception = XCTestExpectation.init(description: "getBucketLifecycle");
+        
       
         //.cssg-snippet-body-start:[swift-get-bucket-lifecycle]
         let getBucketLifeCycle = QCloudGetBucketLifecycleRequest.init();
@@ -129,21 +127,19 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
             }else{
                 print(config!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(config);
+         
         };
         QCloudCOSXMLService.defaultCOSXML().getBucketLifecycle(getBucketLifeCycle);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+        
     }
 
 
     // 删除存储桶生命周期
     func deleteBucketLifecycle() {
-        let exception = XCTestExpectation.init(description: "deleteBucketLifecycle");
+        
       
         //.cssg-snippet-body-start:[swift-delete-bucket-lifecycle]
         let deleteBucketLifeCycle = QCloudDeleteBucketLifeCycleRequest.init();
@@ -154,15 +150,13 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
             }else{
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+         
         };
         QCloudCOSXMLService.defaultCOSXML().deleteBucketLifeCycle(deleteBucketLifeCycle);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+        
     }
 
 

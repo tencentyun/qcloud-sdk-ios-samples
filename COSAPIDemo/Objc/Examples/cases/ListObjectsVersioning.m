@@ -67,7 +67,6 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
  * 获取对象多版本列表第一页数据
  */
 - (void)listObjectsVersioning {
-    XCTestExpectation* exp = [self expectationWithDescription:@"listObjectsVersioning"];
     //.cssg-snippet-body-start:[objc-list-objects-versioning]
     
     QCloudListObjectVersionsRequest* listObjectVersionsRequest = [[QCloudListObjectVersionsRequest alloc] init];
@@ -85,23 +84,19 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
         
         //result.deleteMarker; // 已删除的文件
         //result.versionContent;  对象版本条目
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+        
         
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] ListObjectVersions:listObjectVersionsRequest];
     //.cssg-snippet-body-end
-    
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 获取对象多版本列表下一页数据
  */
 - (void)listObjectsVersioningNextPage {
-    XCTestExpectation* exp = [self expectationWithDescription:@"listObjectsVersioningNextPage"];
+
     //.cssg-snippet-body-start:[objc-list-objects-versioning]
     
     QCloudListObjectVersionsRequest* listObjectVersionsRequest = [[QCloudListObjectVersionsRequest alloc] init];
@@ -122,16 +117,13 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
         
         //result.deleteMarker; // 已删除的文件
         //result.versionContent;  对象版本条目
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+    
         
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] ListObjectVersions:listObjectVersionsRequest];
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 - (void)testListObjectsVersioning {

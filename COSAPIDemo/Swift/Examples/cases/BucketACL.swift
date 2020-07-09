@@ -52,7 +52,7 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
 
     // 设置存储桶 ACL
     func putBucketAcl() {
-        let exception = XCTestExpectation.init(description: "putBucketAcl");
+        
       
         //.cssg-snippet-body-start:[swift-put-bucket-acl]
         let putBucketACLReq = QCloudPutBucketACLRequest.init();
@@ -76,22 +76,19 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
             }else{
                 print(result!);
             }
-            
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+          
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketACL(putBucketACLReq);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+
     }
 
 
     // 获取存储桶 ACL
     func getBucketAcl() {
-        let exception = XCTestExpectation.init(description: "getBucketAcl");
+        
       
         //.cssg-snippet-body-start:[swift-get-bucket-acl]
         let getBucketACLReq = QCloudGetBucketACLRequest.init();
@@ -105,15 +102,11 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
             }else{
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketACL(getBucketACLReq)
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
     }
 
 

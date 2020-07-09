@@ -65,7 +65,7 @@
  * 设置存储桶生命周期
  */
 - (void)putBucketLifecycle {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketLifecycle"];
+    
     
     //.cssg-snippet-body-start:[objc-put-bucket-lifecycle]
     QCloudPutBucketLifecycleRequest* request = [QCloudPutBucketLifecycleRequest new];
@@ -105,25 +105,21 @@
     //生命周期配置
     request.lifeCycle.rules = @[rule];
     [request setFinishBlock:^(id outputObject, NSError* error) {
-        //可以从 outputObject 中获取服务器返回的 header 信息
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
         
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] PutBucketLifecycle:request];
     
     //.cssg-snippet-body-end
-    
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+
 }
 
 /**
  * 获取存储桶生命周期
  */
 - (void)getBucketLifecycle {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketLifecycle"];
     
     //.cssg-snippet-body-start:[objc-get-bucket-lifecycle]
     QCloudGetBucketLifecycleRequest* request = [QCloudGetBucketLifecycleRequest new];
@@ -131,22 +127,18 @@
     [request setFinishBlock:^(QCloudLifecycleConfiguration* result,NSError* error) {
         // 可以从 result 中获取返回信息
         
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+     
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetBucketLifecycle:request];
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 删除存储桶生命周期
  */
 - (void)deleteBucketLifecycle {
-    XCTestExpectation* exp = [self expectationWithDescription:@"deleteBucketLifecycle"];
     
     //.cssg-snippet-body-start:[objc-delete-bucket-lifecycle]
     QCloudDeleteBucketLifeCycleRequest* request =
@@ -155,15 +147,10 @@
     request.bucket = @"examplebucket-1250000000";
     [request setFinishBlock:^(QCloudLifecycleConfiguration* deleteResult, NSError* error) {
         // 返回删除结果
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(deleteResult);
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucketLifeCycle:request];
     
     //.cssg-snippet-body-end
-    
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

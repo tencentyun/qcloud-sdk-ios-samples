@@ -52,7 +52,6 @@ class CopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
 
     // 复制对象时保留对象属性
     func copyObject() {
-        let exception = XCTestExpectation.init(description: "copyObject");
       
         //.cssg-snippet-body-start:[swift-copy-object]
         let putObjectCopy = QCloudPutObjectCopyRequest.init();
@@ -86,21 +85,18 @@ class CopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
             }else{
                 print(result!);
             }
-            exception.fulfill();
-                       XCTAssertNil(error);
-                       XCTAssertNotNil(result)
+               
         }
         QCloudCOSXMLService.defaultCOSXML().putObjectCopy(putObjectCopy);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 
     // 复制对象时替换对象属性
     func copyObjectReplaced() {
-        let exception = XCTestExpectation.init(description: "copyObjectReplaced");
       
         //.cssg-snippet-body-start:[swift-copy-object-replaced]
         let request : QCloudPutObjectCopyRequest  = QCloudPutObjectCopyRequest();
@@ -142,14 +138,12 @@ class CopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
                    }else{
                        print(result!);
                    }
-            exception.fulfill();
-                       XCTAssertNil(error);
-                       XCTAssertNotNil(result)
+               
         }
         QCloudCOSXMLService.defaultCOSXML().putObjectCopy(request);
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 

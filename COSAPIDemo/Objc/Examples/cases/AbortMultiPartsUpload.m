@@ -71,8 +71,7 @@
  * 作.分块上传适合于在弱网络或高带宽环境下上传较大的对象.
  */
 - (void)initMultiUpload {
-    XCTestExpectation* exp = [self expectationWithDescription:@"initMultiUpload"];
-
+    
     //.cssg-snippet-body-start:[objc-init-multi-upload]
     QCloudInitiateMultipartUploadRequest* initrequest = [QCloudInitiateMultipartUploadRequest new];
     
@@ -83,10 +82,6 @@
                                   NSError *error) {
         //获取分块上传的 uploadId，后续的上传都需要这个 ID，请保存以备后续使用
          outputObject.uploadId = @"exampleUploadId";
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
     }];
     
     //初始化上传
@@ -94,7 +89,6 @@
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
@@ -105,7 +99,6 @@
  * 或者舍弃分块上传.
  */
 - (void)abortMultiUpload {
-    XCTestExpectation* exp = [self expectationWithDescription:@"abortMultiUpload"];
 
     //.cssg-snippet-body-start:[objc-abort-multi-upload]
     QCloudAbortMultipfartUploadRequest *abortRequest = [QCloudAbortMultipfartUploadRequest new];
@@ -119,16 +112,12 @@
     
     [abortRequest setFinishBlock:^(id outputObject, NSError *error) {
         //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        NSDictionary * result = (NSDictionary *)outputObject;
     }];
     
     [[QCloudCOSXMLService defaultCOSXML]AbortMultipfartUpload:abortRequest];
     
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

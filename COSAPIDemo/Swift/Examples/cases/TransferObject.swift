@@ -48,7 +48,7 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
     
     // 高级接口上传对象
     func transferUploadFile() {
-        let exception = XCTestExpectation.init(description: "transferUploadFile");
+        
         
         //.cssg-snippet-body-start:[swift-transfer-upload-file]
         let put:QCloudCOSXMLUploadObjectRequest = QCloudCOSXMLUploadObjectRequest<AnyObject>();
@@ -57,9 +57,9 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         //需要上传的对象内容。可以传入NSData*或者NSURL*类型的变量
         put.body = NSURL.fileURL(withPath: "") as AnyObject;
         put.setFinish { (result, error) in
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+            
+            
+            
         }
         
         put.sendProcessBlock = { (bytesDownload, totalBytesDownload,totalBytesExpectedToDownload) in
@@ -71,37 +71,24 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         QCloudCOSTransferMangerService.defaultCOSTransferManager().uploadObject(put);
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+        
     }
     
     
-    // 高级接口上传字节数组
+    // 高级接口上传二进制数据
     func transferUploadBytes() {
-        let exception = XCTestExpectation.init(description: "transferUploadBytes");
+        
         
         //.cssg-snippet-body-start:[swift-transfer-upload-bytes]
-        
-        //.cssg-snippet-body-end
-        
-        self.wait(for: [exception], timeout: 100);
-    }
-    
-    
-    // 高级接口流式上传
-    func transferUploadStream() {
-        let exception = XCTestExpectation.init(description: "transferUploadStream");
-        
-        //.cssg-snippet-body-start:[swift-transfer-upload-stream]
-        
         let put:QCloudCOSXMLUploadObjectRequest = QCloudCOSXMLUploadObjectRequest<AnyObject>();
         put.object = "文件名.jpg";
         put.bucket = "bucket名";
         //需要上传的对象内容。可以传入NSData*或者NSURL*类型的变量
         put.body =  NSData.init();// 文件data数据
         put.setFinish { (result, error) in
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+            
+            
+            
         }
         
         put.sendProcessBlock = { (bytesDownload, totalBytesDownload,totalBytesExpectedToDownload) in
@@ -113,13 +100,25 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         QCloudCOSTransferMangerService.defaultCOSTransferManager().uploadObject(put);
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+        
+    }
+    
+    
+    // 高级接口流式上传
+    func transferUploadStream() {
+        
+        //.cssg-snippet-body-start:[swift-transfer-upload-stream]
+        
+        
+        //.cssg-snippet-body-end
+        
+        
     }
     
     
     // 高级接口下载对象
     func transferDownloadObject() {
-        let exception = XCTestExpectation.init(description: "transferDownloadObject");
+        
         
         //.cssg-snippet-body-start:[swift-transfer-download-object]
         let request : QCloudCOSXMLDownloadObjectRequest = QCloudCOSXMLDownloadObjectRequest();
@@ -149,9 +148,7 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
             }else{
                 print(copyResult!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(copyResult);
+            
         }
         
         QCloudCOSTransferMangerService.costransfermangerService(forKey: "ServiceKey").downloadObject(request);
@@ -160,13 +157,13 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         request.cancel();
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+        
     }
     
     
     // 高级接口拷贝对象
     func transferCopyObject() {
-        let exception = XCTestExpectation.init(description: "transferCopyObject");
+        
         
         //.cssg-snippet-body-start:[swift-transfer-copy-object]
         let copyRequest =  QCloudCOSXMLCopyObjectRequest.init();
@@ -183,28 +180,26 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
             }else{
                 print(copyResult!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(copyResult);
+            
         }
         //注意如果是跨地域复制，这里使用的 transferManager 所在的 region 必须为目标桶所在的 region
         QCloudCOSTransferMangerService.defaultCOSTransferManager().copyObject(copyRequest);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+        
     }
     
     
     // 批量上传任务
     func batchUploadObjects() {
-        let exception = XCTestExpectation.init(description: "batchUploadObjects");
+        
         
         //.cssg-snippet-body-start:[swift-batch-upload-objects]
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+        
     }
     
     

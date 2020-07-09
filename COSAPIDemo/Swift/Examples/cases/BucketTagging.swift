@@ -54,7 +54,7 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
      * 用于为存储桶设置键值对作为存储桶标签，可以协助您管理已有的存储桶资源，并通过标签进行成本管理。
      */
     func putBucketTagging() {
-        let exception = XCTestExpectation.init(description: "putBucketTagging");
+        
         
         //.cssg-snippet-body-start:[swift-put-bucket-tagging]
         let req = QCloudPutBucketTaggingRequest.init();
@@ -90,16 +90,13 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
             }else{
                 print( result!);
             }
-            
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketTagging(req);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     
@@ -107,7 +104,6 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
      * 用于查询指定存储桶下已有的存储桶标签。
      */
     func getBucketTagging() {
-        let exception = XCTestExpectation.init(description: "getBucketTagging");
         
         //.cssg-snippet-body-start:[swift-get-bucket-tagging]
         let req = QCloudGetBucketTaggingRequest.init();
@@ -119,15 +115,10 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
             }else{
                 print( result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
         };
         QCloudCOSXMLService.defaultCOSXML().getBucketTagging(req);
         
         //.cssg-snippet-body-end
-        
-        self.wait(for: [exception], timeout: 100);
     }
     
     
@@ -135,7 +126,7 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
      * 用于删除指定存储桶下已有的存储桶标签。
      */
     func deleteBucketTagging() {
-        let exception = XCTestExpectation.init(description: "deleteBucketTagging");
+        
         
         //.cssg-snippet-body-start:[swift-delete-bucket-tagging]
         let req = QCloudDeleteBucketTaggingRequest.init();
@@ -149,15 +140,12 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
             }else{
                 print( result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
         };
         QCloudCOSXMLService.defaultCOSXML().deleteBucketTagging(req);
         
         //.cssg-snippet-body-end
-        
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     

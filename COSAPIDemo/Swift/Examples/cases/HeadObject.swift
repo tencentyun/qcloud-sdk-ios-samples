@@ -52,7 +52,6 @@ class HeadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
 
     // 获取对象信息
     func headObject() {
-        let exception = XCTestExpectation.init(description: "headObject");
       
         //.cssg-snippet-body-start:[swift-head-object]
         let headObject = QCloudHeadObjectRequest.init();
@@ -64,15 +63,15 @@ class HeadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
             }else{
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().headObject(headObject);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 

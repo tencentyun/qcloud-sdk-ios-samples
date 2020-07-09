@@ -52,7 +52,6 @@ class ObjectACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     
     // 设置对象 ACL
     func putObjectAcl() {
-        let exception = XCTestExpectation.init(description: "putObjectAcl");
         
         //.cssg-snippet-body-start:[swift-put-object-acl]
         let putObjectACl = QCloudPutObjectACLRequest.init();
@@ -74,21 +73,21 @@ class ObjectACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
                 //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
                 print(result!);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().putObjectACL(putObjectACl);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     
     // 获取对象 ACL
     func getObjectAcl() {
-        let exception = XCTestExpectation.init(description: "getObjectAcl");
+        
         
         //.cssg-snippet-body-start:[swift-get-object-acl]
         let getObjectACL = QCloudGetObjectACLRequest.init();
@@ -103,15 +102,15 @@ class ObjectACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
                 //可以从 result 的 accessControlList 中获取对象的 ACL
                 print(result!.accessControlList);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().getObjectACL(getObjectACL);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     

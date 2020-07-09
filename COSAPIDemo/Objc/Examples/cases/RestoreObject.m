@@ -66,7 +66,6 @@
  * 恢复归档对象
  */
 - (void)restoreObject {
-    XCTestExpectation* exp = [self expectationWithDescription:@"restoreObject"];
 
     //.cssg-snippet-body-start:[objc-restore-object]
     QCloudPostObjectRestoreRequest *req = [QCloudPostObjectRestoreRequest new];
@@ -80,17 +79,15 @@
     req.restoreRequest.CASJobParameters.tier =QCloudCASTierStandard;
     
     [req setFinishBlock:^(id outputObject, NSError *error) {
-        //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
+       
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] PostObjectRestore:req];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

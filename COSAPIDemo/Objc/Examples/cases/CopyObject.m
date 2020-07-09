@@ -66,7 +66,6 @@
  * 简单拷贝对象
  */
 - (void)copyObject {
-    XCTestExpectation* exp = [self expectationWithDescription:@"copyObject"];
     
     //.cssg-snippet-body-start:[objc-copy-object]
     QCloudPutObjectCopyRequest* request = [[QCloudPutObjectCopyRequest alloc] init];
@@ -96,23 +95,18 @@
     [request setFinishBlock:^(QCloudCopyObjectResult * _Nonnull result,
                               NSError * _Nonnull error) {
         //result 返回具体信息
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+     
     }];
     [[QCloudCOSXMLService defaultCOSXML]  PutObjectCopy:request];
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 复制对象时替换对象属性
  */
 - (void)copyObjectReplaced {
-    XCTestExpectation* exp = [self expectationWithDescription:@"copyObjectReplaced"];
     
     //.cssg-snippet-body-start:[objc-copy-object-replaced]
     QCloudPutObjectCopyRequest* request = [[QCloudPutObjectCopyRequest alloc] init];
@@ -151,15 +145,11 @@
                               NSError * _Nonnull error) {
         //result 返回具体信息
         
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
     }];
     [[QCloudCOSXMLService defaultCOSXML]  PutObjectCopy:request];
     
     //.cssg-snippet-body-end
-    
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+
 }
 
 

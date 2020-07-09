@@ -52,7 +52,7 @@ class ObjectPresignUrl: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
     
     // 获取预签名下载链接
     func getPresignDownloadUrl() {
-        let exception = XCTestExpectation.init(description: "getPresignDownloadUrl");
+        
         
         //.cssg-snippet-body-start:[swift-get-presign-download-url]
         let getPresign  = QCloudGetPresignedURLRequest.init();
@@ -64,21 +64,21 @@ class ObjectPresignUrl: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
             if error == nil{
                 print(result?.presienedURL as Any);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().getPresignedURL(getPresign);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     
     // 获取预签名上传链接
     func getPresignUploadUrl() {
-        let exception = XCTestExpectation.init(description: "getPresignUploadUrl");
+        
         
         //.cssg-snippet-body-start:[swift-get-presign-upload-url]
         let getPresign  = QCloudGetPresignedURLRequest.init();
@@ -90,15 +90,15 @@ class ObjectPresignUrl: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
             if error == nil{
                 print(result?.presienedURL as Any);
             }
-            exception.fulfill();
-            XCTAssertNil(error);
-            XCTAssertNotNil(result);
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().getPresignedURL(getPresign);
         
         //.cssg-snippet-body-end
         
-        self.wait(for: [exception], timeout: 100);
+          
     }
     
     

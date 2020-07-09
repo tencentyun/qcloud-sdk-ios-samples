@@ -71,7 +71,7 @@
  * 版本的元数据。
  */
 - (void)headObject {
-    XCTestExpectation* exp = [self expectationWithDescription:@"headObject"];
+
     
     //.cssg-snippet-body-start:[objc-head-object]
     QCloudHeadObjectRequest* headerRequest = [QCloudHeadObjectRequest new];
@@ -84,16 +84,13 @@
     
     [headerRequest setFinishBlock:^(NSDictionary* result, NSError *error) {
         // result 返回具体信息
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+        
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] HeadObject:headerRequest];
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

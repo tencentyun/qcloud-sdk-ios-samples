@@ -66,7 +66,6 @@
  * 获取预签名下载链接
  */
 - (void)getPresignDownloadUrl {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getPresignDownloadUrl"];
     
     //.cssg-snippet-body-start:[objc-get-presign-download-url]
     QCloudGetPresignedURLRequest* getPresignedURLRequest = [[QCloudGetPresignedURLRequest alloc] init];
@@ -82,24 +81,19 @@
         
         //预签名 URL
         NSString* presignedURL = result.presienedURL;
-        
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+       
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] getPresignedURL:getPresignedURLRequest];
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 获取预签名上传链接
  */
 - (void)getPresignUploadUrl {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getPresignUploadUrl"];
     
     //.cssg-snippet-body-start:[objc-get-presign-upload-url]
     QCloudGetPresignedURLRequest* getPresignedURLRequest = [[QCloudGetPresignedURLRequest alloc] init];
@@ -116,16 +110,12 @@
         //预签名 URL
         NSString* presignedURL = result.presienedURL;
         
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] getPresignedURL:getPresignedURLRequest];
     
     //.cssg-snippet-body-end
     
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

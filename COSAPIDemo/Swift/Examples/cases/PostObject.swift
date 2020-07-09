@@ -53,13 +53,12 @@ class PostObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
 
     // POST 方式上传对象
     func postObject() {
-        let exception = XCTestExpectation.init(description: "postObject");
       
         //.cssg-snippet-body-start:[swift-post-object]
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 

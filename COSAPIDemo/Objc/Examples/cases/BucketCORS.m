@@ -67,7 +67,6 @@
  * 设置存储桶跨域规则
  */
 - (void)putBucketCors {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketCors"];
 
     //.cssg-snippet-body-start:[objc-put-bucket-cors]
     QCloudPutBucketCORSRequest* putCORS = [QCloudPutBucketCORSRequest new];
@@ -97,23 +96,19 @@
     putCORS.bucket = @"examplebucket-1250000000";
     [putCORS setFinishBlock:^(id outputObject, NSError *error) {
         //可以从 outputObject 中获取服务器返回的 header 信息
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        NSDictionary * result = (NSDictionary *)outputObject;
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] PutBucketCORS:putCORS];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 获取存储桶跨域规则
  */
 - (void)getBucketCors {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketCors"];
 
     //.cssg-snippet-body-start:[objc-get-bucket-cors]
     QCloudGetBucketCORSRequest* corsReqeust = [QCloudGetBucketCORSRequest new];
@@ -124,23 +119,19 @@
     [corsReqeust setFinishBlock:^(QCloudCORSConfiguration * _Nonnull result,
                                   NSError * _Nonnull error) {
         //CORS 设置封装在 result 中
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(result);
+        
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] GetBucketCORS:corsReqeust];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 实现 Object 跨域访问配置的预请求
  */
 - (void)optionObject {
-    XCTestExpectation* exp = [self expectationWithDescription:@"optionObject"];
 
     //.cssg-snippet-body-start:[objc-option-object]
     QCloudOptionsObjectRequest* request = [[QCloudOptionsObjectRequest alloc] init];
@@ -158,38 +149,32 @@
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
         //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+        NSDictionary* info = (NSDictionary *) outputObject;
+        
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] OptionsObject:request];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 删除存储桶跨域规则
  */
 - (void)deleteBucketCors {
-    XCTestExpectation* exp = [self expectationWithDescription:@"deleteBucketCors"];
 
     //.cssg-snippet-body-start:[objc-delete-bucket-cors]
     QCloudDeleteBucketCORSRequest* deleteCORS = [QCloudDeleteBucketCORSRequest new];
     deleteCORS.bucket = @"examplebucket-1250000000";
     [deleteCORS setFinishBlock:^(id outputObject, NSError *error) {
         //可以从 outputObject 中获取服务器返回的 header 信息
-        [exp fulfill];
-        XCTAssertNil(error);
-        XCTAssertNotNil(outputObject);
+       NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucketCORS:deleteCORS];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 
