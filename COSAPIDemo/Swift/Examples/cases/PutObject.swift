@@ -53,8 +53,6 @@ class PutObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     
     // 简单上传对象
     func putObject() {
-        
-        
         //.cssg-snippet-body-start:[swift-put-object]
         let putObject = QCloudPutObjectRequest<AnyObject>.init();
         putObject.bucket = "examplebucket-1250000000";
@@ -67,15 +65,10 @@ class PutObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
             }else{
                 print(result!);
             }
-               
-               
-               
         }
         QCloudCOSXMLService.defaultCOSXML().putObject(putObject);
         
         //.cssg-snippet-body-end
-        
-          
     }
     
     

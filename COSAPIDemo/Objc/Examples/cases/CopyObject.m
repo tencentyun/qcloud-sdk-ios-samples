@@ -87,10 +87,11 @@
     //或者此项不进行设置，默认继承 Bucket 权限。
     request.accessControlList = @"default";
     //源对象所在的路径
-    request.objectCopySource = @"sourcebucket-1250000000.cos.COS_REGION.myqcloud.com/sourceObject";
+    request.objectCopySource =
+    @"sourcebucket-1250000000.cos.ap-guangzhou.myqcloud.com/sourceObject";
     
     //指定源文件的 versionID，只有开启或开启后暂停的存储桶，才会响应此参数
-    request.versionID = @"";
+    request.versionID = @"objectVersion1";
     
     [request setFinishBlock:^(QCloudCopyObjectResult * _Nonnull result,
                               NSError * _Nonnull error) {
@@ -134,12 +135,13 @@
     //注意：当前访问策略条目限制为1000条，如果您无需进行 Object ACL 控制，请填 default
     //或者此项不进行设置，默认继承 Bucket 权限。
     // 修改acl
-    request.accessControlList = @"源文件acl";
+    request.accessControlList = @"private";
     //源对象所在的路径
-    request.objectCopySource = @"sourcebucket-1250000000.cos.COS_REGION.myqcloud.com/sourceObject";
+    request.objectCopySource =
+        @"sourcebucket-1250000000.cos.ap-guangzhou.myqcloud.com/sourceObject";
     
     //指定源文件的 versionID，只有开启或开启后暂停的存储桶，才会响应此参数
-    request.versionID = @"";
+    request.versionID = @"objectVersion1";
     
     [request setFinishBlock:^(QCloudCopyObjectResult * _Nonnull result,
                               NSError * _Nonnull error) {

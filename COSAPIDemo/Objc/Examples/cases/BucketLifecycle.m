@@ -86,7 +86,7 @@
     QCloudLifecycleRuleFilter* filter = [[QCloudLifecycleRuleFilter alloc] init];
     
     //指定规则所适用的前缀。匹配前缀的对象受该规则影响，Prefix 最多只能有一个
-    filter.prefix = @"0";
+    filter.prefix = @"prefix1";
     
     //Filter 用于描述规则影响的 Object 集合
     rule.filter = filter;

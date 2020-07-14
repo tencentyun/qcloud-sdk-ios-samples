@@ -71,7 +71,7 @@
     QCloudPutObjectACLRequest* request = [QCloudPutObjectACLRequest new];
     request.object = @"exampleobject";
     request.bucket = @"examplebucket-1250000000";
-    NSString *grantString = [NSString stringWithFormat:@"id=\"%@\"",@"1250000000"];
+    NSString *grantString = [NSString stringWithFormat:@"id=\"%@\"",@"100000000001"];
     
     // grantFullControl 等价于 grantRead + grantWrite
     

@@ -100,10 +100,7 @@ class AbortMultiPartsUpload: XCTestCase,QCloudSignatureProvider,QCloudCredentail
         abort.object = "exampleobject";
         //本次要查询的分块上传的 uploadId，可从初始化分块上传的请求结果
         //QCloudInitiateMultipartUploadResult 中得到
-        abort.uploadId = "exampleUploadId";
-        if self.uploadId != nil {
-            abort.uploadId = self.uploadId!;
-        }
+        abort.uploadId = self.uploadId!;
         
         abort.finishBlock = {(result,error)in
             if error != nil{
@@ -112,7 +109,6 @@ class AbortMultiPartsUpload: XCTestCase,QCloudSignatureProvider,QCloudCredentail
                 //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
                 print(result!);
             }
-            
         }
         QCloudCOSXMLService.defaultCOSXML().abortMultipfartUpload(abort);
         

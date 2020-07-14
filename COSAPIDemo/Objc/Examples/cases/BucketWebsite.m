@@ -166,7 +166,6 @@
     QCloudDeleteBucketWebsiteRequest *delReq = [QCloudDeleteBucketWebsiteRequest new];
     delReq.bucket = @"examplebucket-1250000000";
     [delReq setFinishBlock:^(id outputObject, NSError *error) {
-        
         //outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
     }];

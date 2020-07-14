@@ -62,8 +62,6 @@ class MultiPartsCopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
      * uploadPartAsync(UploadPartRequest, CosXmlResultListener)上传各 个分块.
      */
     func initMultiUpload() {
-        
-        
         //.cssg-snippet-body-start:[swift-init-multi-upload]
         let initRequest = QCloudInitiateMultipartUploadRequest.init();
         
@@ -80,15 +78,12 @@ class MultiPartsCopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
                 self.uploadId = result!.uploadId;
                 print(result!.uploadId);
             }
-
         }
         
         //初始化上传
         QCloudCOSXMLService.defaultCOSXML().initiateMultipartUpload(initRequest);
         
         //.cssg-snippet-body-end
-        
-          
     }
     
     
@@ -101,18 +96,15 @@ class MultiPartsCopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
      * 并修改其中的元数据,复制对象时，默认将继承原对象的元数据，但创建日期将会按新对象的时间计算.
      */
     func uploadPartCopy() {
-        
-        
         //.cssg-snippet-body-start:[swift-upload-part-copy]
         let req = QCloudUploadPartCopyRequest.init();
         req.bucket = "examplebucket-1250000000";
         req.object = "exampleobject";
         //源文件 URL 路径，可以通过 versionid 子资源指定历史版本
-        req.source = "sourcebucket-1250000000.cos.COS_REGION.myqcloud.com/sourceObject";
+        req.source = "sourcebucket-1250000000.cos.ap-guangzhou.myqcloud.com/sourceObject";
         //在初始化分块上传的响应中，会返回一个唯一的描述符（upload ID）
-        req.uploadID = "exampleUploadId";
-        if self.uploadId != nil {
-            req.uploadID = self.uploadId!;
+        if let uploadId = self.uploadId {
+            req.uploadID = uploadId;
         }
         
         //标志当前分块的序号
@@ -128,16 +120,10 @@ class MultiPartsCopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
                 // 保存起来用于最后完成上传时使用
                 self.parts = [mutipartInfo];
             }
-            
-               
-               
-               
         }
         QCloudCOSXMLService.defaultCOSXML().uploadPartCopy(req);
         
         //.cssg-snippet-body-end
-        
-          
     }
     
     
@@ -149,21 +135,19 @@ class MultiPartsCopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
      * 用来校验块的准 确性.
      */
     func completeMultiUpload() {
-    
-        
         //.cssg-snippet-body-start:[swift-complete-multi-upload]
         let  complete = QCloudCompleteMultipartUploadRequest.init();
         complete.bucket = "examplebucket-1250000000";
         complete.object = "exampleobject";
         //本次要查询的分块上传的 uploadId，可从初始化分块上传的请求结果
         //QCloudInitiateMultipartUploadResult 中得到
-        complete.uploadId = "exampleUploadId";
-        if self.uploadId != nil {
-            complete.uploadId = self.uploadId!;
+        if let uploadId = self.uploadId {
+            complete.uploadId = uploadId;
         }
         
-        //    在进行HTTP请求的时候，可以通过设置该参数来设置自定义的一些头部信息。
-        //    通常情况下，携带特定的额外HTTP头部可以使用某项功能，如果是这类需求，可以通过设置该属性来实现。
+        // 在进行HTTP请求的时候，可以通过设置该参数来设置自定义的一些头部信息。
+        // 通常情况下，携带特定的额外HTTP头部可以使用某项功能，如果是这类需求
+        // 可以通过设置该属性来实现。
         complete.customHeaders.setValue("", forKey: "");
         //已上传分块的信息
         let completeInfo = QCloudCompleteMultipartUploadInfo.init();
@@ -181,15 +165,10 @@ class MultiPartsCopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
                 //从 result 中获取上传结果
                 print(result!);
             }
-               
-               
-               
         }
         QCloudCOSXMLService.defaultCOSXML().completeMultipartUpload(complete);
         
         //.cssg-snippet-body-end
-        
-          
     }
     
     

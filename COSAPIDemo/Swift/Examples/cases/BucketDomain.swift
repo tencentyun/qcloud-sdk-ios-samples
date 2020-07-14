@@ -72,14 +72,11 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         //域名配置的规则
         req.domain = config;
         req.finishBlock = {(result,error) in
-        
             if error != nil{
                 print(error!);
             }else{
                 print( result!);
             }
-
-        
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketDomain(req);
         
@@ -97,15 +94,11 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         req.bucket = "examplebucket-1250000000";
         
         req.finishBlock = {(result,error) in
-        
             if error != nil{
                 print(error!);
             }else{
                 print( result!);
             }
-               
-               
-               
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketDomain(req);
         

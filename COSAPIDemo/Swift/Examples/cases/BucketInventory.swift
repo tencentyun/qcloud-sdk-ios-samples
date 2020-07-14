@@ -52,8 +52,6 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
 
     // 设置存储桶清单任务
     func putBucketInventory() {
-        
-      
         //.cssg-snippet-body-start:[swift-put-bucket-inventory]
         let putReq = QCloudPutBucketInventoryRequest.init();
         putReq.bucket = "examplebucket-1250000000";
@@ -124,18 +122,14 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         putReq.inventoryConfiguration = config;
         
         putReq.finishBlock = {(result,error) in
-        
             if error != nil{
                 print(error!);
             }else{
                 print( result!);
             }
-       
         }
         
         QCloudCOSXMLService.defaultCOSXML().putBucketInventory(putReq);
-        
-        
         //.cssg-snippet-body-end
 
     }
@@ -143,56 +137,40 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
 
     // 获取存储桶清单任务
     func getBucketInventory() {
-
-      
         //.cssg-snippet-body-start:[swift-get-bucket-inventory]
         let req = QCloudGetBucketInventoryRequest.init();
         req.bucket = "examplebucket-1250000000";
         //清单任务的名称
         req.inventoryID = "list1";
         req.setFinish {(result,error) in
-        
             if error != nil{
                 print(error!);
             }else{
                 print( result!);
             }
-    
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketInventory(req);
-        
-        
         //.cssg-snippet-body-end
-
-
     }
 
 
     // 删除存储桶清单任务
     func deleteBucketInventory() {
-        
-      
         //.cssg-snippet-body-start:[swift-delete-bucket-inventory]
         let delReq = QCloudDeleteBucketInventoryRequest.init();
         delReq.bucket = "examplebucket-1250000000";
         //清单任务的名称
         delReq.inventoryID = "list1";
         delReq.finishBlock = {(result,error) in
-        
             if error != nil{
                 print(error!);
             }else{
                 print( result!);
             }
-            
         }
         
         QCloudCOSXMLService.defaultCOSXML().deleteBucketInventory(delReq);
-        
-        
         //.cssg-snippet-body-end
-
-        
     }
 
 

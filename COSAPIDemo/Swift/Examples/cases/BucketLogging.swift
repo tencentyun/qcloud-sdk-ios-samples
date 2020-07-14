@@ -52,8 +52,6 @@ class BucketLogging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
 
     // 开启存储桶日志服务
     func putBucketLogging() {
-        
-      
         //.cssg-snippet-body-start:[swift-put-bucket-logging]
         let req = QCloudPutBucketLoggingRequest.init();
         
@@ -72,48 +70,34 @@ class BucketLogging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         req.bucketLoggingStatus = status;
         req.bucket = "examplebucket-1250000000";
         req.finishBlock = {(result,error) in
-        
             if error != nil{
                 print(error!);
             }else{
                 print( result!);
             }
-          
         }
         
         QCloudCOSXMLService.defaultCOSXML().putBucketLogging(req);
-        
-        
         //.cssg-snippet-body-end
-
-        
     }
 
 
     // 获取存储桶日志服务
     func getBucketLogging() {
-        
-      
         //.cssg-snippet-body-start:[swift-get-bucket-logging]
         let req = QCloudGetBucketLoggingRequest.init();
         
         //目标桶名称
         req.bucket = "examplebucket-1250000000";
         req.setFinish { (result, error) in
-        
             if error != nil{
                 print(error!);
             }else{
                 print( result!);
             }
-               
         };
         QCloudCOSXMLService.defaultCOSXML().getBucketLogging(req);
-        
-        
         //.cssg-snippet-body-end
-
-          
     }
 
 

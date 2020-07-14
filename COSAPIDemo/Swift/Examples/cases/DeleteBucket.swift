@@ -52,7 +52,6 @@ class DeleteBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
 
     // 删除存储桶
     func deleteBucket() {
-      
         //.cssg-snippet-body-start:[swift-delete-bucket]
         let deleteBucketReq = QCloudDeleteBucketRequest.init();
         //存储桶名称，命名格式：BucketName-APPID
@@ -68,7 +67,6 @@ class DeleteBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         QCloudCOSXMLService.defaultCOSXML().deleteBucket(deleteBucketReq);
         
         //.cssg-snippet-body-end
-
     }
 
 

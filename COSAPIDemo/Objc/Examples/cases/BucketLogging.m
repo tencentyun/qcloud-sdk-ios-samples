@@ -107,8 +107,7 @@
     getReq.bucket = @"examplebucket-1250000000";
     [getReq setFinishBlock:^(QCloudBucketLoggingStatus * _Nonnull result,
                              NSError * _Nonnull error) {
-        NSLog(@"getReq result = %@",result.loggingEnabled.targetBucket);
-    
+        // result 中包含日志状态
     }];
     [[QCloudCOSXMLService defaultCOSXML]GetBucketLogging:getReq];
     

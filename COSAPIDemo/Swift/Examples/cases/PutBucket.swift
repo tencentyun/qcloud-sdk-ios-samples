@@ -53,8 +53,6 @@ class PutBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     
     // 创建存储桶
     func putBucket() {
-        
-        
         //.cssg-snippet-body-start:[swift-put-bucket]
         let putBucketReq = QCloudPutBucketRequest.init();
         putBucketReq.bucket = "examplebucket-1250000000";
@@ -65,31 +63,23 @@ class PutBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
             } else {
                 print(result!);
             }
-               
-               
-               
         }
         QCloudCOSXMLService.defaultCOSXML().putBucket(putBucketReq);
         
         //.cssg-snippet-body-end
-        
-          
     }
     
     
     // 创建存储桶并且授予存储桶权限
     func putBucketAndGrantAcl() {
-        
-        
         //.cssg-snippet-body-start:[swift-put-bucket-and-grant-acl]
-        
         let putBucketReq = QCloudPutBucketRequest.init();
         putBucketReq.bucket = "examplebucket-1250000000";
         //additional actions after finishing
         putBucketReq.bucket = "examplebucket-1250000000";
         
-        let appID = "1131975903";//授予全新的账号 ID
-        let ownerIdentifier = String.init(format: "qcs::cam::uin/%@:uin/%@",appID,appID);
+        let uin = "1131975903";//授予权限的账号 ID
+        let ownerIdentifier = String.init(format: "qcs::cam::uin/%@:uin/%@",uin,uin);
         let grantString = String.init(format: "id=\"%@\"", ownerIdentifier);
         
         //赋予被授权者读写权限
@@ -107,14 +97,9 @@ class PutBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
             } else {
                 print(result!);
             }
-               
-               
-               
         }
         QCloudCOSXMLService.defaultCOSXML().putBucket(putBucketReq);
         //.cssg-snippet-body-end
-        
-          
     }
     
     

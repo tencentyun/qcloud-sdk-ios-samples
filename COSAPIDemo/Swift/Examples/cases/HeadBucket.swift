@@ -57,29 +57,19 @@ class HeadBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
     * 存储桶不存在，返回 HTTP 状态码为404。
     */
     func headBucket() {
-      
         //.cssg-snippet-body-start:[swift-head-bucket]
         let headBucketReq = QCloudHeadBucketRequest.init();
         headBucketReq.bucket = "examplebucket-1250000000";
         headBucketReq.finishBlock = {(result,error) in
-            //可以从 outputObject 中获取服务器返回的 header 信息
-               //  x-cos-bucket-az-type    存储桶 AZ 类型，当存储桶为多 AZ 存储桶时返回此头部，
-               //  值固定为 MAZ。
-               
-               //  x-cos-bucket-region    存储桶所在地域。枚举值请参见 地域和访问域名 文档，
-               //   例如 ap-beijing，ap-hongkong，eu-frankfurt 等
             if error != nil{
                 print(error!);
             }else{
                 print( result!);
             }
-               
         }
         QCloudCOSXMLService.defaultCOSXML().headBucket(headBucketReq);
         
         //.cssg-snippet-body-end
-
-          
     }
 
 

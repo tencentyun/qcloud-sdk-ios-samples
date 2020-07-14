@@ -52,8 +52,6 @@ class ObjectPresignUrl: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
     
     // 获取预签名下载链接
     func getPresignDownloadUrl() {
-        
-        
         //.cssg-snippet-body-start:[swift-get-presign-download-url]
         let getPresign  = QCloudGetPresignedURLRequest.init();
         getPresign.bucket = "examplebucket-1250000000" ;
@@ -64,22 +62,15 @@ class ObjectPresignUrl: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
             if error == nil{
                 print(result?.presienedURL as Any);
             }
-               
-               
-               
         }
         QCloudCOSXMLService.defaultCOSXML().getPresignedURL(getPresign);
         
         //.cssg-snippet-body-end
-        
-          
     }
     
     
     // 获取预签名上传链接
     func getPresignUploadUrl() {
-        
-        
         //.cssg-snippet-body-start:[swift-get-presign-upload-url]
         let getPresign  = QCloudGetPresignedURLRequest.init();
         getPresign.bucket = "examplebucket-1250000000" ;
@@ -90,15 +81,10 @@ class ObjectPresignUrl: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
             if error == nil{
                 print(result?.presienedURL as Any);
             }
-               
-               
-               
         }
         QCloudCOSXMLService.defaultCOSXML().getPresignedURL(getPresign);
         
         //.cssg-snippet-body-end
-        
-          
     }
     
     

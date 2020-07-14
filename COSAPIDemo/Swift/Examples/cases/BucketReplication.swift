@@ -55,8 +55,6 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
     * 求会替换现有配置。
     */
     func putBucketReplication() {
-        
-      
         //.cssg-snippet-body-start:[swift-put-bucket-replication]
         let putBucketReplication = QCloudPutBucketReplicationRequest.init();
         putBucketReplication.bucket = "examplebucket-1250000000";
@@ -90,20 +88,15 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
         
         putBucketReplication.finishBlock = {(result,error) in
             //可以从 outputObject 中获取服务器返回的 header 信息
-                if error != nil{
-                    print(error!);
-                }else{
-                    print(result!);
-                }
-               
-               
-               
+            if error != nil{
+                print(error!);
+            }else{
+                print(result!);
+            }
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketRelication(putBucketReplication);
         
         //.cssg-snippet-body-end
-
-          
     }
 
 
@@ -111,8 +104,6 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
     * 接口用于查询存储桶中用户跨地域复制配置信息。用户发起该请求时需获得请求签名，表明该请求已获得许可。
     */
     func getBucketReplication() {
-        
-      
         //.cssg-snippet-body-start:[swift-get-bucket-replication]
         let getBucketReplication = QCloudGetBucketReplicationRequest.init();
         getBucketReplication.bucket = "examplebucket-1250000000";
@@ -122,13 +113,10 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
             }else{
                 print(config!);
             }
-               
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketReplication(getBucketReplication);
         
         //.cssg-snippet-body-end
-
-          
     }
 
 
@@ -136,7 +124,6 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
     * 用来删除存储桶中的跨地域复制配置。用户发起该请求时需获得请求签名，表明该请求已获得许可。
     */
     func deleteBucketReplication() {
-      
         //.cssg-snippet-body-start:[swift-delete-bucket-replication]
         let deleteBucketReplication = QCloudDeleteBucketReplicationRequest.init();
         deleteBucketReplication.bucket = "examplebucket-1250000000";
@@ -146,13 +133,10 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
             }else{
                 print(result!);
             }
-
         }
         QCloudCOSXMLService.defaultCOSXML().deleteBucketReplication(deleteBucketReplication);
         
         //.cssg-snippet-body-end
-
-          
     }
 
 

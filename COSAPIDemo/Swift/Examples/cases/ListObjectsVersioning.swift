@@ -52,18 +52,14 @@ class ListObjectsVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentail
     
     // 获取对象多版本列表第一页数据
     func listObjectsVersioning() {
-        
-        //.cssg-snippet-body-start:[swift-list-objects-versioning]
+        //\\.cssg-snippet-body-start:[swift-list-objects-versioning]
         let listObjectVersionsRequest :QCloudListObjectVersionsRequest = QCloudListObjectVersionsRequest();
         
         //存储桶名称
         listObjectVersionsRequest.bucket = "bucketname";
         
-        //存储桶所在的地域
-        listObjectVersionsRequest.regionName = "bucketlocation";
-        
         //一次请求多少条数据
-        listObjectVersionsRequest.maxKeys = 1000;
+        listObjectVersionsRequest.maxKeys = 100;
         
         listObjectVersionsRequest.setFinish { (result, error) in
             //result.deleteMarker; // 已删除的文件
@@ -73,21 +69,16 @@ class ListObjectsVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentail
         
         QCloudCOSXMLService.defaultCOSXML().listObjectVersions(listObjectVersionsRequest);
         //.cssg-snippet-body-end
-        
     }
     
     
     // 获取对象多版本列表下一页数据
     func listObjectsVersioningNextPage() {
-        
-        //.cssg-snippet-body-start:[swift-list-objects-versioning-next-page]
+        //\\.cssg-snippet-body-start:[swift-list-objects-versioning-next-page]
         let listObjectVersionsRequest :QCloudListObjectVersionsRequest = QCloudListObjectVersionsRequest();
         
         //存储桶名称
         listObjectVersionsRequest.bucket = "bucketname";
-        
-        //存储桶所在的地域
-        listObjectVersionsRequest.regionName = "bucketlocation";
         
         //一页请求数据条目数
         listObjectVersionsRequest.maxKeys = 100;
@@ -97,15 +88,10 @@ class ListObjectsVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentail
         listObjectVersionsRequest.setFinish { (result, error) in
             //result.deleteMarker; // 已删除的文件
             //result.versionContent;  对象版本条目
-               
-               
-               
         }
         
         QCloudCOSXMLService.defaultCOSXML().listObjectVersions(listObjectVersionsRequest);
         //.cssg-snippet-body-end
-        
-          
     }
     
     

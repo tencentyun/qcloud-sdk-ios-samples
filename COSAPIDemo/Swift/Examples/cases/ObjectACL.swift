@@ -52,12 +52,11 @@ class ObjectACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     
     // 设置对象 ACL
     func putObjectAcl() {
-        
         //.cssg-snippet-body-start:[swift-put-object-acl]
         let putObjectACl = QCloudPutObjectACLRequest.init();
         putObjectACl.bucket = "examplebucket-1250000000";
         putObjectACl.object = "exampleobject";
-        let grantString = "id=\"1250000000\"";
+        let grantString = "id=\"100000000001\"";
         
         // grantFullControl 等价于 grantRead + grantWrite
         putObjectACl.grantFullControl = grantString;
@@ -73,22 +72,15 @@ class ObjectACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
                 //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
                 print(result!);
             }
-               
-               
-               
         }
         QCloudCOSXMLService.defaultCOSXML().putObjectACL(putObjectACl);
         
         //.cssg-snippet-body-end
-        
-          
     }
     
     
     // 获取对象 ACL
     func getObjectAcl() {
-        
-        
         //.cssg-snippet-body-start:[swift-get-object-acl]
         let getObjectACL = QCloudGetObjectACLRequest.init();
         getObjectACL.bucket = "examplebucket-1250000000";
@@ -102,15 +94,10 @@ class ObjectACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
                 //可以从 result 的 accessControlList 中获取对象的 ACL
                 print(result!.accessControlList);
             }
-               
-               
-               
         }
         QCloudCOSXMLService.defaultCOSXML().getObjectACL(getObjectACL);
         
         //.cssg-snippet-body-end
-        
-          
     }
     
     

@@ -71,9 +71,10 @@
 
     //.cssg-snippet-body-start:[objc-put-bucket-acl]
     QCloudPutBucketACLRequest* putACL = [QCloudPutBucketACLRequest new];
-    NSString* appID = @"1131975903";//授予全新的账号 ID
+    
+    NSString* uin = @"100000000001";//授予权限的账号 ID
     NSString *ownerIdentifier = [NSString stringWithFormat:@"qcs::cam::uin/%@:uin/%@"
-                                 , appID,appID];
+                                 , uin,uin];
     NSString *grantString = [NSString stringWithFormat:@"id=\"%@\"",ownerIdentifier];
     
     //赋予被授权者读写权限
@@ -109,7 +110,7 @@
     
     QCloudGetBucketACLRequest* getBucketACl = [QCloudGetBucketACLRequest new];
     
-    // 格式：BucketName-APPID
+    // 存储桶名称，格式：BucketName-APPID
     getBucketACl.bucket = @"examplebucket-1250000000";
     
     [getBucketACl setFinishBlock:^(QCloudACLPolicy * _Nonnull result,

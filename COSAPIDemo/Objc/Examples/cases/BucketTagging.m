@@ -117,7 +117,6 @@
     //存储桶名称
     getReq.bucket = @"examplebucket-1250000000";
     [getReq setFinishBlock:^(QCloudBucketTagging * result, NSError * error) {
-
         
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetBucketTagging:getReq];

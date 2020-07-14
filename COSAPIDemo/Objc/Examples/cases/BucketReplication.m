@@ -91,14 +91,14 @@
     //资源标识符
     QCloudBucketReplicationDestination* destination = [[QCloudBucketReplicationDestination alloc] init];
     NSString* destinationBucket = @"destinationbucket-1250000000";
-    NSString* region = @"ap-beijing";
+    NSString* region = @"ap-beijing";   //目标存储桶所在地域
     destination.bucket = [NSString stringWithFormat:@"qcs::cos:%@::%@",region,destinationBucket];
     
     //目标存储桶信息
     rule.destination = destination;
     
     //前缀匹配策略，不可重叠，重叠返回错误。前缀匹配根目录为空
-    rule.prefix = @"a";
+    rule.prefix = @"prefix1";
     replConfiguration.rule = @[rule];
     request.configuation = replConfiguration;
     
@@ -125,8 +125,6 @@
     
     [request setFinishBlock:^(QCloudBucketReplicationConfiguation* result,
                               NSError* error) {
-        //outputObject 包含所有的响应 http 头部
-        NSDictionary* info = (NSDictionary *) outputObject;
        
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetBucketReplication:request];

@@ -54,8 +54,6 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
      * 用于为存储桶设置键值对作为存储桶标签，可以协助您管理已有的存储桶资源，并通过标签进行成本管理。
      */
     func putBucketTagging() {
-        
-        
         //.cssg-snippet-body-start:[swift-put-bucket-tagging]
         let req = QCloudPutBucketTaggingRequest.init();
         req.bucket = "examplebucket-1250000000";
@@ -84,19 +82,15 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         //标签集合
         req.taggings = taggings;
         req.finishBlock = {(result,error) in
-            
             if error != nil{
                 print(error!);
             }else{
                 print( result!);
             }
-               
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketTagging(req);
         
         //.cssg-snippet-body-end
-        
-          
     }
     
     
@@ -104,12 +98,10 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
      * 用于查询指定存储桶下已有的存储桶标签。
      */
     func getBucketTagging() {
-        
         //.cssg-snippet-body-start:[swift-get-bucket-tagging]
         let req = QCloudGetBucketTaggingRequest.init();
         req.bucket = "examplebucket-1250000000";
         req.setFinish { (result, error) in
-            
             if error != nil{
                 print(error!);
             }else{
@@ -126,21 +118,17 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
      * 用于删除指定存储桶下已有的存储桶标签。
      */
     func deleteBucketTagging() {
-        
-        
         //.cssg-snippet-body-start:[swift-delete-bucket-tagging]
         let req = QCloudDeleteBucketTaggingRequest.init();
         
         //存储桶名称
         req.bucket = "examplebucket-1250000000";
         req.finishBlock =  { (result, error) in
-            
             if error != nil{
                 print(error!);
             }else{
                 print( result!);
             }
-               
         };
         QCloudCOSXMLService.defaultCOSXML().deleteBucketTagging(req);
         

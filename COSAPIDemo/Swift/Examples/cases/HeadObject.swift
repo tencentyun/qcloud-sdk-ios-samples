@@ -52,7 +52,6 @@ class HeadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
 
     // 获取对象信息
     func headObject() {
-      
         //.cssg-snippet-body-start:[swift-head-object]
         let headObject = QCloudHeadObjectRequest.init();
         headObject.bucket = "examplebucket-1250000000";
@@ -63,15 +62,10 @@ class HeadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
             }else{
                 print(result!);
             }
-               
-               
-               
         }
         QCloudCOSXMLService.defaultCOSXML().headObject(headObject);
         
         //.cssg-snippet-body-end
-
-          
     }
 
 

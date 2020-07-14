@@ -52,8 +52,6 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
 
     // 设置存储桶生命周期
     func putBucketLifecycle() {
-        
-      
         //.cssg-snippet-body-start:[swift-put-bucket-lifecycle]
         let putBucketLifecycleReq = QCloudPutBucketLifecycleRequest.init();
         putBucketLifecycleReq.bucket = "examplebucket-1250000000";
@@ -95,27 +93,21 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         putBucketLifecycleReq.lifeCycle.rules = [rule];
         
         putBucketLifecycleReq.finishBlock = {(result,error) in
-            
             //可以从 outputObject 中获取服务器返回的 header 信息
             if error != nil{
                 print(error!);
             }else{
                 print(result!);
             }
-          
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketLifecycle(putBucketLifecycleReq);
         
         //.cssg-snippet-body-end
-
-        
     }
 
 
     // 获取存储桶生命周期
     func getBucketLifecycle() {
-        
-      
         //.cssg-snippet-body-start:[swift-get-bucket-lifecycle]
         let getBucketLifeCycle = QCloudGetBucketLifecycleRequest.init();
         getBucketLifeCycle.bucket = "examplebucket-1250000000";
@@ -132,15 +124,11 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         QCloudCOSXMLService.defaultCOSXML().getBucketLifecycle(getBucketLifeCycle);
         
         //.cssg-snippet-body-end
-
-        
     }
 
 
     // 删除存储桶生命周期
     func deleteBucketLifecycle() {
-        
-      
         //.cssg-snippet-body-start:[swift-delete-bucket-lifecycle]
         let deleteBucketLifeCycle = QCloudDeleteBucketLifeCycleRequest.init();
         deleteBucketLifeCycle.bucket = "examplebucket-1250000000";
@@ -155,8 +143,6 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         QCloudCOSXMLService.defaultCOSXML().deleteBucketLifeCycle(deleteBucketLifeCycle);
         
         //.cssg-snippet-body-end
-
-        
     }
 
 

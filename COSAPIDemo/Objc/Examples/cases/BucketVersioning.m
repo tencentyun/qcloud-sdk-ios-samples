@@ -113,8 +113,7 @@
     request.bucket = @"examplebucket-1250000000";
     [request setFinishBlock:^(QCloudBucketVersioningConfiguration* result,
                               NSError* error) {
-        
-    
+        // result 包含多版本的状态
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] GetBucketVersioning:request];

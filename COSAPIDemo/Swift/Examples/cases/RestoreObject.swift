@@ -53,8 +53,6 @@ class RestoreObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
     
     // 恢复归档对象
     func restoreObject() {
-        
-        
         //.cssg-snippet-body-start:[swift-restore-object]
         let restore = QCloudPostObjectRestoreRequest.init();
         restore.bucket = "examplebucket-1250000000";
@@ -72,15 +70,10 @@ class RestoreObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
                 //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
                 print(result!);
             }
-               
-               
-               
         }
         QCloudCOSXMLService.defaultCOSXML().postObjectRestore(restore);
         
         //.cssg-snippet-body-end
-        
-          
     }
     
     

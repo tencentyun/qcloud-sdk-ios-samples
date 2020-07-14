@@ -54,7 +54,6 @@ class BucketWebsite: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
      * 设置存储桶静态网站
      */
     func putBucketWebsite() {
-        
         //.cssg-snippet-body-start:[swift-put-bucket-website]
         let req = QCloudPutBucketWebsiteRequest.init();
         req.bucket = "examplebucket-1250000000";
@@ -107,7 +106,6 @@ class BucketWebsite: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         webRe.replaceKeyPrefixWith = replaceKeyPrefixWith;
         rule.redirect = webRe;
         
-        
         let routingRules = QCloudWebsiteRoutingRules.init();
         routingRules.routingRule = [rule];
         
@@ -116,19 +114,15 @@ class BucketWebsite: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         req.websiteConfiguration  = config;
         
         req.finishBlock = {(result,error) in
-            
             if error != nil{
                 print(error!);
             }else{
                 print( result!);
             }
-            
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketWebsite(req);
         
         //.cssg-snippet-body-end
-        
-          
     }
     
     
@@ -136,7 +130,6 @@ class BucketWebsite: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
      * 获取存储桶静态网站
      */
     func getBucketWebsite() {
-        
         //.cssg-snippet-body-start:[swift-get-bucket-website]
         let req = QCloudGetBucketWebsiteRequest.init();
         req.bucket = "examplebucket-1250000000";
@@ -153,27 +146,20 @@ class BucketWebsite: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         QCloudCOSXMLService.defaultCOSXML().getBucketWebsite(req);
         
         //.cssg-snippet-body-end
-        
-          
     }
     
     
     // 删除存储桶静态网站
     func deleteBucketWebsite() {
-        
         //.cssg-snippet-body-start:[swift-delete-bucket-website]
         let delReq = QCloudDeleteBucketWebsiteRequest.init();
         delReq.bucket = "examplebucket-1250000000";
         delReq.finishBlock = {(result,error) in
-            
             if error != nil{
                 print(error!);
             }else{
                 print( result!);
             }
-               
-               
-                
         }
         
         QCloudCOSXMLService.defaultCOSXML().deleteBucketWebsite(delReq);

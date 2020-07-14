@@ -72,7 +72,7 @@
     //删除的文件所在的桶名称
     deleteObjectRequest.bucket = @"examplebucket-1250000000";
     
-    //删除的文件名
+    //删除的对象键
     deleteObjectRequest.object = @"exampleobject";
     
     [deleteObjectRequest setFinishBlock:^(id outputObject, NSError *error) {

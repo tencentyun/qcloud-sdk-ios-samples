@@ -13,7 +13,10 @@
 
 @end
 
-@implementation ListObjectsVersioning
+@implementation ListObjectsVersioning {
+    
+    QCloudListVersionsResult* prevPageResult;
+}
 
 - (void)setUp {
     // 注册默认的 COS 服务
@@ -67,25 +70,25 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
  * 获取对象多版本列表第一页数据
  */
 - (void)listObjectsVersioning {
-    //.cssg-snippet-body-start:[objc-list-objects-versioning]
+    //\\.cssg-snippet-body-start:[objc-list-objects-versioning]
     
-    QCloudListObjectVersionsRequest* listObjectVersionsRequest = [[QCloudListObjectVersionsRequest alloc] init];
+    QCloudListObjectVersionsRequest* listObjectVersionsRequest =
+        [[QCloudListObjectVersionsRequest alloc] init];
     
     //存储桶名称
     listObjectVersionsRequest.bucket = @"bucketname";
     
-    //存储桶所在的地域
-    listObjectVersionsRequest.regionName = @"bucketlocation";
+    //一页请求数据条目数，默认 1000
+    listObjectVersionsRequest.maxKeys = 100;
     
-    //一页请求数据条目数
-    listObjectVersionsRequest.maxKeys = 1000;
     [listObjectVersionsRequest setFinishBlock:^(QCloudListVersionsResult * _Nonnull result,
                                                 NSError * _Nonnull error) {
-        
         //result.deleteMarker; // 已删除的文件
         //result.versionContent;  对象版本条目
-        
-        
+        if (result.isTruncated) {
+            // 表示数据被截断，需要拉取下一页数据
+            self->prevPageResult = result;
+        }
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] ListObjectVersions:listObjectVersionsRequest];
@@ -97,26 +100,27 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
  */
 - (void)listObjectsVersioningNextPage {
 
-    //.cssg-snippet-body-start:[objc-list-objects-versioning]
+    //\\.cssg-snippet-body-start:[objc-list-objects-versioning]
     
     QCloudListObjectVersionsRequest* listObjectVersionsRequest = [[QCloudListObjectVersionsRequest alloc] init];
     
     //存储桶名称
     listObjectVersionsRequest.bucket = @"bucketname";
     
-    //存储桶所在的地域
-    listObjectVersionsRequest.regionName = @"bucketlocation";
-    
-    //一页请求数据条目数
+    //一页请求数据条目数，默认 1000
     listObjectVersionsRequest.maxKeys = 100;
     
     //已经请求的总条目数
-    listObjectVersionsRequest.marker = @"100";
+    listObjectVersionsRequest.marker = prevPageResult.versionIDMarkder;
+    
     [listObjectVersionsRequest setFinishBlock:^(QCloudListVersionsResult * _Nonnull result,
                                                 NSError * _Nonnull error) {
-        
         //result.deleteMarker; // 已删除的文件
         //result.versionContent;  对象版本条目
+        if (result.isTruncated) {
+            // 表示数据被截断，需要拉取下一页数据
+            self->prevPageResult = result;
+        }
     
         
     }];

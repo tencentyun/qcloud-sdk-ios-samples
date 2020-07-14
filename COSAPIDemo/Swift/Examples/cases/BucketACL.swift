@@ -52,12 +52,10 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
 
     // 设置存储桶 ACL
     func putBucketAcl() {
-        
-      
         //.cssg-snippet-body-start:[swift-put-bucket-acl]
         let putBucketACLReq = QCloudPutBucketACLRequest.init();
         putBucketACLReq.bucket = "examplebucket-1250000000";
-        let appTD = "1131975903";//授予全新的账号 ID
+        let appTD = "100000000001";//授予权限的账号 ID
         let ownerIdentifier = "qcs::cam::uin/\(appTD):uin/\(appTD)";
         let grantString = "id=\"\(ownerIdentifier)\"";
         //赋予被授权者写权限
@@ -76,20 +74,15 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
             }else{
                 print(result!);
             }
-          
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketACL(putBucketACLReq);
         
         //.cssg-snippet-body-end
-
-
     }
 
 
     // 获取存储桶 ACL
     func getBucketAcl() {
-        
-      
         //.cssg-snippet-body-start:[swift-get-bucket-acl]
         let getBucketACLReq = QCloudGetBucketACLRequest.init();
         
@@ -106,7 +99,6 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         QCloudCOSXMLService.defaultCOSXML().getBucketACL(getBucketACLReq)
         
         //.cssg-snippet-body-end
-
     }
 
 

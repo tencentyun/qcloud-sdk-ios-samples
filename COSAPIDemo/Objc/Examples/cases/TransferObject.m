@@ -70,10 +70,11 @@
     //.cssg-snippet-body-start:[objc-transfer-upload-file]
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
     NSURL* url = [NSURL URLWithString:@"文件的URL"];
-    put.object = @"文件名.jpg";
-    put.bucket = @"bucket名";
+    put.bucket = @"examplebucket-1250000000";
+    put.object = @"exampleobject";
     //需要上传的对象内容。可以传入NSData*或者NSURL*类型的变量
     put.body =  url;
+    //监听上传进度
     [put setSendProcessBlock:^(int64_t bytesSent,
                                int64_t totalBytesSent,
                                int64_t totalBytesExpectedToSend) {
@@ -86,7 +87,7 @@
               bytesSent, totalBytesSent, totalBytesExpectedToSend);
     }];
     
-    
+    //监听上传结果
     [put setFinishBlock:^(id outputObject, NSError *error) {
       //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
       NSDictionary * result = (NSDictionary *)outputObject;
@@ -94,20 +95,41 @@
     
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
     
+    //.cssg-snippet-body-end
+    
     //取消上传
     [put cancel];
-    
-    //.cssg-snippet-body-end
 
 }
 
 /**
- * 高级接口上传字节数组
+ * 高级接口上传二进制数据
  */
 - (void)transferUploadBytes {
     
     
     //.cssg-snippet-body-start:[objc-transfer-upload-bytes]
+    QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
+    put.bucket = @"examplebucket-1250000000";
+    put.object = @"exampleobject";
+    //需要上传的对象内容。可以传入NSData*或者NSURL*类型的变量
+    put.body =  [NSData dataWithContentsOfFile:@"文件路径"];
+    
+    //监听上传进度
+    [put setSendProcessBlock:^(int64_t bytesSent,
+                               int64_t totalBytesSent,
+                               int64_t totalBytesExpectedToSend) {
+        //      bytesSent       一次上传的字节数，
+        //      totalBytesSent  总共上传的字节数
+        //      totalBytesExpectedToSend 文件一共多少字节
+    }];
+    
+    //监听上传结果
+    [put setFinishBlock:^(id outputObject, NSError *error) {
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
+    }];
+    [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
    
     //.cssg-snippet-body-end
     
@@ -121,29 +143,6 @@
     
     
     //.cssg-snippet-body-start:[objc-transfer-upload-stream]
-    QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
-    put.object = @"文件名.jpg";
-    put.bucket = @"bucket名";
-    //需要上传的对象内容。可以传入NSData*或者NSURL*类型的变量
-    put.body =  [NSData dataWithContentsOfFile:@"文件路径"];
-    [put setSendProcessBlock:^(int64_t bytesSent,
-                               int64_t totalBytesSent,
-                               int64_t totalBytesExpectedToSend) {
-        
-        //      bytesSent       一次上传的字节数，
-        //      totalBytesSent  总共上传的字节数
-        //      totalBytesExpectedToSend 文件一共多少字节
-        
-        NSLog(@"upload %lld totalSend %lld aim %lld",
-              bytesSent, totalBytesSent, totalBytesExpectedToSend);
-    }];
-    
-    
-    [put setFinishBlock:^(id outputObject, NSError *error) {
-        //outputObject 包含所有的响应 http 头部
-        NSDictionary* info = (NSDictionary *) outputObject;
-    }];
-    [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
     //.cssg-snippet-body-end
     
 }
@@ -156,7 +155,7 @@
     //.cssg-snippet-body-start:[objc-transfer-download-object]
     QCloudCOSXMLDownloadObjectRequest * request = [QCloudCOSXMLDownloadObjectRequest new];
     
-    request.object = @"quic_large_object";
+    request.object = @"exampleobject";
     
     //设置下载的路径 URL，如果设置了，文件将会被下载到指定路径中
     //如果未设置该参数，那么文件将会被下载至内存里，存放在在 finishBlock 的 outputObject 里
@@ -165,16 +164,16 @@
     // 文件所在桶
     request.bucket = @"examplebucket-1250000000";
     
-    //本地已下载的文件大小
+    //本地已下载的文件大小，如果是从头开始下载，请不要设置
     request.localCacheDownloadOffset = 100;
     
-    //下载完成
+    //监听下载结果
     [request setFinishBlock:^(id outputObject, NSError *error) {
         //outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
     
-    //下载中
+    //监听下载进度
     [request setDownProcessBlock:^(int64_t bytesDownload, int64_t totalBytesDownload,
         int64_t totalBytesExpectedToDownload) {
         //      bytesDownload       一次下载的字节数，
@@ -184,12 +183,11 @@
         
     }];
     
-    [[QCloudCOSTransferMangerService costransfermangerServiceForKey:@"ServiceKey"]
-                                                     DownloadObject:request];
+    [[QCloudCOSTransferMangerService defaultCOSTransferManager] DownloadObject:request];
     
+    //.cssg-snippet-body-end
     // 取消下载
     [request cancel];
-    //.cssg-snippet-body-end
 
 }
 
@@ -239,7 +237,7 @@
     // 高级接口上传对象
     [self transferUploadFile];
     
-    // 高级接口上传字节数组
+    // 高级接口上传二进制数据
     [self transferUploadBytes];
     
     // 高级接口流式上传

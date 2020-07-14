@@ -52,7 +52,6 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
 
     // 设置存储桶跨域规则
     func putBucketCors() {
-      
         //.cssg-snippet-body-start:[swift-put-bucket-cors]
         let putBucketCorsReq = QCloudPutBucketCORSRequest.init();
         
@@ -61,7 +60,7 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         let rule = QCloudCORSRule.init();
         
         // 配置规则的 ID
-        rule.identifier = "swift-sdk";
+        rule.identifier = "rule1";
         
         // 在发送 OPTIONS 请求时告知服务端，接下来的请求可以使用哪些自定义的 HTTP 请求头部，支持通配符 *
         rule.allowedHeader = ["origin","host","accept","content-type","authorization"];
@@ -89,18 +88,15 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
             }else{
                 print(result!);
             }
-           
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketCORS(putBucketCorsReq);
         
         //.cssg-snippet-body-end
-
     }
 
 
     // 获取存储桶跨域规则
     func getBucketCors() {
-      
         //.cssg-snippet-body-start:[swift-get-bucket-cors]
         let  getBucketCorsRes = QCloudGetBucketCORSRequest.init();
         //格式：BucketName-APPID
@@ -112,7 +108,6 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
             }else{
                 print(corsConfig!);
             }
-
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketCORS(getBucketCorsRes);
         
@@ -122,7 +117,6 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
 
     // 实现 Object 跨域访问配置的预请求
     func optionObject() {
-      
         //.cssg-snippet-body-start:[swift-option-object]
         let optionsObject = QCloudOptionsObjectRequest.init();
         optionsObject.object = "exampleobject";
@@ -141,18 +135,15 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
             }else{
                 print(result!);
             }
-            
         }
         QCloudCOSXMLService.defaultCOSXML().optionsObject(optionsObject);
         
         //.cssg-snippet-body-end
-
     }
 
 
     // 删除存储桶跨域规则
     func deleteBucketCors() {
-      
         //.cssg-snippet-body-start:[swift-delete-bucket-cors]
         let deleteBucketCorsRequest = QCloudDeleteBucketCORSRequest.init();
         deleteBucketCorsRequest.bucket = "examplebucket-1250000000";
@@ -163,15 +154,10 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
             }else{
                 print(result!);
             }
-               
-               
-               
         }
         QCloudCOSXMLService.defaultCOSXML().deleteBucketCORS(deleteBucketCorsRequest);
         
         //.cssg-snippet-body-end
-
-          
     }
 
 

@@ -92,7 +92,7 @@
     //additional actions after finishing
     request.bucket = @"examplebucket-1250000000";
     
-    NSString* appID = @"1131975903";//授予全新的账号 ID
+    NSString* appID = @"100000000001";//授予权限的账号 ID
     NSString *ownerIdentifier = [NSString stringWithFormat:@"qcs::cam::uin/%@:uin/%@"
                                  , appID,appID];
     NSString *grantString = [NSString stringWithFormat:@"id=\"%@\"",ownerIdentifier];

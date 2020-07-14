@@ -75,10 +75,11 @@
     QCloudCORSRule* rule = [QCloudCORSRule new];
     
     // 配置规则的 ID
-    rule.identifier = @"sdk";
+    rule.identifier = @"rule1";
     
-    // 在发送 OPTIONS 请求时告知服务端，接下来的请求可以使用哪些自定义的 HTTP 请求头部，支持通配符 *
-    rule.allowedHeader = @[@"origin",@"host",@"accept",@"content-type",@"authorization"];
+    // 在发送 OPTIONS 请求时告知服务端，接下来的请求可以使用的 HTTP 请求头部，支持通配符 *
+    rule.allowedHeader = @[@"origin",@"host",@"accept",
+                           @"content-type",@"authorization"];
     rule.exposeHeader = @"ETag";
     
     // 允许的 HTTP 操作，例如：GET，PUT，HEAD，POST，DELETE

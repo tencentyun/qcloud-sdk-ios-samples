@@ -52,7 +52,6 @@ class CopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
 
     // 复制对象时保留对象属性
     func copyObject() {
-      
         //.cssg-snippet-body-start:[swift-copy-object]
         let putObjectCopy = QCloudPutObjectCopyRequest.init();
         
@@ -63,7 +62,7 @@ class CopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         putObjectCopy.object = "exampleobject";
         
         //源对象所在的路径
-        putObjectCopy.objectCopySource = "sourcebucket-1250000000.cos.COS_REGION.myqcloud.com/sourceObject";
+        putObjectCopy.objectCopySource = "sourcebucket-1250000000.cos.ap-guangzhou.myqcloud.com/sourceObject";
         
         // 是否拷贝元数据，枚举值：Copy，Replaced，默认值 Copy。
         // 假如标记为 Copy，忽略 Header 中的用户元数据信息直接复制
@@ -90,14 +89,11 @@ class CopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         QCloudCOSXMLService.defaultCOSXML().putObjectCopy(putObjectCopy);
         
         //.cssg-snippet-body-end
-
-          
     }
 
 
     // 复制对象时替换对象属性
     func copyObjectReplaced() {
-      
         //.cssg-snippet-body-start:[swift-copy-object-replaced]
         let request : QCloudPutObjectCopyRequest  = QCloudPutObjectCopyRequest();
         
@@ -127,23 +123,21 @@ class CopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         // 修改acl
         request.accessControlList = "源文件acl";
         //源对象所在的路径
-        request.objectCopySource = "sourcebucket-1250000000.cos.COS_REGION.myqcloud.com/sourceObject";
+        request.objectCopySource = "sourcebucket-1250000000.cos.ap-guangzhou.myqcloud.com/sourceObject";
         
         //指定源文件的 versionID，只有开启或开启后暂停的存储桶，才会响应此参数
         request.versionID = "versionID";
         
         request.setFinish { (result, error) in
-                   if error != nil{
-                       print(error!);
-                   }else{
-                       print(result!);
-                   }
+           if error != nil{
+               print(error!);
+           }else{
+               print(result!);
+           }
                
         }
         QCloudCOSXMLService.defaultCOSXML().putObjectCopy(request);
         //.cssg-snippet-body-end
-
-          
     }
 
 

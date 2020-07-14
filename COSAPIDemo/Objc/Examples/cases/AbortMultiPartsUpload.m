@@ -73,19 +73,18 @@
 - (void)initMultiUpload {
     
     //.cssg-snippet-body-start:[objc-init-multi-upload]
-    QCloudInitiateMultipartUploadRequest* initrequest = [QCloudInitiateMultipartUploadRequest new];
+    QCloudInitiateMultipartUploadRequest* initRequest = [QCloudInitiateMultipartUploadRequest new];
     
-    initrequest.bucket = @"examplebucket-1250000000"; // 上传文件目标桶
-    initrequest.object = @"exampleobject"; //上传的文件
+    initRequest.bucket = @"examplebucket-1250000000"; // 存储桶名称
+    initRequest.object = @"exampleobject"; //对象键
     
-    [initrequest setFinishBlock:^(QCloudInitiateMultipartUploadResult* outputObject,
+    [initRequest setFinishBlock:^(QCloudInitiateMultipartUploadResult* outputObject,
                                   NSError *error) {
         //获取分块上传的 uploadId，后续的上传都需要这个 ID，请保存以备后续使用
-         outputObject.uploadId = @"exampleUploadId";
+        NSString * uploadId = outputObject.uploadId;
     }];
     
-    //初始化上传
-    [[QCloudCOSXMLService defaultCOSXML] InitiateMultipartUpload:initrequest];
+    [[QCloudCOSXMLService defaultCOSXML] InitiateMultipartUpload:initRequest];
     
     //.cssg-snippet-body-end
 
@@ -103,11 +102,11 @@
     //.cssg-snippet-body-start:[objc-abort-multi-upload]
     QCloudAbortMultipfartUploadRequest *abortRequest = [QCloudAbortMultipfartUploadRequest new];
     
-    //存储桶名称
-    abortRequest.object = @"exampleobject";
-    abortRequest.bucket = @"examplebucket-1250000000";
+    abortRequest.object = @"exampleobject"; //存储桶名称
+    abortRequest.bucket = @"examplebucket-1250000000"; //对象键
     
-    //本次要终止的分块上传的 uploadId，可从初始化分块上传的请求结果 QCloudInitiateMultipartUploadResult 中得到
+    //本次要终止的分块上传的 uploadId
+    //可从初始化分块上传的请求结果 QCloudInitiateMultipartUploadResult 中得到
     abortRequest.uploadId = @"exampleUploadId";
     
     [abortRequest setFinishBlock:^(id outputObject, NSError *error) {
