@@ -21,7 +21,8 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         self.credentialFenceQueue?.delegate = self;
     }
 
-    func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
+    func fenceQueue(_ queue: QCloudCredentailFenceQueue!,
+                    requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
         let cre = QCloudCredential.init();
         //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
         cre.secretID = "COS_SECRETID";
@@ -34,7 +35,10 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         continueBlock(auth,nil);
     }
 
-    func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
+    func signature(with fileds: QCloudSignatureFields!,
+                   request: QCloudBizHTTPRequest!,
+                   urlRequest urlRequst: NSMutableURLRequest!,
+                   compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
                 continueBlock(nil,error!);
@@ -48,7 +52,6 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
 
     // 设置存储桶跨域规则
     func putBucketCors() {
-        let exception = XCTestExpectation.init(description: "putBucketCors");
       
         //.cssg-snippet-body-start:[swift-put-bucket-cors]
         let putBucketCorsReq = QCloudPutBucketCORSRequest.init();
@@ -56,96 +59,119 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         let corsConfig = QCloudCORSConfiguration.init();
         
         let rule = QCloudCORSRule.init();
+        
+        // 配置规则的 ID
         rule.identifier = "swift-sdk";
+        
+        // 在发送 OPTIONS 请求时告知服务端，接下来的请求可以使用哪些自定义的 HTTP 请求头部，支持通配符 *
         rule.allowedHeader = ["origin","host","accept","content-type","authorization"];
         rule.exposeHeader = "Etag";
+        
+        // 允许的 HTTP 操作，例如：GET，PUT，HEAD，POST，DELETE
         rule.allowedMethod = ["GET","PUT","POST", "DELETE", "HEAD"];
+        
+        // 设置 OPTIONS 请求得到结果的有效期
         rule.maxAgeSeconds = 3600;
+        
+        // 允许的访问来源，支持通配符 *，格式为：协议://域名[:端口]
         rule.allowedOrigin = "*";
         
         corsConfig.rules = [rule];
         
         putBucketCorsReq.corsConfiguration = corsConfig;
+        
+        //格式：BucketName-APPID
         putBucketCorsReq.bucket = "examplebucket-1250000000";
         putBucketCorsReq.finishBlock = {(result,error) in
+            //可以从 outputObject 中获取服务器返回的 header 信息
             if error != nil{
                 print(error!);
             }else{
                 print(result!);
-            }}
-        
+            }
+           
+        }
         QCloudCOSXMLService.defaultCOSXML().putBucketCORS(putBucketCorsReq);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 获取存储桶跨域规则
     func getBucketCors() {
-        let exception = XCTestExpectation.init(description: "getBucketCors");
       
         //.cssg-snippet-body-start:[swift-get-bucket-cors]
         let  getBucketCorsRes = QCloudGetBucketCORSRequest.init();
+        //格式：BucketName-APPID
         getBucketCorsRes.bucket = "examplebucket-1250000000";
         getBucketCorsRes.setFinish { (corsConfig, error) in
+            //CORS 设置封装在 corsConfig 中
             if error != nil{
                 print(error!);
             }else{
                 print(corsConfig!);
-            }}
+            }
+
+        }
         QCloudCOSXMLService.defaultCOSXML().getBucketCORS(getBucketCorsRes);
         
         //.cssg-snippet-body-end
-
-        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 实现 Object 跨域访问配置的预请求
     func optionObject() {
-        let exception = XCTestExpectation.init(description: "optionObject");
       
         //.cssg-snippet-body-start:[swift-option-object]
         let optionsObject = QCloudOptionsObjectRequest.init();
         optionsObject.object = "exampleobject";
+        
+        //模拟跨域访问的请求来源域名
         optionsObject.origin = "http://www.qcloud.com";
         optionsObject.accessControlRequestMethod = "GET";
         optionsObject.accessControlRequestHeaders = "origin";
+        
+        //存储桶名称，格式：BucketName-APPID
         optionsObject.bucket = "examplebucket-1250000000";
         optionsObject.finishBlock = {(result,error) in
+            //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
             if error != nil{
                 print(error!);
             }else{
                 print(result!);
-            }}
+            }
+            
+        }
         QCloudCOSXMLService.defaultCOSXML().optionsObject(optionsObject);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 删除存储桶跨域规则
     func deleteBucketCors() {
-        let exception = XCTestExpectation.init(description: "deleteBucketCors");
       
         //.cssg-snippet-body-start:[swift-delete-bucket-cors]
         let deleteBucketCorsRequest = QCloudDeleteBucketCORSRequest.init();
         deleteBucketCorsRequest.bucket = "examplebucket-1250000000";
         deleteBucketCorsRequest.finishBlock = {(result,error) in
+            //可以从 outputObject 中获取服务器返回的 header 信息
             if error != nil{
                 print(error!);
             }else{
                 print(result!);
-            }}
+            }
+               
+               
+               
+        }
         QCloudCOSXMLService.defaultCOSXML().deleteBucketCORS(deleteBucketCorsRequest);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 

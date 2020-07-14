@@ -21,7 +21,8 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         self.credentialFenceQueue?.delegate = self;
     }
 
-    func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
+    func fenceQueue(_ queue: QCloudCredentailFenceQueue!,
+                    requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
         let cre = QCloudCredential.init();
         //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
         cre.secretID = "COS_SECRETID";
@@ -34,7 +35,10 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         continueBlock(auth,nil);
     }
 
-    func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
+    func signature(with fileds: QCloudSignatureFields!,
+                   request: QCloudBizHTTPRequest!,
+                   urlRequest urlRequst: NSMutableURLRequest!,
+                   compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
                 continueBlock(nil,error!);
@@ -48,7 +52,7 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
 
     // 设置存储桶 ACL
     func putBucketAcl() {
-        let exception = XCTestExpectation.init(description: "putBucketAcl");
+        
       
         //.cssg-snippet-body-start:[swift-put-bucket-acl]
         let putBucketACLReq = QCloudPutBucketACLRequest.init();
@@ -56,39 +60,53 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         let appTD = "1131975903";//授予全新的账号 ID
         let ownerIdentifier = "qcs::cam::uin/\(appTD):uin/\(appTD)";
         let grantString = "id=\"\(ownerIdentifier)\"";
+        //赋予被授权者写权限
         putBucketACLReq.grantWrite = grantString;
+        
+        //赋予被授权者读权限
+        putBucketACLReq.grantRead = grantString;
+        
+        //赋予被授权者读写权限 grantFullControl == grantRead + grantWrite
+        putBucketACLReq.grantFullControl = grantString;
+        
         putBucketACLReq.finishBlock = {(result,error) in
+            //QCloudACLPolicy 中包含了 Bucket 的 ACL 信息
             if error != nil{
                 print(error!);
             }else{
                 print(result!);
-            }}
+            }
+          
+        }
         QCloudCOSXMLService.defaultCOSXML().putBucketACL(putBucketACLReq);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+
     }
 
 
     // 获取存储桶 ACL
     func getBucketAcl() {
-        let exception = XCTestExpectation.init(description: "getBucketAcl");
+        
       
         //.cssg-snippet-body-start:[swift-get-bucket-acl]
         let getBucketACLReq = QCloudGetBucketACLRequest.init();
+        
+        // 格式：BucketName-APPID
         getBucketACLReq.bucket = "examplebucket-1250000000";
+        
         getBucketACLReq.setFinish { (result, error) in
             if error != nil{
                 print(error!);
             }else{
                 print(result!);
-            }}
+            }
+        }
         QCloudCOSXMLService.defaultCOSXML().getBucketACL(getBucketACLReq)
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
     }
 
 

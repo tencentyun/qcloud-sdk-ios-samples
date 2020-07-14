@@ -51,7 +51,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -65,29 +66,34 @@
  * 下载对象
  */
 - (void)getObject {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getObject"];
 
     //.cssg-snippet-body-start:[objc-get-object]
     QCloudGetObjectRequest* request = [QCloudGetObjectRequest new];
+    
     //设置下载的路径 URL，如果设置了，文件将会被下载到指定路径中
     //如果未设置该参数，那么文件将会被下载至内存里，存放在在 finishBlock 的 outputObject 里
     request.downloadingURL = [NSURL URLWithString:QCloudTempFilePathWithExtension(@"downding")];
     request.object = @"exampleobject";
+    
+    // 文件所在桶
     request.bucket = @"examplebucket-1250000000";
     
     [request setFinishBlock:^(id outputObject, NSError *error) {
         //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [request setDownProcessBlock:^(int64_t bytesDownload, int64_t totalBytesDownload,
         int64_t totalBytesExpectedToDownload) {
+        //      bytesDownload       一次下载的字节数，
+        //      totalBytesDownload  总过接受的字节数
+        //      totalBytesExpectedToDownload 文件一共多少字节
         //下载过程中的进度
+        
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] GetObject:request];
     
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

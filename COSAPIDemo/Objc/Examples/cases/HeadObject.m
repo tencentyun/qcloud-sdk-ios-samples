@@ -25,7 +25,7 @@
     configuration.endpoint = endpoint;
     [QCloudCOSXMLService registerDefaultCOSXMLWithConfiguration:configuration];
     [QCloudCOSTransferMangerService registerDefaultCOSTransferMangerWithConfiguration:configuration];
-
+    
     // 脚手架用于获取临时密钥
     self.credentialFenceQueue = [QCloudCredentailFenceQueue new];
     self.credentialFenceQueue.delegate = self;
@@ -42,7 +42,7 @@
     credential.startDate = [[[NSDateFormatter alloc] init] dateFromString:@"startTime"]; // 单位是秒
     credential.experationDate = [[[NSDateFormatter alloc] init] dateFromString:@"expiredTime"];
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc]
-        initWithCredential:credential];
+                                            initWithCredential:credential];
     continueBlock(creator, nil);
 }
 
@@ -51,7 +51,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -62,32 +63,41 @@
 }
 
 /**
- * 获取对象信息
+ * 1:HEAD Object 接口请求可以判断指定对象是否存在和有权限，并在指定对象可访问时获取其元数据。
+ * 该 API 的请求者需要对目标对象有读取权限，或者目标对象向所有人开放了读取权限（公有读）。
+ *
+ * 2:当启用版本控制时，该 HEAD 操作可以使用 versionId 请求参数指定要返回的版本 ID，此时将返回
+ * 指定版本的元数据，如指定版本为删除标记则返回 HTTP 响应码404（Not Found），否则将返回最新
+ * 版本的元数据。
  */
 - (void)headObject {
-    XCTestExpectation* exp = [self expectationWithDescription:@"headObject"];
 
+    
     //.cssg-snippet-body-start:[objc-head-object]
     QCloudHeadObjectRequest* headerRequest = [QCloudHeadObjectRequest new];
     headerRequest.object = @"exampleobject";
+    
+    //    versionId    当启用版本控制时，指定要查询的版本 ID，如不指定则查询对象的最新版本
+    headerRequest.versionID = @"versionID";
+    // 目标文件名
     headerRequest.bucket = @"examplebucket-1250000000";
     
     [headerRequest setFinishBlock:^(NSDictionary* result, NSError *error) {
         // result 返回具体信息
+        
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] HeadObject:headerRequest];
     
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 
 - (void)testHeadObject {
     // 获取对象信息
     [self headObject];
-        
+    
 }
 
 @end

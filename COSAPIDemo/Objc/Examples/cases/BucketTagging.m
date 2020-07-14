@@ -25,7 +25,7 @@
     configuration.endpoint = endpoint;
     [QCloudCOSXMLService registerDefaultCOSXMLWithConfiguration:configuration];
     [QCloudCOSTransferMangerService registerDefaultCOSTransferMangerWithConfiguration:configuration];
-
+    
     // 脚手架用于获取临时密钥
     self.credentialFenceQueue = [QCloudCredentailFenceQueue new];
     self.credentialFenceQueue.delegate = self;
@@ -42,7 +42,7 @@
     credential.startDate = [[[NSDateFormatter alloc] init] dateFromString:@"startTime"]; // 单位是秒
     credential.experationDate = [[[NSDateFormatter alloc] init] dateFromString:@"expiredTime"];
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc]
-        initWithCredential:credential];
+                                            initWithCredential:credential];
     continueBlock(creator, nil);
 }
 
@@ -51,7 +51,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -62,85 +63,101 @@
 }
 
 /**
- * 设置存储桶标签
+ * 用于为存储桶设置键值对作为存储桶标签，可以协助您管理已有的存储桶资源，并通过标签进行成本管理。
  */
 - (void)putBucketTagging {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketTagging"];
-
+    
     //.cssg-snippet-body-start:[objc-put-bucket-tagging]
     QCloudPutBucketTaggingRequest *putReq = [QCloudPutBucketTaggingRequest new];
     putReq.bucket = @"examplebucket-1250000000";
     
+    //标签集合
     QCloudBucketTagging *taggings = [QCloudBucketTagging new];
+    
     QCloudBucketTag *tag1 = [QCloudBucketTag new];
-    QCloudBucketTagSet *tagSet = [QCloudBucketTagSet new];
-    taggings.tagSet = tagSet;
+    
+    //标签的 Key，长度不超过128字节, 支持英文字母、数字、空格、加号、减号、下划线、等号、点号、
+    //冒号、斜线
     tag1.key = @"age";
+    
+    //标签的 Value，长度不超过256字节, 支持英文字母、数字、空格、加号、减号、下划线、等号、点号
+    //、冒号、斜线
     tag1.value = @"20";
     QCloudBucketTag *tag2 = [QCloudBucketTag new];
     tag2.key = @"name";
     tag2.value = @"karis";
+    
+    //标签集合，最多支持10个标签
+    QCloudBucketTagSet *tagSet = [QCloudBucketTagSet new];
     tagSet.tag = @[tag1,tag2];
+    taggings.tagSet = tagSet;
+    
+    //标签集合
     putReq.taggings = taggings;
     
     [putReq setFinishBlock:^(id outputObject, NSError *error) {
-    
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucketTagging:putReq];
     
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
+    
 }
 
 /**
- * 获取存储桶标签
+ * 用于查询指定存储桶下已有的存储桶标签。
  */
 - (void)getBucketTagging {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketTagging"];
-
+    
     //.cssg-snippet-body-start:[objc-get-bucket-tagging]
     QCloudGetBucketTaggingRequest *getReq = [QCloudGetBucketTaggingRequest new];
-           getReq.bucket = @"examplebucket-1250000000";
-           [getReq setFinishBlock:^(QCloudBucketTagging * result, NSError * error) {
-           }];
-           [[QCloudCOSXMLService defaultCOSXML] GetBucketTagging:getReq];
+    
+    //存储桶名称
+    getReq.bucket = @"examplebucket-1250000000";
+    [getReq setFinishBlock:^(QCloudBucketTagging * result, NSError * error) {
+
+        
+    }];
+    [[QCloudCOSXMLService defaultCOSXML] GetBucketTagging:getReq];
     
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 /**
- * 删除存储桶标签
+ * 用于删除指定存储桶下已有的存储桶标签。
  */
 - (void)deleteBucketTagging {
-    XCTestExpectation* exp = [self expectationWithDescription:@"deleteBucketTagging"];
-
+    
+    
     //.cssg-snippet-body-start:[objc-delete-bucket-tagging]
     QCloudDeleteBucketTaggingRequest *delReq = [QCloudDeleteBucketTaggingRequest new];
+    
+    //存储桶名称
     delReq.bucket =  @"examplebucket-1250000000";
     [delReq setFinishBlock:^(id outputObject, NSError *error) {
-    
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucketTagging:delReq];
     
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 
 - (void)testBucketTagging {
     // 设置存储桶标签
     [self putBucketTagging];
-        
+    
     // 获取存储桶标签
     [self getBucketTagging];
-        
+    
     // 删除存储桶标签
     [self deleteBucketTagging];
-        
+    
 }
 
 @end

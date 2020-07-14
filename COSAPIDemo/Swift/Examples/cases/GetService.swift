@@ -21,7 +21,8 @@ class GetService: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         self.credentialFenceQueue?.delegate = self;
     }
 
-    func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
+    func fenceQueue(_ queue: QCloudCredentailFenceQueue!,
+                    requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
         let cre = QCloudCredential.init();
         //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
         cre.secretID = "COS_SECRETID";
@@ -34,7 +35,10 @@ class GetService: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         continueBlock(auth,nil);
     }
 
-    func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
+    func signature(with fileds: QCloudSignatureFields!,
+                   request: QCloudBizHTTPRequest!,
+                   urlRequest urlRequst: NSMutableURLRequest!,
+                   compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
                 continueBlock(nil,error!);
@@ -48,9 +52,12 @@ class GetService: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
 
     // 获取存储桶列表
     func getService() {
-        let exception = XCTestExpectation.init(description: "getService");
       
         //.cssg-snippet-body-start:[swift-get-service]
+        
+        //获取所属账户的所有存储空间列表的方法.
+           //通过使用帯 Authorization 签名认证的请求，可以获取签名中 APPID 所属账户的所有存储空间列
+           //表 (Bucket list).
         let getServiceReq = QCloudGetServiceRequest.init();
         getServiceReq.setFinish{(result,error) in
             if result == nil {
@@ -58,36 +65,39 @@ class GetService: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
             } else {
                 //从 result 中获取返回信息
                 print(result!);
-            }}
+            }
+               
+               
+               
+        }
         QCloudCOSXMLService.defaultCOSXML().getService(getServiceReq);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 
     // 获取地域的存储桶列表
     func getRegionalService() {
-        let exception = XCTestExpectation.init(description: "getRegionalService");
       
         //.cssg-snippet-body-start:[swift-get-regional-service]
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 
     // 计算签名
     func getAuthorization() {
-        let exception = XCTestExpectation.init(description: "getAuthorization");
+        
       
         //.cssg-snippet-body-start:[swift-get-authorization]
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 

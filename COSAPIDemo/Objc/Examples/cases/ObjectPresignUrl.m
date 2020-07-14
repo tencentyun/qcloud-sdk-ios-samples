@@ -25,7 +25,7 @@
     configuration.endpoint = endpoint;
     [QCloudCOSXMLService registerDefaultCOSXMLWithConfiguration:configuration];
     [QCloudCOSTransferMangerService registerDefaultCOSTransferMangerWithConfiguration:configuration];
-
+    
     // 脚手架用于获取临时密钥
     self.credentialFenceQueue = [QCloudCredentailFenceQueue new];
     self.credentialFenceQueue.delegate = self;
@@ -42,7 +42,7 @@
     credential.startDate = [[[NSDateFormatter alloc] init] dateFromString:@"startTime"]; // 单位是秒
     credential.experationDate = [[[NSDateFormatter alloc] init] dateFromString:@"expiredTime"];
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc]
-        initWithCredential:credential];
+                                            initWithCredential:credential];
     continueBlock(creator, nil);
 }
 
@@ -51,7 +51,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -65,46 +66,66 @@
  * 获取预签名下载链接
  */
 - (void)getPresignDownloadUrl {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getPresignDownloadUrl"];
-
+    
     //.cssg-snippet-body-start:[objc-get-presign-download-url]
     QCloudGetPresignedURLRequest* getPresignedURLRequest = [[QCloudGetPresignedURLRequest alloc] init];
     getPresignedURLRequest.bucket = @"examplebucket-1250000000";
+    
+    //使用预签名 URL 的请求的 HTTP 方法。有效值（大小写敏感）为：@"GET"、@"PUT"、@"POST"、@"DELETE"
     getPresignedURLRequest.HTTPMethod = @"GET";
+    
     getPresignedURLRequest.object = @"exampleobject";
     
-    [getPresignedURLRequest setFinishBlock:^(QCloudGetPresignedURLResult * _Nonnull result, NSError * _Nonnull error) {
+    [getPresignedURLRequest setFinishBlock:^(QCloudGetPresignedURLResult * _Nonnull result,
+                                             NSError * _Nonnull error) {
+        
+        //预签名 URL
         NSString* presignedURL = result.presienedURL;
+       
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] getPresignedURL:getPresignedURLRequest];
     
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 /**
  * 获取预签名上传链接
  */
 - (void)getPresignUploadUrl {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getPresignUploadUrl"];
-
+    
     //.cssg-snippet-body-start:[objc-get-presign-upload-url]
+    QCloudGetPresignedURLRequest* getPresignedURLRequest = [[QCloudGetPresignedURLRequest alloc] init];
+    getPresignedURLRequest.bucket = @"examplebucket-1250000000";
+    
+    //使用预签名 URL 的请求的 HTTP 方法。有效值（大小写敏感）为：@"GET"、@"PUT"、@"POST"、@"DELETE"
+    getPresignedURLRequest.HTTPMethod = @"PUT";
+    
+    getPresignedURLRequest.object = @"exampleobject";
+    
+    [getPresignedURLRequest setFinishBlock:^(QCloudGetPresignedURLResult * _Nonnull result,
+                                             NSError * _Nonnull error) {
+        
+        //预签名 URL
+        NSString* presignedURL = result.presienedURL;
+        
+    }];
+    
+    [[QCloudCOSXMLService defaultCOSXML] getPresignedURL:getPresignedURLRequest];
     
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 
 - (void)testObjectPresignUrl {
     // 获取预签名下载链接
     [self getPresignDownloadUrl];
-        
+    
     // 获取预签名上传链接
     [self getPresignUploadUrl];
-        
+    
 }
 
 @end

@@ -65,51 +65,66 @@
  * 删除对象
  */
 - (void)deleteObject {
-    XCTestExpectation* exp = [self expectationWithDescription:@"deleteObject"];
 
     //.cssg-snippet-body-start:[objc-delete-object]
     QCloudDeleteObjectRequest* deleteObjectRequest = [QCloudDeleteObjectRequest new];
+    
+    //删除的文件所在的桶名称
     deleteObjectRequest.bucket = @"examplebucket-1250000000";
+    
+    //删除的文件名
     deleteObjectRequest.object = @"exampleobject";
     
     [deleteObjectRequest setFinishBlock:^(id outputObject, NSError *error) {
-        //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] DeleteObject:deleteObjectRequest];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 /**
  * 删除多个对象
  */
 - (void)deleteMultiObject {
-    XCTestExpectation* exp = [self expectationWithDescription:@"deleteMultiObject"];
 
     //.cssg-snippet-body-start:[objc-delete-multi-object]
     QCloudDeleteMultipleObjectRequest* delteRequest = [QCloudDeleteMultipleObjectRequest new];
     delteRequest.bucket = @"examplebucket-1250000000";
     
+    //要删除的单个文件
     QCloudDeleteObjectInfo* deletedObject0 = [QCloudDeleteObjectInfo new];
     deletedObject0.key = @"exampleobject";
     
+    //要删除的文件集合
     QCloudDeleteInfo* deleteInfo = [QCloudDeleteInfo new];
+    
+    //布尔值，这个值决定了是否启动 Quiet 模式：
+    //true：启动 Quiet 模式
+    //false：启动 Verbose 模式
+    //默认值为 False
     deleteInfo.quiet = NO;
+    
+    //存放需要删除对象信息的数组
     deleteInfo.objects = @[deletedObject0];
+    
+    //封装了需要批量删除的多个对象的信息
     delteRequest.deleteObjects = deleteInfo;
     
-    [delteRequest setFinishBlock:^(QCloudDeleteResult* outputObject, NSError *error) {
+    [delteRequest setFinishBlock:^(QCloudDeleteResult* outputObject,
+                                   NSError *error) {
         //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+        
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] DeleteMultipleObject:delteRequest];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

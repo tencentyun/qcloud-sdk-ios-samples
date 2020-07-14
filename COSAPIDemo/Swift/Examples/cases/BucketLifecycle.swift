@@ -21,7 +21,8 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         self.credentialFenceQueue?.delegate = self;
     }
 
-    func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
+    func fenceQueue(_ queue: QCloudCredentailFenceQueue!,
+                    requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
         let cre = QCloudCredential.init();
         //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
         cre.secretID = "COS_SECRETID";
@@ -34,7 +35,10 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         continueBlock(auth,nil);
     }
 
-    func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
+    func signature(with fileds: QCloudSignatureFields!,
+                   request: QCloudBizHTTPRequest!,
+                   urlRequest urlRequst: NSMutableURLRequest!,
+                   compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
                 continueBlock(nil,error!);
@@ -48,7 +52,7 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
 
     // 设置存储桶生命周期
     func putBucketLifecycle() {
-        let exception = XCTestExpectation.init(description: "putBucketLifecycle");
+        
       
         //.cssg-snippet-body-start:[swift-put-bucket-lifecycle]
         let putBucketLifecycleReq = QCloudPutBucketLifecycleRequest.init();
@@ -56,62 +60,86 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         
         let config = QCloudLifecycleConfiguration.init();
         
+        //规则描述
         let rule = QCloudLifecycleRule.init();
+        
+        //用于唯一地标识规则
         rule.identifier = "swift";
+        
+        //指明规则是否启用，枚举值：Enabled，Disabled
         rule.status = .enabled;
         
+        //Filter 用于描述规则影响的 Object 集合
         let fileter = QCloudLifecycleRuleFilter.init();
+        
+        //指定规则所适用的前缀。匹配前缀的对象受该规则影响，Prefix 最多只能有一个
         fileter.prefix = "0";
         
+        //Filter 用于描述规则影响的 Object 集合
         rule.filter = fileter;
         
+        //规则转换属性，对象何时转换为 Standard_IA 或 Archive
         let transition = QCloudLifecycleTransition.init();
+        
+        //指明规则对应的动作在对象最后的修改日期过后多少天操作：
         transition.days = 100;
+        
+        //指定 Object 转储到的目标存储类型，枚举值： STANDARD_IA，ARCHIVE
         transition.storageClass = .standardIA;
         
         rule.transition = transition;
         
         putBucketLifecycleReq.lifeCycle = config;
+        
+        //生命周期配置
         putBucketLifecycleReq.lifeCycle.rules = [rule];
         
         putBucketLifecycleReq.finishBlock = {(result,error) in
+            
+            //可以从 outputObject 中获取服务器返回的 header 信息
             if error != nil{
                 print(error!);
             }else{
                 print(result!);
-            }}
+            }
+          
+        }
         QCloudCOSXMLService.defaultCOSXML().putBucketLifecycle(putBucketLifecycleReq);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+        
     }
 
 
     // 获取存储桶生命周期
     func getBucketLifecycle() {
-        let exception = XCTestExpectation.init(description: "getBucketLifecycle");
+        
       
         //.cssg-snippet-body-start:[swift-get-bucket-lifecycle]
         let getBucketLifeCycle = QCloudGetBucketLifecycleRequest.init();
         getBucketLifeCycle.bucket = "examplebucket-1250000000";
         getBucketLifeCycle.setFinish { (config, error) in
+            
+            // 可以从 result 中获取返回信息
             if error != nil{
                 print(error!);
             }else{
                 print(config!);
-            }};
+            }
+         
+        };
         QCloudCOSXMLService.defaultCOSXML().getBucketLifecycle(getBucketLifeCycle);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+        
     }
 
 
     // 删除存储桶生命周期
     func deleteBucketLifecycle() {
-        let exception = XCTestExpectation.init(description: "deleteBucketLifecycle");
+        
       
         //.cssg-snippet-body-start:[swift-delete-bucket-lifecycle]
         let deleteBucketLifeCycle = QCloudDeleteBucketLifeCycleRequest.init();
@@ -121,12 +149,14 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
                 print(error!);
             }else{
                 print(result!);
-            }};
+            }
+         
+        };
         QCloudCOSXMLService.defaultCOSXML().deleteBucketLifeCycle(deleteBucketLifeCycle);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+        
     }
 
 

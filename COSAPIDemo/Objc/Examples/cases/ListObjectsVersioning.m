@@ -25,13 +25,14 @@
     configuration.endpoint = endpoint;
     [QCloudCOSXMLService registerDefaultCOSXMLWithConfiguration:configuration];
     [QCloudCOSTransferMangerService registerDefaultCOSTransferMangerWithConfiguration:configuration];
-
+    
     // 脚手架用于获取临时密钥
     self.credentialFenceQueue = [QCloudCredentailFenceQueue new];
     self.credentialFenceQueue.delegate = self;
 }
 
-- (void) fenceQueue:(QCloudCredentailFenceQueue * )queue requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
+- (void) fenceQueue:(QCloudCredentailFenceQueue * )queue
+requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
 {
     QCloudCredential* credential = [QCloudCredential new];
     //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
@@ -42,7 +43,7 @@
     credential.startDate = [[[NSDateFormatter alloc] init] dateFromString:@"startTime"]; // 单位是秒
     credential.experationDate = [[[NSDateFormatter alloc] init] dateFromString:@"expiredTime"];
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc]
-        initWithCredential:credential];
+                                            initWithCredential:credential];
     continueBlock(creator, nil);
 }
 
@@ -51,7 +52,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -65,36 +67,72 @@
  * 获取对象多版本列表第一页数据
  */
 - (void)listObjectsVersioning {
-    XCTestExpectation* exp = [self expectationWithDescription:@"listObjectsVersioning"];
-
     //.cssg-snippet-body-start:[objc-list-objects-versioning]
     
+    QCloudListObjectVersionsRequest* listObjectVersionsRequest = [[QCloudListObjectVersionsRequest alloc] init];
+    
+    //存储桶名称
+    listObjectVersionsRequest.bucket = @"bucketname";
+    
+    //存储桶所在的地域
+    listObjectVersionsRequest.regionName = @"bucketlocation";
+    
+    //一页请求数据条目数
+    listObjectVersionsRequest.maxKeys = 1000;
+    [listObjectVersionsRequest setFinishBlock:^(QCloudListVersionsResult * _Nonnull result,
+                                                NSError * _Nonnull error) {
+        
+        //result.deleteMarker; // 已删除的文件
+        //result.versionContent;  对象版本条目
+        
+        
+    }];
+    
+    [[QCloudCOSXMLService defaultCOSXML] ListObjectVersions:listObjectVersionsRequest];
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 获取对象多版本列表下一页数据
  */
 - (void)listObjectsVersioningNextPage {
-    XCTestExpectation* exp = [self expectationWithDescription:@"listObjectsVersioningNextPage"];
 
-    //.cssg-snippet-body-start:[objc-list-objects-versioning-next-page]
+    //.cssg-snippet-body-start:[objc-list-objects-versioning]
     
+    QCloudListObjectVersionsRequest* listObjectVersionsRequest = [[QCloudListObjectVersionsRequest alloc] init];
+    
+    //存储桶名称
+    listObjectVersionsRequest.bucket = @"bucketname";
+    
+    //存储桶所在的地域
+    listObjectVersionsRequest.regionName = @"bucketlocation";
+    
+    //一页请求数据条目数
+    listObjectVersionsRequest.maxKeys = 100;
+    
+    //已经请求的总条目数
+    listObjectVersionsRequest.marker = @"100";
+    [listObjectVersionsRequest setFinishBlock:^(QCloudListVersionsResult * _Nonnull result,
+                                                NSError * _Nonnull error) {
+        
+        //result.deleteMarker; // 已删除的文件
+        //result.versionContent;  对象版本条目
+    
+        
+    }];
+    
+    [[QCloudCOSXMLService defaultCOSXML] ListObjectVersions:listObjectVersionsRequest];
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
-
 
 - (void)testListObjectsVersioning {
     // 获取对象多版本列表第一页数据
     [self listObjectsVersioning];
-        
+    
     // 获取对象多版本列表下一页数据
     [self listObjectsVersioningNextPage];
-        
+    
 }
 
 @end

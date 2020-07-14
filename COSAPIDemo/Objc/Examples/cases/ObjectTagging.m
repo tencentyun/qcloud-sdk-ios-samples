@@ -51,7 +51,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -65,39 +66,38 @@
  * 设置对象标签
  */
 - (void)putObjectTagging {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putObjectTagging"];
+    
 
     //.cssg-snippet-body-start:[objc-put-object-tagging]
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 /**
  * 获取对象标签
  */
 - (void)getObjectTagging {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getObjectTagging"];
+    
 
     //.cssg-snippet-body-start:[objc-get-object-tagging]
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 /**
  * 删除对象标签
  */
 - (void)deleteObjectTagging {
-    XCTestExpectation* exp = [self expectationWithDescription:@"deleteObjectTagging"];
 
     //.cssg-snippet-body-start:[objc-delete-object-tagging]
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 

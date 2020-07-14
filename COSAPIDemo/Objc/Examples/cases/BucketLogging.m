@@ -31,7 +31,8 @@
     self.credentialFenceQueue.delegate = self;
 }
 
-- (void) fenceQueue:(QCloudCredentailFenceQueue * )queue requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
+- (void) fenceQueue:(QCloudCredentailFenceQueue * )queue
+    requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
 {
     QCloudCredential* credential = [QCloudCredential new];
     //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
@@ -51,7 +52,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -65,37 +67,46 @@
  * 开启存储桶日志服务
  */
 - (void)putBucketLogging {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketLogging"];
 
     //.cssg-snippet-body-start:[objc-put-bucket-logging]
     QCloudPutBucketLoggingRequest *request = [QCloudPutBucketLoggingRequest new];
+    
+    //说明日志记录配置的状态，如果无子节点信息则意为关闭日志记录
     QCloudBucketLoggingStatus *status = [QCloudBucketLoggingStatus new];
+
+    //存储桶 logging 设置的具体信息，主要是目标存储桶
     QCloudLoggingEnabled *loggingEnabled = [QCloudLoggingEnabled new];
+    
+    //存放日志的目标存储桶，可以是同一个存储桶（但不推荐），或同一账户下、同一地域的存储桶
     loggingEnabled.targetBucket = @"examplebucket-1250000000";
+    
+    //日志存放在目标存储桶的指定路径
     loggingEnabled.targetPrefix = @"mylogs";
     status.loggingEnabled = loggingEnabled;
     request.bucketLoggingStatus = status;
     request.bucket = @"examplebucket-1250000000";
     [request setFinishBlock:^(id outputObject, NSError *error) {
-    
+       //outputObject 包含所有的响应 http 头部
+       NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucketLogging:request];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 获取存储桶日志服务
  */
 - (void)getBucketLogging {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketLogging"];
 
     //.cssg-snippet-body-start:[objc-get-bucket-logging]
     QCloudGetBucketLoggingRequest *getReq = [QCloudGetBucketLoggingRequest new];
+    
+    //目标桶名称
     getReq.bucket = @"examplebucket-1250000000";
-    [getReq setFinishBlock:^(QCloudBucketLoggingStatus * _Nonnull result, NSError * _Nonnull error) {
+    [getReq setFinishBlock:^(QCloudBucketLoggingStatus * _Nonnull result,
+                             NSError * _Nonnull error) {
         NSLog(@"getReq result = %@",result.loggingEnabled.targetBucket);
     
     }];
@@ -103,7 +114,6 @@
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

@@ -21,7 +21,8 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         self.credentialFenceQueue?.delegate = self;
     }
 
-    func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
+    func fenceQueue(_ queue: QCloudCredentailFenceQueue!,
+                    requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
         let cre = QCloudCredential.init();
         //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
         cre.secretID = "COS_SECRETID";
@@ -34,7 +35,10 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         continueBlock(auth,nil);
     }
 
-    func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
+    func signature(with fileds: QCloudSignatureFields!,
+                   request: QCloudBizHTTPRequest!,
+                   urlRequest urlRequst: NSMutableURLRequest!,
+                   compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
                 continueBlock(nil,error!);
@@ -48,7 +52,6 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
 
     // 设置存储桶源站
     func putBucketDomain() {
-        let exception = XCTestExpectation.init(description: "putBucketDomain");
       
         //.cssg-snippet-body-start:[swift-put-bucket-domain]
         let req = QCloudPutBucketDomainRequest.init();
@@ -58,9 +61,15 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         let rule = QCloudDomainRule.init();
         rule.status = .enabled;
         rule.name = "www.baidu.com";
+        
+        //替换已存在的配置、有效值CNAME/TXT 填写则强制校验域名所有权之后，再下发配置
         rule.replace = .txt;
         rule.type = .rest;
+        
+        //规则描述集合的数组
         config.rules = [rule];
+        
+        //域名配置的规则
         req.domain = config;
         req.finishBlock = {(result,error) in
         
@@ -69,19 +78,19 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
             }else{
                 print( result!);
             }
+
         
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketDomain(req);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
     }
 
 
     // 获取存储桶源站
     func getBucketDomain() {
-        let exception = XCTestExpectation.init(description: "getBucketDomain");
+        
       
         //.cssg-snippet-body-start:[swift-get-bucket-domain]
         let req = QCloudGetBucketDomainRequest.init();
@@ -94,12 +103,15 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
             }else{
                 print( result!);
             }
+               
+               
+               
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketDomain(req);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 

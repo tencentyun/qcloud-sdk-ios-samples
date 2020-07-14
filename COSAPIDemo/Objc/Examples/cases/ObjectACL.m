@@ -51,7 +51,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -62,48 +63,61 @@
 }
 
 /**
- * 设置对象 ACL
+ * 设置对象访问权限控制列表
  */
 - (void)putObjectAcl {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putObjectAcl"];
 
     //.cssg-snippet-body-start:[objc-put-object-acl]
     QCloudPutObjectACLRequest* request = [QCloudPutObjectACLRequest new];
     request.object = @"exampleobject";
     request.bucket = @"examplebucket-1250000000";
     NSString *grantString = [NSString stringWithFormat:@"id=\"%@\"",@"1250000000"];
+    
+    // grantFullControl 等价于 grantRead + grantWrite
+    
+    //赋予被授权者读写权限。
     request.grantFullControl = grantString;
+    //赋予被授权者读权限。
+    request.grantRead = grantString;
+    //赋予被授权者写权限。
+    request.grantWrite = grantString;
+    
     [request setFinishBlock:^(id outputObject, NSError *error) {
         //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] PutObjectACL:request];
     
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
- * 获取对象 ACL
+ * 查询对象访问权限控制列表
  */
 - (void)getObjectAcl {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getObjectAcl"];
 
     //.cssg-snippet-body-start:[objc-get-object-acl]
     QCloudGetObjectACLRequest *request = [QCloudGetObjectACLRequest new];
+    
+    //文件对象名称
     request.object = @"exampleobject";
+    
+    //文件所在桶
     request.bucket = @"examplebucket-1250000000";
     __block QCloudACLPolicy* policy;
-    [request setFinishBlock:^(QCloudACLPolicy * _Nonnull result, NSError * _Nonnull error) {
+    [request setFinishBlock:^(QCloudACLPolicy * _Nonnull result,
+                              NSError * _Nonnull error) {
         policy = result;
+        
+        // result.accessControlList; 被授权者与权限的信息
+        // result.owner; 持有者的信息
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] GetObjectACL:request];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

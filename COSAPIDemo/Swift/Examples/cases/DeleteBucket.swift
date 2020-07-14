@@ -21,7 +21,8 @@ class DeleteBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         self.credentialFenceQueue?.delegate = self;
     }
 
-    func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
+    func fenceQueue(_ queue: QCloudCredentailFenceQueue!,
+                    requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
         let cre = QCloudCredential.init();
         //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
         cre.secretID = "COS_SECRETID";
@@ -34,7 +35,10 @@ class DeleteBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         continueBlock(auth,nil);
     }
 
-    func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
+    func signature(with fileds: QCloudSignatureFields!,
+                   request: QCloudBizHTTPRequest!,
+                   urlRequest urlRequst: NSMutableURLRequest!,
+                   compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
                 continueBlock(nil,error!);
@@ -48,22 +52,23 @@ class DeleteBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
 
     // 删除存储桶
     func deleteBucket() {
-        let exception = XCTestExpectation.init(description: "deleteBucket");
       
         //.cssg-snippet-body-start:[swift-delete-bucket]
         let deleteBucketReq = QCloudDeleteBucketRequest.init();
+        //存储桶名称，命名格式：BucketName-APPID
         deleteBucketReq.bucket = "examplebucket-1250000000";
         deleteBucketReq.finishBlock = {(result,error) in
+            //可以从 outputObject 中获取服务器返回的 header 信息
             if error != nil{
                 print(error!);
             }else{
                 print(result!);
-            }}
+            }
+        }
         QCloudCOSXMLService.defaultCOSXML().deleteBucket(deleteBucketReq);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
     }
 
 

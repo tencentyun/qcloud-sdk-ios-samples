@@ -31,7 +31,8 @@
     self.credentialFenceQueue.delegate = self;
 }
 
-- (void) fenceQueue:(QCloudCredentailFenceQueue * )queue requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
+- (void) fenceQueue:(QCloudCredentailFenceQueue * )queue
+    requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
 {
     QCloudCredential* credential = [QCloudCredential new];
     //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
@@ -51,7 +52,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -62,79 +64,96 @@
 }
 
 /**
- * 设置存储桶跨地域复制规则
+ * 用于向已启用版本控制的存储桶中配置跨地域复制规则。如果存储桶已经配置了跨地域复制规则，那么该请
+ * 求会替换现有配置。
  */
 - (void)putBucketReplication {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketReplication"];
+    
 
     //.cssg-snippet-body-start:[objc-put-bucket-replication]
     QCloudPutBucketReplicationRequest* request = [[QCloudPutBucketReplicationRequest alloc] init];
     request.bucket = @"examplebucket-1250000000";
-    QCloudBucketReplicationConfiguation* replConfiguration = [[QCloudBucketReplicationConfiguation
-        alloc] init];
+    
+    //说明所有跨地域配置信息
+    QCloudBucketReplicationConfiguation* replConfiguration =
+                                [[QCloudBucketReplicationConfiguation alloc] init];
+    
+    //发起者身份标示
     replConfiguration.role = @"qcs::cam::uin/100000000001:uin/100000000001";
+    
+    //具体配置信息
     QCloudBucketReplicationRule* rule = [[QCloudBucketReplicationRule alloc] init];
     
+    //用来标注具体 Rule 的名称
     rule.identifier = @"identifier";
     rule.status = QCloudCOSXMLStatusEnabled;
     
+    //资源标识符
     QCloudBucketReplicationDestination* destination = [[QCloudBucketReplicationDestination alloc] init];
     NSString* destinationBucket = @"destinationbucket-1250000000";
     NSString* region = @"ap-beijing";
     destination.bucket = [NSString stringWithFormat:@"qcs::cos:%@::%@",region,destinationBucket];
+    
+    //目标存储桶信息
     rule.destination = destination;
+    
+    //前缀匹配策略，不可重叠，重叠返回错误。前缀匹配根目录为空
     rule.prefix = @"a";
     replConfiguration.rule = @[rule];
     request.configuation = replConfiguration;
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
         //可以从 outputObject 中获取服务器返回的 header 信息
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucketRelication:request];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
- * 获取存储桶跨地域复制规则
+ * 接口用于查询存储桶中用户跨地域复制配置信息。用户发起该请求时需获得请求签名，表明该请求已获得许可。
  */
 - (void)getBucketReplication {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketReplication"];
+    
 
     //.cssg-snippet-body-start:[objc-get-bucket-replication]
     QCloudGetBucketReplicationRequest* request = [[QCloudGetBucketReplicationRequest alloc] init];
     request.bucket = @"examplebucket-1250000000";
     
-    [request setFinishBlock:^(QCloudBucketReplicationConfiguation* result, NSError* error) {
-        //可以从 result 中获取返回信息
+    [request setFinishBlock:^(QCloudBucketReplicationConfiguation* result,
+                              NSError* error) {
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
+       
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetBucketReplication:request];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
- * 删除存储桶跨地域复制规则
+ * 用来删除存储桶中的跨地域复制配置。用户发起该请求时需获得请求签名，表明该请求已获得许可。
  */
 - (void)deleteBucketReplication {
-    XCTestExpectation* exp = [self expectationWithDescription:@"deleteBucketReplication"];
 
     //.cssg-snippet-body-start:[objc-delete-bucket-replication]
-    QCloudDeleteBucketReplicationRequest* request = [[QCloudDeleteBucketReplicationRequest alloc] init];
+    QCloudDeleteBucketReplicationRequest* request =
+                            [[QCloudDeleteBucketReplicationRequest alloc] init];
+    
     request.bucket = @"examplebucket-1250000000";
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
-        //可以从 outputObject 中获取服务器返回的 header 信息
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucketReplication:request];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

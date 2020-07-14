@@ -25,7 +25,7 @@
     configuration.endpoint = endpoint;
     [QCloudCOSXMLService registerDefaultCOSXMLWithConfiguration:configuration];
     [QCloudCOSTransferMangerService registerDefaultCOSTransferMangerWithConfiguration:configuration];
-
+    
     // 脚手架用于获取临时密钥
     self.credentialFenceQueue = [QCloudCredentailFenceQueue new];
     self.credentialFenceQueue.delegate = self;
@@ -42,7 +42,7 @@
     credential.startDate = [[[NSDateFormatter alloc] init] dateFromString:@"startTime"]; // 单位是秒
     credential.experationDate = [[[NSDateFormatter alloc] init] dateFromString:@"expiredTime"];
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc]
-        initWithCredential:credential];
+                                            initWithCredential:credential];
     continueBlock(creator, nil);
 }
 
@@ -51,7 +51,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -65,42 +66,64 @@
  * 创建存储桶
  */
 - (void)putBucket {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucket"];
-
+    
     //.cssg-snippet-body-start:[objc-put-bucket]
     QCloudPutBucketRequest* request = [QCloudPutBucketRequest new];
     request.bucket = @"examplebucket-1250000000"; //additional actions after finishing
     [request setFinishBlock:^(id outputObject, NSError* error) {
         //可以从 outputObject 中获取服务器返回的 header 信息
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucket:request];
     
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
+    
 }
 
 /**
  * 创建存储桶并且授予存储桶权限
  */
 - (void)putBucketAndGrantAcl {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketAndGrantAcl"];
-
+    
     //.cssg-snippet-body-start:[objc-put-bucket-and-grant-acl]
+    QCloudPutBucketRequest* request = [QCloudPutBucketRequest new];
+    
+    //additional actions after finishing
+    request.bucket = @"examplebucket-1250000000";
+    
+    NSString* appID = @"1131975903";//授予全新的账号 ID
+    NSString *ownerIdentifier = [NSString stringWithFormat:@"qcs::cam::uin/%@:uin/%@"
+                                 , appID,appID];
+    NSString *grantString = [NSString stringWithFormat:@"id=\"%@\"",ownerIdentifier];
+    
+    //赋予被授权者读写权限
+    request.grantFullControl = grantString;
+    
+    //赋予被授权者读权限
+    request.grantRead = grantString;
+    
+    //赋予被授权者写权限
+    request.grantWrite = grantString;
+    
+    [request setFinishBlock:^(id outputObject, NSError* error) {
+        //可以从 outputObject 中获取服务器返回的 header 信息
+        NSDictionary* info = (NSDictionary *) outputObject;
+    }];
+    [[QCloudCOSXMLService defaultCOSXML] PutBucket:request];
     
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 
 - (void)testPutBucket {
     // 创建存储桶
     [self putBucket];
-        
+    
     // 创建存储桶并且授予存储桶权限
     [self putBucketAndGrantAcl];
-        
+    
 }
 
 @end

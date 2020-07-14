@@ -51,7 +51,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -65,7 +66,6 @@
  * 简单上传对象
  */
 - (void)putObject {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putObject"];
 
     //.cssg-snippet-body-start:[objc-put-object]
     QCloudPutObjectRequest* put = [QCloudPutObjectRequest new];
@@ -74,14 +74,13 @@
     put.body =  [@"testFileContent" dataUsingEncoding:NSUTF8StringEncoding];
     
     [put setFinishBlock:^(id outputObject, NSError *error) {
-        //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+        //outputObject 包含所有的响应 http 头部
+        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] PutObject:put];
     
     //.cssg-snippet-body-end
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

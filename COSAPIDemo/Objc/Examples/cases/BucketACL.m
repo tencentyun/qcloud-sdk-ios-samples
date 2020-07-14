@@ -31,7 +31,8 @@
     self.credentialFenceQueue.delegate = self;
 }
 
-- (void) fenceQueue:(QCloudCredentailFenceQueue * )queue requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
+- (void) fenceQueue:(QCloudCredentailFenceQueue * )queue
+    requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
 {
     QCloudCredential* credential = [QCloudCredential new];
     //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
@@ -51,7 +52,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -65,45 +67,61 @@
  * 设置存储桶 ACL
  */
 - (void)putBucketAcl {
-    XCTestExpectation* exp = [self expectationWithDescription:@"putBucketAcl"];
+    
 
     //.cssg-snippet-body-start:[objc-put-bucket-acl]
     QCloudPutBucketACLRequest* putACL = [QCloudPutBucketACLRequest new];
     NSString* appID = @"1131975903";//授予全新的账号 ID
-    NSString *ownerIdentifier = [NSString stringWithFormat:@"qcs::cam::uin/%@:uin/%@", appID,
-        appID];
+    NSString *ownerIdentifier = [NSString stringWithFormat:@"qcs::cam::uin/%@:uin/%@"
+                                 , appID,appID];
     NSString *grantString = [NSString stringWithFormat:@"id=\"%@\"",ownerIdentifier];
+    
+    //赋予被授权者读写权限
     putACL.grantFullControl = grantString;
+    
+    //赋予被授权者读权限
+    putACL.grantRead = grantString;
+    
+    //赋予被授权者写权限
+    putACL.grantWrite = grantString;
+    
+    //目标存储桶
     putACL.bucket = @"examplebucket-1250000000";
+    
     [putACL setFinishBlock:^(id outputObject, NSError *error) {
         //可以从 outputObject 中获取服务器返回的 header 信息
+        NSDictionary * result = (NSDictionary *)outputObject;
+
     }];
-    
+    // 设置acl
     [[QCloudCOSXMLService defaultCOSXML] PutBucketACL:putACL];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 获取存储桶 ACL
  */
 - (void)getBucketAcl {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getBucketAcl"];
-
+    
     //.cssg-snippet-body-start:[objc-get-bucket-acl]
+    
     QCloudGetBucketACLRequest* getBucketACl = [QCloudGetBucketACLRequest new];
+    
+    // 格式：BucketName-APPID
     getBucketACl.bucket = @"examplebucket-1250000000";
-    [getBucketACl setFinishBlock:^(QCloudACLPolicy * _Nonnull result, NSError * _Nonnull error) {
+    
+    [getBucketACl setFinishBlock:^(QCloudACLPolicy * _Nonnull result,
+                                           NSError * _Nonnull error) {
         //QCloudACLPolicy 中包含了 Bucket 的 ACL 信息
+        
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] GetBucketACL:getBucketACl];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 

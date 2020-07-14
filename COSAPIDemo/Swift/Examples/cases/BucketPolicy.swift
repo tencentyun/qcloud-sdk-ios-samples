@@ -21,7 +21,8 @@ class BucketPolicy: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         self.credentialFenceQueue?.delegate = self;
     }
 
-    func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
+    func fenceQueue(_ queue: QCloudCredentailFenceQueue!,
+                    requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
         let cre = QCloudCredential.init();
         //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
         cre.secretID = "COS_SECRETID";
@@ -34,7 +35,10 @@ class BucketPolicy: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         continueBlock(auth,nil);
     }
 
-    func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
+    func signature(with fileds: QCloudSignatureFields!,
+                   request: QCloudBizHTTPRequest!,
+                   urlRequest urlRequst: NSMutableURLRequest!,
+                   compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
                 continueBlock(nil,error!);
@@ -48,37 +52,36 @@ class BucketPolicy: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
 
     // 设置存储桶 Policy
     func putBucketPolicy() {
-        let exception = XCTestExpectation.init(description: "putBucketPolicy");
       
         //.cssg-snippet-body-start:[swift-put-bucket-policy]
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 
     // 获取存储桶 Policy
     func getBucketPolicy() {
-        let exception = XCTestExpectation.init(description: "getBucketPolicy");
+        
       
         //.cssg-snippet-body-start:[swift-get-bucket-policy]
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 
     // 删除存储桶 Policy
     func deleteBucketPolicy() {
-        let exception = XCTestExpectation.init(description: "deleteBucketPolicy");
+        
       
         //.cssg-snippet-body-start:[swift-delete-bucket-policy]
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 

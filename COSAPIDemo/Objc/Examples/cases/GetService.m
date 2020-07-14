@@ -51,7 +51,8 @@
                   urlRequest:(NSMutableURLRequest*)urlRequst
                    compelete:(QCloudHTTPAuthentationContinueBlock)continueBlock
 {
-    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator, NSError *error) {
+    [self.credentialFenceQueue performAction:^(QCloudAuthentationCreator *creator,
+                                               NSError *error) {
         if (error) {
             continueBlock(nil, error);
         } else {
@@ -65,44 +66,48 @@
  * 获取存储桶列表
  */
 - (void)getService {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getService"];
 
     //.cssg-snippet-body-start:[objc-get-service]
+    
+    //获取所属账户的所有存储空间列表的方法.
+    //通过使用帯 Authorization 签名认证的请求，可以获取签名中 APPID 所属账户的所有存储空间列
+    //表 (Bucket list).
     QCloudGetServiceRequest* request = [[QCloudGetServiceRequest alloc] init];
-    [request setFinishBlock:^(QCloudListAllMyBucketsResult* result, NSError* error) {
+    [request setFinishBlock:^(QCloudListAllMyBucketsResult* result,
+                              NSError* error) {
         //从 result 中获取返回信息
+        
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetService:request];
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 /**
  * 获取地域的存储桶列表
  */
 - (void)getRegionalService {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getRegionalService"];
+    
 
     //.cssg-snippet-body-start:[objc-get-regional-service]
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 /**
  * 计算签名
  */
 - (void)getAuthorization {
-    XCTestExpectation* exp = [self expectationWithDescription:@"getAuthorization"];
+    
 
     //.cssg-snippet-body-start:[objc-get-authorization]
     
     //.cssg-snippet-body-end
 
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    
 }
 
 

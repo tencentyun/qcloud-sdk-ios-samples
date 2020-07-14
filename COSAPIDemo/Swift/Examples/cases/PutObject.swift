@@ -2,9 +2,9 @@ import XCTest
 import QCloudCOSXML
 
 class PutObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDelegate{
-
+    
     var credentialFenceQueue:QCloudCredentailFenceQueue?;
-
+    
     override func setUp() {
         let config = QCloudServiceConfiguration.init();
         config.signatureProvider = self;
@@ -15,13 +15,14 @@ class PutObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         config.endpoint = endpoint;
         QCloudCOSXMLService.registerDefaultCOSXML(with: config);
         QCloudCOSTransferMangerService.registerDefaultCOSTransferManger(with: config);
-
+        
         // 脚手架用于获取临时密钥
         self.credentialFenceQueue = QCloudCredentailFenceQueue();
         self.credentialFenceQueue?.delegate = self;
     }
-
-    func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
+    
+    func fenceQueue(_ queue: QCloudCredentailFenceQueue!,
+                    requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
         let cre = QCloudCredential.init();
         //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
         cre.secretID = "COS_SECRETID";
@@ -33,8 +34,12 @@ class PutObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         let auth = QCloudAuthentationV5Creator.init(credential: cre);
         continueBlock(auth,nil);
     }
-
-    func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
+    
+    func signature(with fileds: QCloudSignatureFields!,
+                       request: QCloudBizHTTPRequest!,
+          urlRequest urlRequst: NSMutableURLRequest!,
+       compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
+        
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
                 continueBlock(nil,error!);
@@ -44,12 +49,12 @@ class PutObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
             }
         })
     }
-
-
+    
+    
     // 简单上传对象
     func putObject() {
-        let exception = XCTestExpectation.init(description: "putObject");
-      
+        
+        
         //.cssg-snippet-body-start:[swift-put-object]
         let putObject = QCloudPutObjectRequest<AnyObject>.init();
         putObject.bucket = "examplebucket-1250000000";
@@ -61,15 +66,19 @@ class PutObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
                 print(error!);
             }else{
                 print(result!);
-            }}
+            }
+               
+               
+               
+        }
         QCloudCOSXMLService.defaultCOSXML().putObject(putObject);
         
         //.cssg-snippet-body-end
-
-        self.wait(for: [exception], timeout: 100);
+        
+          
     }
-
-
+    
+    
     func testPutObject() {
         // 简单上传对象
         self.putObject();

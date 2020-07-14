@@ -21,7 +21,8 @@ class ObjectTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         self.credentialFenceQueue?.delegate = self;
     }
 
-    func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
+    func fenceQueue(_ queue: QCloudCredentailFenceQueue!,
+                    requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
         let cre = QCloudCredential.init();
         //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
         cre.secretID = "COS_SECRETID";
@@ -34,7 +35,10 @@ class ObjectTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         continueBlock(auth,nil);
     }
 
-    func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
+    func signature(with fileds: QCloudSignatureFields!,
+                   request: QCloudBizHTTPRequest!,
+                   urlRequest urlRequst: NSMutableURLRequest!,
+                   compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
                 continueBlock(nil,error!);
@@ -48,37 +52,37 @@ class ObjectTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
 
     // 设置对象标签
     func putObjectTagging() {
-        let exception = XCTestExpectation.init(description: "putObjectTagging");
+        
       
         //.cssg-snippet-body-start:[swift-put-object-tagging]
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 
     // 获取对象标签
     func getObjectTagging() {
-        let exception = XCTestExpectation.init(description: "getObjectTagging");
+        
       
         //.cssg-snippet-body-start:[swift-get-object-tagging]
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 
     // 删除对象标签
     func deleteObjectTagging() {
-        let exception = XCTestExpectation.init(description: "deleteObjectTagging");
+        
       
         //.cssg-snippet-body-start:[swift-delete-object-tagging]
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 

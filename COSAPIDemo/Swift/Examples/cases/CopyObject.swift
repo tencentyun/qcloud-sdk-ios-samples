@@ -21,7 +21,8 @@ class CopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         self.credentialFenceQueue?.delegate = self;
     }
 
-    func fenceQueue(_ queue: QCloudCredentailFenceQueue!, requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
+    func fenceQueue(_ queue: QCloudCredentailFenceQueue!,
+                    requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
         let cre = QCloudCredential.init();
         //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
         cre.secretID = "COS_SECRETID";
@@ -34,7 +35,10 @@ class CopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         continueBlock(auth,nil);
     }
 
-    func signature(with fileds: QCloudSignatureFields!, request: QCloudBizHTTPRequest!, urlRequest urlRequst: NSMutableURLRequest!, compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
+    func signature(with fileds: QCloudSignatureFields!,
+                   request: QCloudBizHTTPRequest!,
+                   urlRequest urlRequst: NSMutableURLRequest!,
+                   compelete continueBlock: QCloudHTTPAuthentationContinueBlock!) {
         self.credentialFenceQueue?.performAction({ (creator, error) in
             if error != nil {
                 continueBlock(nil,error!);
@@ -48,36 +52,98 @@ class CopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
 
     // 复制对象时保留对象属性
     func copyObject() {
-        let exception = XCTestExpectation.init(description: "copyObject");
       
         //.cssg-snippet-body-start:[swift-copy-object]
         let putObjectCopy = QCloudPutObjectCopyRequest.init();
+        
+        //目标存储桶名
         putObjectCopy.bucket = "examplebucket-1250000000";
+        
+        //目标文件的对象键
         putObjectCopy.object = "exampleobject";
+        
+        //源对象所在的路径
         putObjectCopy.objectCopySource = "sourcebucket-1250000000.cos.COS_REGION.myqcloud.com/sourceObject";
+        
+        // 是否拷贝元数据，枚举值：Copy，Replaced，默认值 Copy。
+        // 假如标记为 Copy，忽略 Header 中的用户元数据信息直接复制
+        // 假如标记为 Replaced，按 Header 信息修改元数据。当目标路径和原路径一致，即用户试图修改元数据时，必须为 Replaced
+        putObjectCopy.metadataDirective = "Copy";
+        
+        //定义 Object 的 ACL 属性，有效值：private，public-read，default。
+        //默认值：default（继承 Bucket 权限）。
+        //注意：当前访问策略条目限制为1000条，如果您无需进行 Object ACL 控制，请填 default
+        //或者此项不进行设置，默认继承 Bucket 权限。
+        putObjectCopy.accessControlList = "default";
+        
+        //指定源文件的 versionID，只有开启或开启后暂停的存储桶，才会响应此参数
+        putObjectCopy.versionID = "versionID";
+        
         putObjectCopy.setFinish { (result, error) in
             if error != nil{
                 print(error!);
             }else{
                 print(result!);
-            }}
+            }
+               
+        }
         QCloudCOSXMLService.defaultCOSXML().putObjectCopy(putObjectCopy);
         
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 
     // 复制对象时替换对象属性
     func copyObjectReplaced() {
-        let exception = XCTestExpectation.init(description: "copyObjectReplaced");
       
         //.cssg-snippet-body-start:[swift-copy-object-replaced]
+        let request : QCloudPutObjectCopyRequest  = QCloudPutObjectCopyRequest();
         
+        //目标存储桶名
+        request.bucket = "examplebucket-1250000000";
+        
+        //目标文件的对象键
+        request.object = "exampleobject";
+        
+        // 是否拷贝元数据，枚举值：Copy，Replaced，默认值 Copy。
+        // 假如标记为 Copy，忽略 Header 中的用户元数据信息直接复制
+        // 假如标记为 Replaced，按 Header 信息修改元数据。当目标路径和原路径一致，即用户试图修改元数据时，必须为 Replaced
+        request.metadataDirective = "Replaced";
+        
+        // 修改元数据
+        request.customHeaders.setValue("newValue", forKey: "x-cos-meta-*");
+        
+        //    对象存储类型，枚举值请参见 存储类型 文档，例如 MAZ_STANDARD，MAZ_STANDARD_IA，
+        //    STANDARD_IA，ARCHIVE。仅当对象不是标准存储（STANDARD）时才会返回该头部
+        // 修改存储类型
+        request.customHeaders.setValue("newValue", forKey: "x-cos-storage-class");
+        
+        //定义 Object 的 ACL 属性，有效值：private，public-read，default。
+        //默认值：default（继承 Bucket 权限）。
+        //注意：当前访问策略条目限制为1000条，如果您无需进行 Object ACL 控制，请填 default
+        //或者此项不进行设置，默认继承 Bucket 权限。
+        // 修改acl
+        request.accessControlList = "源文件acl";
+        //源对象所在的路径
+        request.objectCopySource = "sourcebucket-1250000000.cos.COS_REGION.myqcloud.com/sourceObject";
+        
+        //指定源文件的 versionID，只有开启或开启后暂停的存储桶，才会响应此参数
+        request.versionID = "versionID";
+        
+        request.setFinish { (result, error) in
+                   if error != nil{
+                       print(error!);
+                   }else{
+                       print(result!);
+                   }
+               
+        }
+        QCloudCOSXMLService.defaultCOSXML().putObjectCopy(request);
         //.cssg-snippet-body-end
 
-        self.wait(for: [exception], timeout: 100);
+          
     }
 
 
