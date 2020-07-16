@@ -50,10 +50,12 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
     func transferUploadFile() {
         //.cssg-snippet-body-start:[swift-transfer-upload-file]
         let put:QCloudCOSXMLUploadObjectRequest = QCloudCOSXMLUploadObjectRequest<AnyObject>();
-        put.object = "exampleobject";
+        // 存储桶名称，格式为 BucketName-APPID
         put.bucket = "examplebucket-1250000000";
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
+        put.object = "exampleobject";
         //需要上传的对象内容。可以传入NSData*或者NSURL*类型的变量
-        put.body = NSURL.fileURL(withPath: "") as AnyObject;
+        put.body = NSURL.fileURL(withPath: "Local File Path") as AnyObject;
         
         //监听上传结果
         put.setFinish { (result, error) in
@@ -66,11 +68,11 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         }
 
         //监听上传进度
-        put.sendProcessBlock = { (bytesDownload, totalBytesDownload,
-            totalBytesExpectedToDownload) in
-            //      bytesSent       一次上传的字节数，
-            //      totalBytesSent  总共上传的字节数
-            //      totalBytesExpectedToSend 文件一共多少字节
+        put.sendProcessBlock = { (bytesSent, totalBytesSent,
+            totalBytesExpectedToSend) in
+            //      bytesSent                   新增字节数
+            //      totalBytesSent              本次上传的总字节数
+            //      totalBytesExpectedToSend    本地上传的目标字节数
         };
         //设置上传参数
         put.initMultipleUploadFinishBlock = {(multipleUploadInitResult, resumeData) in
@@ -89,8 +91,10 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
     func transferUploadBytes() {
         //.cssg-snippet-body-start:[swift-transfer-upload-bytes]
         let put:QCloudCOSXMLUploadObjectRequest = QCloudCOSXMLUploadObjectRequest<AnyObject>();
-        put.object = "exampleobject";
+        // 存储桶名称，格式为 BucketName-APPID
         put.bucket = "examplebucket-1250000000";
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
+        put.object = "exampleobject";
         //需要上传的对象内容
         let dataBody:NSData = "wrwrwrwrwrw".data(using: .utf8)! as NSData;
         put.body = dataBody;
@@ -106,11 +110,11 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         }
 
         //监听上传进度
-        put.sendProcessBlock = { (bytesDownload, totalBytesDownload,
-            totalBytesExpectedToDownload) in
-            //      bytesSent       一次上传的字节数，
-            //      totalBytesSent  总共上传的字节数
-            //      totalBytesExpectedToSend 文件一共多少字节
+        put.sendProcessBlock = { (bytesSent, totalBytesSent,
+            totalBytesExpectedToSend) in
+            //      bytesSent                   新增字节数
+            //      totalBytesSent              本次上传的总字节数
+            //      totalBytesExpectedToSend    本地上传的目标字节数
         };
         
         QCloudCOSTransferMangerService.defaultCOSTransferManager().uploadObject(put);
@@ -144,8 +148,7 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         
         //设置下载的路径 URL，如果设置了，文件将会被下载到指定路径中
         //如果未设置该参数，那么文件将会被下载至内存里，存放在在 finishBlock 的 outputObject 里
-        request.downloadingURL = NSURL.init(string: QCloudTempFilePathWithExtension("downding"))
-            as URL?;
+        request.downloadingURL = NSURL.fileURL(withPath: "Local File Path") as URL?;
         
         //本地已下载的文件大小，如果是从头开始下载，请不要设置
         request.localCacheDownloadOffset = 100;
@@ -153,14 +156,13 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         //监听下载进度
         request.sendProcessBlock = { (bytesDownload, totalBytesDownload,
             totalBytesExpectedToDownload) in
-            //      bytesDownload       一次下载的字节数，
-            //      totalBytesDownload  总过接受的字节数
-            //      totalBytesExpectedToDownload 文件一共多少字节
+            //      bytesDownload                   新增字节数
+            //      totalBytesDownload              本次下载接收的总字节数
+            //      totalBytesExpectedToDownload    本次下载的目标字节数
         }
 
         //监听下载结果
         request.finishBlock = { (copyResult, error) in
-            //下载完成
             if error != nil{
                 print(error!);
             }else{
@@ -181,13 +183,17 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
     func transferCopyObject() {
         //.cssg-snippet-body-start:[swift-transfer-copy-object]
         let copyRequest =  QCloudCOSXMLCopyObjectRequest.init();
-        copyRequest.bucket = "examplebucket-1250000000";//目的 <BucketName-APPID>，需要是公有读或者在当前账号有权限
-        copyRequest.object = "exampleobject";//目的文件名称
-        //文件来源 <BucketName-APPID>，需要是公有读或者在当前账号有权限
+        // 文件所在桶
+        copyRequest.bucket = "examplebucket-1250000000";
+        // 对象键
+        copyRequest.object = "exampleobject";
+        
+        //文件来源存储桶，需要是公有读或者在当前账号有权限
         copyRequest.sourceBucket = "sourcebucket-1250000000";
         copyRequest.sourceObject = "sourceObject";//源文件名称
         copyRequest.sourceAPPID = "1250000000";//源文件的 APPID
         copyRequest.sourceRegion = "COS_REGION";//来源的地域
+        
         copyRequest.setFinish { (copyResult, error) in
             if error != nil{
                 print(error!);
@@ -200,6 +206,9 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         QCloudCOSTransferMangerService.defaultCOSTransferManager().copyObject(copyRequest);
         
         //.cssg-snippet-body-end
+        
+        // 取消copy
+        copyRequest.cancel();
     }
     
     
