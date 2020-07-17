@@ -54,10 +54,14 @@ class PutBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     // 创建存储桶
     func putBucket() {
         //.cssg-snippet-body-start:[swift-put-bucket]
+        
+        // 创建存储桶
         let putBucketReq = QCloudPutBucketRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         putBucketReq.bucket = "examplebucket-1250000000";
         putBucketReq.finishBlock = {(result,error) in
-            //可以从 outputObject 中获取服务器返回的 header 信息
+            // 可以从 result 中获取服务器返回的 header 信息
             if error != nil {
                 print(error!);
             } else {
@@ -74,24 +78,25 @@ class PutBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     func putBucketAndGrantAcl() {
         //.cssg-snippet-body-start:[swift-put-bucket-and-grant-acl]
         let putBucketReq = QCloudPutBucketRequest.init();
-        putBucketReq.bucket = "examplebucket-1250000000";
-        //additional actions after finishing
+        
+        // 存储桶名称，格式为 BucketName-APPID
         putBucketReq.bucket = "examplebucket-1250000000";
         
-        let uin = "1131975903";//授予权限的账号 ID
+        // 授予权限的账号 ID
+        let uin = "1131975903";
         let ownerIdentifier = String.init(format: "qcs::cam::uin/%@:uin/%@",uin,uin);
         let grantString = String.init(format: "id=\"%@\"", ownerIdentifier);
         
-        //赋予被授权者读写权限
+        // 赋予被授权者读写权限
         putBucketReq.grantFullControl = grantString;
         
-        //赋予被授权者读权限
+        // 赋予被授权者读权限
         putBucketReq.grantRead = grantString;
         
-        //赋予被授权者写权限
+        // 赋予被授权者写权限
         putBucketReq.grantWrite = grantString;
         putBucketReq.finishBlock = {(result,error) in
-            //可以从 outputObject 中获取服务器返回的 header 信息
+            // 可以从 result 中获取服务器返回的 header 信息
             if error != nil {
                 print(error!);
             } else {

@@ -68,10 +68,15 @@
 - (void)putBucket {
     
     //.cssg-snippet-body-start:[objc-put-bucket]
+    
+    // 创建存储桶
     QCloudPutBucketRequest* request = [QCloudPutBucketRequest new];
-    request.bucket = @"examplebucket-1250000000"; //additional actions after finishing
+    
+    // 存储桶名称，格式为 BucketName-APPID
+    request.bucket = @"examplebucket-1250000000";
+    
     [request setFinishBlock:^(id outputObject, NSError* error) {
-        //可以从 outputObject 中获取服务器返回的 header 信息
+        // 可以从 outputObject 中获取服务器返回的 header 信息
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucket:request];
@@ -89,25 +94,27 @@
     //.cssg-snippet-body-start:[objc-put-bucket-and-grant-acl]
     QCloudPutBucketRequest* request = [QCloudPutBucketRequest new];
     
-    //additional actions after finishing
+    // 存储桶名称，格式为 BucketName-APPID
     request.bucket = @"examplebucket-1250000000";
+    // 授予权限的账号 ID
+    NSString* appID = @"100000000001";
     
-    NSString* appID = @"100000000001";//授予权限的账号 ID
     NSString *ownerIdentifier = [NSString stringWithFormat:@"qcs::cam::uin/%@:uin/%@"
                                  , appID,appID];
     NSString *grantString = [NSString stringWithFormat:@"id=\"%@\"",ownerIdentifier];
     
-    //赋予被授权者读写权限
+    // 赋予被授权者读写权限
     request.grantFullControl = grantString;
     
-    //赋予被授权者读权限
+    // 赋予被授权者读权限
     request.grantRead = grantString;
     
-    //赋予被授权者写权限
+    // 赋予被授权者写权限
     request.grantWrite = grantString;
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
-        //可以从 outputObject 中获取服务器返回的 header 信息
+        
+        // 可以从 outputObject 中获取服务器返回的 header 信息
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucket:request];

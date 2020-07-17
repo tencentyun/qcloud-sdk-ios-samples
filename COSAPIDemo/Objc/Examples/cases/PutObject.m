@@ -69,12 +69,18 @@
 
     //.cssg-snippet-body-start:[objc-put-object]
     QCloudPutObjectRequest* put = [QCloudPutObjectRequest new];
-    put.object = @"exampleobject";
+    
+    // 存储桶名称，格式为 BucketName-APPID
     put.bucket = @"examplebucket-1250000000";
+    
+    // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
+    put.object = @"exampleobject";
+    
     put.body =  [@"testFileContent" dataUsingEncoding:NSUTF8StringEncoding];
     
     [put setFinishBlock:^(id outputObject, NSError *error) {
-        //outputObject 包含所有的响应 http 头部
+        
+        // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
     

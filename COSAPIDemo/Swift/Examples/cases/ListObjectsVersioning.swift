@@ -52,19 +52,19 @@ class ListObjectsVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentail
     
     // 获取对象多版本列表第一页数据
     func listObjectsVersioning() {
-        //\\.cssg-snippet-body-start:[swift-list-objects-versioning]
+        //.cssg-snippet-body-start:[swift-list-objects-versioning]
         let listObjectVersionsRequest :QCloudListObjectVersionsRequest = QCloudListObjectVersionsRequest();
         
-        //存储桶名称
-        listObjectVersionsRequest.bucket = "bucketname";
+        // 存储桶名称，格式为 BucketName-APPID
+        listObjectVersionsRequest.bucket = "examplebucket-1250000000";
         
-        //一次请求多少条数据
+        // 一次请求多少条数据
         listObjectVersionsRequest.maxKeys = 100;
         
         listObjectVersionsRequest.setFinish { (result, error) in
-            //result.deleteMarker; // 已删除的文件
-            //result.versionContent;  对象版本条目
-               
+            
+            // result.deleteMarker; // 已删除的文件
+            // result.versionContent;  对象版本条目
         }
         
         QCloudCOSXMLService.defaultCOSXML().listObjectVersions(listObjectVersionsRequest);
@@ -74,20 +74,21 @@ class ListObjectsVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentail
     
     // 获取对象多版本列表下一页数据
     func listObjectsVersioningNextPage() {
-        //\\.cssg-snippet-body-start:[swift-list-objects-versioning-next-page]
+        //.cssg-snippet-body-start:[swift-list-objects-versioning-next-page]
         let listObjectVersionsRequest :QCloudListObjectVersionsRequest = QCloudListObjectVersionsRequest();
         
-        //存储桶名称
-        listObjectVersionsRequest.bucket = "bucketname";
+        // 存储桶名称，格式为 BucketName-APPID
+        listObjectVersionsRequest.bucket = "examplebucket-1250000000";
         
-        //一页请求数据条目数
+        // 一页请求数据条目数
         listObjectVersionsRequest.maxKeys = 100;
         
-        //已经请求的总条目数
+        // 已经请求的总条目数
         listObjectVersionsRequest.marker = "100";
         listObjectVersionsRequest.setFinish { (result, error) in
-            //result.deleteMarker; // 已删除的文件
-            //result.versionContent;  对象版本条目
+
+            // result.deleteMarker;
+            // result.versionContent;  对象版本条目
         }
         
         QCloudCOSXMLService.defaultCOSXML().listObjectVersions(listObjectVersionsRequest);

@@ -54,10 +54,14 @@ class GetObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     func getObject() {
         //.cssg-snippet-body-start:[swift-get-object]
         let getObject = QCloudGetObjectRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         getObject.bucket = "examplebucket-1250000000";
+        
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         getObject.object = "exampleobject";
-        //设置下载的路径 URL，如果设置了，文件将会被下载到指定路径中
-        //如果未设置该参数，那么文件将会被下载至内存里，存放在在 finishBlock 的 outputObject 里
+        // 设置下载的路径 URL，如果设置了，文件将会被下载到指定路径中
+        // 如果未设置该参数，那么文件将会被下载至内存里，存放在在 finishBlock 的 result 里
         getObject.downloadingURL = URL.init(string: NSTemporaryDirectory())!
             .appendingPathComponent(getObject.object);
         getObject.finishBlock = {(result,error) in
@@ -69,9 +73,9 @@ class GetObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         };
         getObject.downProcessBlock = {(bytesDownload, totalBytesDownload,
             totalBytesExpectedToDownload) in
-            //      bytesDownload       一次下载的字节数，
-            //      totalBytesDownload  总过接受的字节数
-            //      totalBytesExpectedToDownload 文件一共多少字节
+            // bytesDownload       一次下载的字节数，
+            // totalBytesDownload  总过接受的字节数
+            // totalBytesExpectedToDownload 文件一共多少字节
         }
         QCloudCOSXMLService.defaultCOSXML().getObject(getObject);
         

@@ -49,12 +49,14 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         })
     }
 
-
     // 设置存储桶源站
     func putBucketDomain() {
       
         //.cssg-snippet-body-start:[swift-put-bucket-domain]
+        
         let req = QCloudPutBucketDomainRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         req.bucket = "examplebucket-1250000000";
         
         let config = QCloudDomainConfiguration.init();
@@ -62,14 +64,14 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         rule.status = .enabled;
         rule.name = "www.baidu.com";
         
-        //替换已存在的配置、有效值CNAME/TXT 填写则强制校验域名所有权之后，再下发配置
+        // 替换已存在的配置、有效值CNAME/TXT 填写则强制校验域名所有权之后，再下发配置
         rule.replace = .txt;
         rule.type = .rest;
         
-        //规则描述集合的数组
+        // 规则描述集合的数组
         config.rules = [rule];
         
-        //域名配置的规则
+        // 域名配置的规则
         req.domain = config;
         req.finishBlock = {(result,error) in
             if error != nil{
@@ -84,13 +86,13 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
 
     }
 
-
     // 获取存储桶源站
     func getBucketDomain() {
         
-      
         //.cssg-snippet-body-start:[swift-get-bucket-domain]
         let req = QCloudGetBucketDomainRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         req.bucket = "examplebucket-1250000000";
         
         req.finishBlock = {(result,error) in
@@ -103,10 +105,8 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         QCloudCOSXMLService.defaultCOSXML().getBucketDomain(req);
         
         //.cssg-snippet-body-end
-
           
     }
-
 
     func testBucketDomain() {
         // 设置存储桶源站

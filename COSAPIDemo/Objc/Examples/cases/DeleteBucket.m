@@ -70,10 +70,12 @@
     //.cssg-snippet-body-start:[objc-delete-bucket]
     QCloudDeleteBucketRequest* request = [[QCloudDeleteBucketRequest alloc ] init];
     
-    //存储桶名称，命名格式：BucketName-APPID
+    // 存储桶名称，命名格式：BucketName-APPID
     request.bucket = @"examplebucket-1250000000";
+    
     [request setFinishBlock:^(id outputObject,NSError*error) {
-        //可以从 outputObject 中获取服务器返回的 header 信息
+        
+        // 可以从 outputObject 中获取服务器返回的 header 信息
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucket:request];

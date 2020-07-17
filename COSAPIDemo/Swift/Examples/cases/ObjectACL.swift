@@ -54,22 +54,26 @@ class ObjectACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     func putObjectAcl() {
         //.cssg-snippet-body-start:[swift-put-object-acl]
         let putObjectACl = QCloudPutObjectACLRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         putObjectACl.bucket = "examplebucket-1250000000";
+        
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         putObjectACl.object = "exampleobject";
         let grantString = "id=\"100000000001\"";
         
         // grantFullControl 等价于 grantRead + grantWrite
         putObjectACl.grantFullControl = grantString;
-        //赋予被授权者读权限。
+        // 赋予被授权者读权限。
         putObjectACl.grantRead = grantString;
-        //赋予被授权者写权限。
+        // 赋予被授权者写权限。
         putObjectACl.grantWrite = grantString;
         
         putObjectACl.finishBlock = {(result,error)in
             if error != nil{
                 print(error!)
             }else{
-                //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+                // 可以从 result 中获取 response 中 etag 或者自定义头部等信息
                 print(result!);
             }
         }
@@ -83,7 +87,11 @@ class ObjectACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     func getObjectAcl() {
         //.cssg-snippet-body-start:[swift-get-object-acl]
         let getObjectACL = QCloudGetObjectACLRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         getObjectACL.bucket = "examplebucket-1250000000";
+        
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         getObjectACL.object = "exampleobject";
         getObjectACL.setFinish { (result, error) in
             // result.accessControlList; 被授权者与权限的信息
@@ -91,7 +99,7 @@ class ObjectACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
             if error != nil{
                 print(error!)
             }else{
-                //可以从 result 的 accessControlList 中获取对象的 ACL
+                // 可以从 result 的 accessControlList 中获取对象的 ACL
                 print(result!.accessControlList);
             }
         }

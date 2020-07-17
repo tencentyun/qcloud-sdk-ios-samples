@@ -69,17 +69,19 @@
     
     //.cssg-snippet-body-start:[objc-get-presign-download-url]
     QCloudGetPresignedURLRequest* getPresignedURLRequest = [[QCloudGetPresignedURLRequest alloc] init];
+    
+    // 存储桶名称，格式为 BucketName-APPID
     getPresignedURLRequest.bucket = @"examplebucket-1250000000";
     
-    //使用预签名 URL 的请求的 HTTP 方法。有效值（大小写敏感）为：@"GET"、@"PUT"、@"POST"、@"DELETE"
+    // 使用预签名 URL 的请求的 HTTP 方法。有效值（大小写敏感）为：@"GET"、@"PUT"、@"POST"、@"DELETE"
     getPresignedURLRequest.HTTPMethod = @"GET";
     
+    // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
     getPresignedURLRequest.object = @"exampleobject";
     
     [getPresignedURLRequest setFinishBlock:^(QCloudGetPresignedURLResult * _Nonnull result,
                                              NSError * _Nonnull error) {
-        
-        //预签名 URL
+        // 预签名 URL
         NSString* presignedURL = result.presienedURL;
        
     }];
@@ -96,18 +98,22 @@
 - (void)getPresignUploadUrl {
     
     //.cssg-snippet-body-start:[objc-get-presign-upload-url]
+    
     QCloudGetPresignedURLRequest* getPresignedURLRequest = [[QCloudGetPresignedURLRequest alloc] init];
+    
+    // 存储桶名称，格式为 BucketName-APPID
     getPresignedURLRequest.bucket = @"examplebucket-1250000000";
     
-    //使用预签名 URL 的请求的 HTTP 方法。有效值（大小写敏感）为：@"GET"、@"PUT"、@"POST"、@"DELETE"
+    // 使用预签名 URL 的请求的 HTTP 方法。有效值（大小写敏感）为：@"GET"、@"PUT"、@"POST"、@"DELETE"
     getPresignedURLRequest.HTTPMethod = @"PUT";
     
+    // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
     getPresignedURLRequest.object = @"exampleobject";
     
     [getPresignedURLRequest setFinishBlock:^(QCloudGetPresignedURLResult * _Nonnull result,
                                              NSError * _Nonnull error) {
         
-        //预签名 URL
+        // 预签名 URL
         NSString* presignedURL = result.presienedURL;
         
     }];

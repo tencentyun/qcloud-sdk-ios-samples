@@ -60,20 +60,22 @@ class BucketVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
     */
     func putBucketVersioning() {
         //.cssg-snippet-body-start:[swift-put-bucket-versioning]
-        //开启版本控制
+        // 开启版本控制
         let putBucketVersioning = QCloudPutBucketVersioningRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         putBucketVersioning.bucket = "examplebucket-1250000000";
         
-        //说明版本控制的具体信息
+        // 说明版本控制的具体信息
         let config = QCloudBucketVersioningConfiguration.init();
         
-        //说明版本是否开启，枚举值：Suspended、Enabled
+        // 说明版本是否开启，枚举值：Suspended、Enabled
         config.status = .enabled;
         
         putBucketVersioning.configuration = config;
         
         putBucketVersioning.finishBlock = {(result,error) in
-            //可以从 outputObject 中获取服务器返回的 header 信息
+            // 可以从 result 中获取服务器返回的 header 信息
             if error != nil{
                 print(error!);
             }else{
@@ -97,8 +99,9 @@ class BucketVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
         //.cssg-snippet-body-start:[swift-get-bucket-versioning]
         let getBucketVersioning = QCloudGetBucketVersioningRequest.init();
         
-        //目标桶名称
+        // 存储桶名称，格式为 BucketName-APPID
         getBucketVersioning.bucket = "examplebucket-1250000000";
+        
         getBucketVersioning.setFinish { (config, error) in
             if error != nil{
                 print(error!);

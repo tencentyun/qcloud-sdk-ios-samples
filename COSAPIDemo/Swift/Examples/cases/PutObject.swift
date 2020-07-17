@@ -54,10 +54,15 @@ class PutObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
     // 简单上传对象
     func putObject() {
         //.cssg-snippet-body-start:[swift-put-object]
+        
         let putObject = QCloudPutObjectRequest<AnyObject>.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         putObject.bucket = "examplebucket-1250000000";
         let dataBody:NSData? = "wrwrwrwrwrw".data(using: .utf8) as NSData?;
         putObject.body =  dataBody!;
+        
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         putObject.object = "exampleobject";
         putObject.finishBlock = {(result,error) in
             if error != nil{

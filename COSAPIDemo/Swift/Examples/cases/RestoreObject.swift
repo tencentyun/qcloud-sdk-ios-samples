@@ -50,24 +50,27 @@ class RestoreObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         })
     }
     
-    
     // 恢复归档对象
     func restoreObject() {
         //.cssg-snippet-body-start:[swift-restore-object]
         let restore = QCloudPostObjectRestoreRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         restore.bucket = "examplebucket-1250000000";
+        
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         restore.object = "exampleobject";
         
-        //设置临时副本的过期时间
+        // 设置临时副本的过期时间
         restore.restoreRequest.days = 10;
         
-        //复原的过程类型配置信息
+        // 复原的过程类型配置信息
         restore.restoreRequest.casJobParameters.tier = .standard;
         restore.finishBlock = {(result,error)in
             if error != nil{
                 print(error!)
             }else{
-                //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+                // 可以从 result 中获取 response 中 etag 或者自定义头部等信息
                 print(result!);
             }
         }

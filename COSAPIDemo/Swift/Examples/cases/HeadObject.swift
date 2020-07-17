@@ -54,7 +54,14 @@ class HeadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
     func headObject() {
         //.cssg-snippet-body-start:[swift-head-object]
         let headObject = QCloudHeadObjectRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         headObject.bucket = "examplebucket-1250000000";
+        
+        // versionId 当启用版本控制时，指定要查询的版本 ID，如不指定则查询对象的最新版本
+        headObject.versionID = "versionID";
+        
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         headObject.object  = "exampleobject";
         headObject.finishBlock =  {(result,error) in
             if error != nil{

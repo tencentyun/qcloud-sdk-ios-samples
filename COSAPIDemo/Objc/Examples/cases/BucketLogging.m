@@ -71,22 +71,24 @@
     //.cssg-snippet-body-start:[objc-put-bucket-logging]
     QCloudPutBucketLoggingRequest *request = [QCloudPutBucketLoggingRequest new];
     
-    //说明日志记录配置的状态，如果无子节点信息则意为关闭日志记录
+    // 说明日志记录配置的状态，如果无子节点信息则意为关闭日志记录
     QCloudBucketLoggingStatus *status = [QCloudBucketLoggingStatus new];
 
-    //存储桶 logging 设置的具体信息，主要是目标存储桶
+    // 存储桶 logging 设置的具体信息，主要是目标存储桶
     QCloudLoggingEnabled *loggingEnabled = [QCloudLoggingEnabled new];
     
-    //存放日志的目标存储桶，可以是同一个存储桶（但不推荐），或同一账户下、同一地域的存储桶
+    // 存放日志的目标存储桶，可以是同一个存储桶（但不推荐），或同一账户下、同一地域的存储桶
     loggingEnabled.targetBucket = @"examplebucket-1250000000";
     
-    //日志存放在目标存储桶的指定路径
+    // 日志存放在目标存储桶的指定路径
     loggingEnabled.targetPrefix = @"mylogs";
     status.loggingEnabled = loggingEnabled;
     request.bucketLoggingStatus = status;
+    
+    // 存储桶名称，格式为 BucketName-APPID
     request.bucket = @"examplebucket-1250000000";
     [request setFinishBlock:^(id outputObject, NSError *error) {
-       //outputObject 包含所有的响应 http 头部
+       // outputObject 包含所有的响应 http 头部
        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucketLogging:request];
@@ -103,8 +105,9 @@
     //.cssg-snippet-body-start:[objc-get-bucket-logging]
     QCloudGetBucketLoggingRequest *getReq = [QCloudGetBucketLoggingRequest new];
     
-    //目标桶名称
+    // 存储桶名称，格式为 BucketName-APPID
     getReq.bucket = @"examplebucket-1250000000";
+    
     [getReq setFinishBlock:^(QCloudBucketLoggingStatus * _Nonnull result,
                              NSError * _Nonnull error) {
         // result 中包含日志状态

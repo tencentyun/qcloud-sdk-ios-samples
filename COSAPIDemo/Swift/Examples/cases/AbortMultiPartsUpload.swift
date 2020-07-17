@@ -50,8 +50,7 @@ class AbortMultiPartsUpload: XCTestCase,QCloudSignatureProvider,QCloudCredentail
             }
         })
     }
-    
-    
+
     /**
      * 初始化分块上传的方法
      *
@@ -63,14 +62,17 @@ class AbortMultiPartsUpload: XCTestCase,QCloudSignatureProvider,QCloudCredentail
         
         //.cssg-snippet-body-start:[swift-init-multi-upload]
         let initRequest = QCloudInitiateMultipartUploadRequest.init();
-        // 上传文件目标桶
+        
+        // 存储桶名称，格式为 BucketName-APPID
         initRequest.bucket = "examplebucket-1250000000";
+        
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         initRequest.object = "exampleobject";
         initRequest.setFinish { (result, error) in
             if error != nil{
                 print(error!);
             }else{
-                //获取分块上传的 uploadId，后续的上传都需要这个 ID，请保存以备后续使用
+                // 获取分块上传的 uploadId，后续的上传都需要这个 ID，请保存以备后续使用
                 self.uploadId = result!.uploadId;
                 print(result!.uploadId);
             }
@@ -79,8 +81,6 @@ class AbortMultiPartsUpload: XCTestCase,QCloudSignatureProvider,QCloudCredentail
         QCloudCOSXMLService.defaultCOSXML().initiateMultipartUpload(initRequest);
         
         //.cssg-snippet-body-end
-        
-        
     }
     
     
@@ -93,28 +93,30 @@ class AbortMultiPartsUpload: XCTestCase,QCloudSignatureProvider,QCloudCredentail
      */
     func abortMultiUpload() {
         
-        
         //.cssg-snippet-body-start:[swift-abort-multi-upload]
         let abort = QCloudAbortMultipfartUploadRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         abort.bucket = "examplebucket-1250000000";
+        
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         abort.object = "exampleobject";
-        //本次要查询的分块上传的 uploadId，可从初始化分块上传的请求结果
-        //QCloudInitiateMultipartUploadResult 中得到
+        
+        // 本次要查询的分块上传的 uploadId，可从初始化分块上传的请求结果
+        // QCloudInitiateMultipartUploadResult 中得到
         abort.uploadId = self.uploadId!;
         
         abort.finishBlock = {(result,error)in
             if error != nil{
                 print(error!)
             }else{
-                //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+                // 可以从 result 中获取 response 中 etag 或者自定义头部等信息
                 print(result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().abortMultipfartUpload(abort);
         
         //.cssg-snippet-body-end
-        
-
     }
     
     

@@ -69,34 +69,36 @@
     
     //.cssg-snippet-body-start:[objc-put-bucket-tagging]
     QCloudPutBucketTaggingRequest *putReq = [QCloudPutBucketTaggingRequest new];
+    
+    // 存储桶名称，格式为 BucketName-APPID
     putReq.bucket = @"examplebucket-1250000000";
     
-    //标签集合
+    // 标签集合
     QCloudBucketTagging *taggings = [QCloudBucketTagging new];
     
     QCloudBucketTag *tag1 = [QCloudBucketTag new];
     
-    //标签的 Key，长度不超过128字节, 支持英文字母、数字、空格、加号、减号、下划线、等号、点号、
-    //冒号、斜线
+    // 标签的 Key，长度不超过128字节, 支持英文字母、数字、空格、加号、减号、下划线、等号、点号、
+    // 冒号、斜线
     tag1.key = @"age";
     
-    //标签的 Value，长度不超过256字节, 支持英文字母、数字、空格、加号、减号、下划线、等号、点号
-    //、冒号、斜线
+    // 标签的 Value，长度不超过256字节, 支持英文字母、数字、空格、加号、减号、下划线、等号、点号
+    // 、冒号、斜线
     tag1.value = @"20";
     QCloudBucketTag *tag2 = [QCloudBucketTag new];
     tag2.key = @"name";
     tag2.value = @"karis";
     
-    //标签集合，最多支持10个标签
+    // 标签集合，最多支持10个标签
     QCloudBucketTagSet *tagSet = [QCloudBucketTagSet new];
     tagSet.tag = @[tag1,tag2];
     taggings.tagSet = tagSet;
     
-    //标签集合
+    // 标签集合
     putReq.taggings = taggings;
     
     [putReq setFinishBlock:^(id outputObject, NSError *error) {
-        //outputObject 包含所有的响应 http 头部
+        // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucketTagging:putReq];
@@ -114,10 +116,13 @@
     //.cssg-snippet-body-start:[objc-get-bucket-tagging]
     QCloudGetBucketTaggingRequest *getReq = [QCloudGetBucketTaggingRequest new];
     
-    //存储桶名称
+    // 存储桶名称，格式为 BucketName-APPID
     getReq.bucket = @"examplebucket-1250000000";
+    
     [getReq setFinishBlock:^(QCloudBucketTagging * result, NSError * error) {
         
+        // tag的集合
+        QCloudBucketTagSet * tagSet = result.tagSet;
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetBucketTagging:getReq];
     
@@ -134,10 +139,12 @@
     //.cssg-snippet-body-start:[objc-delete-bucket-tagging]
     QCloudDeleteBucketTaggingRequest *delReq = [QCloudDeleteBucketTaggingRequest new];
     
-    //存储桶名称
+    // 存储桶名称，格式为 BucketName-APPID
     delReq.bucket =  @"examplebucket-1250000000";
+    
     [delReq setFinishBlock:^(id outputObject, NSError *error) {
-        //outputObject 包含所有的响应 http 头部
+        
+        // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucketTagging:delReq];

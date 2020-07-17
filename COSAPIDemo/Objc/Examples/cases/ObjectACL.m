@@ -69,21 +69,25 @@
 
     //.cssg-snippet-body-start:[objc-put-object-acl]
     QCloudPutObjectACLRequest* request = [QCloudPutObjectACLRequest new];
+    
+    // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
     request.object = @"exampleobject";
+    
+    // 存储桶名称，格式为 BucketName-APPID
     request.bucket = @"examplebucket-1250000000";
+    
     NSString *grantString = [NSString stringWithFormat:@"id=\"%@\"",@"100000000001"];
     
     // grantFullControl 等价于 grantRead + grantWrite
-    
-    //赋予被授权者读写权限。
+    // 赋予被授权者读写权限。
     request.grantFullControl = grantString;
-    //赋予被授权者读权限。
+    // 赋予被授权者读权限。
     request.grantRead = grantString;
-    //赋予被授权者写权限。
+    // 赋予被授权者写权限。
     request.grantWrite = grantString;
     
     [request setFinishBlock:^(id outputObject, NSError *error) {
-        //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+        // 可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
     
@@ -100,16 +104,17 @@
     //.cssg-snippet-body-start:[objc-get-object-acl]
     QCloudGetObjectACLRequest *request = [QCloudGetObjectACLRequest new];
     
-    //文件对象名称
+    // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
     request.object = @"exampleobject";
     
-    //文件所在桶
+    // 存储桶名称，格式为 BucketName-APPID
     request.bucket = @"examplebucket-1250000000";
+    
     __block QCloudACLPolicy* policy;
     [request setFinishBlock:^(QCloudACLPolicy * _Nonnull result,
                               NSError * _Nonnull error) {
-        policy = result;
         
+        policy = result;
         // result.accessControlList; 被授权者与权限的信息
         // result.owner; 持有者的信息
     }];

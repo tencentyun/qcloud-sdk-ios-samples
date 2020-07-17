@@ -57,29 +57,31 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
     func putBucketReplication() {
         //.cssg-snippet-body-start:[swift-put-bucket-replication]
         let putBucketReplication = QCloudPutBucketReplicationRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         putBucketReplication.bucket = "examplebucket-1250000000";
         
-        //说明所有跨地域配置信息
+        // 说明所有跨地域配置信息
         let config = QCloudBucketReplicationConfiguation.init();
         config.role = "qcs::cam::uin/100000000001:uin/100000000001";
         
-        //发起者身份标示
+        // 发起者身份标示
         let rule = QCloudBucketReplicationRule.init();
-        
-        //用来标注具体 Rule 的名称
+         
+        // 用来标注具体 Rule 的名称
         rule.identifier = "swift";
         rule.status = .enabled;
 
-        //资源标识符
+        // 资源标识符
         let destination = QCloudBucketReplicationDestination.init();
         let destinationBucket = "destinationbucket-1250000000";
         let region = "ap-beijing";
         destination.bucket = "qcs::cos:\(region)::\(destinationBucket)";
         
-        //目标存储桶信息
+        // 目标存储桶信息
         rule.destination = destination;
         
-        //前缀匹配策略，不可重叠，重叠返回错误。前缀匹配根目录为空
+        // 前缀匹配策略，不可重叠，重叠返回错误。前缀匹配根目录为空
         rule.prefix = "a";
         
         config.rule = [rule];
@@ -87,7 +89,7 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
         putBucketReplication.configuation = config;
         
         putBucketReplication.finishBlock = {(result,error) in
-            //可以从 outputObject 中获取服务器返回的 header 信息
+            // 可以从 result 中获取服务器返回的 header 信息
             if error != nil{
                 print(error!);
             }else{

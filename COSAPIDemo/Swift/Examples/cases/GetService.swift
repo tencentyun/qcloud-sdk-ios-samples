@@ -24,7 +24,7 @@ class GetService: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
     func fenceQueue(_ queue: QCloudCredentailFenceQueue!,
                     requestCreatorWithContinue continueBlock: QCloudCredentailFenceQueueContinue!) {
         let cre = QCloudCredential.init();
-        //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
+        // 在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
         cre.secretID = "COS_SECRETID";
         cre.secretKey = "COS_SECRETKEY";
         cre.token = "COS_TOKEN";
@@ -54,15 +54,18 @@ class GetService: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
     func getService() {
         //.cssg-snippet-body-start:[swift-get-service]
         
-        //获取所属账户的所有存储空间列表的方法.
-        //通过使用帯 Authorization 签名认证的请求，可以获取签名中 APPID 所属账户的所有存储空间列
-        //表 (Bucket list).
+        // 获取所属账户的所有存储空间列表的方法.
+        // 通过使用帯 Authorization 签名认证的请求，可以获取签名中 APPID 所属账户的所有存储空间列
+        // 表 (Bucket list).
         let getServiceReq = QCloudGetServiceRequest.init();
         getServiceReq.setFinish{(result,error) in
             if result == nil {
                 print(error!);
             } else {
-                //从 result 中获取返回信息
+                
+                // 从 result 中获取返回信息
+                // result?.owner ;  bucket owner的信息
+                // result?.buckets; 存储桶列表
                 print(result!);
             }
         }
@@ -77,21 +80,14 @@ class GetService: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
       
         //.cssg-snippet-body-start:[swift-get-regional-service]
         
-        //.cssg-snippet-body-end
-
-          
+        //.cssg-snippet-body-end     
     }
-
-
     // 计算签名
     func getAuthorization() {
-        
-      
+    
         //.cssg-snippet-body-start:[swift-get-authorization]
         
         //.cssg-snippet-body-end
-
-          
     }
 
 

@@ -55,13 +55,14 @@ class DeleteObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         //.cssg-snippet-body-start:[swift-delete-object]
         let deleteObject = QCloudDeleteObjectRequest.init();
         
-        //删除的文件所在的桶名称
+        // 存储桶名称，格式为 BucketName-APPID
         deleteObject.bucket = "examplebucket-1250000000";
         
-        //删除的文件名
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         deleteObject.object = "exampleobject";
+        
         deleteObject.finishBlock = {(result,error)in
-            //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+            // 可以从 result 中获取 response 中 etag 或者自定义头部等信息
             if error != nil{
                 print(error!);
             }else{
@@ -79,28 +80,31 @@ class DeleteObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
     func deleteMultiObject() {
         //.cssg-snippet-body-start:[swift-delete-multi-object]
         let mutipleDel = QCloudDeleteMultipleObjectRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         mutipleDel.bucket = "examplebucket-1250000000";
         
-        //要删除的单个文件
+        // 要删除的单个文件
         let info1 = QCloudDeleteObjectInfo.init();
-        info1.key = "exampleobject";
         
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
+        info1.key = "exampleobject";
         
         let info2 = QCloudDeleteObjectInfo.init();
         
-        //要删除的文件集合
+        // 要删除的文件集合
         let deleteInfos = QCloudDeleteInfo.init();
         
-        //存放需要删除对象信息的数组
+        // 存放需要删除对象信息的数组
         deleteInfos.objects = [info1,info2];
         
-        //布尔值，这个值决定了是否启动 Quiet 模式：
-        //true：启动 Quiet 模式
-        //false：启动 Verbose 模式
-        //默认值为 False
+        // 布尔值，这个值决定了是否启动 Quiet 模式：
+        // true：启动 Quiet 模式
+        // false：启动 Verbose 模式
+        // 默认值为 False
         deleteInfos.quiet = false;
         
-        //封装了需要批量删除的多个对象的信息
+        // 封装了需要批量删除的多个对象的信息
         mutipleDel.deleteObjects = deleteInfos;
         
         mutipleDel.setFinish { (result, error) in
@@ -114,7 +118,6 @@ class DeleteObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         
         //.cssg-snippet-body-end
     }
-    
     
     func testDeleteObject() {
         // 删除对象

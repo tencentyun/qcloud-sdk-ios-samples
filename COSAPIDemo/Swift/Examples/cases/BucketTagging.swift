@@ -56,30 +56,32 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
     func putBucketTagging() {
         //.cssg-snippet-body-start:[swift-put-bucket-tagging]
         let req = QCloudPutBucketTaggingRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         req.bucket = "examplebucket-1250000000";
         let taggings = QCloudBucketTagging.init();
         
-        //标签集合
+        // 标签集合
         let tagSet = QCloudBucketTagSet.init();
         taggings.tagSet = tagSet;
         let tag1 = QCloudBucketTag.init();
         
-        //标签的 Key，长度不超过128字节, 支持英文字母、数字、空格、加号、减号、下划线、等号、点号、
-        //冒号、斜线
+        // 标签的 Key，长度不超过128字节, 支持英文字母、数字、空格、加号、减号、下划线、等号、点号、
+        // 冒号、斜线
         tag1.key = "age";
         
-        //标签的 Value，长度不超过256字节, 支持英文字母、数字、空格、加号、减号、下划线、等号、点号
-        //、冒号、斜线
+        // 标签的 Value，长度不超过256字节, 支持英文字母、数字、空格、加号、减号、下划线、等号、点号
+        // 、冒号、斜线
         tag1.value = "20";
         
         let tag2 = QCloudBucketTag.init();
         tag2.key = "name";
         tag2.value = "karis";
         
-        //标签集合，最多支持10个标签
+        // 标签集合，最多支持10个标签
         tagSet.tag = [tag1,tag2];
         
-        //标签集合
+        // 标签集合
         req.taggings = taggings;
         req.finishBlock = {(result,error) in
             if error != nil{
@@ -100,6 +102,8 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
     func getBucketTagging() {
         //.cssg-snippet-body-start:[swift-get-bucket-tagging]
         let req = QCloudGetBucketTaggingRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         req.bucket = "examplebucket-1250000000";
         req.setFinish { (result, error) in
             if error != nil{
@@ -121,7 +125,7 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         //.cssg-snippet-body-start:[swift-delete-bucket-tagging]
         let req = QCloudDeleteBucketTaggingRequest.init();
         
-        //存储桶名称
+        // 存储桶名称，格式为 BucketName-APPID
         req.bucket = "examplebucket-1250000000";
         req.finishBlock =  { (result, error) in
             if error != nil{

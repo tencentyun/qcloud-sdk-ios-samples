@@ -75,12 +75,15 @@
     //.cssg-snippet-body-start:[objc-init-multi-upload]
     QCloudInitiateMultipartUploadRequest* initRequest = [QCloudInitiateMultipartUploadRequest new];
     
-    initRequest.bucket = @"examplebucket-1250000000"; // 存储桶名称
-    initRequest.object = @"exampleobject"; //对象键
+    // 存储桶名称，格式为 BucketName-APPID
+    initRequest.bucket = @"examplebucket-1250000000";
+    
+    // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
+    initRequest.object = @"exampleobject";
     
     [initRequest setFinishBlock:^(QCloudInitiateMultipartUploadResult* outputObject,
                                   NSError *error) {
-        //获取分块上传的 uploadId，后续的上传都需要这个 ID，请保存以备后续使用
+        // 获取分块上传的 uploadId，后续的上传都需要这个 ID，请保存以备后续使用
         NSString * uploadId = outputObject.uploadId;
     }];
     
@@ -102,15 +105,18 @@
     //.cssg-snippet-body-start:[objc-abort-multi-upload]
     QCloudAbortMultipfartUploadRequest *abortRequest = [QCloudAbortMultipfartUploadRequest new];
     
-    abortRequest.object = @"exampleobject"; //存储桶名称
-    abortRequest.bucket = @"examplebucket-1250000000"; //对象键
+    // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
+    abortRequest.object = @"exampleobject";
     
-    //本次要终止的分块上传的 uploadId
-    //可从初始化分块上传的请求结果 QCloudInitiateMultipartUploadResult 中得到
+    // 存储桶名称，格式为 BucketName-APPID
+    abortRequest.bucket = @"examplebucket-1250000000";
+    
+    // 本次要终止的分块上传的 uploadId
+    // 可从初始化分块上传的请求结果 QCloudInitiateMultipartUploadResult 中得到
     abortRequest.uploadId = @"exampleUploadId";
     
     [abortRequest setFinishBlock:^(id outputObject, NSError *error) {
-        //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+        // 可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
         NSDictionary * result = (NSDictionary *)outputObject;
     }];
     
