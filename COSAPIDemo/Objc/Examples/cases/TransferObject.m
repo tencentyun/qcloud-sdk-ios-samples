@@ -91,8 +91,8 @@
     
     // 监听上传结果
     [put setFinishBlock:^(id outputObject, NSError *error) {
-      // 可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
-      NSDictionary * result = (NSDictionary *)outputObject;
+        // 可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+        NSDictionary * result = (NSDictionary *)outputObject;
     }];
     
     [put setInitMultipleUploadFinishBlock:^(QCloudInitiateMultipartUploadResult * _Nullable multipleUploadInitResult, QCloudCOSXMLUploadObjectResumeData  _Nullable resumeData) {
@@ -108,8 +108,8 @@
     // 如果需要中途取消上传，调用cancel 方法
     [put cancel];
     //.cssg-snippet-body-end
- 
-
+    
+    
 }
 
 /**
@@ -133,9 +133,9 @@
                                int64_t totalBytesSent,
                                int64_t totalBytesExpectedToSend) {
         
-       // bytesSent                   新增字节数
-       // totalBytesSent              本次上传的总字节数
-       // totalBytesExpectedToSend    本地上传的目标字节数
+        // bytesSent                   新增字节数
+        // totalBytesSent              本次上传的总字节数
+        // totalBytesExpectedToSend    本地上传的目标字节数
     }];
     
     // 监听上传结果
@@ -144,7 +144,7 @@
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-   
+    
     //.cssg-snippet-body-end
 }
 
@@ -201,7 +201,7 @@
     // 取消下载
     // 如果需要取消下载，调用cancel方法
     [request cancel];
-
+    
     //.cssg-snippet-body-end
 }
 
@@ -251,7 +251,6 @@
  */
 - (void)batchUploadObjects {
     
-
     //.cssg-snippet-body-start:[objc-batch-upload-objects]
     
     //.cssg-snippet-body-end

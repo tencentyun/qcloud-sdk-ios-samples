@@ -66,13 +66,10 @@
  * 设置对象标签
  */
 - (void)putObjectTagging {
-    
 
     //.cssg-snippet-body-start:[objc-put-object-tagging]
     
     //.cssg-snippet-body-end
-
-    
 }
 
 /**
@@ -80,12 +77,9 @@
  */
 - (void)getObjectTagging {
     
-
     //.cssg-snippet-body-start:[objc-get-object-tagging]
     
     //.cssg-snippet-body-end
-
-    
 }
 
 /**
@@ -96,8 +90,6 @@
     //.cssg-snippet-body-start:[objc-delete-object-tagging]
     
     //.cssg-snippet-body-end
-
-    
 }
 
 

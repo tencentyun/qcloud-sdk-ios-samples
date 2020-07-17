@@ -151,6 +151,18 @@
     [getReq setFinishBlock:^(QCloudWebsiteConfiguration *  result,
                              NSError * error) {
         
+        // 设置重定向规则，最多设置100条RoutingRule
+        QCloudWebsiteRoutingRules *rules =result.rules;
+        
+        // 索引文档
+        QCloudWebsiteIndexDocument *indexDocument = result.indexDocument;
+        
+        // 错误文档
+        QCloudWebisteErrorDocument *errorDocument = result.errorDocument;
+       
+        // 重定向所有请求
+        QCloudWebsiteRedirectAllRequestsTo *redirectAllRequestsTo = result.redirectAllRequestsTo;
+        
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetBucketWebsite:getReq];
     

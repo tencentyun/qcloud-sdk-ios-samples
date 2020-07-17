@@ -95,6 +95,7 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
                 print(error!);
             }else{
                 print(result!);
+                result?.accessControlList; // 被授权者与权限的信息
             }
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketACL(getBucketACLReq)
