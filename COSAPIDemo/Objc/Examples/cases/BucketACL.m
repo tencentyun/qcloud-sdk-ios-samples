@@ -72,25 +72,26 @@
     //.cssg-snippet-body-start:[objc-put-bucket-acl]
     QCloudPutBucketACLRequest* putACL = [QCloudPutBucketACLRequest new];
     
-    NSString* uin = @"100000000001";//授予权限的账号 ID
+    // 授予权限的账号 ID
+    NSString* uin = @"100000000001";
     NSString *ownerIdentifier = [NSString stringWithFormat:@"qcs::cam::uin/%@:uin/%@"
                                  , uin,uin];
     NSString *grantString = [NSString stringWithFormat:@"id=\"%@\"",ownerIdentifier];
     
-    //赋予被授权者读写权限
+    // 赋予被授权者读写权限
     putACL.grantFullControl = grantString;
     
-    //赋予被授权者读权限
+    // 赋予被授权者读权限
     putACL.grantRead = grantString;
     
-    //赋予被授权者写权限
+    // 赋予被授权者写权限
     putACL.grantWrite = grantString;
     
-    //目标存储桶
+    // 存储桶名称，格式为 BucketName-APPID
     putACL.bucket = @"examplebucket-1250000000";
     
     [putACL setFinishBlock:^(id outputObject, NSError *error) {
-        //可以从 outputObject 中获取服务器返回的 header 信息
+        // 可以从 outputObject 中获取服务器返回的 header 信息
         NSDictionary * result = (NSDictionary *)outputObject;
 
     }];
@@ -115,8 +116,8 @@
     
     [getBucketACl setFinishBlock:^(QCloudACLPolicy * _Nonnull result,
                                            NSError * _Nonnull error) {
-        //QCloudACLPolicy 中包含了 Bucket 的 ACL 信息
-        
+        // QCloudACLPolicy 中包含了 Bucket 的 ACL 信息
+        // result.accessControlList; 被授权者与权限的信息
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] GetBucketACL:getBucketACl];

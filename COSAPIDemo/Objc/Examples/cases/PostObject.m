@@ -70,8 +70,6 @@
     //.cssg-snippet-body-start:[objc-post-object]
     
     //.cssg-snippet-body-end
-
-    
 }
 
 

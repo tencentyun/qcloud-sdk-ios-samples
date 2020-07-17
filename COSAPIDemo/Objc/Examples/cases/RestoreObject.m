@@ -25,7 +25,7 @@
     configuration.endpoint = endpoint;
     [QCloudCOSXMLService registerDefaultCOSXMLWithConfiguration:configuration];
     [QCloudCOSTransferMangerService registerDefaultCOSTransferMangerWithConfiguration:configuration];
-
+    
     // 脚手架用于获取临时密钥
     self.credentialFenceQueue = [QCloudCredentailFenceQueue new];
     self.credentialFenceQueue.delegate = self;
@@ -42,7 +42,7 @@
     credential.startDate = [[[NSDateFormatter alloc] init] dateFromString:@"startTime"]; // 单位是秒
     credential.experationDate = [[[NSDateFormatter alloc] init] dateFromString:@"expiredTime"];
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc]
-        initWithCredential:credential];
+                                            initWithCredential:credential];
     continueBlock(creator, nil);
 }
 
@@ -66,35 +66,40 @@
  * 恢复归档对象
  */
 - (void)restoreObject {
-
+    
     //.cssg-snippet-body-start:[objc-restore-object]
     QCloudPostObjectRestoreRequest *req = [QCloudPostObjectRestoreRequest new];
+    
+    // 存储桶名称，格式为 BucketName-APPID
     req.bucket = @"examplebucket-1250000000";
+    
+    // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
     req.object = @"exampleobject";
     
-    //设置临时副本的过期时间
+    // 设置临时副本的过期时间
     req.restoreRequest.days  = 10;
     
-    //复原的过程类型配置信息
+    // 复原的过程类型配置信息
     req.restoreRequest.CASJobParameters.tier =QCloudCASTierStandard;
     
     [req setFinishBlock:^(id outputObject, NSError *error) {
-        //outputObject 包含所有的响应 http 头部
+        
+        // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
-       
+        
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] PostObjectRestore:req];
     
     //.cssg-snippet-body-end
-
+    
 }
 
 
 - (void)testRestoreObject {
     // 恢复归档对象
     [self restoreObject];
-        
+    
 }
 
 @end

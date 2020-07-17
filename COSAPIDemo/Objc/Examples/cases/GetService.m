@@ -69,14 +69,18 @@
 
     //.cssg-snippet-body-start:[objc-get-service]
     
-    //获取所属账户的所有存储空间列表的方法.
-    //通过使用帯 Authorization 签名认证的请求，可以获取签名中 APPID 所属账户的所有存储空间列
-    //表 (Bucket list).
+    // 获取所属账户的所有存储空间列表的方法.
+    // 通过使用帯 Authorization 签名认证的请求，可以获取签名中 APPID 所属账户的所有存储空间列
+    // 表 (Bucket list).
     QCloudGetServiceRequest* request = [[QCloudGetServiceRequest alloc] init];
     [request setFinishBlock:^(QCloudListAllMyBucketsResult* result,
                               NSError* error) {
-        //从 result 中获取返回信息
         
+        // 从 result 中获取返回信息 存储桶列表
+        NSArray<QCloudBucket*> *buckets = result.buckets;
+        
+        // bucket owner的信息
+        QCloudOwner *owner = result.owner;
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetService:request];
     
@@ -89,25 +93,18 @@
  */
 - (void)getRegionalService {
     
-
     //.cssg-snippet-body-start:[objc-get-regional-service]
     
     //.cssg-snippet-body-end
-
-    
 }
 
 /**
  * 计算签名
  */
 - (void)getAuthorization {
-    
-
     //.cssg-snippet-body-start:[objc-get-authorization]
     
     //.cssg-snippet-body-end
-
-    
 }
 
 

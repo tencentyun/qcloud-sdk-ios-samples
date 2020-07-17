@@ -70,21 +70,26 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
  * 获取对象多版本列表第一页数据
  */
 - (void)listObjectsVersioning {
-    //\\.cssg-snippet-body-start:[objc-list-objects-versioning]
+    
+    // .cssg-snippet-body-start:[objc-list-objects-versioning]
     
     QCloudListObjectVersionsRequest* listObjectVersionsRequest =
         [[QCloudListObjectVersionsRequest alloc] init];
     
-    //存储桶名称
+    // 存储桶名称
     listObjectVersionsRequest.bucket = @"bucketname";
     
-    //一页请求数据条目数，默认 1000
+    // 一页请求数据条目数，默认 1000
     listObjectVersionsRequest.maxKeys = 100;
     
     [listObjectVersionsRequest setFinishBlock:^(QCloudListVersionsResult * _Nonnull result,
                                                 NSError * _Nonnull error) {
-        //result.deleteMarker; // 已删除的文件
-        //result.versionContent;  对象版本条目
+        // 已删除的文件
+        NSArray<QCloudDeleteMarker*> *deleteMarker = result.deleteMarker;
+        
+        // 对象版本条目
+        NSArray<QCloudVersionContent*> *versionContent = result.versionContent;
+        
         if (result.isTruncated) {
             // 表示数据被截断，需要拉取下一页数据
             self->prevPageResult = result;
@@ -100,23 +105,28 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
  */
 - (void)listObjectsVersioningNextPage {
 
-    //\\.cssg-snippet-body-start:[objc-list-objects-versioning]
+    //.cssg-snippet-body-start:[objc-list-objects-versioning]
     
     QCloudListObjectVersionsRequest* listObjectVersionsRequest = [[QCloudListObjectVersionsRequest alloc] init];
     
-    //存储桶名称
+    // 存储桶名称
     listObjectVersionsRequest.bucket = @"bucketname";
     
-    //一页请求数据条目数，默认 1000
+    // 一页请求数据条目数，默认 1000
     listObjectVersionsRequest.maxKeys = 100;
     
-    //已经请求的总条目数
+    // 已经请求的总条目数
     listObjectVersionsRequest.marker = prevPageResult.versionIDMarkder;
     
     [listObjectVersionsRequest setFinishBlock:^(QCloudListVersionsResult * _Nonnull result,
                                                 NSError * _Nonnull error) {
-        //result.deleteMarker; // 已删除的文件
-        //result.versionContent;  对象版本条目
+        
+        // 已删除的文件
+        NSArray<QCloudDeleteMarker*> *deleteMarker = result.deleteMarker;
+        
+        // 对象版本条目
+        NSArray<QCloudVersionContent*> *versionContent = result.versionContent;
+        
         if (result.isTruncated) {
             // 表示数据被截断，需要拉取下一页数据
             self->prevPageResult = result;

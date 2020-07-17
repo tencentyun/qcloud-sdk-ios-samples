@@ -71,30 +71,31 @@
     
     QCloudPutBucketDomainRequest *req = [QCloudPutBucketDomainRequest new];
     
+    // 存储桶名称，格式为 BucketName-APPID
     req.bucket = @"examplebucket-1250000000";
+    
     QCloudDomainConfiguration *config = [QCloudDomainConfiguration new];
     QCloudDomainRule *rule = [QCloudDomainRule new];
     
     rule.status = QCloudDomainStatueEnabled;
     rule.name = @"www.baidu.com";
     
-    //替换已存在的配置、有效值CNAME/TXT 填写则强制校验域名所有权之后，再下发配置
+    // 替换已存在的配置、有效值CNAME/TXT 填写则强制校验域名所有权之后，再下发配置
     rule.replace = QCloudCOSDomainReplaceTypeTxt;
     rule.type = QCloudCOSDomainTypeRest;
     
-    //规则描述集合的数组
+    // 规则描述集合的数组
     config.rules = @[rule];
     
-    //域名配置的规则
+    // 域名配置的规则
     req.domain  = config;
     
     [req setFinishBlock:^(id outputObject, NSError *error) {
-        //outputObject 包含所有的响应 http 头部
+        // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
         
     }];
     [[QCloudCOSXMLService defaultCOSXML]PutBucketDomain:req];
-    
     
     //.cssg-snippet-body-end
     
@@ -107,11 +108,14 @@
     
     //.cssg-snippet-body-start:[objc-get-bucket-domain]
     QCloudGetBucketDomainRequest *getReq =  [QCloudGetBucketDomainRequest new];
+    
+    // 存储桶名称，格式为 BucketName-APPID
     getReq.bucket = @"examplebucket-1250000000";
+    
     [getReq setFinishBlock:^(QCloudDomainConfiguration * _Nonnull result,
                              NSError * _Nonnull error) {
-        
-       
+        // 规则描述集合的数组
+        NSArray *rules = result.rules;
     }];
     [[QCloudCOSXMLService defaultCOSXML]GetBucketDomain:getReq];
     

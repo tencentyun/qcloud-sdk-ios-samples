@@ -71,34 +71,45 @@
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
     // 本地文件路径
     NSURL* url = [NSURL fileURLWithPath:@"文件的URL"];
+    
     // 存储桶名称，格式为 BucketName-APPID
     put.bucket = @"examplebucket-1250000000";
+    
     // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
     put.object = @"exampleobject";
-    //需要上传的对象内容。可以传入NSData*或者NSURL*类型的变量
+    
+    // 需要上传的对象内容。可以传入NSData*或者NSURL*类型的变量
     put.body =  url;
-    //监听上传进度
+    // 监听上传进度
     [put setSendProcessBlock:^(int64_t bytesSent,
                                int64_t totalBytesSent,
                                int64_t totalBytesExpectedToSend) {
-        //      bytesSent                   新增字节数
-        //      totalBytesSent              本次上传的总字节数
-        //      totalBytesExpectedToSend    本地上传的目标字节数
+        // bytesSent                   新增字节数
+        // totalBytesSent              本次上传的总字节数
+        // totalBytesExpectedToSend    本地上传的目标字节数
     }];
     
-    //监听上传结果
+    // 监听上传结果
     [put setFinishBlock:^(id outputObject, NSError *error) {
-      //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
-      NSDictionary * result = (NSDictionary *)outputObject;
+        // 可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+        NSDictionary * result = (NSDictionary *)outputObject;
+    }];
+    
+    [put setInitMultipleUploadFinishBlock:^(QCloudInitiateMultipartUploadResult * _Nullable multipleUploadInitResult, QCloudCOSXMLUploadObjectResumeData  _Nullable resumeData) {
+        
+        // 在初始化分块上传完成以后会回调该 block，在这里可以获取 resumeData
+        // 并且可以通过 resumeData 生成一个分块上传的请求
+        QCloudCOSXMLUploadObjectRequest * resumeUploadRequest = [QCloudCOSXMLUploadObjectRequest requestWithRequestData:resumeData];
     }];
     
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
     
+    // 取消上传
+    // 如果需要中途取消上传，调用cancel 方法
+    [put cancel];
     //.cssg-snippet-body-end
     
-    //取消上传
-    [put cancel];
-
+    
 }
 
 /**
@@ -107,29 +118,33 @@
 - (void)transferUploadBytes {
     //.cssg-snippet-body-start:[objc-transfer-upload-bytes]
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
+    
     // 存储桶名称，格式为 BucketName-APPID
     put.bucket = @"examplebucket-1250000000";
+    
     // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
     put.object = @"exampleobject";
-    //需要上传的对象内容。可以传入NSData*或者NSURL*类型的变量
+    
+    // 需要上传的对象内容。可以传入NSData*或者NSURL*类型的变量
     put.body = [@"My Example Content" dataUsingEncoding:NSUTF8StringEncoding];
     
-    //监听上传进度
+    // 监听上传进度
     [put setSendProcessBlock:^(int64_t bytesSent,
                                int64_t totalBytesSent,
                                int64_t totalBytesExpectedToSend) {
-       //      bytesSent                   新增字节数
-       //      totalBytesSent              本次上传的总字节数
-       //      totalBytesExpectedToSend    本地上传的目标字节数
+        
+        // bytesSent                   新增字节数
+        // totalBytesSent              本次上传的总字节数
+        // totalBytesExpectedToSend    本地上传的目标字节数
     }];
     
-    //监听上传结果
+    // 监听上传结果
     [put setFinishBlock:^(id outputObject, NSError *error) {
-        //outputObject 包含所有的响应 http 头部
+        // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-   
+    
     //.cssg-snippet-body-end
 }
 
@@ -154,37 +169,40 @@
     
     // 存储桶名称，格式为 BucketName-APPID
     request.bucket = @"examplebucket-1250000000";
+    
     // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
     request.object = @"exampleobject";
     
-    //设置下载的路径 URL，如果设置了，文件将会被下载到指定路径中
-    //如果未设置该参数，那么文件将会被下载至内存里，存放在在 finishBlock 的 outputObject 里
+    // 设置下载的路径 URL，如果设置了，文件将会被下载到指定路径中
+    // 如果未设置该参数，那么文件将会被下载至内存里，存放在在 finishBlock 的 outputObject 里
     request.downloadingURL = [NSURL fileURLWithPath:@"Local File Path"];
     
-    //本地已下载的文件大小，如果是从头开始下载，请不要设置
+    // 本地已下载的文件大小，如果是从头开始下载，请不要设置
     request.localCacheDownloadOffset = 100;
     
-    //监听下载结果
+    // 监听下载结果
     [request setFinishBlock:^(id outputObject, NSError *error) {
-        //outputObject 包含所有的响应 http 头部
+        // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
     
-    //监听下载进度
+    // 监听下载进度
     [request setDownProcessBlock:^(int64_t bytesDownload,
                                    int64_t totalBytesDownload,
                                    int64_t totalBytesExpectedToDownload) {
-        //      bytesDownload                   新增字节数
-        //      totalBytesDownload              本次下载接收的总字节数
-        //      totalBytesExpectedToDownload    本次下载的目标字节数
+        
+        // bytesDownload                   新增字节数
+        // totalBytesDownload              本次下载接收的总字节数
+        // totalBytesExpectedToDownload    本次下载的目标字节数
     }];
     
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] DownloadObject:request];
     
-    //.cssg-snippet-body-end
     // 取消下载
+    // 如果需要取消下载，调用cancel方法
     [request cancel];
-
+    
+    //.cssg-snippet-body-end
 }
 
 /**
@@ -197,25 +215,34 @@
     
     // 存储桶名称，格式为 BucketName-APPID
     request.bucket = @"examplebucket-1250000000";
+    
     // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
     request.object = @"exampleobject";
     
-    //文件来源存储桶，需要是公有读或者在当前账号有权限
+    // 文件来源存储桶，需要是公有读或者在当前账号有权限
     request.sourceBucket = @"sourcebucket-1250000000";
-    request.sourceObject = @"sourceObject";//源文件名称
-    request.sourceAPPID = @"1250000000";//源文件的 APPID
-    request.sourceRegion= @"COS_REGION";//来源的地域
+    
+    // 源文件名称
+    request.sourceObject = @"sourceObject";
+    
+    // 源文件的 APPID
+    request.sourceAPPID = @"1250000000";
+    
+    // 来源的地域
+    request.sourceRegion= @"COS_REGION";
     
     [request setFinishBlock:^(QCloudCopyObjectResult* result, NSError* error) {
-        //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+        // 可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
     }];
     
-    //注意如果是跨地域复制，这里使用的 transferManager 所在的 region 必须为目标桶所在的 region
+    // 注意如果是跨地域复制，这里使用的 transferManager 所在的 region 必须为目标桶所在的 region
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] CopyObject:request];
-    //.cssg-snippet-body-end
     
-    //取消copy
+    // 取消copy
+    // 若需要取消copy 调用cancel方法
     [request cancel];
+    
+    //.cssg-snippet-body-end
     
 }
 
@@ -224,7 +251,6 @@
  */
 - (void)batchUploadObjects {
     
-
     //.cssg-snippet-body-start:[objc-batch-upload-objects]
     
     //.cssg-snippet-body-end

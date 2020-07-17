@@ -49,43 +49,33 @@ class ObjectTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         })
     }
 
-
     // 设置对象标签
     func putObjectTagging() {
         
-      
         //.cssg-snippet-body-start:[swift-put-object-tagging]
         
         //.cssg-snippet-body-end
 
-          
     }
-
 
     // 获取对象标签
     func getObjectTagging() {
         
-      
         //.cssg-snippet-body-start:[swift-get-object-tagging]
         
         //.cssg-snippet-body-end
-
           
     }
 
-
     // 删除对象标签
     func deleteObjectTagging() {
-        
-      
+
         //.cssg-snippet-body-start:[swift-delete-object-tagging]
         
         //.cssg-snippet-body-end
 
-          
     }
-
-
+ 
     func testObjectTagging() {
         // 设置对象标签
         self.putObjectTagging();

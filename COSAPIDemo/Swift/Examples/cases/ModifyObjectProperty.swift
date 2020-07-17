@@ -57,10 +57,10 @@ class ModifyObjectProperty: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
         //.cssg-snippet-body-start:[swift-modify-object-metadata]
         let request : QCloudPutObjectCopyRequest = QCloudPutObjectCopyRequest();
         
-        //目标存储桶名
+        // 存储桶名称，格式为 BucketName-APPID
         request.bucket = "examplebucket-1250000000";
         
-        //目标文件的对象键
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         request.object = "exampleobject";
         
         // 是否拷贝元数据，枚举值：Copy，Replaced，默认值 Copy。
@@ -69,19 +69,21 @@ class ModifyObjectProperty: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
         // 即用户试图修改元数据时，必须为 Replaced
         request.metadataDirective = "Replaced";
         
-        //  自定义对象header
+        // 自定义对象header
         request.customHeaders.setValue("newValue", forKey: "x-cos-meta-*")
-        //定义 Object 的 ACL 属性，有效值：private，public-read，default。
-        //默认值：default（继承 Bucket 权限）。
-        //注意：当前访问策略条目限制为1000条，如果您无需进行 Object ACL 控制，请填 default
-        //或者此项不进行设置，默认继承 Bucket 权限。
+        
+        // 定义 Object 的 ACL 属性，有效值：private，public-read，default。
+        // 默认值：default（继承 Bucket 权限）。
+        // 注意：当前访问策略条目限制为1000条，如果您无需进行 Object ACL 控制，请填 default
+        // 或者此项不进行设置，默认继承 Bucket 权限。
         request.accessControlList = "default";
-        //源对象所在的路径
+        
+        // 源对象所在的路径
         request.objectCopySource =
             "examplebucket-1250000000.cos.ap-guangzhou.myqcloud.com/exampleobject";
         
         request.setFinish { (result, error) in
-            //result 返回具体信息
+            // result 返回具体信息
         }
         
         QCloudCOSXMLService.defaultCOSXML().putObjectCopy(request);
@@ -94,21 +96,21 @@ class ModifyObjectProperty: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
         //.cssg-snippet-body-start:[swift-modify-object-storage-class]
         let request : QCloudPutObjectCopyRequest = QCloudPutObjectCopyRequest();
         
-        //目标存储桶名
+        // 存储桶名称，格式为 BucketName-APPID
         request.bucket = "examplebucket-1250000000";
         
-        //目标文件的对象键
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         request.object = "exampleobject";
         
-        //    对象存储类型，枚举值请参见 存储类型 文档，例如 MAZ_STANDARD，MAZ_STANDARD_IA，
-        //    STANDARD_IA，ARCHIVE。仅当对象不是标准存储（STANDARD）时才会返回该头部
+        // 对象存储类型，枚举值请参见 存储类型 文档，例如 MAZ_STANDARD，MAZ_STANDARD_IA，
+        // STANDARD_IA，ARCHIVE。仅当对象不是标准存储（STANDARD）时才会返回该头部
         request.customHeaders.setValue("newValue", forKey: "x-cos-storage-class");
-        //源对象所在的路径
+        // 源对象所在的路径
         request.objectCopySource =
             "examplebucket-1250000000.cos.ap-guangzhou.myqcloud.com/exampleobject";
         
         request.setFinish { (result, error) in
-            //result 返回具体信息
+            // result 返回具体信息
         }
         
         QCloudCOSXMLService.defaultCOSXML().putObjectCopy(request);

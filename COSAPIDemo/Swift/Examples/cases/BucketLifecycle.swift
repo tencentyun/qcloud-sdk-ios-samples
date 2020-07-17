@@ -49,51 +49,52 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         })
     }
 
-
     // 设置存储桶生命周期
     func putBucketLifecycle() {
         //.cssg-snippet-body-start:[swift-put-bucket-lifecycle]
         let putBucketLifecycleReq = QCloudPutBucketLifecycleRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         putBucketLifecycleReq.bucket = "examplebucket-1250000000";
         
         let config = QCloudLifecycleConfiguration.init();
         
-        //规则描述
+        // 规则描述
         let rule = QCloudLifecycleRule.init();
         
-        //用于唯一地标识规则
+        // 用于唯一地标识规则
         rule.identifier = "swift";
         
-        //指明规则是否启用，枚举值：Enabled，Disabled
+        // 指明规则是否启用，枚举值：Enabled，Disabled
         rule.status = .enabled;
         
-        //Filter 用于描述规则影响的 Object 集合
+        // Filter 用于描述规则影响的 Object 集合
         let fileter = QCloudLifecycleRuleFilter.init();
         
-        //指定规则所适用的前缀。匹配前缀的对象受该规则影响，Prefix 最多只能有一个
+        // 指定规则所适用的前缀。匹配前缀的对象受该规则影响，Prefix 最多只能有一个
         fileter.prefix = "0";
         
-        //Filter 用于描述规则影响的 Object 集合
+        // Filter 用于描述规则影响的 Object 集合
         rule.filter = fileter;
         
-        //规则转换属性，对象何时转换为 Standard_IA 或 Archive
+        // 规则转换属性，对象何时转换为 Standard_IA 或 Archive
         let transition = QCloudLifecycleTransition.init();
         
-        //指明规则对应的动作在对象最后的修改日期过后多少天操作：
+        // 指明规则对应的动作在对象最后的修改日期过后多少天操作：
         transition.days = 100;
         
-        //指定 Object 转储到的目标存储类型，枚举值： STANDARD_IA，ARCHIVE
+        // 指定 Object 转储到的目标存储类型，枚举值： STANDARD_IA，ARCHIVE
         transition.storageClass = .standardIA;
         
         rule.transition = transition;
         
         putBucketLifecycleReq.lifeCycle = config;
         
-        //生命周期配置
+        // 生命周期配置
         putBucketLifecycleReq.lifeCycle.rules = [rule];
         
         putBucketLifecycleReq.finishBlock = {(result,error) in
-            //可以从 outputObject 中获取服务器返回的 header 信息
+            // 可以从 result 中获取服务器返回的 header 信息
             if error != nil{
                 print(error!);
             }else{
@@ -104,7 +105,6 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         
         //.cssg-snippet-body-end
     }
-
 
     // 获取存储桶生命周期
     func getBucketLifecycle() {
@@ -126,7 +126,6 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         //.cssg-snippet-body-end
     }
 
-
     // 删除存储桶生命周期
     func deleteBucketLifecycle() {
         //.cssg-snippet-body-start:[swift-delete-bucket-lifecycle]
@@ -138,13 +137,11 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
             }else{
                 print(result!);
             }
-         
         };
         QCloudCOSXMLService.defaultCOSXML().deleteBucketLifeCycle(deleteBucketLifeCycle);
         
         //.cssg-snippet-body-end
     }
-
 
     func testBucketLifecycle() {
         // 设置存储桶生命周期

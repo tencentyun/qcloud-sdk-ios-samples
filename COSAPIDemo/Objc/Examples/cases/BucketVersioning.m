@@ -73,22 +73,25 @@
 - (void)putBucketVersioning {
 
     //.cssg-snippet-body-start:[objc-put-bucket-versioning]
-    //开启版本控制
+    // 开启版本控制
     QCloudPutBucketVersioningRequest* request = [[QCloudPutBucketVersioningRequest alloc] init];
+    
+    // 存储桶名称，格式为 BucketName-APPID
     request.bucket =@"examplebucket-1250000000";
     
-    //说明版本控制的具体信息
+    // 说明版本控制的具体信息
     QCloudBucketVersioningConfiguration* versioningConfiguration =
         [[QCloudBucketVersioningConfiguration alloc] init];
     
     request.configuration = versioningConfiguration;
     
-    //说明版本是否开启，枚举值：Suspended、Enabled
+    // 说明版本是否开启，枚举值：Suspended、Enabled
     versioningConfiguration.status = QCloudCOSBucketVersioningStatusEnabled;
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
-        //可以从 outputObject 中获取服务器返回的 header 信息
-        //outputObject 包含所有的响应 http 头部
+        
+        // 可以从 outputObject 中获取服务器返回的 header 信息
+        // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucketVersioning:request];
@@ -109,11 +112,14 @@
     QCloudGetBucketVersioningRequest* request =
                                 [[QCloudGetBucketVersioningRequest alloc] init];
     
-    //目标桶名称
+    // 存储桶名称，格式为 BucketName-APPID
     request.bucket = @"examplebucket-1250000000";
+    
     [request setFinishBlock:^(QCloudBucketVersioningConfiguration* result,
                               NSError* error) {
+        
         // result 包含多版本的状态
+        result.status;
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] GetBucketVersioning:request];

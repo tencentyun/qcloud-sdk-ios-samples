@@ -52,6 +52,7 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
 
     // 设置存储桶跨域规则
     func putBucketCors() {
+        
         //.cssg-snippet-body-start:[swift-put-bucket-cors]
         let putBucketCorsReq = QCloudPutBucketCORSRequest.init();
         
@@ -79,10 +80,10 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         
         putBucketCorsReq.corsConfiguration = corsConfig;
         
-        //格式：BucketName-APPID
+        // 存储桶名称，格式为 BucketName-APPID
         putBucketCorsReq.bucket = "examplebucket-1250000000";
         putBucketCorsReq.finishBlock = {(result,error) in
-            //可以从 outputObject 中获取服务器返回的 header 信息
+            // 可以从 result 中获取服务器返回的 header 信息
             if error != nil{
                 print(error!);
             }else{
@@ -93,16 +94,17 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         
         //.cssg-snippet-body-end
     }
-
-
+    
     // 获取存储桶跨域规则
     func getBucketCors() {
+        
         //.cssg-snippet-body-start:[swift-get-bucket-cors]
         let  getBucketCorsRes = QCloudGetBucketCORSRequest.init();
-        //格式：BucketName-APPID
+        
+        // 存储桶名称，格式为 BucketName-APPID
         getBucketCorsRes.bucket = "examplebucket-1250000000";
         getBucketCorsRes.setFinish { (corsConfig, error) in
-            //CORS 设置封装在 corsConfig 中
+            // CORS 设置封装在 corsConfig 中
             if error != nil{
                 print(error!);
             }else{
@@ -114,22 +116,26 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         //.cssg-snippet-body-end
     }
 
-
     // 实现 Object 跨域访问配置的预请求
     func optionObject() {
+        
         //.cssg-snippet-body-start:[swift-option-object]
         let optionsObject = QCloudOptionsObjectRequest.init();
+        
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         optionsObject.object = "exampleobject";
         
-        //模拟跨域访问的请求来源域名
+        // 模拟跨域访问的请求来源域名
         optionsObject.origin = "http://www.qcloud.com";
         optionsObject.accessControlRequestMethod = "GET";
         optionsObject.accessControlRequestHeaders = "origin";
         
-        //存储桶名称，格式：BucketName-APPID
+        // 存储桶名称，格式为 BucketName-APPID
         optionsObject.bucket = "examplebucket-1250000000";
+        
         optionsObject.finishBlock = {(result,error) in
-            //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+            
+            // 可以从 result 中获取 response 中 etag 或者自定义头部等信息
             if error != nil{
                 print(error!);
             }else{
@@ -146,9 +152,12 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
     func deleteBucketCors() {
         //.cssg-snippet-body-start:[swift-delete-bucket-cors]
         let deleteBucketCorsRequest = QCloudDeleteBucketCORSRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         deleteBucketCorsRequest.bucket = "examplebucket-1250000000";
+        
         deleteBucketCorsRequest.finishBlock = {(result,error) in
-            //可以从 outputObject 中获取服务器返回的 header 信息
+            // 可以从 result 中获取服务器返回的 header 信息
             if error != nil{
                 print(error!);
             }else{

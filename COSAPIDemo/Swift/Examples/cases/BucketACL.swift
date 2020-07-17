@@ -49,26 +49,29 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         })
     }
 
-
     // 设置存储桶 ACL
     func putBucketAcl() {
         //.cssg-snippet-body-start:[swift-put-bucket-acl]
         let putBucketACLReq = QCloudPutBucketACLRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         putBucketACLReq.bucket = "examplebucket-1250000000";
-        let appTD = "100000000001";//授予权限的账号 ID
+        
+        // 授予权限的账号 ID
+        let appTD = "100000000001";
         let ownerIdentifier = "qcs::cam::uin/\(appTD):uin/\(appTD)";
         let grantString = "id=\"\(ownerIdentifier)\"";
-        //赋予被授权者写权限
+        // 赋予被授权者写权限
         putBucketACLReq.grantWrite = grantString;
         
-        //赋予被授权者读权限
+        // 赋予被授权者读权限
         putBucketACLReq.grantRead = grantString;
         
-        //赋予被授权者读写权限 grantFullControl == grantRead + grantWrite
+        // 赋予被授权者读写权限 grantFullControl == grantRead + grantWrite
         putBucketACLReq.grantFullControl = grantString;
         
         putBucketACLReq.finishBlock = {(result,error) in
-            //QCloudACLPolicy 中包含了 Bucket 的 ACL 信息
+            // QCloudACLPolicy 中包含了 Bucket 的 ACL 信息
             if error != nil{
                 print(error!);
             }else{
@@ -76,17 +79,15 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
             }
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketACL(putBucketACLReq);
-        
         //.cssg-snippet-body-end
     }
-
 
     // 获取存储桶 ACL
     func getBucketAcl() {
         //.cssg-snippet-body-start:[swift-get-bucket-acl]
         let getBucketACLReq = QCloudGetBucketACLRequest.init();
         
-        // 格式：BucketName-APPID
+        // 存储桶名称，格式为 BucketName-APPID
         getBucketACLReq.bucket = "examplebucket-1250000000";
         
         getBucketACLReq.setFinish { (result, error) in
@@ -94,6 +95,7 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
                 print(error!);
             }else{
                 print(result!);
+                result?.accessControlList; // 被授权者与权限的信息
             }
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketACL(getBucketACLReq)

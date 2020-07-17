@@ -54,9 +54,15 @@ class ObjectPresignUrl: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
     func getPresignDownloadUrl() {
         //.cssg-snippet-body-start:[swift-get-presign-download-url]
         let getPresign  = QCloudGetPresignedURLRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         getPresign.bucket = "examplebucket-1250000000" ;
-        //使用预签名 URL 的请求的 HTTP 方法。有效值（大小写敏感）为：@"GET"、@"PUT"、@"POST"、@"DELETE"
+        
+        // 使用预签名 URL 的请求的 HTTP 方法。有效值（大小写敏感）为：
+        // @"GET"、@"PUT"、@"POST"、@"DELETE"
         getPresign.httpMethod = "GET";
+        
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         getPresign.object = "exampleobject";
         getPresign.setFinish { (result, error) in
             if error == nil{
@@ -68,14 +74,19 @@ class ObjectPresignUrl: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
         //.cssg-snippet-body-end
     }
     
-    
     // 获取预签名上传链接
     func getPresignUploadUrl() {
         //.cssg-snippet-body-start:[swift-get-presign-upload-url]
         let getPresign  = QCloudGetPresignedURLRequest.init();
+        
+        // 存储桶名称，格式为 BucketName-APPID
         getPresign.bucket = "examplebucket-1250000000" ;
-        //使用预签名 URL 的请求的 HTTP 方法。有效值（大小写敏感）为：@"GET"、@"PUT"、@"POST"、@"DELETE"
+        
+        // 使用预签名 URL 的请求的 HTTP 方法。有效值（大小写敏感）为：
+        // @"GET"、@"PUT"、@"POST"、@"DELETE"
         getPresign.httpMethod = "PUT";
+        
+        // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         getPresign.object = "exampleobject";
         getPresign.setFinish { (result, error) in
             if error == nil{

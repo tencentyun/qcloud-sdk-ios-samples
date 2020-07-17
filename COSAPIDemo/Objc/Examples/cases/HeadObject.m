@@ -72,19 +72,21 @@
  */
 - (void)headObject {
 
-    
     //.cssg-snippet-body-start:[objc-head-object]
     QCloudHeadObjectRequest* headerRequest = [QCloudHeadObjectRequest new];
+    
+    // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
     headerRequest.object = @"exampleobject";
     
-    //    versionId    当启用版本控制时，指定要查询的版本 ID，如不指定则查询对象的最新版本
+    // versionId 当启用版本控制时，指定要查询的版本 ID，如不指定则查询对象的最新版本
     headerRequest.versionID = @"versionID";
-    // 目标文件名
+    
+    // 存储桶名称，格式为 BucketName-APPID
     headerRequest.bucket = @"examplebucket-1250000000";
     
     [headerRequest setFinishBlock:^(NSDictionary* result, NSError *error) {
         // result 返回具体信息
-        
+
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] HeadObject:headerRequest];

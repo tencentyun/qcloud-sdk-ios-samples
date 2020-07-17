@@ -93,10 +93,11 @@
     cors.rules = @[rule];
     putCORS.corsConfiguration = cors;
     
-    //格式：BucketName-APPID
+    // 存储桶名称，格式为 BucketName-APPID
     putCORS.bucket = @"examplebucket-1250000000";
+    
     [putCORS setFinishBlock:^(id outputObject, NSError *error) {
-        //可以从 outputObject 中获取服务器返回的 header 信息
+        // 可以从 outputObject 中获取服务器返回的 header 信息
         NSDictionary * result = (NSDictionary *)outputObject;
     }];
     
@@ -114,12 +115,12 @@
     //.cssg-snippet-body-start:[objc-get-bucket-cors]
     QCloudGetBucketCORSRequest* corsReqeust = [QCloudGetBucketCORSRequest new];
     
-    //格式：BucketName-APPID
+    // 存储桶名称，格式为 BucketName-APPID
     corsReqeust.bucket = @"examplebucket-1250000000";
     
     [corsReqeust setFinishBlock:^(QCloudCORSConfiguration * _Nonnull result,
                                   NSError * _Nonnull error) {
-        //CORS 设置封装在 result 中
+        // CORS 设置封装在 result 中
         
     }];
     
@@ -137,19 +138,20 @@
     //.cssg-snippet-body-start:[objc-option-object]
     QCloudOptionsObjectRequest* request = [[QCloudOptionsObjectRequest alloc] init];
     
-    //存储桶名称，格式：BucketName-APPID
+    // 存储桶名称，格式：BucketName-APPID
     request.bucket =@"examplebucket-1250000000";
     
-    //模拟跨域访问的请求来源域名
+    // 模拟跨域访问的请求来源域名
     request.origin = @"http://cloud.tencent.com";
     request.accessControlRequestMethod = @"GET";
     request.accessControlRequestHeaders = @"host";
     
-    //对象位于存储桶中的位置标识符，即对象键
+    // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
     request.object = @"exampleobject";
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
-        //可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
+        
+        // 可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
         NSDictionary* info = (NSDictionary *) outputObject;
         
     }];
@@ -167,9 +169,13 @@
 
     //.cssg-snippet-body-start:[objc-delete-bucket-cors]
     QCloudDeleteBucketCORSRequest* deleteCORS = [QCloudDeleteBucketCORSRequest new];
+    
+    // 存储桶名称，格式为 BucketName-APPID
     deleteCORS.bucket = @"examplebucket-1250000000";
+    
     [deleteCORS setFinishBlock:^(id outputObject, NSError *error) {
-        //可以从 outputObject 中获取服务器返回的 header 信息
+        
+        // 可以从 outputObject 中获取服务器返回的 header 信息
        NSDictionary* info = (NSDictionary *) outputObject;
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucketCORS:deleteCORS];
@@ -177,7 +183,6 @@
     //.cssg-snippet-body-end
 
 }
-
 
 - (void)testBucketCORS {
     // 设置存储桶跨域规则

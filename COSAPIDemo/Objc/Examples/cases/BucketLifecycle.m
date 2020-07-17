@@ -66,46 +66,48 @@
  */
 - (void)putBucketLifecycle {
     
-    
     //.cssg-snippet-body-start:[objc-put-bucket-lifecycle]
     QCloudPutBucketLifecycleRequest* request = [QCloudPutBucketLifecycleRequest new];
+    
+    // 存储桶名称，格式为 BucketName-APPID
     request.bucket = @"examplebucket-1250000000";
     __block QCloudLifecycleConfiguration* lifecycleConfiguration =
     [[QCloudLifecycleConfiguration alloc] init];
     
-    //规则描述
+    // 规则描述
     QCloudLifecycleRule* rule = [[QCloudLifecycleRule alloc] init];
     
-    //用于唯一地标识规则
+    // 用于唯一地标识规则
     rule.identifier = @"identifier";
     
-    //指明规则是否启用，枚举值：Enabled，Disabled
+    // 指明规则是否启用，枚举值：Enabled，Disabled
     rule.status = QCloudLifecycleStatueEnabled;
     
-    //Filter 用于描述规则影响的 Object 集合
+    // Filter 用于描述规则影响的 Object 集合
     QCloudLifecycleRuleFilter* filter = [[QCloudLifecycleRuleFilter alloc] init];
     
-    //指定规则所适用的前缀。匹配前缀的对象受该规则影响，Prefix 最多只能有一个
+    // 指定规则所适用的前缀。匹配前缀的对象受该规则影响，Prefix 最多只能有一个
     filter.prefix = @"prefix1";
     
-    //Filter 用于描述规则影响的 Object 集合
+    // Filter 用于描述规则影响的 Object 集合
     rule.filter = filter;
     
-    //规则转换属性，对象何时转换为 Standard_IA 或 Archive
+    // 规则转换属性，对象何时转换为 Standard_IA 或 Archive
     QCloudLifecycleTransition* transition = [[QCloudLifecycleTransition alloc] init];
     
-    //指明规则对应的动作在对象最后的修改日期过后多少天操作：
+    // 指明规则对应的动作在对象最后的修改日期过后多少天操作：
     transition.days = 100;
     
-    //指定 Object 转储到的目标存储类型，枚举值： STANDARD_IA，ARCHIVE
+    // 指定 Object 转储到的目标存储类型，枚举值： STANDARD_IA，ARCHIVE
     transition.storageClass = QCloudCOSStorageStandardIA;
     rule.transition = transition;
     request.lifeCycle = lifecycleConfiguration;
     
-    //生命周期配置
+    // 生命周期配置
     request.lifeCycle.rules = @[rule];
     [request setFinishBlock:^(id outputObject, NSError* error) {
-        //outputObject 包含所有的响应 http 头部
+        
+        // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
         
     }];
@@ -123,10 +125,12 @@
     
     //.cssg-snippet-body-start:[objc-get-bucket-lifecycle]
     QCloudGetBucketLifecycleRequest* request = [QCloudGetBucketLifecycleRequest new];
+    
+    // 存储桶名称，格式为 BucketName-APPID
     request.bucket = @"examplebucket-1250000000";
     [request setFinishBlock:^(QCloudLifecycleConfiguration* result,NSError* error) {
         // 可以从 result 中获取返回信息
-        
+        // result.rules 规则描述集合的数组
      
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetBucketLifecycle:request];
@@ -144,7 +148,9 @@
     QCloudDeleteBucketLifeCycleRequest* request =
     [[QCloudDeleteBucketLifeCycleRequest alloc ] init];
     
+    // 存储桶名称，格式为 BucketName-APPID
     request.bucket = @"examplebucket-1250000000";
+    
     [request setFinishBlock:^(QCloudLifecycleConfiguration* deleteResult, NSError* error) {
         // 返回删除结果
     }];

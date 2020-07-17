@@ -35,12 +35,12 @@
     requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
 {
     QCloudCredential* credential = [QCloudCredential new];
-    //在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
+    // 在这里可以同步过程从服务器获取临时签名需要的 secretID，secretKey，expiretionDate 和 token 参数
     credential.secretID = @"COS_SECRETID";
     credential.secretKey = @"COS_SECRETKEY";
     credential.token = @"COS_TOKEN";
-    /*强烈建议返回服务器时间作为签名的开始时间，用来避免由于用户手机本地时间偏差过大导致的签名不正确 */
-    credential.startDate = [[[NSDateFormatter alloc] init] dateFromString:@"startTime"]; // 单位是秒
+    // 强烈建议返回服务器时间作为签名的开始时间，用来避免由于用户手机本地时间偏差过大导致的签名不正确 单位是秒
+    credential.startDate = [[[NSDateFormatter alloc] init] dateFromString:@"startTime"];
     credential.experationDate = [[[NSDateFormatter alloc] init] dateFromString:@"expiredTime"];
     QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc]
         initWithCredential:credential];
@@ -69,43 +69,47 @@
  */
 - (void)putBucketReplication {
     
-
     //.cssg-snippet-body-start:[objc-put-bucket-replication]
     QCloudPutBucketReplicationRequest* request = [[QCloudPutBucketReplicationRequest alloc] init];
+    
+    // 存储桶名称，格式为 BucketName-APPID
     request.bucket = @"examplebucket-1250000000";
     
-    //说明所有跨地域配置信息
+    // 说明所有跨地域配置信息
     QCloudBucketReplicationConfiguation* replConfiguration =
                                 [[QCloudBucketReplicationConfiguation alloc] init];
     
-    //发起者身份标示
+    // 发起者身份标示
     replConfiguration.role = @"qcs::cam::uin/100000000001:uin/100000000001";
     
-    //具体配置信息
+    // 具体配置信息
     QCloudBucketReplicationRule* rule = [[QCloudBucketReplicationRule alloc] init];
     
-    //用来标注具体 Rule 的名称
+    // 用来标注具体 Rule 的名称
     rule.identifier = @"identifier";
     rule.status = QCloudCOSXMLStatusEnabled;
     
-    //资源标识符
+    // 资源标识符
     QCloudBucketReplicationDestination* destination = [[QCloudBucketReplicationDestination alloc] init];
     NSString* destinationBucket = @"destinationbucket-1250000000";
-    NSString* region = @"ap-beijing";   //目标存储桶所在地域
+    
+    // 目标存储桶所在地域
+    NSString* region = @"ap-beijing";
     destination.bucket = [NSString stringWithFormat:@"qcs::cos:%@::%@",region,destinationBucket];
     
-    //目标存储桶信息
+    // 目标存储桶信息
     rule.destination = destination;
     
-    //前缀匹配策略，不可重叠，重叠返回错误。前缀匹配根目录为空
+    // 前缀匹配策略，不可重叠，重叠返回错误。前缀匹配根目录为空
     rule.prefix = @"prefix1";
     replConfiguration.rule = @[rule];
     request.configuation = replConfiguration;
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
-        //可以从 outputObject 中获取服务器返回的 header 信息
-        //outputObject 包含所有的响应 http 头部
+        
+        // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
+        
     }];
     [[QCloudCOSXMLService defaultCOSXML] PutBucketRelication:request];
     
@@ -117,15 +121,18 @@
  * 接口用于查询存储桶中用户跨地域复制配置信息。用户发起该请求时需获得请求签名，表明该请求已获得许可。
  */
 - (void)getBucketReplication {
-    
 
     //.cssg-snippet-body-start:[objc-get-bucket-replication]
     QCloudGetBucketReplicationRequest* request = [[QCloudGetBucketReplicationRequest alloc] init];
+    
+    // 存储桶名称，格式为 BucketName-APPID
     request.bucket = @"examplebucket-1250000000";
     
     [request setFinishBlock:^(QCloudBucketReplicationConfiguation* result,
                               NSError* error) {
-       
+        
+        // 具体配置信息，最多支持 1000 个，所有策略只能指向一个目标存储桶
+        NSArray *rules = result.rule;
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetBucketReplication:request];
     
@@ -142,11 +149,14 @@
     QCloudDeleteBucketReplicationRequest* request =
                             [[QCloudDeleteBucketReplicationRequest alloc] init];
     
+    // 存储桶名称，格式为 BucketName-APPID
     request.bucket = @"examplebucket-1250000000";
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
-        //outputObject 包含所有的响应 http 头部
+        
+        // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
+        
     }];
     [[QCloudCOSXMLService defaultCOSXML] DeleteBucketReplication:request];
     

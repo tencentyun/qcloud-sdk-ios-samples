@@ -49,7 +49,6 @@ class BucketPolicy: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         })
     }
 
-
     // 设置存储桶 Policy
     func putBucketPolicy() {
       
@@ -57,9 +56,7 @@ class BucketPolicy: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         
         //.cssg-snippet-body-end
 
-          
     }
-
 
     // 获取存储桶 Policy
     func getBucketPolicy() {
@@ -68,22 +65,17 @@ class BucketPolicy: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         //.cssg-snippet-body-start:[swift-get-bucket-policy]
         
         //.cssg-snippet-body-end
-
           
     }
 
-
     // 删除存储桶 Policy
     func deleteBucketPolicy() {
-        
       
         //.cssg-snippet-body-start:[swift-delete-bucket-policy]
         
         //.cssg-snippet-body-end
 
-          
     }
-
 
     func testBucketPolicy() {
         // 设置存储桶 Policy
