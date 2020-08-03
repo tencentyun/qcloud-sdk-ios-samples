@@ -89,6 +89,16 @@
     //.cssg-snippet-body-end
 }
 
+/**
+ * 设置全球加速域名
+ */
+- (void)setAccelerateDomain {
+    //.cssg-snippet-body-start:[objc-set-accelerate-domain]
+    
+    //.cssg-snippet-body-end
+}
+
+
 // .cssg-methods-pragma
 
 - (void)testSetCustomDomain {
@@ -100,6 +110,10 @@
         
     // 设置自定义域名
     [self setCustomDomain];
+
+    // 设置全球加速域名
+    [self setAccelerateDomain];
+        
         
     // .cssg-methods-pragma
 }
