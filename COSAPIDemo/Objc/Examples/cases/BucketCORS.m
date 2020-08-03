@@ -74,22 +74,23 @@
     
     QCloudCORSRule* rule = [QCloudCORSRule new];
     
-    // 配置规则的 ID
+    // 配置规则 ID
     rule.identifier = @"rule1";
     
-    // 在发送 OPTIONS 请求时告知服务端，接下来的请求可以使用的 HTTP 请求头部，支持通配符 *
+    // 跨域请求可以使用的 HTTP 请求头部，支持通配符 *
     rule.allowedHeader = @[@"origin",@"host",@"accept",
                            @"content-type",@"authorization"];
     rule.exposeHeader = @"ETag";
     
-    // 允许的 HTTP 操作，例如：GET，PUT，HEAD，POST，DELETE
+    // 跨域请求允许的 HTTP 操作，例如：GET，PUT，HEAD，POST，DELETE
     rule.allowedMethod = @[@"GET",@"PUT",@"POST", @"DELETE", @"HEAD"];
     
-    // 设置 OPTIONS 请求得到结果的有效期
+    // 跨域请求得到结果的有效期
     rule.maxAgeSeconds = 3600;
     
     // 允许的访问来源，支持通配符 *，格式为：协议://域名[:端口]
     rule.allowedOrigin = @"http://cloud.tencent.com";
+    
     cors.rules = @[rule];
     putCORS.corsConfiguration = cors;
     
@@ -120,7 +121,8 @@
     
     [corsReqeust setFinishBlock:^(QCloudCORSConfiguration * _Nonnull result,
                                   NSError * _Nonnull error) {
-        // CORS 设置封装在 result 中
+        // 跨域规则列表
+        NSArray<QCloudCORSRule*> *rules = result.rules;
         
     }];
     
@@ -141,7 +143,7 @@
     // 存储桶名称，格式：BucketName-APPID
     request.bucket =@"examplebucket-1250000000";
     
-    // 模拟跨域访问的请求来源域名
+    // 模拟跨域访问的请求来源域名，请求 method，请求 host
     request.origin = @"http://cloud.tencent.com";
     request.accessControlRequestMethod = @"GET";
     request.accessControlRequestHeaders = @"host";
@@ -150,7 +152,6 @@
     request.object = @"exampleobject";
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
-        
         // 可以从 outputObject 中获取 response 中 etag 或者自定义头部等信息
         NSDictionary* info = (NSDictionary *) outputObject;
         
@@ -174,7 +175,6 @@
     deleteCORS.bucket = @"examplebucket-1250000000";
     
     [deleteCORS setFinishBlock:^(id outputObject, NSError *error) {
-        
         // 可以从 outputObject 中获取服务器返回的 header 信息
        NSDictionary* info = (NSDictionary *) outputObject;
     }];
@@ -183,6 +183,7 @@
     //.cssg-snippet-body-end
 
 }
+// .cssg-methods-pragma
 
 - (void)testBucketCORS {
     // 设置存储桶跨域规则
@@ -196,6 +197,7 @@
         
     // 删除存储桶跨域规则
     [self deleteBucketCors];
+    // .cssg-methods-pragma
         
 }
 

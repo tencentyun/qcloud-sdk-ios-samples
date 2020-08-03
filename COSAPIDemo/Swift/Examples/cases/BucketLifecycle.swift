@@ -94,11 +94,10 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         putBucketLifecycleReq.lifeCycle.rules = [rule];
         
         putBucketLifecycleReq.finishBlock = {(result,error) in
-            // 可以从 result 中获取服务器返回的 header 信息
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print(result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketLifecycle(putBucketLifecycleReq);
@@ -112,12 +111,11 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         let getBucketLifeCycle = QCloudGetBucketLifecycleRequest.init();
         getBucketLifeCycle.bucket = "examplebucket-1250000000";
         getBucketLifeCycle.setFinish { (config, error) in
-            
-            // 可以从 result 中获取返回信息
-            if error != nil{
+            if let config = config {
+                // 生命周期规则
+                let rules = config.rules
+            } else {
                 print(error!);
-            }else{
-                print(config!);
             }
          
         };
@@ -132,16 +130,17 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         let deleteBucketLifeCycle = QCloudDeleteBucketLifeCycleRequest.init();
         deleteBucketLifeCycle.bucket = "examplebucket-1250000000";
         deleteBucketLifeCycle.finishBlock = { (result, error) in
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print(result!);
             }
         };
         QCloudCOSXMLService.defaultCOSXML().deleteBucketLifeCycle(deleteBucketLifeCycle);
         
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
 
     func testBucketLifecycle() {
         // 设置存储桶生命周期
@@ -150,5 +149,6 @@ class BucketLifecycle: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         self.getBucketLifecycle();
         // 删除存储桶生命周期
         self.deleteBucketLifecycle();
+        // .cssg-methods-pragma
     }
 }

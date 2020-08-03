@@ -77,16 +77,14 @@
     req.object = @"exampleobject";
     
     // 设置临时副本的过期时间
-    req.restoreRequest.days  = 10;
+    req.restoreRequest.days = 10;
     
     // 复原的过程类型配置信息
-    req.restoreRequest.CASJobParameters.tier =QCloudCASTierStandard;
+    req.restoreRequest.CASJobParameters.tier = QCloudCASTierStandard;
     
     [req setFinishBlock:^(id outputObject, NSError *error) {
-        
         // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
-        
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] PostObjectRestore:req];
@@ -94,11 +92,13 @@
     //.cssg-snippet-body-end
     
 }
+// .cssg-methods-pragma
 
 
 - (void)testRestoreObject {
     // 恢复归档对象
     [self restoreObject];
+    // .cssg-methods-pragma
     
 }
 

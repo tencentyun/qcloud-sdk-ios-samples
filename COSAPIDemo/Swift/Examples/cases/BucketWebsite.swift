@@ -62,7 +62,6 @@ class BucketWebsite: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         
         let indexDocumentSuffix = "index.html";
         let errorDocKey = "error.html";
-        let derPro = "https";
         let errorCode = 451;
         let replaceKeyPrefixWith = "404.html";
         
@@ -116,10 +115,10 @@ class BucketWebsite: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         req.websiteConfiguration  = config;
         
         req.finishBlock = {(result,error) in
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print( result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketWebsite(req);
@@ -139,11 +138,10 @@ class BucketWebsite: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         req.bucket = "examplebucket-1250000000";
         
         req.setFinish {(result,error) in
-            
-            if error != nil{
+            if let result = result {
+                let rules = result.rules
+            } else {
                 print(error!);
-            }else{
-                print( result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketWebsite(req);
@@ -161,10 +159,10 @@ class BucketWebsite: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         delReq.bucket = "examplebucket-1250000000";
         
         delReq.finishBlock = {(result,error) in
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print( result!);
             }
         }
         
@@ -172,6 +170,7 @@ class BucketWebsite: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
     
     
     func testBucketWebsite() {
@@ -181,5 +180,6 @@ class BucketWebsite: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         self.getBucketWebsite();
         // 删除存储桶静态网站
         self.deleteBucketWebsite();
+        // .cssg-methods-pragma
     }
 }

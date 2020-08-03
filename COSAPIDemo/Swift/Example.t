@@ -49,21 +49,19 @@ class {{name}}: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDel
 
     // {{description}}
     func {{name}}() {
-        let exception = XCTestExpectation.init(description: "{{name}}");
-      
         {{{startTag}}}
         {{{snippet}}}
         {{{endTag}}}
-
-        self.wait(for: [exception], timeout: 100);
     }
 
     {{/methods}}
+    // .cssg-methods-pragma
 
     func test{{name}}() {
         {{#methods}}
         // {{description}}
         self.{{name}}();
         {{/methods}}
+        // .cssg-methods-pragma
     }
 }

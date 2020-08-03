@@ -82,11 +82,13 @@
     
     // 日志存放在目标存储桶的指定路径
     loggingEnabled.targetPrefix = @"mylogs";
+    
     status.loggingEnabled = loggingEnabled;
     request.bucketLoggingStatus = status;
     
     // 存储桶名称，格式为 BucketName-APPID
     request.bucket = @"examplebucket-1250000000";
+    
     [request setFinishBlock:^(id outputObject, NSError *error) {
        // outputObject 包含所有的响应 http 头部
        NSDictionary* info = (NSDictionary *) outputObject;
@@ -110,13 +112,15 @@
     
     [getReq setFinishBlock:^(QCloudBucketLoggingStatus * _Nonnull result,
                              NSError * _Nonnull error) {
-        // result 中包含日志状态
+        // 日志配置信息
+        QCloudLoggingEnabled *loggingEnabled = result.loggingEnabled;
     }];
     [[QCloudCOSXMLService defaultCOSXML]GetBucketLogging:getReq];
     
     //.cssg-snippet-body-end
 
 }
+// .cssg-methods-pragma
 
 
 - (void)testBucketLogging {
@@ -125,6 +129,7 @@
         
     // 获取存储桶日志服务
     [self getBucketLogging];
+    // .cssg-methods-pragma
         
 }
 

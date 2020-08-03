@@ -65,17 +65,18 @@ class BucketLogging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         loggingEnabled.targetBucket = "examplebucket-1250000000";
         
         // 日志存放在目标存储桶的指定路径
-        loggingEnabled.targetPrefix = "";
+        loggingEnabled.targetPrefix = "logs/";
+        
         status.loggingEnabled = loggingEnabled;
         req.bucketLoggingStatus = status;
         
         // 存储桶名称，格式为 BucketName-APPID
         req.bucket = "examplebucket-1250000000";
         req.finishBlock = {(result,error) in
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print( result!);
             }
         }
         
@@ -91,15 +92,17 @@ class BucketLogging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         // 存储桶名称，格式为 BucketName-APPID
         req.bucket = "examplebucket-1250000000";
         req.setFinish { (result, error) in
-            if error != nil{
+            if let result = result {
+                // 日志配置信息
+                let enabled = result.loggingEnabled
+            } else {
                 print(error!);
-            }else{
-                print( result!);
             }
         };
         QCloudCOSXMLService.defaultCOSXML().getBucketLogging(req);
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
 
 
     func testBucketLogging() {
@@ -107,5 +110,6 @@ class BucketLogging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         self.putBucketLogging();
         // 获取存储桶日志服务
         self.getBucketLogging();
+        // .cssg-methods-pragma
     }
 }

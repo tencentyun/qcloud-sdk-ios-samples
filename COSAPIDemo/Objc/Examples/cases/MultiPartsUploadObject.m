@@ -265,6 +265,7 @@
     //.cssg-snippet-body-end
     
 }
+// .cssg-methods-pragma
 
 
 - (void)testMultiPartsUploadObject {
@@ -282,6 +283,7 @@
     
     // 完成分片上传任务
     [self completeMultiUpload];
+    // .cssg-methods-pragma
     
 }
 

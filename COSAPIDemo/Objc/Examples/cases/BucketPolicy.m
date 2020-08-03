@@ -98,6 +98,7 @@
 
     
 }
+// .cssg-methods-pragma
 
 
 - (void)testBucketPolicy {
@@ -109,6 +110,7 @@
         
     // 删除存储桶 Policy
     [self deleteBucketPolicy];
+    // .cssg-methods-pragma
         
 }
 

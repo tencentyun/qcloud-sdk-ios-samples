@@ -166,7 +166,7 @@
     getReq.inventoryID = @"list1";
     [getReq setFinishBlock:^(QCloudInventoryConfiguration * _Nonnull result,
                              NSError * _Nonnull error) {
-    
+        // result 包含清单的信息
     }];
     [[QCloudCOSXMLService defaultCOSXML] GetBucketInventory:getReq];
     
@@ -197,6 +197,7 @@
     //.cssg-snippet-body-end
 
 }
+// .cssg-methods-pragma
 
 - (void)testBucketInventory {
     // 设置存储桶清单任务
@@ -207,6 +208,7 @@
         
     // 删除存储桶清单任务
     [self deleteBucketInventory];
+    // .cssg-methods-pragma
         
 }
 

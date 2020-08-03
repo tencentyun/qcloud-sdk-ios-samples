@@ -71,11 +71,10 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         putBucketACLReq.grantFullControl = grantString;
         
         putBucketACLReq.finishBlock = {(result,error) in
-            // QCloudACLPolicy 中包含了 Bucket 的 ACL 信息
-            if error != nil{
-                print(error!);
-            }else{
-                print(result!);
+            if let result = result {
+                // 可以从 result 中获取服务器返回的 header 信息
+            } else {
+                print(error!)
             }
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketACL(putBucketACLReq);
@@ -91,17 +90,18 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         getBucketACLReq.bucket = "examplebucket-1250000000";
         
         getBucketACLReq.setFinish { (result, error) in
-            if error != nil{
-                print(error!);
-            }else{
-                print(result!);
-                result?.accessControlList; // 被授权者与权限的信息
+            if let result = result {
+                // ACL 授权信息
+                let acl = result.accessControlList;
+            } else {
+                print(error!)
             }
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketACL(getBucketACLReq)
         
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
 
 
     func testBucketACL() {
@@ -109,5 +109,6 @@ class BucketACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         self.putBucketAcl();
         // 获取存储桶 ACL
         self.getBucketAcl();
+        // .cssg-methods-pragma
     }
 }

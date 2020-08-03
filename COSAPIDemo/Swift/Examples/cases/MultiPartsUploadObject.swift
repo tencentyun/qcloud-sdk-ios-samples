@@ -68,12 +68,11 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
         initRequest.object = "exampleobject";
         
         initRequest.setFinish { (result, error) in
-            if error != nil{
-                print(error!);
-            }else{
+            if let result = result {
                 // 获取分块上传的 uploadId，后续的上传都需要这个 ID，请保存以备后续使用
-                self.uploadId = result!.uploadId;
-                print(result!.uploadId);
+                self.uploadId = result.uploadId;
+            } else {
+                print(error!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().initiateMultipartUpload(initRequest);
@@ -94,14 +93,11 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
         listParts.maxUploads = 100;
         
         listParts.setFinish { (result, error) in
-            if error != nil{
+            if let result = result {
+                // 未完成的所有分块上传任务
+                let uploads = result.uploads;
+            } else {
                 print(error!);
-            }else{
-                // 可以从 result 中返回分块信息
-                print(result!);
-                
-                // 进行中的分块上传对象
-                let uploads : Array<QCloudListMultipartUploadContent> = result!.uploads;
             }
         }
         QCloudCOSXMLService.defaultCOSXML().listBucketMultipartUploads(listParts);
@@ -122,29 +118,30 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
         uploadPart.object = "exampleobject";
         uploadPart.partNumber = 1;
         
-        // 标识本次分块上传的 ID；使用 Initiate Multipart Upload 接口初始化分块上传时会得到一个 uploadId
-        // 该 ID 不但唯一标识这一分块数据，也标识了这分块数据在整个文件内的相对位置
+        // 标识本次分块上传的 ID
         if let uploadId = self.uploadId {
             uploadPart.uploadId = uploadId;
         }
         
+        // 示例文件内容
         let dataBody:NSData? = "wrwrwrwrwrwwrwrwrwrwrwwwrwrw"
             .data(using: .utf8) as NSData?;
+        
         uploadPart.body = dataBody!;
         uploadPart.setFinish { (result, error) in
-            if error != nil{
-                print(error!);
-            }else{
+            if let result = result {
                 let mutipartInfo = QCloudMultipartInfo.init();
-                // 获取所上传分块的 etag
-                mutipartInfo.eTag = result!.eTag;
+                // 获取分块的 etag
+                mutipartInfo.eTag = result.eTag;
                 mutipartInfo.partNumber = "1";
-                // 保存起来用于最好完成上传时使用
+                // 保存起来用于最后完成上传时使用
                 self.parts = [mutipartInfo];
+            } else {
+                print(error!);
             }
         }
-        uploadPart.sendProcessBlock = {(bytesSent,totalBytesSent,totalBytesExpectedToSend) in
-            
+        uploadPart.sendProcessBlock = {(bytesSent,totalBytesSent,
+                                        totalBytesExpectedToSend) in
             // 上传进度信息
             // bytesSent                   新增字节数
             // totalBytesSent              本次上传的总字节数
@@ -177,11 +174,11 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
             req.uploadId = uploadId;
         }
         req.setFinish { (result, error) in
-            if error != nil{
+            if let result = result {
+                // 所有已完成的分片
+                let parts = result.parts
+            } else {
                 print(error!);
-            }else{
-                // 从 result 中获取已上传分块信息
-                print(result!);
             }
         }
         
@@ -221,17 +218,20 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
         
         complete.parts = completeInfo;
         complete.setFinish { (result, error) in
-            if error != nil{
-                print(error!)
-            }else{
-                // 从 result 中获取上传结果
-                print(result!);
+            if let result = result {
+                // 文件的 eTag
+                let eTag = result.eTag
+                // 不带签名的文件链接
+                let location = result.location
+            } else {
+                print(error!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().completeMultipartUpload(complete);
         
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
     
     
     func testMultiPartsUploadObject() {
@@ -245,5 +245,6 @@ class MultiPartsUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
         self.listParts();
         // 完成分片上传任务
         self.completeMultiUpload();
+        // .cssg-methods-pragma
     }
 }

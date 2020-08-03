@@ -75,11 +75,10 @@ class BucketVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
         putBucketVersioning.configuration = config;
         
         putBucketVersioning.finishBlock = {(result,error) in
-            // 可以从 result 中获取服务器返回的 header 信息
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print(result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketVersioning(putBucketVersioning);
@@ -103,10 +102,11 @@ class BucketVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
         getBucketVersioning.bucket = "examplebucket-1250000000";
         
         getBucketVersioning.setFinish { (config, error) in
-            if error != nil{
+            if let config = config {
+                // 多版本状态
+                let status = config.status
+            } else {
                 print(error!);
-            }else{
-                print(config!);
             }
                
         }
@@ -114,12 +114,13 @@ class BucketVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
         
         //.cssg-snippet-body-end
     }
-
+    // .cssg-methods-pragma
 
     func testBucketVersioning() {
         // 设置存储桶多版本
         self.putBucketVersioning();
         // 获取存储桶多版本状态
         self.getBucketVersioning();
+        // .cssg-methods-pragma
     }
 }

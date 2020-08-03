@@ -75,6 +75,7 @@ class ObjectTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         //.cssg-snippet-body-end
 
     }
+    // .cssg-methods-pragma
  
     func testObjectTagging() {
         // 设置对象标签
@@ -83,5 +84,6 @@ class ObjectTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         self.getObjectTagging();
         // 删除对象标签
         self.deleteObjectTagging();
+        // .cssg-methods-pragma
     }
 }

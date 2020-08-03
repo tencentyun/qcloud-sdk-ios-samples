@@ -96,16 +96,16 @@ class PutBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         // 赋予被授权者写权限
         putBucketReq.grantWrite = grantString;
         putBucketReq.finishBlock = {(result,error) in
-            // 可以从 result 中获取服务器返回的 header 信息
-            if error != nil {
-                print(error!);
+            if let result = result {
+                // result 包含响应的 header 信息
             } else {
-                print(result!);
+                print(error!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().putBucket(putBucketReq);
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
     
     
     func testPutBucket() {
@@ -113,5 +113,6 @@ class PutBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         self.putBucket();
         // 创建存储桶并且授予存储桶权限
         self.putBucketAndGrantAcl();
+        // .cssg-methods-pragma
     }
 }

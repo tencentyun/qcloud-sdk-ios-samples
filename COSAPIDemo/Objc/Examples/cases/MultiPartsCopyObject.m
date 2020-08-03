@@ -200,6 +200,7 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
     //.cssg-snippet-body-end
     
 }
+// .cssg-methods-pragma
 
 
 - (void)testMultiPartsCopyObject {
@@ -211,6 +212,7 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
     
     // 完成分片拷贝任务
     [self completeMultiUpload];
+    // .cssg-methods-pragma
     
 }
 

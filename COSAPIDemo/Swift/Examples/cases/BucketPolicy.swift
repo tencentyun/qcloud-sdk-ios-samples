@@ -60,7 +60,6 @@ class BucketPolicy: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
 
     // 获取存储桶 Policy
     func getBucketPolicy() {
-        
       
         //.cssg-snippet-body-start:[swift-get-bucket-policy]
         
@@ -76,6 +75,7 @@ class BucketPolicy: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         //.cssg-snippet-body-end
 
     }
+    // .cssg-methods-pragma
 
     func testBucketPolicy() {
         // 设置存储桶 Policy
@@ -84,5 +84,6 @@ class BucketPolicy: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         self.getBucketPolicy();
         // 删除存储桶 Policy
         self.deleteBucketPolicy();
+        // .cssg-methods-pragma
     }
 }

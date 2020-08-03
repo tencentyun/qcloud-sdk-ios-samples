@@ -71,11 +71,13 @@
     
     //.cssg-snippet-body-end
 }
+// .cssg-methods-pragma
 
 
 - (void)testPostObject {
     // POST 方式上传对象
     [self postObject];
+    // .cssg-methods-pragma
         
 }
 

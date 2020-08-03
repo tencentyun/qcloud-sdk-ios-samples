@@ -62,11 +62,10 @@ class DeleteObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         deleteObject.object = "exampleobject";
         
         deleteObject.finishBlock = {(result,error)in
-            // 可以从 result 中获取 response 中 etag 或者自定义头部等信息
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print(result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().deleteObject(deleteObject);
@@ -108,21 +107,24 @@ class DeleteObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         mutipleDel.deleteObjects = deleteInfos;
         
         mutipleDel.setFinish { (result, error) in
-            if error != nil{
+            if let result = result {
+                let deleted = result.deletedObjects
+                let failed = result.deletedFailedObjects
+            } else {
                 print(error!);
-            }else{
-                print(result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().deleteMultipleObject(mutipleDel);
         
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
     
     func testDeleteObject() {
         // 删除对象
         self.deleteObject();
         // 删除多个对象
         self.deleteMultiObject();
+        // .cssg-methods-pragma
     }
 }

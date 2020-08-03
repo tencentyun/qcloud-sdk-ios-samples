@@ -77,7 +77,9 @@
     QCloudDomainConfiguration *config = [QCloudDomainConfiguration new];
     QCloudDomainRule *rule = [QCloudDomainRule new];
     
+    // 源站状态，可选 QCloudDomainStatueEnabled、 QCloudDomainStatueDisabled
     rule.status = QCloudDomainStatueEnabled;
+    // 域名信息
     rule.name = @"www.baidu.com";
     
     // 替换已存在的配置、有效值CNAME/TXT 填写则强制校验域名所有权之后，再下发配置
@@ -122,6 +124,7 @@
     //.cssg-snippet-body-end
 
 }
+// .cssg-methods-pragma
 
 
 - (void)testBucketDomain {
@@ -130,6 +133,7 @@
     
     // 获取存储桶源站
     [self getBucketDomain];
+    // .cssg-methods-pragma
     
 }
 

@@ -120,7 +120,6 @@
     getReq.bucket = @"examplebucket-1250000000";
     
     [getReq setFinishBlock:^(QCloudBucketTagging * result, NSError * error) {
-        
         // tag的集合
         QCloudBucketTagSet * tagSet = result.tagSet;
     }];
@@ -143,7 +142,6 @@
     delReq.bucket =  @"examplebucket-1250000000";
     
     [delReq setFinishBlock:^(id outputObject, NSError *error) {
-        
         // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
@@ -152,6 +150,7 @@
     //.cssg-snippet-body-end
     
 }
+// .cssg-methods-pragma
 
 
 - (void)testBucketTagging {
@@ -163,6 +162,7 @@
     
     // 删除存储桶标签
     [self deleteBucketTagging];
+    // .cssg-methods-pragma
     
 }
 

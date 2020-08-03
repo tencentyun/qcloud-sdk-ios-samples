@@ -71,7 +71,6 @@
     
     // 存储桶名称，格式为 BucketName-APPID
     NSString *bucket = @"examplebucket-1250000000";
-    NSString * regionName = @"ap-chengdu";
     
     NSString *indexDocumentSuffix = @"index.html";
     NSString *errorDocKey = @"error.html";
@@ -182,7 +181,6 @@
     delReq.bucket = @"examplebucket-1250000000";
     
     [delReq setFinishBlock:^(id outputObject, NSError *error) {
-        
         // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
@@ -192,6 +190,7 @@
     //.cssg-snippet-body-end
     
 }
+// .cssg-methods-pragma
 
 
 - (void)testBucketWebsite {
@@ -203,6 +202,7 @@
     
     // 删除存储桶静态网站
     [self deleteBucketWebsite];
+    // .cssg-methods-pragma
     
 }
 

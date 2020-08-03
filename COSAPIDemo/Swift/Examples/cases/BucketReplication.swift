@@ -69,31 +69,29 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
         let rule = QCloudBucketReplicationRule.init();
          
         // 用来标注具体 Rule 的名称
-        rule.identifier = "swift";
+        rule.identifier = "rule1";
+        // 规则开启状态，可选 .enabled, .disabled
         rule.status = .enabled;
-
-        // 资源标识符
+        
+        // 目标存储桶信息
         let destination = QCloudBucketReplicationDestination.init();
         let destinationBucket = "destinationbucket-1250000000";
         let region = "ap-beijing";
         destination.bucket = "qcs::cos:\(region)::\(destinationBucket)";
-        
-        // 目标存储桶信息
         rule.destination = destination;
         
         // 前缀匹配策略，不可重叠，重叠返回错误。前缀匹配根目录为空
-        rule.prefix = "a";
+        rule.prefix = "dir/";
         
         config.rule = [rule];
         
         putBucketReplication.configuation = config;
         
         putBucketReplication.finishBlock = {(result,error) in
-            // 可以从 result 中获取服务器返回的 header 信息
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print(result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketRelication(putBucketReplication);
@@ -110,10 +108,11 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
         let getBucketReplication = QCloudGetBucketReplicationRequest.init();
         getBucketReplication.bucket = "examplebucket-1250000000";
         getBucketReplication.setFinish { (config, error) in
-            if error != nil{
+            if let config = config {
+                // 配置信息列表
+                let rule = config.rule
+            } else {
                 print(error!);
-            }else{
-                print(config!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketReplication(getBucketReplication);
@@ -130,16 +129,17 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
         let deleteBucketReplication = QCloudDeleteBucketReplicationRequest.init();
         deleteBucketReplication.bucket = "examplebucket-1250000000";
         deleteBucketReplication.finishBlock = {(result,error) in
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print(result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().deleteBucketReplication(deleteBucketReplication);
         
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
 
 
     func testBucketReplication() {
@@ -149,5 +149,6 @@ class BucketReplication: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenc
         self.getBucketReplication();
         // 删除存储桶跨地域复制规则
         self.deleteBucketReplication();
+        // .cssg-methods-pragma
     }
 }

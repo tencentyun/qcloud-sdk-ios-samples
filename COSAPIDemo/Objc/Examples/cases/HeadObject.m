@@ -94,11 +94,13 @@
     //.cssg-snippet-body-end
     
 }
+// .cssg-methods-pragma
 
 
 - (void)testHeadObject {
     // 获取对象信息
     [self headObject];
+    // .cssg-methods-pragma
     
 }
 

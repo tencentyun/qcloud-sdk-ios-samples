@@ -106,10 +106,8 @@
     // 生命周期配置
     request.lifeCycle.rules = @[rule];
     [request setFinishBlock:^(id outputObject, NSError* error) {
-        
         // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
-        
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] PutBucketLifecycle:request];
@@ -158,6 +156,7 @@
     
     //.cssg-snippet-body-end
 }
+// .cssg-methods-pragma
 
 
 - (void)testBucketLifecycle {
@@ -169,6 +168,7 @@
     
     // 删除存储桶生命周期
     [self deleteBucketLifecycle];
+    // .cssg-methods-pragma
     
 }
 

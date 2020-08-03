@@ -67,16 +67,13 @@
  * {{description}}
  */
 - (void){{name}} {
-    XCTestExpectation* exp = [self expectationWithDescription:@"{{name}}"];
-
     {{{startTag}}}
     {{{snippet}}}
     {{{endTag}}}
-
-    [self waitForExpectationsWithTimeout:80 handler:nil];
 }
 
 {{/methods}}
+// .cssg-methods-pragma
 
 - (void)test{{name}} {
     {{#methods}}
@@ -84,6 +81,7 @@
     [self {{name}}];
         
     {{/methods}}
+    // .cssg-methods-pragma
 }
 
 @end

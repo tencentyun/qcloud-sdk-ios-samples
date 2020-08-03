@@ -71,7 +71,6 @@
     QCloudGetObjectRequest* request = [QCloudGetObjectRequest new];
     
     // 设置下载的路径 URL，如果设置了，文件将会被下载到指定路径中
-    // 如果未设置该参数，那么文件将会被下载至内存里，存放在在 finishBlock 的 outputObject 里
     request.downloadingURL = [NSURL URLWithString:QCloudTempFilePathWithExtension(@"downding")];
     
     // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
@@ -98,10 +97,12 @@
     
     //.cssg-snippet-body-end
 }
+// .cssg-methods-pragma
 
 - (void)testGetObject {
     // 下载对象
     [self getObject];
+    // .cssg-methods-pragma
         
 }
 

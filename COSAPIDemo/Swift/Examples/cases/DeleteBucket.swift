@@ -59,21 +59,22 @@ class DeleteBucket: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         deleteBucketReq.bucket = "examplebucket-1250000000";
         
         deleteBucketReq.finishBlock = {(result,error) in
-            // 可以从 result 中获取服务器返回的 header 信息
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print(result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().deleteBucket(deleteBucketReq);
         
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
 
 
     func testDeleteBucket() {
         // 删除存储桶
         self.deleteBucket();
+        // .cssg-methods-pragma
     }
 }

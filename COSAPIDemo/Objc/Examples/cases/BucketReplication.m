@@ -106,7 +106,6 @@
     request.configuation = replConfiguration;
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
-        
         // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
         
@@ -130,7 +129,6 @@
     
     [request setFinishBlock:^(QCloudBucketReplicationConfiguation* result,
                               NSError* error) {
-        
         // 具体配置信息，最多支持 1000 个，所有策略只能指向一个目标存储桶
         NSArray *rules = result.rule;
     }];
@@ -153,7 +151,6 @@
     request.bucket = @"examplebucket-1250000000";
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
-        
         // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
         
@@ -163,6 +160,7 @@
     //.cssg-snippet-body-end
 
 }
+// .cssg-methods-pragma
 
 
 - (void)testBucketReplication {
@@ -174,6 +172,7 @@
         
     // 删除存储桶跨地域复制规则
     [self deleteBucketReplication];
+    // .cssg-methods-pragma
         
 }
 

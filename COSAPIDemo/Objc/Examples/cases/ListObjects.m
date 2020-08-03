@@ -171,6 +171,7 @@
     //.cssg-snippet-body-end
     
 }
+// .cssg-methods-pragma
 
 
 - (void)testListObjects {
@@ -182,6 +183,7 @@
     
     // 获取对象列表与子目录
     [self getBucketWithDelimiter];
+    // .cssg-methods-pragma
     
 }
 

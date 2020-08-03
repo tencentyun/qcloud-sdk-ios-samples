@@ -83,7 +83,12 @@ class ModifyObjectProperty: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
             "examplebucket-1250000000.cos.ap-guangzhou.myqcloud.com/exampleobject";
         
         request.setFinish { (result, error) in
-            // result 返回具体信息
+            if let result = result {
+                // 生成的新文件的 etag
+                let eTag = result.eTag
+            } else {
+                print(error!);
+            }
         }
         
         QCloudCOSXMLService.defaultCOSXML().putObjectCopy(request);
@@ -110,12 +115,18 @@ class ModifyObjectProperty: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
             "examplebucket-1250000000.cos.ap-guangzhou.myqcloud.com/exampleobject";
         
         request.setFinish { (result, error) in
-            // result 返回具体信息
+            if let result = result {
+                // 生成的新文件的 etag
+                let eTag = result.eTag
+            } else {
+                print(error!);
+            }
         }
         
         QCloudCOSXMLService.defaultCOSXML().putObjectCopy(request);
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
     
     
     func testModifyObjectProperty() {
@@ -123,5 +134,6 @@ class ModifyObjectProperty: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
         self.modifyObjectMetadata();
         // 修改对象存储类型
         self.modifyObjectStorageClass();
+        // .cssg-methods-pragma
     }
 }

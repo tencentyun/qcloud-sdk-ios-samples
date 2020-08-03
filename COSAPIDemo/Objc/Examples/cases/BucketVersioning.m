@@ -85,12 +85,11 @@
     
     request.configuration = versioningConfiguration;
     
-    // 说明版本是否开启，枚举值：Suspended、Enabled
+    // 说明版本是否开启，枚举值：QCloudCOSBucketVersioningStatusEnabled、
+    // QCloudCOSBucketVersioningStatusSuspended
     versioningConfiguration.status = QCloudCOSBucketVersioningStatusEnabled;
     
     [request setFinishBlock:^(id outputObject, NSError* error) {
-        
-        // 可以从 outputObject 中获取服务器返回的 header 信息
         // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
@@ -117,9 +116,8 @@
     
     [request setFinishBlock:^(QCloudBucketVersioningConfiguration* result,
                               NSError* error) {
-        
-        // result 包含多版本的状态
-        result.status;
+        // 获取多版本状态
+        QCloudCOSBucketVersioningStatus * status = result.status;
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] GetBucketVersioning:request];
@@ -127,6 +125,7 @@
     //.cssg-snippet-body-end
 
 }
+// .cssg-methods-pragma
 
 
 - (void)testBucketVersioning {
@@ -135,6 +134,7 @@
         
     // 获取存储桶多版本状态
     [self getBucketVersioning];
+    // .cssg-methods-pragma
         
 }
 

@@ -68,17 +68,16 @@ class ListObjects: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueue
         getBucketReq.prefix = "dir/";
         
         getBucketReq.setFinish { (result, error) in
-            // result 返回具体信息
-            // QCloudListBucketResult.contents 桶内文件数组
-            // QCloudListBucketResult.commonPrefixes 桶内文件夹数组
-            
-            if error != nil{
-                print(error!);
-            } else if let isTruncated = result?.isTruncated {
-                if (isTruncated) {
+            if let result = result {
+                // 文件列表
+                let contents = result.contents
+                
+                if (result.isTruncated) {
                     // 数据被截断，需要请求下一页数据
                     self.prevPageResult = result;
                 }
+            } else {
+                print(error!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().getBucket(getBucketReq);
@@ -106,17 +105,16 @@ class ListObjects: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueue
         getBucketReq.prefix = "dir/";
         
         getBucketReq.setFinish { (result, error) in
-            // result 返回具体信息
-            // QCloudListBucketResult.contents 桶内文件数组
-            // QCloudListBucketResult.commonPrefixes 桶内文件夹数组
-            
-            if error != nil{
-                print(error!);
-            } else if let isTruncated = result?.isTruncated {
-                if (isTruncated) {
+            if let result = result {
+                // 文件列表
+                let contents = result.contents
+                
+                if (result.isTruncated) {
                     // 数据被截断，需要请求下一页数据
                     self.prevPageResult = result;
                 }
+            } else {
+                print(error!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().getBucket(getBucketReq);
@@ -149,22 +147,22 @@ class ListObjects: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueue
         }
         
         getBucketReq.setFinish { (result, error) in
-            // result 返回具体信息
-            // QCloudListBucketResult.contents 桶内文件数组
-            // QCloudListBucketResult.commonPrefixes 桶内文件夹数组
-            
-            if error != nil{
-                print(error!);
-            } else if let isTruncated = result?.isTruncated {
-                if (isTruncated) {
+            if let result = result {
+                // 文件列表
+                let contents = result.contents
+                
+                if (result.isTruncated) {
                     // 数据被截断，需要请求下一页数据
                     self.prevPageResult = result;
                 }
+            } else {
+                print(error!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().getBucket(getBucketReq);
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
     
     
     func testListObjects() {
@@ -174,5 +172,6 @@ class ListObjects: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueue
         self.getBucketNextPage();
         // 获取对象列表与子目录
         self.getBucketWithDelimiter();
+        // .cssg-methods-pragma
     }
 }

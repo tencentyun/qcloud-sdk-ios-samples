@@ -116,8 +116,8 @@
     
     [getBucketACl setFinishBlock:^(QCloudACLPolicy * _Nonnull result,
                                            NSError * _Nonnull error) {
-        // QCloudACLPolicy 中包含了 Bucket 的 ACL 信息
-        // result.accessControlList; 被授权者与权限的信息
+        // 被授权者与权限的信息
+        QCloudAccessControlList *acl = result.accessControlList;
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] GetBucketACL:getBucketACl];
@@ -125,6 +125,7 @@
     //.cssg-snippet-body-end
 
 }
+// .cssg-methods-pragma
 
 
 - (void)testBucketACL {
@@ -133,6 +134,7 @@
         
     // 获取存储桶 ACL
     [self getBucketAcl];
+    // .cssg-methods-pragma
         
 }
 

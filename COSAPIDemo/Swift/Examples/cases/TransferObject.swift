@@ -63,10 +63,11 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         // 监听上传结果
         put.setFinish { (result, error) in
             // 获取上传结果
-            if error != nil{
+            if let result = result {
+                // 文件的 etag
+                let eTag = result.eTag
+            } else {
                 print(error!);
-            }else{
-                print(result!);
             }
         }
 
@@ -79,13 +80,18 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         };
         // 设置上传参数
         put.initMultipleUploadFinishBlock = {(multipleUploadInitResult, resumeData) in
-            // 在初始化分块上传完成以后会回调该 block，在这里可以获取 resumeData
-            // 并且可以通过 resumeData 生成一个分块上传的请求
-            let resumeUploadRequest = QCloudCOSXMLUploadObjectRequest<AnyObject>
-                .init(request: resumeData as Data?);
+            // 在初始化分块上传完成以后会回调该 block，在这里可以获取 resumeData,以及 uploadId
+            if let multipleUploadInitResult = multipleUploadInitResult {
+                let uploadId = multipleUploadInitResult.uploadId
+            }
         }
         
         QCloudCOSTransferMangerService.defaultCOSTransferManager().uploadObject(put);
+        
+        // 如果需要取消上传，调用 abort 方法
+        put.abort { (result, error) in
+            
+        }
         //.cssg-snippet-body-end
     }
     
@@ -110,10 +116,11 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         // 监听上传结果
         put.setFinish { (result, error) in
             // 获取上传结果
-            if error != nil{
+            if let result = result {
+                // 文件的 etag
+                let eTag = result.eTag
+            } else {
                 print(error!);
-            }else{
-                print(result!);
             }
         }
 
@@ -151,7 +158,6 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         request.object = "exampleobject";
         
         // 设置下载的路径 URL，如果设置了，文件将会被下载到指定路径中
-        // 如果未设置该参数，那么文件将会被下载至内存里，存放在在 finishBlock 的 result 里
         request.downloadingURL = NSURL.fileURL(withPath: "Local File Path") as URL?;
         
         // 本地已下载的文件大小，如果是从头开始下载，请不要设置
@@ -167,11 +173,11 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         }
 
         // 监听下载结果
-        request.finishBlock = { (copyResult, error) in
-            if error != nil{
+        request.finishBlock = { (result, error) in
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print(copyResult!);
             }
         }
         
@@ -210,10 +216,11 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         copyRequest.sourceRegion = "COS_REGION";
         
         copyRequest.setFinish { (copyResult, error) in
-            if error != nil{
+            if let copyResult = copyResult {
+                // 文件的 etag
+                let eTag = copyResult.eTag
+            } else {
                 print(error!);
-            }else{
-                print(copyResult!);
             }
             
         }
@@ -235,6 +242,7 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         //.cssg-snippet-body-end
 
     }
+    // .cssg-methods-pragma
         
     func testTransferObject() {
         // 高级接口上传对象
@@ -249,5 +257,6 @@ class TransferObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQu
         self.transferCopyObject();
         // 批量上传任务
         self.batchUploadObjects();
+        // .cssg-methods-pragma
     }
 }

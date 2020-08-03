@@ -124,10 +124,10 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         putReq.inventoryConfiguration = config;
         
         putReq.finishBlock = {(result,error) in
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print( result!);
             }
         }
         
@@ -147,10 +147,11 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         // 清单任务的名称
         req.inventoryID = "list1";
         req.setFinish {(result,error) in
-            if error != nil{
+            if let result = result {
+                // 任务信息
+                let enabled = result.isEnabled
+            } else {
                 print(error!);
-            }else{
-                print( result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketInventory(req);
@@ -169,16 +170,17 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         // 清单任务的名称
         delReq.inventoryID = "list1";
         delReq.finishBlock = {(result,error) in
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print( result!);
             }
         }
         
         QCloudCOSXMLService.defaultCOSXML().deleteBucketInventory(delReq);
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
 
 
     func testBucketInventory() {
@@ -188,5 +190,6 @@ class BucketInventory: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQ
         self.getBucketInventory();
         // 删除存储桶清单任务
         self.deleteBucketInventory();
+        // .cssg-methods-pragma
     }
 }

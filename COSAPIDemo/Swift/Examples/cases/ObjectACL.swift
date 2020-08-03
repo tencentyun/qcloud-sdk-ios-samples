@@ -70,11 +70,10 @@ class ObjectACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         putObjectACl.grantWrite = grantString;
         
         putObjectACl.finishBlock = {(result,error)in
-            if error != nil{
-                print(error!)
-            }else{
-                // 可以从 result 中获取 response 中 etag 或者自定义头部等信息
-                print(result!);
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
+                print(error!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().putObjectACL(putObjectACl);
@@ -94,19 +93,18 @@ class ObjectACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         getObjectACL.object = "exampleobject";
         getObjectACL.setFinish { (result, error) in
-            // result.accessControlList; 被授权者与权限的信息
-            // result.owner; 持有者的信息
-            if error != nil{
-                print(error!)
-            }else{
-                // 可以从 result 的 accessControlList 中获取对象的 ACL
-                print(result!.accessControlList);
+            if let result = result {
+                // 对象授权信息
+                let acl = result.accessControlList
+            } else {
+                print(error!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().getObjectACL(getObjectACL);
         
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
     
     
     func testObjectACL() {
@@ -114,5 +112,6 @@ class ObjectACL: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         self.putObjectAcl();
         // 获取对象 ACL
         self.getObjectAcl();
+        // .cssg-methods-pragma
     }
 }

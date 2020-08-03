@@ -124,6 +124,7 @@
     //.cssg-snippet-body-end
 
 }
+// .cssg-methods-pragma
 
 
 - (void)testObjectACL {
@@ -132,6 +133,7 @@
         
     // 获取对象 ACL
     [self getObjectAcl];
+    // .cssg-methods-pragma
         
 }
 

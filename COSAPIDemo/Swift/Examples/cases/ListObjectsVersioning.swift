@@ -52,7 +52,7 @@ class ListObjectsVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentail
     
     // 获取对象多版本列表第一页数据
     func listObjectsVersioning() {
-        //.cssg-snippet-body-start:[swift-list-objects-versioning]
+        //#hide.cssg-snippet-body-start:[swift-list-objects-versioning]
         let listObjectVersionsRequest :QCloudListObjectVersionsRequest = QCloudListObjectVersionsRequest();
         
         // 存储桶名称，格式为 BucketName-APPID
@@ -74,7 +74,7 @@ class ListObjectsVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentail
     
     // 获取对象多版本列表下一页数据
     func listObjectsVersioningNextPage() {
-        //.cssg-snippet-body-start:[swift-list-objects-versioning-next-page]
+        //#hide.cssg-snippet-body-start:[swift-list-objects-versioning-next-page]
         let listObjectVersionsRequest :QCloudListObjectVersionsRequest = QCloudListObjectVersionsRequest();
         
         // 存储桶名称，格式为 BucketName-APPID
@@ -94,6 +94,7 @@ class ListObjectsVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentail
         QCloudCOSXMLService.defaultCOSXML().listObjectVersions(listObjectVersionsRequest);
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
     
     
     func testListObjectsVersioning() {
@@ -101,5 +102,6 @@ class ListObjectsVersioning: XCTestCase,QCloudSignatureProvider,QCloudCredentail
         self.listObjectsVersioning();
         // 获取对象多版本列表下一页数据
         self.listObjectsVersioningNextPage();
+        // .cssg-methods-pragma
     }
 }

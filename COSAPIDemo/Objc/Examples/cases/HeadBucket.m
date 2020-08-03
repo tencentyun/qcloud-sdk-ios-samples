@@ -79,11 +79,6 @@
     [request setFinishBlock:^(id outputObject, NSError* error) {
         // 可以从 outputObject 中获取服务器返回的 header 信息
         NSDictionary * result = (NSDictionary *)outputObject;
-        // x-cos-bucket-az-type 存储桶 AZ 类型，当存储桶为多 AZ 存储桶时返回此头部，
-        // 值固定为 MAZ。
-        
-        // x-cos-bucket-region 存储桶所在地域。枚举值请参见 地域和访问域名 文档，
-        // 例如 ap-beijing，ap-hongkong，eu-frankfurt 等
     
     }];
     [[QCloudCOSXMLService defaultCOSXML] HeadBucket:request];
@@ -91,11 +86,13 @@
     //.cssg-snippet-body-end
 
 }
+// .cssg-methods-pragma
 
 
 - (void)testHeadBucket {
     // 获取存储桶信息
     [self headBucket];
+    // .cssg-methods-pragma
         
 }
 

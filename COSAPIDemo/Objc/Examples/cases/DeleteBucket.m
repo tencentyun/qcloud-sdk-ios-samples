@@ -74,7 +74,6 @@
     request.bucket = @"examplebucket-1250000000";
     
     [request setFinishBlock:^(id outputObject,NSError*error) {
-        
         // 可以从 outputObject 中获取服务器返回的 header 信息
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
@@ -82,11 +81,13 @@
     
     //.cssg-snippet-body-end
 }
+// .cssg-methods-pragma
 
 
 - (void)testDeleteBucket {
     // 删除存储桶
     [self deleteBucket];
+    // .cssg-methods-pragma
         
 }
 

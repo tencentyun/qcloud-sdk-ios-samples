@@ -112,7 +112,6 @@
     
     [getPresignedURLRequest setFinishBlock:^(QCloudGetPresignedURLResult * _Nonnull result,
                                              NSError * _Nonnull error) {
-        
         // 预签名 URL
         NSString* presignedURL = result.presienedURL;
         
@@ -123,6 +122,7 @@
     //.cssg-snippet-body-end
     
 }
+// .cssg-methods-pragma
 
 
 - (void)testObjectPresignUrl {
@@ -131,6 +131,7 @@
     
     // 获取预签名上传链接
     [self getPresignUploadUrl];
+    // .cssg-methods-pragma
     
 }
 

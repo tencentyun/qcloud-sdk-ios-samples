@@ -63,31 +63,29 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         // 配置规则的 ID
         rule.identifier = "rule1";
         
-        // 在发送 OPTIONS 请求时告知服务端，接下来的请求可以使用哪些自定义的 HTTP 请求头部，支持通配符 *
+        // 跨域请求可以使用的 HTTP 请求头部，支持通配符 *
         rule.allowedHeader = ["origin","host","accept","content-type","authorization"];
         rule.exposeHeader = "Etag";
         
-        // 允许的 HTTP 操作，例如：GET，PUT，HEAD，POST，DELETE
+        // 跨域请求允许的 HTTP 操作，例如：GET，PUT，HEAD，POST，DELETE
         rule.allowedMethod = ["GET","PUT","POST", "DELETE", "HEAD"];
         
-        // 设置 OPTIONS 请求得到结果的有效期
+        // 跨域请求得到结果的有效期
         rule.maxAgeSeconds = 3600;
         
         // 允许的访问来源，支持通配符 *，格式为：协议://域名[:端口]
         rule.allowedOrigin = "*";
         
         corsConfig.rules = [rule];
-        
         putBucketCorsReq.corsConfiguration = corsConfig;
         
         // 存储桶名称，格式为 BucketName-APPID
         putBucketCorsReq.bucket = "examplebucket-1250000000";
         putBucketCorsReq.finishBlock = {(result,error) in
-            // 可以从 result 中获取服务器返回的 header 信息
-            if error != nil{
-                print(error!);
-            }else{
-                print(result!);
+            if let result = result {
+                // 可以从 result 中获取服务器返回的 header 信息
+            } else {
+                print(error!)
             }
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketCORS(putBucketCorsReq);
@@ -104,11 +102,11 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         // 存储桶名称，格式为 BucketName-APPID
         getBucketCorsRes.bucket = "examplebucket-1250000000";
         getBucketCorsRes.setFinish { (corsConfig, error) in
-            // CORS 设置封装在 corsConfig 中
-            if error != nil{
-                print(error!);
-            }else{
-                print(corsConfig!);
+            if let corsConfig = corsConfig {
+                // 跨域规则列表
+                let rules = corsConfig.rules
+            } else {
+                print(error!)
             }
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketCORS(getBucketCorsRes);
@@ -125,7 +123,7 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         optionsObject.object = "exampleobject";
         
-        // 模拟跨域访问的请求来源域名
+        // 模拟跨域访问的请求来源域名，请求 method，请求头部
         optionsObject.origin = "http://www.qcloud.com";
         optionsObject.accessControlRequestMethod = "GET";
         optionsObject.accessControlRequestHeaders = "origin";
@@ -134,12 +132,8 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         optionsObject.bucket = "examplebucket-1250000000";
         
         optionsObject.finishBlock = {(result,error) in
-            
-            // 可以从 result 中获取 response 中 etag 或者自定义头部等信息
-            if error != nil{
-                print(error!);
-            }else{
-                print(result!);
+            if let result = result {
+                // 可以从 result 中获取服务器返回的 header 信息
             }
         }
         QCloudCOSXMLService.defaultCOSXML().optionsObject(optionsObject);
@@ -157,17 +151,17 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         deleteBucketCorsRequest.bucket = "examplebucket-1250000000";
         
         deleteBucketCorsRequest.finishBlock = {(result,error) in
-            // 可以从 result 中获取服务器返回的 header 信息
-            if error != nil{
-                print(error!);
-            }else{
-                print(result!);
+            if let result = result {
+                // 可以从 result 中获取服务器返回的 header 信息
+            } else {
+                print(error!)
             }
         }
         QCloudCOSXMLService.defaultCOSXML().deleteBucketCORS(deleteBucketCorsRequest);
         
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
 
 
     func testBucketCORS() {
@@ -179,5 +173,6 @@ class BucketCORS: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         self.optionObject();
         // 删除存储桶跨域规则
         self.deleteBucketCors();
+        // .cssg-methods-pragma
     }
 }

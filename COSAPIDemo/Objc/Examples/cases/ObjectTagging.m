@@ -91,6 +91,7 @@
     
     //.cssg-snippet-body-end
 }
+// .cssg-methods-pragma
 
 
 - (void)testObjectTagging {
@@ -102,6 +103,7 @@
         
     // 删除对象标签
     [self deleteObjectTagging];
+    // .cssg-methods-pragma
         
 }
 

@@ -140,6 +140,7 @@
     //.cssg-snippet-body-end
 
 }
+// .cssg-methods-pragma
 
 
 - (void)testModifyObjectProperty {
@@ -148,6 +149,7 @@
     
     // 修改对象存储类型
     [self modifyObjectStorageClass];
+    // .cssg-methods-pragma
     
 }
 

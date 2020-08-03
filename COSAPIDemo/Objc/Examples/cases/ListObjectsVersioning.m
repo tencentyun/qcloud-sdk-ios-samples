@@ -71,7 +71,7 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
  */
 - (void)listObjectsVersioning {
     
-    // .cssg-snippet-body-start:[objc-list-objects-versioning]
+    //#hide.cssg-snippet-body-start:[objc-list-objects-versioning]
     
     QCloudListObjectVersionsRequest* listObjectVersionsRequest =
         [[QCloudListObjectVersionsRequest alloc] init];
@@ -105,7 +105,7 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
  */
 - (void)listObjectsVersioningNextPage {
 
-    //.cssg-snippet-body-start:[objc-list-objects-versioning]
+    //#hide.cssg-snippet-body-start:[objc-list-objects-versioning]
     
     QCloudListObjectVersionsRequest* listObjectVersionsRequest = [[QCloudListObjectVersionsRequest alloc] init];
     
@@ -139,6 +139,7 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
     //.cssg-snippet-body-end
     
 }
+// .cssg-methods-pragma
 
 - (void)testListObjectsVersioning {
     // 获取对象多版本列表第一页数据
@@ -146,6 +147,7 @@ requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
     
     // 获取对象多版本列表下一页数据
     [self listObjectsVersioningNextPage];
+    // .cssg-methods-pragma
     
 }
 

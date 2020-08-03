@@ -76,10 +76,10 @@
     // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
     put.object = @"exampleobject";
     
+    // 文件内容，可以传入NSData*或者NSURL*类型的变量
     put.body =  [@"testFileContent" dataUsingEncoding:NSUTF8StringEncoding];
     
     [put setFinishBlock:^(id outputObject, NSError *error) {
-        
         // outputObject 包含所有的响应 http 头部
         NSDictionary* info = (NSDictionary *) outputObject;
     }];
@@ -88,11 +88,13 @@
     
     //.cssg-snippet-body-end
 }
+// .cssg-methods-pragma
 
 
 - (void)testPutObject {
     // 简单上传对象
     [self putObject];
+    // .cssg-methods-pragma
         
 }
 

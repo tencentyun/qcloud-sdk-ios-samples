@@ -64,20 +64,22 @@ class HeadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         headObject.object  = "exampleobject";
         headObject.finishBlock =  {(result,error) in
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print(result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().headObject(headObject);
         
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
 
 
     func testHeadObject() {
         // 获取对象信息
         self.headObject();
+        // .cssg-methods-pragma
     }
 }

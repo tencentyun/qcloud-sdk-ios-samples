@@ -61,6 +61,7 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         
         let config = QCloudDomainConfiguration.init();
         let rule = QCloudDomainRule.init();
+        // 开启状态，可选 .enabled, .disabled
         rule.status = .enabled;
         rule.name = "www.baidu.com";
         
@@ -74,10 +75,10 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         // 域名配置的规则
         req.domain = config;
         req.finishBlock = {(result,error) in
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print( result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketDomain(req);
@@ -96,10 +97,10 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         req.bucket = "examplebucket-1250000000";
         
         req.finishBlock = {(result,error) in
-            if error != nil{
+            if let result = result {
+                // result 包含源站信息
+            } else {
                 print(error!);
-            }else{
-                print( result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().getBucketDomain(req);
@@ -107,11 +108,13 @@ class BucketDomain: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueu
         //.cssg-snippet-body-end
           
     }
+    // .cssg-methods-pragma
 
     func testBucketDomain() {
         // 设置存储桶源站
         self.putBucketDomain();
         // 获取存储桶源站
         self.getBucketDomain();
+        // .cssg-methods-pragma
     }
 }

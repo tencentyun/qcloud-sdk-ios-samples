@@ -84,10 +84,10 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         // 标签集合
         req.taggings = taggings;
         req.finishBlock = {(result,error) in
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print( result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().putBucketTagging(req);
@@ -106,10 +106,11 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         // 存储桶名称，格式为 BucketName-APPID
         req.bucket = "examplebucket-1250000000";
         req.setFinish { (result, error) in
-            if error != nil{
+            if let result = result {
+                // 标签集合
+                let tagSet = result.tagSet
+            } else {
                 print(error!);
-            }else{
-                print( result!);
             }
         };
         QCloudCOSXMLService.defaultCOSXML().getBucketTagging(req);
@@ -128,18 +129,17 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         // 存储桶名称，格式为 BucketName-APPID
         req.bucket = "examplebucket-1250000000";
         req.finishBlock =  { (result, error) in
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print( result!);
             }
         };
         QCloudCOSXMLService.defaultCOSXML().deleteBucketTagging(req);
         
         //.cssg-snippet-body-end
-          
     }
-    
+    // .cssg-methods-pragma
     
     func testBucketTagging() {
         // 设置存储桶标签
@@ -148,5 +148,6 @@ class BucketTagging: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQue
         self.getBucketTagging();
         // 删除存储桶标签
         self.deleteBucketTagging();
+        // .cssg-methods-pragma
     }
 }

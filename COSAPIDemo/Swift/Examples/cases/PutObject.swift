@@ -59,26 +59,29 @@ class PutObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueDe
         
         // 存储桶名称，格式为 BucketName-APPID
         putObject.bucket = "examplebucket-1250000000";
+        // 需要上传的对象内容。可以传入NSData*或者NSURL*类型的变量
         let dataBody:NSData? = "wrwrwrwrwrw".data(using: .utf8) as NSData?;
         putObject.body =  dataBody!;
         
         // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         putObject.object = "exampleobject";
         putObject.finishBlock = {(result,error) in
-            if error != nil{
+            if let result = result {
+                // result 包含响应的 header 信息
+            } else {
                 print(error!);
-            }else{
-                print(result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().putObject(putObject);
         
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
     
     
     func testPutObject() {
         // 简单上传对象
         self.putObject();
+        // .cssg-methods-pragma
     }
 }

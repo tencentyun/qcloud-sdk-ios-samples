@@ -65,8 +65,10 @@ class ObjectPresignUrl: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
         // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         getPresign.object = "exampleobject";
         getPresign.setFinish { (result, error) in
-            if error == nil{
-                print(result?.presienedURL as Any);
+            if let result = result {
+                let url = result.presienedURL
+            } else {
+                print(error!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().getPresignedURL(getPresign);
@@ -89,14 +91,17 @@ class ObjectPresignUrl: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
         // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         getPresign.object = "exampleobject";
         getPresign.setFinish { (result, error) in
-            if error == nil{
-                print(result?.presienedURL as Any);
+            if let result = result {
+                let url = result.presienedURL
+            } else {
+                print(error!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().getPresignedURL(getPresign);
         
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
     
     
     func testObjectPresignUrl() {
@@ -104,5 +109,6 @@ class ObjectPresignUrl: XCTestCase,QCloudSignatureProvider,QCloudCredentailFence
         self.getPresignDownloadUrl();
         // 获取预签名上传链接
         self.getPresignUploadUrl();
+        // .cssg-methods-pragma
     }
 }

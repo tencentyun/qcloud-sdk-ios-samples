@@ -124,6 +124,7 @@
     
     //.cssg-snippet-body-end
 }
+// .cssg-methods-pragma
 
 
 - (void)testAbortMultiPartsUpload {
@@ -132,6 +133,7 @@
         
     // 终止分片上传任务
     [self abortMultiUpload];
+    // .cssg-methods-pragma
         
 }
 

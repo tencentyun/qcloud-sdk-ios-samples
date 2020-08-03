@@ -156,6 +156,7 @@
     //.cssg-snippet-body-end
 
 }
+// .cssg-methods-pragma
 
 - (void)testCopyObject {
     // 简单拷贝对象
@@ -163,6 +164,7 @@
     
     // 复制对象时替换对象属性
     [self copyObjectReplaced];
+    // .cssg-methods-pragma
     
 }
 

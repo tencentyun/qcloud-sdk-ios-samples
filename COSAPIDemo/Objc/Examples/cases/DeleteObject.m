@@ -128,6 +128,7 @@
     //.cssg-snippet-body-end
 
 }
+// .cssg-methods-pragma
 
 - (void)testDeleteObject {
     // 删除对象
@@ -135,6 +136,7 @@
         
     // 删除多个对象
     [self deleteMultiObject];
+    // .cssg-methods-pragma
         
 }
 

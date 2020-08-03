@@ -79,10 +79,10 @@ class CopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         putObjectCopy.versionID = "versionID";
         
         putObjectCopy.setFinish { (result, error) in
-            if error != nil{
+            if let result = result {
+                let eTag = result.eTag
+            } else {
                 print(error!);
-            }else{
-                print(result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().putObjectCopy(putObjectCopy);
@@ -128,22 +128,23 @@ class CopyObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailFenceQueueD
         request.versionID = "versionID";
         
         request.setFinish { (result, error) in
-           if error != nil{
-               print(error!);
-           }else{
-               print(result!);
-           }
+            if let result = result {
+                let eTag = result.eTag
+            } else {
+                print(error!);
+            }
                
         }
         QCloudCOSXMLService.defaultCOSXML().putObjectCopy(request);
         //.cssg-snippet-body-end
     }
-
+    // .cssg-methods-pragma
 
     func testCopyObject() {
         // 复制对象时保留对象属性
         self.copyObject();
         // 复制对象时替换对象属性
         self.copyObjectReplaced();
+        // .cssg-methods-pragma
     }
 }

@@ -58,8 +58,6 @@ class AbortMultiPartsUpload: XCTestCase,QCloudSignatureProvider,QCloudCredentail
      * 作.分块上传适合于在弱网络或高带宽环境下上传较大的对象
      */
     func initMultiUpload() {
-        
-        
         //.cssg-snippet-body-start:[swift-init-multi-upload]
         let initRequest = QCloudInitiateMultipartUploadRequest.init();
         
@@ -69,14 +67,12 @@ class AbortMultiPartsUpload: XCTestCase,QCloudSignatureProvider,QCloudCredentail
         // 对象键，是对象在 COS 上的完整路径，如果带目录的话，格式为 "dir1/object1"
         initRequest.object = "exampleobject";
         initRequest.setFinish { (result, error) in
-            if error != nil{
-                print(error!);
-            }else{
+            if let result = result {
                 // 获取分块上传的 uploadId，后续的上传都需要这个 ID，请保存以备后续使用
-                self.uploadId = result!.uploadId;
-                print(result!.uploadId);
+                self.uploadId = result.uploadId;
+            } else {
+                print(error!);
             }
-            
         }
         QCloudCOSXMLService.defaultCOSXML().initiateMultipartUpload(initRequest);
         
@@ -107,17 +103,17 @@ class AbortMultiPartsUpload: XCTestCase,QCloudSignatureProvider,QCloudCredentail
         abort.uploadId = self.uploadId!;
         
         abort.finishBlock = {(result,error)in
-            if error != nil{
+            if let result = result {
+                // 可以从 result 中获取服务器返回的 header 信息
+            } else {
                 print(error!)
-            }else{
-                // 可以从 result 中获取 response 中 etag 或者自定义头部等信息
-                print(result!);
             }
         }
         QCloudCOSXMLService.defaultCOSXML().abortMultipfartUpload(abort);
         
         //.cssg-snippet-body-end
     }
+    // .cssg-methods-pragma
     
     
     func testAbortMultiPartsUpload() {
@@ -125,5 +121,6 @@ class AbortMultiPartsUpload: XCTestCase,QCloudSignatureProvider,QCloudCredentail
         self.initMultiUpload();
         // 终止分片上传任务
         self.abortMultiUpload();
+        // .cssg-methods-pragma
     }
 }
