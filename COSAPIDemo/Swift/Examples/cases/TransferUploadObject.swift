@@ -88,10 +88,6 @@ class TransferUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
         
         QCloudCOSTransferMangerService.defaultCOSTransferManager().uploadObject(put);
         
-        // 如果需要取消上传，调用 abort 方法
-        put.abort { (result, error) in
-            
-        }
         //.cssg-snippet-body-end
     }
     
@@ -146,20 +142,38 @@ class TransferUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
     }
 
 
-    // 上传暂停与续传
-    func transferUploadPauseAndResume() {
-        //.cssg-snippet-body-start:[swift-transfer-upload-pause-and-resume]
-        
-        //.cssg-snippet-body-end
-    }
-
-
     // 批量上传
     func transferBatchUploadObjects() {
         //.cssg-snippet-body-start:[swift-transfer-batch-upload-objects]
         
         //.cssg-snippet-body-end
     }
+
+
+    // 上传暂停、续传、取消
+    func transferUploadInteract() {
+        //.cssg-snippet-body-start:[swift-transfer-upload-pause]
+        
+        //.cssg-snippet-body-end
+        
+        //.cssg-snippet-body-start:[swift-transfer-upload-resume]
+        
+        //.cssg-snippet-body-end
+        
+        //.cssg-snippet-body-start:[swift-transfer-upload-cancel]
+        
+        //.cssg-snippet-body-end
+    }
+
+
+    // 高级接口 URI 上传
+    func transferUploadUri() {
+        //.cssg-snippet-body-start:[swift-transfer-upload-uri]
+        
+        //.cssg-snippet-body-end
+    }
+
+
 
     // .cssg-methods-pragma
 
@@ -170,10 +184,14 @@ class TransferUploadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentailF
         self.transferUploadBytes();
         // 高级接口流式上传
         self.transferUploadStream();
-        // 上传暂停与续传
-        self.transferUploadPauseAndResume();
+        // 上传暂停、续传、取消
+        self.transferUploadInteract();
         // 批量上传
         self.transferBatchUploadObjects();
+
+        // 高级接口 URI 上传
+        self.transferUploadUri();
+        
         // .cssg-methods-pragma
     }
 }

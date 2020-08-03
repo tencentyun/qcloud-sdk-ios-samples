@@ -103,11 +103,6 @@
     
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
     
-    // 如果需要中途取消上传，调用 cancel 方法
-    [put abort:^(id outputObject, NSError *error) {
-
-    }];
-    
     //.cssg-snippet-body-end
 }
 
@@ -156,10 +151,18 @@
 }
 
 /**
- * 上传暂停与续传
+ * 上传暂停、续传与取消
  */
-- (void)transferUploadPauseAndResume {
-    //.cssg-snippet-body-start:[objc-transfer-upload-pause-and-resume]
+- (void)transferUploadInteract {
+    //.cssg-snippet-body-start:[objc-transfer-upload-pause]
+    
+    //.cssg-snippet-body-end
+    
+    //.cssg-snippet-body-start:[objc-transfer-upload-resume]
+    
+    //.cssg-snippet-body-end
+    
+    //.cssg-snippet-body-start:[objc-transfer-upload-cancel]
     
     //.cssg-snippet-body-end
 }
@@ -173,6 +176,16 @@
     //.cssg-snippet-body-end
 }
 
+/**
+ * 高级接口 URI 上传
+ */
+- (void)transferUploadUri {
+    //.cssg-snippet-body-start:[objc-transfer-upload-uri]
+    
+    //.cssg-snippet-body-end
+}
+
+
 // .cssg-methods-pragma
 
 - (void)testTransferUploadObject {
@@ -185,11 +198,14 @@
     // 高级接口流式上传
     [self transferUploadStream];
         
-    // 上传暂停与续传
-    [self transferUploadPauseAndResume];
+    // 上传暂停、续传与取消
+    [self transferUploadInteract];
         
     // 批量上传
     [self transferBatchUploadObjects];
+
+    // 高级接口 URI 上传
+    [self transferUploadUri];
         
     // .cssg-methods-pragma
 }

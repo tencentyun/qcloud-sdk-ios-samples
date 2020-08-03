@@ -83,18 +83,6 @@ class TransferDownloadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
         
         QCloudCOSTransferMangerService.defaultCOSTransferManager().downloadObject(request);
         
-        // 取消下载
-        // 如果需要取消下载，调用cancel方法
-        request.cancel();
-        
-        //.cssg-snippet-body-end
-    }
-
-
-    // 下载暂停与续传
-    func transferDownloadObjectPauseAndResume() {
-        //.cssg-snippet-body-start:[swift-transfer-download-object-pause-and-resume]
-        
         //.cssg-snippet-body-end
     }
 
@@ -106,15 +94,33 @@ class TransferDownloadObject: XCTestCase,QCloudSignatureProvider,QCloudCredentai
         //.cssg-snippet-body-end
     }
 
+
+    // 下载暂停、续传、取消
+    func transferDownloadObjectInteract() {
+        //.cssg-snippet-body-start:[swift-transfer-download-object-pause]
+        
+        //.cssg-snippet-body-end
+        
+        //.cssg-snippet-body-start:[swift-transfer-download-object-resume]
+        
+        //.cssg-snippet-body-end
+        
+        //.cssg-snippet-body-start:[swift-transfer-download-object-cancel]
+        
+        //.cssg-snippet-body-end
+    }
+
+
     // .cssg-methods-pragma
 
     func testTransferDownloadObject() {
         // 高级接口下载对象
         self.transferDownloadObject();
-        // 下载暂停与续传
-        self.transferDownloadObjectPauseAndResume();
+        // 下载暂停、续传、取消
+        self.transferDownloadObjectInteract();
         // 批量下载
         self.transferBatchDownloadObjects();
+        
         // .cssg-methods-pragma
     }
 }
