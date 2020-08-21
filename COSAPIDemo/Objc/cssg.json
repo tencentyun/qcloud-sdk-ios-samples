@@ -1,9 +1,0 @@
-{
-  "sourceExtension": ".m",
-  "snippetNameCommonPrefix": "objc-",
-  "caseRelativePath": "Examples/cases/",
-  "commentDelimiter": ["//", ""],
-  "sourceFileNamingConvention": "upper-camel",
-  "methodNamingConvention": "lower-camel",
-  "classNamingConvention": "upper-camel"
-}
