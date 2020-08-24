@@ -1,0 +1,15 @@
+//
+//  PrefixHeader.pch
+//  QCloudCOSXMLSwiftDemo
+//
+//  Created by garenwang on 2020/5/20.
+//  Copyright © 2020 tencentyun.com. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+#import "QCloudCOSXMLSwiftDemo-Swift.h"
+
+#import <QCloudCOSXML/QCloudCOSXML.h>
+
+#endif /* PrefixHeader_pch */
