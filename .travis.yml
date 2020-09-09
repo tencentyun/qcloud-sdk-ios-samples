@@ -6,16 +6,16 @@ xcode_scheme: QCloudCOSXMLDemoTests
 xcode_destination: platform=iOS Simulator,OS=11.3,name=iPhone X
 
 before_install:
-- pod repo update
-
+  - pod repo update
+  - pwd
+  - cd QCloudCOSXMLDemo
 
 intall:
-- pod install
+  - pod install
+  
 before_script:
  # Create and start emulator
-  - pwd
-  
-  - cd QCloudCOSXMLDemo
+ 
   - pwd
   - echo -e "{\"secretID\":\"${secretID}\", \"secretKey\":\"${secretKey}\"}" >> key.json 
 

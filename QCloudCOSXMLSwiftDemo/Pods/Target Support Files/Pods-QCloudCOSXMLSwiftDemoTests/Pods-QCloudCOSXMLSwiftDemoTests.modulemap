@@ -1,0 +1,6 @@
+framework module Pods_QCloudCOSXMLSwiftDemoTests {
+  umbrella header "Pods-QCloudCOSXMLSwiftDemoTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
