@@ -1,0 +1,30 @@
+{
+  "name": "CSSGTestCase",
+  "version": "1.0.0",
+  "summary": "High-performance, high-fidelity mobile apps.",
+  "description": "Flutter provides an easy and productive way to build and deploy high-performance mobile apps for Android and iOS.",
+  "homepage": "https://cloud.tencent.com/product/cos",
+  "license": {
+    "type": "MIT"
+  },
+  "authors": {
+    "COS CSSG Dev Team": "wjielai@tencent.com"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source": {
+    "path": "."
+  },
+  "static_framework": true,
+  "frameworks": "XCTest",
+  "dependencies": {
+    "QCloudCOSXML": [
+
+    ]
+  },
+  "source_files": [
+    "cases/*.{swift}",
+    "secret/*.{swift}"
+  ]
+}

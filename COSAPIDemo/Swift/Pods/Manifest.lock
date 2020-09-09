@@ -1,0 +1,32 @@
+PODS:
+  - CSSGTestCase (1.0.0):
+    - QCloudCOSXML
+  - QCloudCore (5.7.3):
+    - QCloudCore/Default (= 5.7.3)
+  - QCloudCore/Default (5.7.3)
+  - QCloudCOSXML (5.7.3):
+    - QCloudCOSXML/Default (= 5.7.3)
+  - QCloudCOSXML/Default (5.7.3):
+    - QCloudCore (= 5.7.3)
+
+DEPENDENCIES:
+  - CSSGTestCase (from `Examples`)
+  - QCloudCOSXML
+
+SPEC REPOS:
+  trunk:
+    - QCloudCore
+    - QCloudCOSXML
+
+EXTERNAL SOURCES:
+  CSSGTestCase:
+    :path: Examples
+
+SPEC CHECKSUMS:
+  CSSGTestCase: 2b68c88b616564813491c8df45292a609928df3c
+  QCloudCore: 62e4857fc8d435de9be71002021c0d97f1f1b43a
+  QCloudCOSXML: 6a3df109cbdb6a8929c78951d5758ebc853c280b
+
+PODFILE CHECKSUM: 0b2702ffab156209a6aa4035fba3d4733dbfa5c8
+
+COCOAPODS: 1.9.1
