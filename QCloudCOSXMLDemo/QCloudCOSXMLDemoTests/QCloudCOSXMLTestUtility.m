@@ -5,7 +5,6 @@
 //  Created by erichmzhang(张恒铭) on 01/12/2017.
 //  Copyright © 2017 Tencent. All rights reserved.
 //
-#import "QCloudCOSXMLVersion.h"
 #import "QCloudCOSXMLTestUtility.h"
 #import <QCloudCOSXML/QCloudCOSXML.h>
 #define kTestObejectPrefix @"objectcanbedelete"

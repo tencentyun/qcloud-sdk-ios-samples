@@ -6,9 +6,6 @@
 //  Copyright © 2017 Tencent. All rights reserved.
 //
 
-#import "QCloudCOSXMLVersion.h"
-
-
 //#if QCloudCoreModuleVersionNumber >= 502000
 #import <QCloudCore/QCloudTestUtility.h>
 #import <QCloudCOSXML/QCloudCOSXML.h>

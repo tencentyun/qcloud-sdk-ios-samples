@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-
    LastUpgradeVersion = "1010"
-
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -29,8 +27,6 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <Testables>
-      </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
@@ -40,8 +36,28 @@
             ReferencedContainer = "container:QCloudCOSXMLDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D2BC31D22512067900E46F11"
+               BuildableName = "QCloudCOSXMLDemoUITests.xctest"
+               BlueprintName = "QCloudCOSXMLDemoUITests"
+               ReferencedContainer = "container:QCloudCOSXMLDemo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D2BC31E02512070600E46F11"
+               BuildableName = "QCloudCOSXMLDemoTests.xctest"
+               BlueprintName = "QCloudCOSXMLDemoTests"
+               ReferencedContainer = "container:QCloudCOSXMLDemo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -70,8 +86,6 @@
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

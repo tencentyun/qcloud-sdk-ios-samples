@@ -7,30 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0846D4FC31472DFAA0929803 /* Pods_QCloudCOSXMLDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AA61E20CD9596F16704FEEB /* Pods_QCloudCOSXMLDemoTests.framework */; };
-		1A1C1DB31ED4324400EF74AB /* QCloudCOSTransferTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1C1DB21ED4324400EF74AB /* QCloudCOSTransferTests.m */; };
+		16ED424EDF5E538F43B87AA4 /* Pods_QCloudCOSXMLDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AA61E20CD9596F16704FEEB /* Pods_QCloudCOSXMLDemoTests.framework */; };
 		1AB143F11E601E0500830F93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB143F01E601E0500830F93 /* main.m */; };
 		1AB143F41E601E0500830F93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB143F31E601E0500830F93 /* AppDelegate.m */; };
 		1AB143F71E601E0500830F93 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB143F61E601E0500830F93 /* ViewController.m */; };
 		1AB143FC1E601E0500830F93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AB143FB1E601E0500830F93 /* Assets.xcassets */; };
 		1AB143FF1E601E0500830F93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AB143FD1E601E0500830F93 /* LaunchScreen.storyboard */; };
-		1AB1440A1E601E0500830F93 /* QCloudCOSXMLDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB144091E601E0500830F93 /* QCloudCOSXMLDemoTests.m */; };
-		1AB3815E1EE8FFCA00F6E302 /* QCloudCOSXMLBucketTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB3815D1EE8FFCA00F6E302 /* QCloudCOSXMLBucketTests.m */; };
 		1AC3C2711EED368100B3151F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AC3C2701EED368100B3151F /* Main.storyboard */; };
 		1AFD73241EED1EF5002A1CD2 /* QCloudUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD73231EED1EF5002A1CD2 /* QCloudUploadViewController.m */; };
 		1AFD73271EED1EFF002A1CD2 /* QCloudDownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFD73261EED1EFF002A1CD2 /* QCloudDownloadViewController.m */; };
 		22C6C3B097E8839604635346 /* Pods_QCloudCOSXMLDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377CE75396849EA8EA9F77E1 /* Pods_QCloudCOSXMLDemo.framework */; };
-		7F069E0A21DDF7BD005F1AFA /* QCloudSTSPolicyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F069E0921DDF7BC005F1AFA /* QCloudSTSPolicyTests.m */; };
-		7F26A8E7213557200078097B /* QCloudCOSCSPTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F26A8E6213557200078097B /* QCloudCOSCSPTest.m */; };
 		7F2923D52338ADB8008CE707 /* key.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F2923D42338ADB8008CE707 /* key.json */; };
 		7F41127E2338A97100A3276E /* SecretStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F41127B2338A92200A3276E /* SecretStorage.m */; };
-		7F43AE97213932EA0025DD1B /* QCloudCSPCOSXMLTestUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F43AE96213932EA0025DD1B /* QCloudCSPCOSXMLTestUtility.m */; };
-		A7CB0119246D5AB700D4DB53 /* QCloudCOSQuicTransferTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CB0118246D5AB700D4DB53 /* QCloudCOSQuicTransferTest.m */; };
 		A801AD41201990DC004D1B9A /* NSString+UINCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C56AA31F205F13007D845B /* NSString+UINCategory.m */; };
 		A801AD42201990DC004D1B9A /* QCloudTestTempVariables.m in Sources */ = {isa = PBXBuildFile; fileRef = A80802DF1FB945E800A7020E /* QCloudTestTempVariables.m */; };
 		A808A89A1F25CD7600116AAC /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A808A8991F25CD7600116AAC /* DownloadTableViewCell.m */; };
-		A84AB4FB201AC62100A47F14 /* QCloudCOSXMLTestUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A82A95011FD13F3800273FC3 /* QCloudCOSXMLTestUtility.m */; };
-		A8674C411F4ACF20005E14DD /* QCloudCOSXMLExceptionCoverage.m in Sources */ = {isa = PBXBuildFile; fileRef = A8674C401F4ACF20005E14DD /* QCloudCOSXMLExceptionCoverage.m */; };
 		A89945C32091842B00FEFF28 /* QCloudTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A89945C22091842B00FEFF28 /* QCloudTabBarViewController.m */; };
 		A89945C62091847900FEFF28 /* QCloudSelectRegionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A89945C52091847900FEFF28 /* QCloudSelectRegionTableViewController.m */; };
 		A89945C9209187E500FEFF28 /* QCloudCOSXMLConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = A89945C8209187E500FEFF28 /* QCloudCOSXMLConfiguration.m */; };
@@ -46,10 +37,27 @@
 		D2B7008E2472280400F59994 /* QCloudBucketContents+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B7008D2472280400F59994 /* QCloudBucketContents+Addition.m */; };
 		D2B700912472379100F59994 /* QCloudDownLoadNewCtor.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B700902472379100F59994 /* QCloudDownLoadNewCtor.m */; };
 		D2B700972472722200F59994 /* QCloudUploadNewCtor.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B700962472722200F59994 /* QCloudUploadNewCtor.m */; };
+		D2BC31EB2512071400E46F11 /* QCloudCSPCOSXMLTestUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F43AE96213932EA0025DD1B /* QCloudCSPCOSXMLTestUtility.m */; };
+		D2BC31EC2512071400E46F11 /* QCloudCOSQuicTransferTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CB0118246D5AB700D4DB53 /* QCloudCOSQuicTransferTest.m */; };
+		D2BC31ED2512071400E46F11 /* QCloudCOSTransferTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1C1DB21ED4324400EF74AB /* QCloudCOSTransferTests.m */; };
+		D2BC31EE2512071400E46F11 /* QCloudCOSXMLBucketTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB3815D1EE8FFCA00F6E302 /* QCloudCOSXMLBucketTests.m */; };
+		D2BC31EF2512071800E46F11 /* QCloudCOSCSPTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F26A8E6213557200078097B /* QCloudCOSCSPTest.m */; };
+		D2BC31F02512071800E46F11 /* QCloudCOSXMLExceptionCoverage.m in Sources */ = {isa = PBXBuildFile; fileRef = A8674C401F4ACF20005E14DD /* QCloudCOSXMLExceptionCoverage.m */; };
+		D2BC31F12512071800E46F11 /* QCloudCOSXMLTestUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A82A95011FD13F3800273FC3 /* QCloudCOSXMLTestUtility.m */; };
+		D2BC31F22512071800E46F11 /* QCloudSTSPolicyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F069E0921DDF7BC005F1AFA /* QCloudSTSPolicyTests.m */; };
+		D2BC31F32512071800E46F11 /* QCloudCOSXMLDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB144091E601E0500830F93 /* QCloudCOSXMLDemoTests.m */; };
+		D2BC31FF2512090100E46F11 /* QCloudCOSXMLDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BC31FE2512090100E46F11 /* QCloudCOSXMLDemoUITests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1AB144061E601E0500830F93 /* PBXContainerItemProxy */ = {
+		D2BC31E62512070600E46F11 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AB143E41E601E0500830F93 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1AB143EB1E601E0500830F93;
+			remoteInfo = QCloudCOSXMLDemo;
+		};
+		D2BC32012512090100E46F11 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1AB143E41E601E0500830F93 /* Project object */;
 			proxyType = 1;
@@ -70,9 +78,7 @@
 		1AB143FB1E601E0500830F93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1AB143FE1E601E0500830F93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AB144001E601E0500830F93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1AB144051E601E0500830F93 /* QCloudCOSXMLDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QCloudCOSXMLDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AB144091E601E0500830F93 /* QCloudCOSXMLDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCloudCOSXMLDemoTests.m; sourceTree = "<group>"; };
-		1AB1440B1E601E0500830F93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AB3815D1EE8FFCA00F6E302 /* QCloudCOSXMLBucketTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCloudCOSXMLBucketTests.m; sourceTree = "<group>"; };
 		1AC3C2701EED368100B3151F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		1AFD73221EED1EF5002A1CD2 /* QCloudUploadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCloudUploadViewController.h; sourceTree = "<group>"; };
@@ -143,6 +149,13 @@
 		D2B700952472722200F59994 /* QCloudUploadNewCtor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCloudUploadNewCtor.h; sourceTree = "<group>"; };
 		D2B700962472722200F59994 /* QCloudUploadNewCtor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCloudUploadNewCtor.m; sourceTree = "<group>"; };
 		D2B700CD2477BDF600F59994 /* QCloudCOSXMLContants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCloudCOSXMLContants.h; sourceTree = "<group>"; };
+		D2BC31E12512070600E46F11 /* QCloudCOSXMLDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QCloudCOSXMLDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2BC31E52512070600E46F11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2BC31F42512089500E46F11 /* QCloudCOSXMLDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QCloudCOSXMLDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		D2BC31F62512089600E46F11 /* QCloudCOSXMLDemoTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QCloudCOSXMLDemoTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		D2BC31FC2512090100E46F11 /* QCloudCOSXMLDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QCloudCOSXMLDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2BC31FE2512090100E46F11 /* QCloudCOSXMLDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCloudCOSXMLDemoUITests.m; sourceTree = "<group>"; };
+		D2BC32002512090100E46F11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2FFB526C25234819DB6C822 /* Pods-QCloudCOSXMLDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QCloudCOSXMLDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QCloudCOSXMLDemoTests/Pods-QCloudCOSXMLDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F3E9F7DE3343D4DD2A0004E1 /* Pods-QCloudCOSXMLDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QCloudCOSXMLDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-QCloudCOSXMLDemo/Pods-QCloudCOSXMLDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F3ED2BCC59D2BD696DAAF0C1 /* Pods_QCloudCOSXMLDemoTests5_0_2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QCloudCOSXMLDemoTests5_0_2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,11 +173,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1AB144021E601E0500830F93 /* Frameworks */ = {
+		D2BC31DE2512070600E46F11 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0846D4FC31472DFAA0929803 /* Pods_QCloudCOSXMLDemoTests.framework in Frameworks */,
+				16ED424EDF5E538F43B87AA4 /* Pods_QCloudCOSXMLDemoTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2BC31F92512090100E46F11 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,7 +196,8 @@
 			children = (
 				7F2923D42338ADB8008CE707 /* key.json */,
 				1AB143EE1E601E0500830F93 /* QCloudCOSXMLDemo */,
-				1AB144081E601E0500830F93 /* QCloudCOSXMLDemoTests */,
+				D2BC31E22512070600E46F11 /* QCloudCOSXMLDemoTests */,
+				D2BC31FD2512090100E46F11 /* QCloudCOSXMLDemoUITests */,
 				1AB143ED1E601E0500830F93 /* Products */,
 				653460976F84B6E5D3700574 /* Pods */,
 				4BD76E968F422ED67FDC5B0D /* Frameworks */,
@@ -187,7 +208,8 @@
 			isa = PBXGroup;
 			children = (
 				1AB143EC1E601E0500830F93 /* QCloudCOSXMLDemo.app */,
-				1AB144051E601E0500830F93 /* QCloudCOSXMLDemoTests.xctest */,
+				D2BC31E12512070600E46F11 /* QCloudCOSXMLDemoTests.xctest */,
+				D2BC31FC2512090100E46F11 /* QCloudCOSXMLDemoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -232,25 +254,6 @@
 				1AB143F01E601E0500830F93 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		1AB144081E601E0500830F93 /* QCloudCOSXMLDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				7F26A8E6213557200078097B /* QCloudCOSCSPTest.m */,
-				7F069E0921DDF7BC005F1AFA /* QCloudSTSPolicyTests.m */,
-				A82A95001FD13F3800273FC3 /* QCloudCOSXMLTestUtility.h */,
-				A82A95011FD13F3800273FC3 /* QCloudCOSXMLTestUtility.m */,
-				A8674C401F4ACF20005E14DD /* QCloudCOSXMLExceptionCoverage.m */,
-				1AB144091E601E0500830F93 /* QCloudCOSXMLDemoTests.m */,
-				1AB1440B1E601E0500830F93 /* Info.plist */,
-				A7CB0118246D5AB700D4DB53 /* QCloudCOSQuicTransferTest.m */,
-				1A1C1DB21ED4324400EF74AB /* QCloudCOSTransferTests.m */,
-				1AB3815D1EE8FFCA00F6E302 /* QCloudCOSXMLBucketTests.m */,
-				7F43AE95213932EA0025DD1B /* QCloudCSPCOSXMLTestUtility.h */,
-				7F43AE96213932EA0025DD1B /* QCloudCSPCOSXMLTestUtility.m */,
-			);
-			path = QCloudCOSXMLDemoTests;
 			sourceTree = "<group>";
 		};
 		4BD76E968F422ED67FDC5B0D /* Frameworks */ = {
@@ -355,6 +358,36 @@
 			name = Categroy;
 			sourceTree = "<group>";
 		};
+		D2BC31E22512070600E46F11 /* QCloudCOSXMLDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				D2BC31F62512089600E46F11 /* QCloudCOSXMLDemoTests-Bridging-Header.h */,
+				7F26A8E6213557200078097B /* QCloudCOSCSPTest.m */,
+				7F069E0921DDF7BC005F1AFA /* QCloudSTSPolicyTests.m */,
+				A82A95001FD13F3800273FC3 /* QCloudCOSXMLTestUtility.h */,
+				A82A95011FD13F3800273FC3 /* QCloudCOSXMLTestUtility.m */,
+				A8674C401F4ACF20005E14DD /* QCloudCOSXMLExceptionCoverage.m */,
+				1AB144091E601E0500830F93 /* QCloudCOSXMLDemoTests.m */,
+				A7CB0118246D5AB700D4DB53 /* QCloudCOSQuicTransferTest.m */,
+				1A1C1DB21ED4324400EF74AB /* QCloudCOSTransferTests.m */,
+				1AB3815D1EE8FFCA00F6E302 /* QCloudCOSXMLBucketTests.m */,
+				7F43AE95213932EA0025DD1B /* QCloudCSPCOSXMLTestUtility.h */,
+				7F43AE96213932EA0025DD1B /* QCloudCSPCOSXMLTestUtility.m */,
+				D2BC31E52512070600E46F11 /* Info.plist */,
+				D2BC31F42512089500E46F11 /* QCloudCOSXMLDemo-Bridging-Header.h */,
+			);
+			path = QCloudCOSXMLDemoTests;
+			sourceTree = "<group>";
+		};
+		D2BC31FD2512090100E46F11 /* QCloudCOSXMLDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D2BC31FE2512090100E46F11 /* QCloudCOSXMLDemoUITests.m */,
+				D2BC32002512090100E46F11 /* Info.plist */,
+			);
+			path = QCloudCOSXMLDemoUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -376,24 +409,42 @@
 			productReference = 1AB143EC1E601E0500830F93 /* QCloudCOSXMLDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1AB144041E601E0500830F93 /* QCloudCOSXMLDemoTests */ = {
+		D2BC31E02512070600E46F11 /* QCloudCOSXMLDemoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1AB1441C1E601E0500830F93 /* Build configuration list for PBXNativeTarget "QCloudCOSXMLDemoTests" */;
+			buildConfigurationList = D2BC31EA2512070600E46F11 /* Build configuration list for PBXNativeTarget "QCloudCOSXMLDemoTests" */;
 			buildPhases = (
-				1D59EE8D501B13C83D478AED /* [CP] Check Pods Manifest.lock */,
-				1AB144011E601E0500830F93 /* Sources */,
-				1AB144021E601E0500830F93 /* Frameworks */,
-				1AB144031E601E0500830F93 /* Resources */,
+				338EF7152177F5FE408F920D /* [CP] Check Pods Manifest.lock */,
+				D2BC31DD2512070600E46F11 /* Sources */,
+				D2BC31DE2512070600E46F11 /* Frameworks */,
+				D2BC31DF2512070600E46F11 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1AB144071E601E0500830F93 /* PBXTargetDependency */,
+				D2BC31E72512070600E46F11 /* PBXTargetDependency */,
 			);
 			name = QCloudCOSXMLDemoTests;
-			productName = QCloudCOSXMLDemoTests;
-			productReference = 1AB144051E601E0500830F93 /* QCloudCOSXMLDemoTests.xctest */;
+			productName = QCloudCOSXMLDemoTests1;
+			productReference = D2BC31E12512070600E46F11 /* QCloudCOSXMLDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D2BC31FB2512090100E46F11 /* QCloudCOSXMLDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D2BC32052512090100E46F11 /* Build configuration list for PBXNativeTarget "QCloudCOSXMLDemoUITests" */;
+			buildPhases = (
+				D2BC31F82512090100E46F11 /* Sources */,
+				D2BC31F92512090100E46F11 /* Frameworks */,
+				D2BC31FA2512090100E46F11 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D2BC32022512090100E46F11 /* PBXTargetDependency */,
+			);
+			name = QCloudCOSXMLDemoUITests;
+			productName = QCloudCOSXMLDemoUITests;
+			productReference = D2BC31FC2512090100E46F11 /* QCloudCOSXMLDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -407,11 +458,18 @@
 					1AB143EB1E601E0500830F93 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = TD5DJDNRQ4;
+						LastSwiftMigration = 1170;
 						ProvisioningStyle = Automatic;
 					};
-					1AB144041E601E0500830F93 = {
-						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = TD5DJDNRQ4;
+					D2BC31E02512070600E46F11 = {
+						CreatedOnToolsVersion = 11.7;
+						DevelopmentTeam = 6RL39LH4U4;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 1AB143EB1E601E0500830F93;
+					};
+					D2BC31FB2512090100E46F11 = {
+						CreatedOnToolsVersion = 11.7;
+						DevelopmentTeam = 6RL39LH4U4;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 1AB143EB1E601E0500830F93;
 					};
@@ -432,7 +490,8 @@
 			projectRoot = "";
 			targets = (
 				1AB143EB1E601E0500830F93 /* QCloudCOSXMLDemo */,
-				1AB144041E601E0500830F93 /* QCloudCOSXMLDemoTests */,
+				D2BC31E02512070600E46F11 /* QCloudCOSXMLDemoTests */,
+				D2BC31FB2512090100E46F11 /* QCloudCOSXMLDemoUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -449,7 +508,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1AB144031E601E0500830F93 /* Resources */ = {
+		D2BC31DF2512070600E46F11 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2BC31FA2512090100E46F11 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -459,16 +525,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1D59EE8D501B13C83D478AED /* [CP] Check Pods Manifest.lock */ = {
+		338EF7152177F5FE408F920D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-QCloudCOSXMLDemoTests-checkManifestLockResult.txt",
 			);
@@ -529,29 +599,42 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1AB144011E601E0500830F93 /* Sources */ = {
+		D2BC31DD2512070600E46F11 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7CB0119246D5AB700D4DB53 /* QCloudCOSQuicTransferTest.m in Sources */,
-				1A1C1DB31ED4324400EF74AB /* QCloudCOSTransferTests.m in Sources */,
-				A84AB4FB201AC62100A47F14 /* QCloudCOSXMLTestUtility.m in Sources */,
-				1AB3815E1EE8FFCA00F6E302 /* QCloudCOSXMLBucketTests.m in Sources */,
-				1AB1440A1E601E0500830F93 /* QCloudCOSXMLDemoTests.m in Sources */,
-				7F26A8E7213557200078097B /* QCloudCOSCSPTest.m in Sources */,
-				7F43AE97213932EA0025DD1B /* QCloudCSPCOSXMLTestUtility.m in Sources */,
-				7F069E0A21DDF7BD005F1AFA /* QCloudSTSPolicyTests.m in Sources */,
-				A8674C411F4ACF20005E14DD /* QCloudCOSXMLExceptionCoverage.m in Sources */,
+				D2BC31ED2512071400E46F11 /* QCloudCOSTransferTests.m in Sources */,
+				D2BC31EC2512071400E46F11 /* QCloudCOSQuicTransferTest.m in Sources */,
+				D2BC31F22512071800E46F11 /* QCloudSTSPolicyTests.m in Sources */,
+				D2BC31F32512071800E46F11 /* QCloudCOSXMLDemoTests.m in Sources */,
+				D2BC31EB2512071400E46F11 /* QCloudCSPCOSXMLTestUtility.m in Sources */,
+				D2BC31EF2512071800E46F11 /* QCloudCOSCSPTest.m in Sources */,
+				D2BC31EE2512071400E46F11 /* QCloudCOSXMLBucketTests.m in Sources */,
+				D2BC31F12512071800E46F11 /* QCloudCOSXMLTestUtility.m in Sources */,
+				D2BC31F02512071800E46F11 /* QCloudCOSXMLExceptionCoverage.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2BC31F82512090100E46F11 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2BC31FF2512090100E46F11 /* QCloudCOSXMLDemoUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1AB144071E601E0500830F93 /* PBXTargetDependency */ = {
+		D2BC31E72512070600E46F11 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1AB143EB1E601E0500830F93 /* QCloudCOSXMLDemo */;
-			targetProxy = 1AB144061E601E0500830F93 /* PBXContainerItemProxy */;
+			targetProxy = D2BC31E62512070600E46F11 /* PBXContainerItemProxy */;
+		};
+		D2BC32022512090100E46F11 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1AB143EB1E601E0500830F93 /* QCloudCOSXMLDemo */;
+			targetProxy = D2BC32012512090100E46F11 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -662,6 +745,7 @@
 			baseConfigurationReference = C4A3043A5CCC66AEB50EA9AE /* Pods-QCloudCOSXMLDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TD5DJDNRQ4;
@@ -679,6 +763,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "QCloudCOSXMLDemoTests/QCloudCOSXMLDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -687,6 +774,7 @@
 			baseConfigurationReference = F3E9F7DE3343D4DD2A0004E1 /* Pods-QCloudCOSXMLDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TD5DJDNRQ4;
@@ -704,36 +792,130 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "QCloudCOSXMLDemoTests/QCloudCOSXMLDemo-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
-		1AB1441D1E601E0500830F93 /* Debug */ = {
+		D2BC31E82512070600E46F11 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F2FFB526C25234819DB6C822 /* Pods-QCloudCOSXMLDemoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = TD5DJDNRQ4;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6RL39LH4U4;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = QCloudCOSXMLDemoTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.qcloud.QCloudCOSXMLDemoTests;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tx.test.QCloudCOSXMLDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QCloudCOSXMLDemo.app/QCloudCOSXMLDemo";
 			};
 			name = Debug;
 		};
-		1AB1441E1E601E0500830F93 /* Release */ = {
+		D2BC31E92512070600E46F11 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4D40D10FFB554B7B26399262 /* Pods-QCloudCOSXMLDemoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = TD5DJDNRQ4;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6RL39LH4U4;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = QCloudCOSXMLDemoTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.qcloud.QCloudCOSXMLDemoTests;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tx.test.QCloudCOSXMLDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QCloudCOSXMLDemo.app/QCloudCOSXMLDemo";
+			};
+			name = Release;
+		};
+		D2BC32032512090100E46F11 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6RL39LH4U4;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = QCloudCOSXMLDemoUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tx.test.QCloudCOSXMLDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = QCloudCOSXMLDemo;
+			};
+			name = Debug;
+		};
+		D2BC32042512090100E46F11 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6RL39LH4U4;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = QCloudCOSXMLDemoUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tx.test.QCloudCOSXMLDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = QCloudCOSXMLDemo;
 			};
 			name = Release;
 		};
@@ -758,11 +940,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1AB1441C1E601E0500830F93 /* Build configuration list for PBXNativeTarget "QCloudCOSXMLDemoTests" */ = {
+		D2BC31EA2512070600E46F11 /* Build configuration list for PBXNativeTarget "QCloudCOSXMLDemoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1AB1441D1E601E0500830F93 /* Debug */,
-				1AB1441E1E601E0500830F93 /* Release */,
+				D2BC31E82512070600E46F11 /* Debug */,
+				D2BC31E92512070600E46F11 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D2BC32052512090100E46F11 /* Build configuration list for PBXNativeTarget "QCloudCOSXMLDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2BC32032512090100E46F11 /* Debug */,
+				D2BC32042512090100E46F11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
