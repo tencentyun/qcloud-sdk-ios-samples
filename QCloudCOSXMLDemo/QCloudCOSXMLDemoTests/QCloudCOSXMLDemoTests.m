@@ -396,33 +396,33 @@
 
 
 
-- (void) testLittleLimitAppendObject {
-    QCloudAppendObjectRequest* put = [QCloudAppendObjectRequest new];
-    put.object = [NSUUID UUID].UUIDString;
-    put.bucket = self.bucket;
-    put.body =  [NSURL fileURLWithPath:[self tempFileWithSize:1024*4]];
-    
-    XCTestExpectation* exp = [self expectationWithDescription:@"delete"];
-    
-    __block NSDictionary* result = nil;
-    __block NSError* error;
-    [put setFinishBlock:^(id outputObject, NSError *servererror) {
-        QCloudLogInfo(@"QCloudAppendObjectRequest   outputObject :   %@",outputObject);
-        result = outputObject;
-        error = servererror;
-        QCloudHeadObjectRequest* headerRequest = [QCloudHeadObjectRequest new];
-        headerRequest.object = put.object;
-        headerRequest.bucket = self.bucket;
-        [headerRequest setFinishBlock:^(NSDictionary* result, NSError *error) {
-             QCloudLogInfo(@"QCloudAppendObjectRequest   result :   %@",result);
-        }];
-        [[QCloudCOSXMLService defaultCOSXML] HeadObject:headerRequest];
-        [exp fulfill];
-    }];
-    [[QCloudCOSXMLService defaultCOSXML] AppendObject:put];
-    [self waitForExpectationsWithTimeout:80 handler:nil];
-    XCTAssertNil(error);
-}
+//- (void) testLittleLimitAppendObject {
+//    QCloudAppendObjectRequest* put = [QCloudAppendObjectRequest new];
+//    put.object = [NSUUID UUID].UUIDString;
+//    put.bucket = self.bucket;
+//    put.body =  [NSURL fileURLWithPath:[self tempFileWithSize:1024*4]];
+//    
+//    XCTestExpectation* exp = [self expectationWithDescription:@"delete"];
+//    
+//    __block NSDictionary* result = nil;
+//    __block NSError* error;
+//    [put setFinishBlock:^(id outputObject, NSError *servererror) {
+//        QCloudLogInfo(@"QCloudAppendObjectRequest   outputObject :   %@",outputObject);
+//        result = outputObject;
+//        error = servererror;
+//        QCloudHeadObjectRequest* headerRequest = [QCloudHeadObjectRequest new];
+//        headerRequest.object = put.object;
+//        headerRequest.bucket = self.bucket;
+//        [headerRequest setFinishBlock:^(NSDictionary* result, NSError *error) {
+//             QCloudLogInfo(@"QCloudAppendObjectRequest   result :   %@",result);
+//        }];
+//        [[QCloudCOSXMLService defaultCOSXML] HeadObject:headerRequest];
+//        [exp fulfill];
+//    }];
+//    [[QCloudCOSXMLService defaultCOSXML] AppendObject:put];
+//    [self waitForExpectationsWithTimeout:80 handler:nil];
+//    XCTAssertNil(error);
+//}
 
 - (void) testGetObject {
     QCloudPutObjectRequest* put = [QCloudPutObjectRequest new];

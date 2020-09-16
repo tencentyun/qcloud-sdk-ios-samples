@@ -362,26 +362,26 @@
     XCTAssert(![request buildURLRequest:&error]);
 }
 
-- (void)testCoverAppendObjectRequest {
-    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverAppendObjectRequest");
-    QCloudAppendObjectRequest* request = [[QCloudAppendObjectRequest alloc] init];
-    NSError* error = [NSError errorWithDomain:@"com.test.domain" code:404 userInfo:nil];
-    XCTAssert(![request buildURLRequest:&error]);
-    request.bucket = @"testBucket";
-    XCTAssert(![request buildURLRequest:&error]);
-    request.object = @"testObject";
-    XCTAssert(![request buildURLRequest:&error]);
-    request.cacheControl = @"cacheControl";
-    request.contentDisposition = @"contentDisposition";
-    request.expect = @"expect";
-    request.expires = @"expires";
-    request.contentSHA1 = @"contentSHA1";
-    request.accessControlList = @"accessControlList";
-    request.grantRead = @"grantRead";
-    request.grantWrite = @"grantWrite";
-    request.grantFullControl = @"grantFullControl";
-    XCTAssert(![request buildURLRequest:&error]);
-}
+//- (void)testCoverAppendObjectRequest {
+//    QCloudLogInfo(@"QCloudCOSXMLExceptionCoverage:testCoverAppendObjectRequest");
+//    QCloudAppendObjectRequest* request = [[QCloudAppendObjectRequest alloc] init];
+//    NSError* error = [NSError errorWithDomain:@"com.test.domain" code:404 userInfo:nil];
+//    XCTAssert(![request buildURLRequest:&error]);
+//    request.bucket = @"testBucket";
+//    XCTAssert(![request buildURLRequest:&error]);
+//    request.object = @"testObject";
+//    XCTAssert(![request buildURLRequest:&error]);
+//    request.cacheControl = @"cacheControl";
+//    request.contentDisposition = @"contentDisposition";
+//    request.expect = @"expect";
+//    request.expires = @"expires";
+//    request.contentSHA1 = @"contentSHA1";
+//    request.accessControlList = @"accessControlList";
+//    request.grantRead = @"grantRead";
+//    request.grantWrite = @"grantWrite";
+//    request.grantFullControl = @"grantFullControl";
+//    XCTAssert(![request buildURLRequest:&error]);
+//}
 - (NSString *)formattedBucket:(NSString*)bucket withAPPID:(NSString*)APPID {
     NSInteger subfixLength = APPID.length + 1;
     if (bucket.length <= subfixLength) {

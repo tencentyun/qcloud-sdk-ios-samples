@@ -5,6 +5,7 @@ use_frameworks!
 
 target 'QCloudCOSXMLDemo' do
 pod 'QCloudCOSXML'
+pod 'QCloudCore'
 target 'QCloudCOSXMLDemoTests' do
   inherit! :search_paths
 end
