@@ -264,7 +264,7 @@
     }];
     
     [[QCloudCOSXMLService defaultCOSXML] PutObjectACL:request];
-    [self waitForExpectationsWithTimeout:1000 handler:nil];
+    [self waitForExpectationsWithTimeout:100 handler:nil];
     
 }
 
@@ -288,7 +288,7 @@
         [[QCloudCOSXMLService defaultCOSXML] PutBucketACL:request];
     }
     
-    [self waitForExpectationsWithTimeout:1000 handler:nil];
+    [self waitForExpectationsWithTimeout:100 handler:nil];
 }
 - (void) testPutObject {
     QCloudPutObjectRequest* put = [QCloudPutObjectRequest new];
@@ -596,7 +596,7 @@
         QCloudLogDebug(@"testMetric %@",requstMetricArray);
     };
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] CopyObject:request];
-    [self waitForExpectationsWithTimeout:10000 handler:nil];
+    [self waitForExpectationsWithTimeout:100 handler:nil];
     
 }
 
@@ -647,7 +647,7 @@
             [expectation fulfill];
         }];
         [[QCloudCOSTransferMangerService defaultCOSTransferManager] CopyObject:request];
-        [self waitForExpectationsWithTimeout:10000 handler:nil];
+        [self waitForExpectationsWithTimeout:100 handler:nil];
     }
 }
 
@@ -689,7 +689,7 @@
         [uploadWhiteSpaceExpectation fulfill];
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:uploadObjectRequest3];
-    [self waitForExpectationsWithTimeout:1000 handler:nil];
+    [self waitForExpectationsWithTimeout:100 handler:nil];
     
     
     XCTestExpectation* getBucketExpectation = [self expectationWithDescription:@"get bucket"];
@@ -720,7 +720,7 @@
             [expectation fulfill];
         }];
         [[QCloudCOSTransferMangerService defaultCOSTransferManager] CopyObject:request];
-        [self waitForExpectationsWithTimeout:10000 handler:nil];
+        [self waitForExpectationsWithTimeout:100 handler:nil];
     }
    
 }
@@ -898,7 +898,7 @@
         [expectation fulfill];
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] CopyObject:request];
-    [self waitForExpectationsWithTimeout:10000 handler:nil];
+    [self waitForExpectationsWithTimeout:100 handler:nil];
 }
 
 -(void)testSampleCopyFromAnotherRegion{
@@ -932,6 +932,6 @@
         [expectation fulfill];
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] CopyObject:request];
-    [self waitForExpectationsWithTimeout:10000 handler:nil];
+    [self waitForExpectationsWithTimeout:100 handler:nil];
 }
 @end

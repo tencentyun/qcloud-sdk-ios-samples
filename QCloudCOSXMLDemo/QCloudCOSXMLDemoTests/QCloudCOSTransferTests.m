@@ -130,7 +130,7 @@
         [req waitForComplete];
     }
     
-    [self waitForExpectationsWithTimeout:180000 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
        }];
 }
 - (void) testRegisterCustomManagerService
@@ -190,7 +190,7 @@
     }];
    
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-    [self waitForExpectationsWithTimeout:18000 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
     }];
   
     
@@ -214,7 +214,7 @@
         [exp fulfill];
     }];
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] UploadObject:put];
-    [self waitForExpectationsWithTimeout:18000 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
     }];
     
 }
@@ -438,7 +438,7 @@
         [expectation fulfill];
     }];
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] CopyObject:request];
-    [self waitForExpectationsWithTimeout:10000 handler:nil];
+    [self waitForExpectationsWithTimeout:100 handler:nil];
 
 }
 - (void)testCopyBigFileWithSSE {
@@ -477,7 +477,7 @@
         [expectation fulfill];
     }];
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] CopyObject:request];
-        [self waitForExpectationsWithTimeout:10000 handler:nil];
+        [self waitForExpectationsWithTimeout:100 handler:nil];
     
 }
 
@@ -574,7 +574,7 @@
 ////        [expectation fulfill];
 ////    }];
 ////    [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] CopyObject:request];
-////    [self waitForExpectationsWithTimeout:10000 handler:nil];
+////    [self waitForExpectationsWithTimeout:100 handler:nil];
 //
 //    
 //}
@@ -633,7 +633,7 @@
 ////        [expectation fulfill];
 ////    }];
 ////    [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] CopyObject:request];
-////    [self waitForExpectationsWithTimeout:10000 handler:nil];
+////    [self waitForExpectationsWithTimeout:100 handler:nil];
 //}
 
 - (void) testChineseFileNameBigfileUpload {
@@ -658,7 +658,7 @@
         NSLog(@"UploadID%@",uploadID);
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-    [self waitForExpectationsWithTimeout:18000 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
     }];
     XCTAssertNotNil(result);
 }
@@ -680,7 +680,7 @@
         [exp fulfill];
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-    [self waitForExpectationsWithTimeout:18000 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
     }];
     XCTAssertNotNil(result);
 }
@@ -705,7 +705,7 @@
         [exp fulfill];
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-    [self waitForExpectationsWithTimeout:18000 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
     }];
     XCTAssertNotNil(result);
 }
@@ -729,7 +729,7 @@
         [exp fulfill];
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-    [self waitForExpectationsWithTimeout:18000 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
     }];
     XCTAssertNotNil(result);
 }
@@ -751,7 +751,7 @@
         [exp fulfill];
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-    [self waitForExpectationsWithTimeout:18000 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
     }];
     XCTAssertNotNil(result);
 }
@@ -774,7 +774,7 @@
         [exp fulfill];
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-    [self waitForExpectationsWithTimeout:18000 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
     }];
     XCTAssertNotNil(result);
 }
@@ -797,7 +797,7 @@
         [exp fulfill];
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-    [self waitForExpectationsWithTimeout:18000 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
     }];
     XCTAssertNotNil(result);
     
@@ -840,7 +840,7 @@
         }];
         
     });
-    [self waitForExpectationsWithTimeout:100000 handler:nil];
+    [self waitForExpectationsWithTimeout:100 handler:nil];
     XCTAssertNotNil(abortResult);
 }
 - (void) testChainesePauseAndResume {
@@ -898,7 +898,7 @@
     });
     
     
-    [self waitForExpectationsWithTimeout:80000 handler:nil];
+    [self waitForExpectationsWithTimeout:800 handler:nil];
     XCTAssertNotNil(result);
     XCTAssertNotNil(result.location);
     XCTAssertNotNil(result.eTag);
@@ -951,7 +951,7 @@
     });
 
 
-    [self waitForExpectationsWithTimeout:80000 handler:nil];
+    [self waitForExpectationsWithTimeout:800 handler:nil];
     XCTAssertNotNil(result);
     XCTAssertNotNil(result.location);
     XCTAssertNotNil(result.eTag);

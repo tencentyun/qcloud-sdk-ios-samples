@@ -637,7 +637,7 @@
 ////        NSLog(@"partsSent: %lld totalPartsExpectedToSent:%lld",partsSent,totalPartsExpectedToSent);
 ////    }];
 ////    [[self getCSPCOSXMLTransferService] CopyObject:request];
-////    [self waitForExpectationsWithTimeout:10000 handler:nil];
+////    [self waitForExpectationsWithTimeout:100 handler:nil];
 ////    
 ////}
 //

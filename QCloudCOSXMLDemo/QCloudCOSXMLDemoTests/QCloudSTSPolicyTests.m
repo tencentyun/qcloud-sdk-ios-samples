@@ -389,7 +389,7 @@
 //        [[self cosxmlService] GetObject:request];
 //    }];
 //    [[self transferService] UploadObject:put];
-//    [self waitForExpectationsWithTimeout:18000 handler:^(NSError * _Nullable error) {
+//    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
 //    }];
 //}
 //
@@ -504,7 +504,7 @@
 ////        [[self transferService] CopyObject:request];
 ////    }];
 ////    [[self transferService] UploadObject:uploadObjectRequest];
-////    [self waitForExpectationsWithTimeout:10000 handler:nil];
+////    [self waitForExpectationsWithTimeout:100 handler:nil];
 ////}
 //
 //-(void)testPUT_GET_ObjectACL{
@@ -667,7 +667,7 @@
 //    [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kTestSTSCopyOringeRegion] UploadObject:uploadObjectRequest];
 //    
 //   
-//    [self waitForExpectationsWithTimeout:10000 handler:nil];
+//    [self waitForExpectationsWithTimeout:100 handler:nil];
 //}
 //
 //
