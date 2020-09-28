@@ -5,6 +5,7 @@ podfile: QCloudCOSXMLDemo/Podfile
 xcode_workspace: QCloudCOSXMLDemo.xcworkspace
 xcode_scheme: QCloudCOSXMLDemo
 xcode_destination: platform=iOS Simulator,OS=13.6,name=iPhone 11
+script: xcodebuild -workspace QCloudCOSXMLDemo.xcworkspace -scheme QCloudCOSXMLDemo -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.6' test
 
 before_install:
   - pod repo update
