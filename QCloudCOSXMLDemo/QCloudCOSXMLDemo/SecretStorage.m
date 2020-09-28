@@ -26,6 +26,9 @@
     self.secretID = dict[@"secretID"];
     self.secretKey = dict[@"secretKey"];
     self.appID = dict[@"appId"];
+    if (self.appID == nil) {
+        self.appID = @"1278687956";
+    }
     return  self;
 }
 @end
