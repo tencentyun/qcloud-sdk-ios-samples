@@ -316,12 +316,12 @@
 
 - (void) testPutObjectWithACL {
     QCloudPutObjectRequest* put = [QCloudPutObjectRequest new];
-    put.object =
-    put.bucket =self.bucket;
+    put.bucket = @"karis1test-1253653367";
+    put.object = @"123.txt";
     put.body =  [@"1234jdjdjdjjdjdjyuehjshgdytfakjhsghgdhg" dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *ownerIdentifier = [NSString stringWithFormat:@"qcs::cam::uin/%@:uin/%@",@"2779643970", @"2779643970"];
+    NSString *ownerIdentifier = [NSString stringWithFormat:@"qcs::cam::uin/%@:uin/%@",self.authorizedUIN, self.authorizedUIN];
     NSString *grantString = [NSString stringWithFormat:@"id=\"%@\"",ownerIdentifier];
-    put.grantRead = put.grantWrite = put.grantFullControl = grantString;
+    put.grantRead = grantString;
     XCTestExpectation* exp = [self expectationWithDescription:@"delete"];
     __block NSError* resultError;
     [put setFinishBlock:^(id outputObject, NSError *error) {
