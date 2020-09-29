@@ -18,9 +18,6 @@
 @interface QCloudCOSTransferTests : XCTestCase <QCloudSignatureProvider>
 @property (nonatomic, strong) NSString* bucket;
 @property (nonatomic, strong) NSMutableArray* tempFilePathArray;
-@property (nonatomic,strong)NSString * abroadBucket;
-@property (nonatomic,strong)NSString * abroadLocation;
-
 @end
 
 @implementation QCloudCOSTransferTests
@@ -44,9 +41,6 @@
 //    });
     self.bucket = [QCloudTestTempVariables sharedInstance].testBucket;
     [self registerHTTPTransferManager];
-    
-    self.abroadBucket = @"travis-ci-test";
-    self.abroadLocation = @"na-siliconvalley";
 }
 
 - (void)tearDown {
@@ -108,7 +102,7 @@
     __block int count = 0;
     for (int i = 0; i<20; i++) {
         QCloudCOSXMLUploadObjectRequest *req = [QCloudCOSXMLUploadObjectRequest new];
-        req.bucket = self.abroadBucket;
+        req.bucket = @"testmoreservice-1253653367";
         req.object = [NSString stringWithFormat:@"%d",i];
         req.body = [NSURL fileURLWithPath:[self tempFileWithSize:50*1024*1024]];
        
@@ -164,7 +158,7 @@
     __block NSString *object = [NSUUID UUID].UUIDString;
     put.body = url;
     put.object = @"1907161004223325000101490019f27d_1907161004223325000101490019f27e.mp4";
-    put.bucket = self.abroadBucket;
+    put.bucket = self.bucket;
 
 //    put.enableMD5Verification = NO;
 
@@ -208,7 +202,7 @@
     int randomNumber = arc4random()%100;
     NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:15*1024*1024 + randomNumber]];
     put.object = [NSUUID UUID].UUIDString;
-    put.bucket = self.abroadBucket;
+    put.bucket = self.bucket;
     put.body =  url;
     [put setSendProcessBlock:^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
         NSLog(@"upload %lld totalSend %lld aim %lld", bytesSent, totalBytesSent, totalBytesExpectedToSend);
@@ -344,7 +338,7 @@
     __block XCTestExpectation* Expectation = [self expectationWithDescription:@"Put Object Expectation"];
     __block QCloudCOSXMLUploadObjectRequest* uploadObjectRequest = [[QCloudCOSXMLUploadObjectRequest alloc] init];
 
-    uploadObjectRequest.bucket = self.abroadBucket;
+    uploadObjectRequest.bucket = self.bucket;
     uploadObjectRequest.object = @"SSE-part-Upload";
     uploadObjectRequest.body = [NSURL fileURLWithPath:[self tempFileWithSize:2*1024*1024]];
     NSString *customKey = @"123456qwertyuioplkjhgfdsazxcvbnm";
@@ -376,7 +370,7 @@
     __block XCTestExpectation* Expectation = [self expectationWithDescription:@"Put Object Expectation"];
     __block QCloudCOSXMLUploadObjectRequest* uploadObjectRequest = [[QCloudCOSXMLUploadObjectRequest alloc] init];
     uploadObjectRequest.enableMD5Verification = NO;
-    uploadObjectRequest.bucket = self.abroadBucket;
+    uploadObjectRequest.bucket = self.bucket;
     uploadObjectRequest.object = @"SSE-part-Upload";
     uploadObjectRequest.body = [NSURL fileURLWithPath:[self tempFileWithSize:2*1024*1024]];
     NSString *customKey = @"123456qwertyuioplkjhgfdsazxcvbnm";
@@ -448,7 +442,7 @@
 
 }
 - (void)testCopyBigFileWithSSE {
-    NSString* tempBucket = self.abroadBucket;
+    NSString* tempBucket = [[QCloudCOSXMLTestUtility sharedInstance] createTestBucketWithPrefix:@"tf"];
     NSString* tempFileName =  @"30MBTempFile";
     
     XCTestExpectation* uploadChineseNameBigFileExpectation = [self expectationWithDescription:@"upload temp object"];
@@ -476,7 +470,7 @@
     request.sourceBucket = tempBucket;
     request.sourceObject = uploadObjectRequest2.object;
     request.sourceAPPID = [QCloudCOSXMLService defaultCOSXML].configuration.appID;
-    request.sourceRegion= self.abroadLocation;
+    request.sourceRegion= [QCloudCOSXMLService defaultCOSXML].configuration.endpoint.regionName;
     NSLog(@"customHeaders %@",request.customHeaders);
     [request setFinishBlock:^(QCloudCopyObjectResult* result, NSError* error) {
         XCTAssertNil(error);
@@ -647,7 +641,7 @@
     int randomNumber = arc4random()%100;
     NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:15*1024*1024 + randomNumber]];
     put.object = @"中文名大文件";
-    put.bucket = self.abroadBucket;
+    put.bucket = self.bucket;
     put.body =  url;
     [put setSendProcessBlock:^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
         NSLog(@"upload %lld totalSend %lld aim %lld", bytesSent, totalBytesSent, totalBytesExpectedToSend);
@@ -697,7 +691,7 @@
     int randomNumber = arc4random()%100;
     NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:15*1024*1024 + randomNumber]];
     put.object = @"→↓←→↖↗↙↘! \"#$%&'()*+,-.0123456789:;<=>@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
-    put.bucket = self.abroadBucket;
+    put.bucket = self.bucket;
     put.body =  url;
     [put setSendProcessBlock:^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
         NSLog(@"upload %lld totalSend %lld aim %lld", bytesSent, totalBytesSent, totalBytesExpectedToSend);
@@ -745,7 +739,7 @@
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
     NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:50*1024*1024 ]];
     put.object = [NSUUID UUID].UUIDString;
-    put.bucket = self.abroadBucket;
+    put.bucket = self.bucket;
     put.body =  url;
     [put setSendProcessBlock:^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
         NSLog(@"upload %lld totalSend %lld aim %lld", bytesSent, totalBytesSent, totalBytesExpectedToSend);
@@ -813,7 +807,7 @@
     int randomNumber = arc4random()%100;
     NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:304*1024*1024 + randomNumber]];
     put.object = [NSUUID UUID].UUIDString;
-    put.bucket = self.abroadBucket;
+    put.bucket = self.bucket;
     put.body =  url;
     
     XCTestExpectation* exp = [self expectationWithDescription:@"UploadObject exp"];
@@ -863,7 +857,7 @@
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
     NSURL* url = [NSURL fileURLWithPath:file4MBPath];
     put.object = [NSUUID UUID].UUIDString;
-    put.bucket = self.abroadBucket;
+    put.bucket = self.bucket;
     put.body =  url;
     
     __block QCloudUploadObjectResult* result;
@@ -915,7 +909,7 @@
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
     NSURL* url = [NSURL fileURLWithPath:[self tempFileWithSize:30*1024*1024]];
     put.object = [NSUUID UUID].UUIDString;
-    put.bucket = self.abroadBucket;
+    put.bucket = self.bucket;
     put.body =  url;
     
     __block QCloudUploadObjectResult* result;
