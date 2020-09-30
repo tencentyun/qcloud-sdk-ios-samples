@@ -293,7 +293,8 @@
 - (void) testPutObject {
     QCloudPutObjectRequest* put = [QCloudPutObjectRequest new];
     put.object = @"1/4.txt";
-    put.bucket =self.bucket;
+    put.bucket = kAbroadBucket;
+    put.regionName = kAbroadRegion;
     NSURL *url = [NSURL fileURLWithPath:[self tempFileWithSize:30*1024*1024]];
     put.body =  url;
     XCTestExpectation* exp = [self expectationWithDescription:@"delete"];
@@ -362,6 +363,7 @@
 }
 - (NSString*) tempFileWithSize:(int)size
 {
+    size = size / 5;
     NSString* file4MBPath = QCloudPathJoin(QCloudTempDir(), [NSUUID UUID].UUIDString);
     
     if (!QCloudFileExist(file4MBPath)) {
@@ -428,7 +430,8 @@
     QCloudPutObjectRequest* put = [QCloudPutObjectRequest new];
     NSString* object =  [NSUUID UUID].UUIDString;
     put.object =@"test/1/2/3/4/5.jpg";
-    put.bucket = self.bucket;
+    put.bucket = kAbroadBucket;
+    put.regionName = kAbroadRegion;
     NSURL* fileURL = [NSURL fileURLWithPath:[self tempFileWithSize:1024*1024*3]];
     put.body = fileURL;
     
@@ -437,7 +440,8 @@
     request.downloadingURL = [NSURL URLWithString:QCloudTempFilePathWithExtension(@"downding")];
     
     [put setFinishBlock:^(id outputObject, NSError *error) {
-        request.bucket = self.bucket;
+        request.bucket = kAbroadBucket;
+        request.regionName = kAbroadRegion;
         request.object = @"test/1/2/3/4/5.jpg";
         
         [request setFinishBlock:^(id outputObject, NSError *error) {
@@ -463,7 +467,8 @@
     QCloudCOSXMLUploadObjectRequest* put = [QCloudCOSXMLUploadObjectRequest new];
     NSString* object =  [NSUUID UUID].UUIDString;
     put.object =object;
-    put.bucket = self.bucket;
+    put.bucket = kAbroadBucket;
+    put.regionName = kAbroadRegion;
     NSURL* fileURL = [NSURL fileURLWithPath:[self tempFileWithSize:1024*1024*1]];
     put.body = fileURL;
     NSLog(@"fileURL  %@",fileURL.absoluteString);
@@ -471,7 +476,8 @@
     __block QCloudGetObjectRequest* request = [QCloudGetObjectRequest new];
     request.downloadingURL = [NSURL URLWithString:QCloudTempFilePathWithExtension(@"downding")];
     [put setFinishBlock:^(id outputObject, NSError *error) {
-        request.bucket = self.bucket;
+        request.bucket = kAbroadBucket;
+        request.regionName = kAbroadRegion;
         request.object = object;
         request.enableMD5Verification = YES;
         [request setFinishBlock:^(id outputObject, NSError *error) {
@@ -564,12 +570,13 @@
 
 
 - (void)testMultiplePutObjectCopy {
-    NSString* tempBucket = [[QCloudCOSXMLTestUtility sharedInstance] createTestBucketWithPrefix:@"dt"];
+    NSString* tempBucket = kAbroadBucket;
     
     XCTestExpectation* uploadExpectation = [self expectationWithDescription:@"upload temp object"];
     QCloudCOSXMLUploadObjectRequest* uploadObjectRequest = [[QCloudCOSXMLUploadObjectRequest alloc] init];
     NSString* tempFileName =  @"30MBTempFile";
     uploadObjectRequest.bucket = tempBucket;
+    uploadObjectRequest.regionName = kAbroadRegion;
     uploadObjectRequest.object = tempFileName;
     uploadObjectRequest.body = [NSURL fileURLWithPath:[self tempFileWithSize:30*1024*1024]];
     [uploadObjectRequest setFinishBlock:^(QCloudUploadObjectResult *result, NSError *error) {
@@ -585,7 +592,7 @@
     request.sourceBucket = tempBucket;
     request.sourceObject = tempFileName;
     request.sourceAPPID = [QCloudCOSXMLService defaultCOSXML].configuration.appID;
-    request.sourceRegion= [QCloudCOSXMLService defaultCOSXML].configuration.endpoint.regionName;
+    request.sourceRegion= kAbroadRegion;
     
     XCTestExpectation* expectation = [self expectationWithDescription:@"Put Object Copy"];
     [request setFinishBlock:^(QCloudCopyObjectResult* result, NSError* error) {
@@ -601,14 +608,14 @@
 }
 
 - (void)testForInCopyObject {
-    NSString* tempBucket = [[QCloudCOSXMLTestUtility sharedInstance] createTestBucketWithPrefix:@"dt"];
+    NSString* tempBucket = kAbroadBucket;
     NSString* tempFileName =  @"30MBTempFile";
-
     for (int i = 0; i < 5; i++) {
     XCTestExpectation* uploadExpectation = [self expectationWithDescription:@"upload temp object"];
         QCloudCOSXMLUploadObjectRequest* uploadObjectRequest = [[QCloudCOSXMLUploadObjectRequest alloc] init];
         uploadObjectRequest.bucket = tempBucket;
-        uploadObjectRequest.object = tempFileName;
+        uploadObjectRequest.regionName = kAbroadRegion;
+        uploadObjectRequest.object = [NSString stringWithFormat:@"tempFileName_%d",i];
         uploadObjectRequest.body = [NSURL fileURLWithPath:[self tempFileWithSize:30*1024*1024]];
         [uploadObjectRequest setFinishBlock:^(QCloudUploadObjectResult *result, NSError *error) {
             XCTAssertNil(error,@"error occures on uploading");
@@ -617,12 +624,13 @@
         [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:uploadObjectRequest];
         [self waitForExpectationsWithTimeout:200 handler:nil];
     }
-    
+//
     XCTestExpectation* getBucketExpectation = [self expectationWithDescription:@"get bucket"];
     __block NSArray* contentsArray ;
     QCloudGetBucketRequest* getBucketRequest = [[QCloudGetBucketRequest alloc] init];
     getBucketRequest.bucket = tempBucket;
-    getBucketRequest.maxKeys = 1000;
+    getBucketRequest.regionName = kAbroadRegion;
+    getBucketRequest.maxKeys = 10;
     [getBucketRequest setFinishBlock:^(QCloudListBucketResult * _Nonnull result, NSError * _Nonnull error) {
         contentsArray = result.contents;
         XCTAssertNil(error,@"error during get bucket");
@@ -634,12 +642,13 @@
     for (QCloudBucketContents* content in contentsArray) {
         QCloudCOSXMLCopyObjectRequest* request = [[QCloudCOSXMLCopyObjectRequest alloc] init];
 
-        request.bucket = self.bucket;
-        request.object = [NSString stringWithFormat:@"copy-%@",tempFileName];
+        request.bucket = kAbroadBucket;
+        request.regionName = kAbroadRegion;
+        request.object = [NSString stringWithFormat:@"copy-%@",content.key];
         request.sourceBucket = tempBucket;
         request.sourceObject = content.key;
         request.sourceAPPID = [QCloudCOSXMLService defaultCOSXML].configuration.appID;
-        request.sourceRegion= [QCloudCOSXMLService defaultCOSXML].configuration.endpoint.regionName;
+        request.sourceRegion= kAbroadRegion;
         
         XCTestExpectation* expectation = [self expectationWithDescription:@"Put Object Copy"];
         [request setFinishBlock:^(QCloudCopyObjectResult* result, NSError* error) {
@@ -652,12 +661,13 @@
 }
 
 - (void)testCopyWithChineseNameAndWhiteSpace {
-    NSString* tempBucket = [[QCloudCOSXMLTestUtility sharedInstance] createTestBucketWithPrefix:@"dt"];
+    NSString* tempBucket = kAbroadBucket;
     NSString* tempFileName =  @"30MBTempFile";
     
         XCTestExpectation* uploadChineseNameSmallFileExpectation = [self expectationWithDescription:@"upload temp object"];
         QCloudCOSXMLUploadObjectRequest* uploadObjectRequest1 = [[QCloudCOSXMLUploadObjectRequest alloc] init];
         uploadObjectRequest1.bucket = tempBucket;
+        uploadObjectRequest1.regionName = kAbroadRegion;
         uploadObjectRequest1.object = @"中文名小文件";
         uploadObjectRequest1.body = [NSURL fileURLWithPath:[self tempFileWithSize:1024]];
         [uploadObjectRequest1 setFinishBlock:^(QCloudUploadObjectResult *result, NSError *error) {
@@ -683,6 +693,7 @@
     QCloudCOSXMLUploadObjectRequest* uploadObjectRequest3 = [[QCloudCOSXMLUploadObjectRequest alloc] init];
     uploadObjectRequest3.bucket = tempBucket;
     uploadObjectRequest3.object = tempFileName;
+    uploadObjectRequest3.regionName = kAbroadRegion;
     uploadObjectRequest3.body = [NSURL fileURLWithPath:[self tempFileWithSize:30*1024*1024]];
     [uploadObjectRequest3 setFinishBlock:^(QCloudUploadObjectResult *result, NSError *error) {
         XCTAssertNil(error,@"error occures on uploading");
@@ -696,7 +707,8 @@
     QCloudGetBucketRequest* getBucketRequest = [[QCloudGetBucketRequest alloc] init];
     __block NSArray* contentsArray;
     getBucketRequest.bucket = tempBucket;
-    getBucketRequest.maxKeys = 1000;
+    getBucketRequest.regionName = kAbroadRegion;
+    getBucketRequest.maxKeys = 10;
     [getBucketRequest setFinishBlock:^(QCloudListBucketResult * _Nonnull result, NSError * _Nonnull error) {
         XCTAssertNil(error,@"error during get bucket");
         contentsArray = result.contents;
@@ -707,12 +719,13 @@
     
     for (QCloudBucketContents* content in contentsArray) {
         QCloudCOSXMLCopyObjectRequest* request = [[QCloudCOSXMLCopyObjectRequest alloc] init];
-        request.bucket = self.bucket;
-        request.object = [NSString stringWithFormat:@"copy-%@",tempFileName];
+        request.bucket = tempBucket;
+        request.regionName = kAbroadRegion;
+        request.object = [NSString stringWithFormat:@"copy-%@",content.key];
         request.sourceBucket = tempBucket;
         request.sourceObject = content.key;
         request.sourceAPPID = [QCloudCOSXMLService defaultCOSXML].configuration.appID;
-        request.sourceRegion= [QCloudCOSXMLService defaultCOSXML].configuration.endpoint.regionName;
+        request.sourceRegion= kAbroadRegion;
         
         XCTestExpectation* expectation = [self expectationWithDescription:@"Put Object Copy"];
         [request setFinishBlock:^(QCloudCopyObjectResult* result, NSError* error) {
@@ -872,10 +885,11 @@
     
     XCTestExpectation* uploadExpectation = [self expectationWithDescription:@"upload temp object"];
     QCloudCOSXMLUploadObjectRequest* uploadObjectRequest = [[QCloudCOSXMLUploadObjectRequest alloc] init];
-    NSString* tempFileName =  @"test/subtest/30MBTempFile";
-    uploadObjectRequest.bucket = [[QCloudCOSXMLTestUtility sharedInstance] createTestBucketWithCosSerVice:[QCloudCOSXMLService cosxmlServiceForKey:kTestFromAnotherRegionCopy] withPrefix:@"sts"];
+    NSString* tempFileName =  @"test/subtest/3MBTempFile";
+    uploadObjectRequest.bucket = kAbroadBucket;
+    uploadObjectRequest.regionName = kAbroadRegion;
     uploadObjectRequest.object = tempFileName;
-    uploadObjectRequest.body = [NSURL fileURLWithPath:[self tempFileWithSize:30*1024*1024]];
+    uploadObjectRequest.body = [NSURL fileURLWithPath:[self tempFileWithSize:3*1024*1024]];
     [uploadObjectRequest setFinishBlock:^(QCloudUploadObjectResult *result, NSError *error) {
         XCTAssertNil(error,@"error occures on uploading");
         [uploadExpectation fulfill];
@@ -885,12 +899,13 @@
     
     QCloudCOSXMLCopyObjectRequest* request = [[QCloudCOSXMLCopyObjectRequest alloc] init];
     
-    request.bucket = self.bucket;
+    request.bucket = kAbroadBucket;
+    request.regionName = kAbroadRegion;
     request.object = @"copy-result-test";
-    request.sourceBucket =  uploadObjectRequest.bucket;
+    request.sourceBucket =  kAbroadBucket;
     request.sourceObject = tempFileName;
     request.sourceAPPID = self.appID;
-    request.sourceRegion= kRegion;
+    request.sourceRegion= kAbroadRegion;
     
     XCTestExpectation* expectation = [self expectationWithDescription:@"Put Object Copy"];
     [request setFinishBlock:^(QCloudCopyObjectResult* result, NSError* error) {
@@ -907,7 +922,8 @@
     XCTestExpectation* uploadExpectation = [self expectationWithDescription:@"upload temp object"];
     QCloudCOSXMLUploadObjectRequest* uploadObjectRequest = [[QCloudCOSXMLUploadObjectRequest alloc] init];
     NSString* tempFileName =  @"test/subtest/30MBTempFile";
-    uploadObjectRequest.bucket = [[QCloudCOSXMLTestUtility sharedInstance] createTestBucketWithCosSerVice:[QCloudCOSXMLService cosxmlServiceForKey:kTestFromAnotherRegionCopy] withPrefix:@"sts"];
+    uploadObjectRequest.bucket = kAbroadBucket;
+    uploadObjectRequest.regionName = kAbroadRegion;
     uploadObjectRequest.object = tempFileName;
     uploadObjectRequest.body = [NSURL fileURLWithPath:[self tempFileWithSize:1*1024*1024]];
     [uploadObjectRequest setFinishBlock:^(QCloudUploadObjectResult *result, NSError *error) {
@@ -919,12 +935,13 @@
     
     QCloudCOSXMLCopyObjectRequest* request = [[QCloudCOSXMLCopyObjectRequest alloc] init];
     
-    request.bucket = self.bucket;
+    request.bucket = kAbroadBucket;
+    request.regionName = kAbroadRegion;
     request.object = @"copy-result-test";
     request.sourceBucket =  uploadObjectRequest.bucket;
     request.sourceObject = tempFileName;
     request.sourceAPPID = self.appID;
-    request.sourceRegion= kRegion;
+    request.sourceRegion= kAbroadRegion;
     
     XCTestExpectation* expectation = [self expectationWithDescription:@"Put Object Copy"];
     [request setFinishBlock:^(QCloudCopyObjectResult* result, NSError* error) {

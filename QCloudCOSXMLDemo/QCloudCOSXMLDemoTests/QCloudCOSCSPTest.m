@@ -79,6 +79,7 @@
 
 - (NSString*) tempFileWithSize:(int)size
 {
+    size = size / 5;
     NSString* file4MBPath = QCloudPathJoin(QCloudTempDir(), [NSUUID UUID].UUIDString);
     
     if (!QCloudFileExist(file4MBPath)) {

@@ -15,5 +15,8 @@
 #define kRegion @"ap-guangzhou"
 #define kTestBucket @"ios-v2-test"
 
+#define kAbroadRegion @"na-siliconvalley"
+#define kAbroadBucket @"travis-ci-test"
+
 #define kTestFromAnotherRegionCopy @"testcopyFromAnotherRegion"
 #endif /* TestCommonDefine_h */
