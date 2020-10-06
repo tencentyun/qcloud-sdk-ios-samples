@@ -72,7 +72,6 @@
 #pragma mark -tool
 - (NSString*) tempFileWithSize:(int)size
 {
-    size = size / 5;
     NSString* file4MBPath = QCloudPathJoin(QCloudTempDir(), [NSUUID UUID].UUIDString);
     
     if (!QCloudFileExist(file4MBPath)) {
@@ -131,7 +130,7 @@
         [req waitForComplete];
     }
     
-    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:600 handler:^(NSError * _Nullable error) {
        }];
 }
 - (void) testRegisterCustomManagerService
@@ -191,7 +190,7 @@
     }];
    
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:600 handler:^(NSError * _Nullable error) {
     }];
   
     
@@ -216,7 +215,7 @@
         [exp fulfill];
     }];
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] UploadObject:put];
-    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:600 handler:^(NSError * _Nullable error) {
     }];
     
 }
@@ -358,7 +357,7 @@
         [Expectation fulfill];
     }];
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] UploadObject:uploadObjectRequest];
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    [self waitForExpectationsWithTimeout:600 handler:nil];
     
     __block XCTestExpectation* headObjectExpectation = [self expectationWithDescription:@"Put Object Expectation"];
     QCloudHeadObjectRequest* headObjectRequest = [[QCloudHeadObjectRequest alloc] init];
@@ -371,7 +370,7 @@
     headObjectRequest.regionName = kAbroadRegion;
     headObjectRequest.object = @"SSE-part-Upload";
     [[QCloudCOSXMLService cosxmlServiceForKey:kHTTPServiceKey] HeadObject:headObjectRequest];
-     [self waitForExpectationsWithTimeout:80 handler:nil];
+     [self waitForExpectationsWithTimeout:600 handler:nil];
 }
 ////SSE-C分块上传
 - (void)testMultiplePut_GetObjectWithSSE {
@@ -392,7 +391,7 @@
         [Expectation fulfill];
     }];
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] UploadObject:uploadObjectRequest];
-    [self waitForExpectationsWithTimeout:100 handler:nil];
+    [self waitForExpectationsWithTimeout:600 handler:nil];
     
     __block XCTestExpectation* getObjecExpectation = [self expectationWithDescription:@"Put Object Expectation"];
     QCloudGetObjectRequest* getObjectRequest = [[QCloudGetObjectRequest alloc] init];
@@ -409,7 +408,7 @@
         QCloudLogInfo(@"bytesDownload: %lld  totalBytesDownload :%lld  totalBytesExpectedToDownload:%lld ",bytesDownload,totalBytesDownload,totalBytesExpectedToDownload);
     }];
     [[QCloudCOSXMLService cosxmlServiceForKey:kHTTPServiceKey] GetObject:getObjectRequest];
-    [self waitForExpectationsWithTimeout:100 handler:nil];
+    [self waitForExpectationsWithTimeout:600 handler:nil];
 }
 - (void)testCopySmallFileWithSSE {
     NSString* tempBucket = [[QCloudCOSXMLTestUtility sharedInstance] createTestBucketWithPrefix:@"tf"];
@@ -471,7 +470,7 @@
         [uploadChineseNameBigFileExpectation fulfill];
     }];
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] UploadObject:uploadObjectRequest2];
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    [self waitForExpectationsWithTimeout:600 handler:nil];
     XCTestExpectation* expectation = [self expectationWithDescription:@"Put Object Copy"];
     
     QCloudCOSXMLCopyObjectRequest* request = [[QCloudCOSXMLCopyObjectRequest alloc] init];
@@ -489,7 +488,7 @@
         [expectation fulfill];
     }];
     [[QCloudCOSTransferMangerService costransfermangerServiceForKey:kHTTPServiceKey] CopyObject:request];
-        [self waitForExpectationsWithTimeout:100 handler:nil];
+        [self waitForExpectationsWithTimeout:600 handler:nil];
     
 }
 
@@ -671,7 +670,7 @@
         NSLog(@"UploadID%@",uploadID);
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:600 handler:^(NSError * _Nullable error) {
     }];
     XCTAssertNotNil(result);
 }
@@ -694,7 +693,7 @@
         [exp fulfill];
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:600 handler:^(NSError * _Nullable error) {
     }];
     XCTAssertNotNil(result);
 }
@@ -720,7 +719,7 @@
         [exp fulfill];
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:600 handler:^(NSError * _Nullable error) {
     }];
     XCTAssertNotNil(result);
 }
@@ -768,7 +767,7 @@
         [exp fulfill];
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-    [self waitForExpectationsWithTimeout:180 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:600 handler:^(NSError * _Nullable error) {
     }];
     XCTAssertNotNil(result);
 }
@@ -860,7 +859,7 @@
         }];
         
     });
-    [self waitForExpectationsWithTimeout:100 handler:nil];
+    [self waitForExpectationsWithTimeout:600 handler:nil];
     XCTAssertNotNil(abortResult);
 }
 - (void) testChainesePauseAndResume {
@@ -919,7 +918,7 @@
     });
     
     
-    [self waitForExpectationsWithTimeout:800 handler:nil];
+    [self waitForExpectationsWithTimeout:600 handler:nil];
     XCTAssertNotNil(result);
     XCTAssertNotNil(result.location);
     XCTAssertNotNil(result.eTag);
@@ -973,7 +972,7 @@
     });
 
 
-    [self waitForExpectationsWithTimeout:800 handler:nil];
+    [self waitForExpectationsWithTimeout:600 handler:nil];
     XCTAssertNotNil(result);
     XCTAssertNotNil(result.location);
     XCTAssertNotNil(result.eTag);
@@ -1014,7 +1013,7 @@
         
     }];
     [[QCloudCOSTransferMangerService defaultCOSTransferManager] UploadObject:put];
-    [self waitForExpectationsWithTimeout:80 handler:nil];
+    [self waitForExpectationsWithTimeout:600 handler:nil];
 }
 
 

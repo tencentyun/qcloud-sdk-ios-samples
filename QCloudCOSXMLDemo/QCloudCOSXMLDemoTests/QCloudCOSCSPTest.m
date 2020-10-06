@@ -72,14 +72,14 @@
         [exp fulfill];
     }];
     [[self getCSPCOSXMLService] PutObject:put];
-    [self waitForExpectationsWithTimeout:80 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:600 handler:^(NSError * _Nullable error) {
     }];
     return put.object;
 }
 
 - (NSString*) tempFileWithSize:(int)size
 {
-    size = size / 5;
+    
     NSString* file4MBPath = QCloudPathJoin(QCloudTempDir(), [NSUUID UUID].UUIDString);
     
     if (!QCloudFileExist(file4MBPath)) {
