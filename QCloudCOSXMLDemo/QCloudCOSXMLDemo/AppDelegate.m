@@ -11,7 +11,6 @@
 
 #import <UserNotifications/UserNotifications.h>
 #import "SecretStorage.h"
-#import "MTAConfig.h"
 #import "QCloudMyBucketListCtor.h"
 //#import <QCloudCOSXML/QCloudLogManager.h>
 //#define  USE_TEMPERATE_SECRET
@@ -83,7 +82,7 @@
     [self setupCOSXMLShareService];
     self.credentialFenceQueue = [QCloudCredentailFenceQueue new];
     self.credentialFenceQueue.delegate = self;
-    [[TACMTAConfig getInstance] setDebugEnable:YES];
+  
     
     [QCloudCOSXMLConfiguration sharedInstance].currentRegion = kRegion;
     QCloudServiceConfiguration* configuration = [[QCloudCOSXMLService defaultCOSXML].configuration copy];
