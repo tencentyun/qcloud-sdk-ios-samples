@@ -13,13 +13,11 @@
 @class QCloudThreadSafeMutableDictionary;
 typedef void (^QCloudURLSessionDidFinishEventsForBackgroundURLSessionBlock)(void);
 
-
 @interface QCloudHTTPSessionManager : NSObject <QCloudNetworkingAPI>
-@property (nonatomic ,strong) NSURLSessionConfiguration* configuration;
+@property (nonatomic, strong) NSURLSessionConfiguration *configuration;
 
-@property (copy, nonatomic) QCloudURLSessionDidFinishEventsForBackgroundURLSessionBlock didFinishEventsForBackgroundURLSession ;
-FOUNDATION_EXTERN QCloudThreadSafeMutableDictionary* cloudBackGroundSessionManagersCache;
-+ (QCloudHTTPSessionManager*)sessionManagerWithBackgroundIdentifier:(NSString *)backgroundIdentifier;
-+ (QCloudHTTPSessionManager*) shareClient;
+@property (copy, nonatomic) QCloudURLSessionDidFinishEventsForBackgroundURLSessionBlock didFinishEventsForBackgroundURLSession;
+FOUNDATION_EXTERN QCloudThreadSafeMutableDictionary *cloudBackGroundSessionManagersCache;
++ (QCloudHTTPSessionManager *)shareClient;
 @property (nonatomic, assign) int customConcurrentCount;
 @end

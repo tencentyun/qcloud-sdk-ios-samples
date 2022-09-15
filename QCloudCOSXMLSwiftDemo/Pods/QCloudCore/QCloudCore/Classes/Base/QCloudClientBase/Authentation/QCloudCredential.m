@@ -13,16 +13,15 @@
 /**
  Use the time after fix to compare,avoid time skew caused by Device
  */
-- (BOOL) valid
-{
-    if (!self.experationDate) {
+- (BOOL)valid {
+    if (!self.expirationDate) {
         return YES;
     }
     NSDate *date = [NSDate date];
     if ([NSDate qcloud_getTimeDeviation]) {
         date = [NSDate qcloud_calibrateTime];
     }
-    if ([date compare:self.experationDate] == NSOrderedDescending) {
+    if ([date compare:self.expirationDate] == NSOrderedDescending) {
         return NO;
     }
     return YES;

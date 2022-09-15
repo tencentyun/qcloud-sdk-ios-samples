@@ -1,5 +1,6 @@
 CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/QCloudCOSXML" "${PODS_CONFIGURATION_BUILD_DIR}/QCloudCore"
+EXCLUDED_ARCHS[sdk=iphonesimulator*] = arm64
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/QCloudCOSXML" "${PODS_CONFIGURATION_BUILD_DIR}/QCloudCore" "${PODS_ROOT}/QCloudCore/QCloudCore/Classes/BeaconFramework"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/QCloudCOSXML/QCloudCOSXML.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/QCloudCore/QCloudCore.framework/Headers"
 OTHER_LDFLAGS = $(inherited) -l"c++" -l"z" -framework "Accelerate" -framework "CoreMedia" -framework "SystemConfiguration"

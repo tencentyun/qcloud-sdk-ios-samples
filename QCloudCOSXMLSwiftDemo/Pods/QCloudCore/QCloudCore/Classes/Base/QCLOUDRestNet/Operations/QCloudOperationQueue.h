@@ -12,8 +12,9 @@
 @interface QCloudOperationQueue : NSObject
 @property (nonatomic, assign) int maxConcurrentCount;
 @property (nonatomic, assign) int customConcurrentCount;
-- (void) addOpreation:(QCloudRequestOperation*)operation;
-- (void) cancel:(QCloudRequestOperation*)operation;
-- (void) cancelByRequestID:(int64_t)requestID;
-- (void) cancelByRequestIDs:(NSArray<NSNumber*>*)requestIDs;
+- (void)addOpreation:(QCloudRequestOperation *)operation;
+- (void)cancel:(QCloudRequestOperation *)operation;
+- (void)cancelByRequestID:(int64_t)requestID;
+- (void)cancelByRequestIDs:(NSArray<NSNumber *> *)requestIDs;
+- (void)cancelAllOperation;
 @end

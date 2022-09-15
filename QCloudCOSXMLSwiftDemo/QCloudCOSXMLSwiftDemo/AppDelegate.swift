@@ -57,7 +57,6 @@ QCloudCredentailFenceQueueDelegate {
         self.setupCOSXMLService();
         self.credentialFenceQueue = QCloudCredentailFenceQueue.init();
         self.credentialFenceQueue?.delegate = self;
-        TACMTAConfig.getInstance()?.debugEnable = true;
         
         
         var configuration:QCloudServiceConfiguration?

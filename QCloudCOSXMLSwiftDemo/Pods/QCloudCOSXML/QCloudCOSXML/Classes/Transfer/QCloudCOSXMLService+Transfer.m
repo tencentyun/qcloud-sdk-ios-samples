@@ -16,56 +16,44 @@
 #import "QCloudHeadObjectRequest.h"
 #import "QCloudUploadPartCopyRequest.h"
 #import "QCloudPutObjectCopyRequest.h"
-#import "QCloudPutObjectWatermarkRequest.h"
-#import "QCloudGetRecognitionObjectRequest.h"
 
 
 @implementation QCloudCOSXMLService (Transfer)
 
-- (void) PutObject:(QCloudPutObjectRequest*)request
-{
-    [super performRequest:request ];
+- (void)PutObject:(QCloudPutObjectRequest *)request {
+    [super performRequest:request];
 }
 
-- (void) GetObject:(QCloudGetObjectRequest*)request
-{
-    [super performRequest:request ];
+- (void)GetObject:(QCloudGetObjectRequest *)request {
+    [super performRequest:request];
 }
 
-
-- (void) InitiateMultipartUpload:(QCloudInitiateMultipartUploadRequest*)request
-{
-    [super performRequest:request ];
+- (void)InitiateMultipartUpload:(QCloudInitiateMultipartUploadRequest *)request {
+    [super performRequest:request];
 }
 
-- (void) UploadPart:(QCloudUploadPartRequest*)request
-{
-    [super performRequest:request ];
+- (void)UploadPart:(QCloudUploadPartRequest *)request {
+    [super performRequest:request];
 }
 
-- (void) CompleteMultipartUpload:(QCloudCompleteMultipartUploadRequest*)request
-{
-    [super performRequest:request ];
+- (void)CompleteMultipartUpload:(QCloudCompleteMultipartUploadRequest *)request {
+    [super performRequest:request];
 }
 
-- (void) AbortMultipfartUpload:(QCloudAbortMultipfartUploadRequest*)request
-{
-    [super performRequest:request ];
+- (void)AbortMultipfartUpload:(QCloudAbortMultipfartUploadRequest *)request {
+    [super performRequest:request];
 }
 
-- (void) ListMultipart:(QCloudListMultipartRequest*)request
-{
-    [super performRequest:request ];
+- (void)ListMultipart:(QCloudListMultipartRequest *)request {
+    [super performRequest:request];
 }
-- (void) HeadObject:(QCloudHeadObjectRequest*)request
-{
-    [super performRequest:request ];
+- (void)HeadObject:(QCloudHeadObjectRequest *)request {
+    [super performRequest:request];
 }
-- (void) PutObjectCopy:(QCloudPutObjectCopyRequest*)request
-{
-    [super performRequest:request ];
+- (void)PutObjectCopy:(QCloudPutObjectCopyRequest *)request {
+    [super performRequest:request];
 }
-- (void) UploadPartCopy:(QCloudUploadPartCopyRequest*)request {
-    [super performRequest:request ];
+- (void)UploadPartCopy:(QCloudUploadPartCopyRequest *)request {
+    [super performRequest:request];
 }
 @end

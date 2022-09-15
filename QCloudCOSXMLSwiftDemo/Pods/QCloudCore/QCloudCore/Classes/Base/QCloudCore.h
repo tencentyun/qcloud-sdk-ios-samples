@@ -13,6 +13,7 @@
 #import "QCloudLogger.h"
 #import "QCloudBundle.h"
 #import "QCloudServiceConfiguration.h"
+#import "QCloudServiceConfiguration+Quality.h"
 #import "QCloudService.h"
 #import "QCloudFileUtils.h"
 #import "QCloudEndPoint.h"
@@ -40,6 +41,7 @@
 #import "QCloudThreadSafeMutableDictionary.h"
 #import "QCloudError.h"
 #import "UIDevice+QCloudFCUUID.h"
-
+#import "QCloudGCDTimer.h"
 #import "NSObject+HTTPHeadersContainer.h"
+#import "NSObject+QCloudModelTool.h"
 #endif /* QCloudCore_h */
