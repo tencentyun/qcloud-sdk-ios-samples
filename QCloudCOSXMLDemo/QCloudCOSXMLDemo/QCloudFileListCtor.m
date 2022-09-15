@@ -113,8 +113,8 @@ NSString * const BUCKET_PREFIXES_ITEM_VIEW_CELL = @"UITableViewCell";
         });
         
         if (error != nil) {
-            self.tableViewFooter.text = @"请求失败";
             dispatch_async(dispatch_get_main_queue(), ^{
+                self.tableViewFooter.text = @"请求失败";
                 [weakSelf.tableView reloadData];
             });
             

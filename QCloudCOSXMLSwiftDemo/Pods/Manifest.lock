@@ -11,7 +11,7 @@ DEPENDENCIES:
   - QCloudCOSXML
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/CocoaPods/Specs:
     - QCloudCore
     - QCloudCOSXML
 
@@ -21,4 +21,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 75cabaa47fed834986baecf3c02a565c8822ea94
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.11.3

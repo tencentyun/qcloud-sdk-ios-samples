@@ -108,11 +108,17 @@ NSInteger const RowHeight = 80;
     [QCloudCOSXMLConfiguration sharedInstance].currentBucket = self.contentsArray[indexPath.row].name;
     NSString* regionName = self.contentsArray[indexPath.row].location;
     [QCloudCOSXMLConfiguration sharedInstance].currentRegion = regionName;
+    
+    
     QCloudServiceConfiguration* configuration = [[QCloudCOSXMLService defaultCOSXML].configuration copy];
     configuration.endpoint.regionName = regionName;
+    
     [QCloudCOSTransferMangerService registerCOSTransferMangerWithConfiguration:configuration withKey:regionName];
     
-    [QCloudCOSXMLService registerCOSXMLWithConfiguration:configuration withKey:regionName];
+    if (![QCloudCOSXMLService hasServiceForKey:regionName]) {
+        [QCloudCOSXMLService registerCOSXMLWithConfiguration:configuration withKey:regionName];
+    }
+    
     [self.navigationController pushViewController:[QCloudFileListCtor new] animated:YES];
     
 }

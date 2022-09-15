@@ -31,10 +31,10 @@
 		D24283AF24F3B2D8002CA2EB /* QCCouldMyBucketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242839C24F3B2D7002CA2EB /* QCCouldMyBucketCell.swift */; };
 		D24283B024F3B2D8002CA2EB /* QCloudTransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242839D24F3B2D7002CA2EB /* QCloudTransferController.swift */; };
 		D24283B324F3B321002CA2EB /* COS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24283B224F3B321002CA2EB /* COS.swift */; };
-		D2F3E1E024F3B6D600CC920D /* UIViewController+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F3E1DC24F3B6D600CC920D /* UIViewController+Loading.m */; };
-		D2F3E1E124F3B6D600CC920D /* QCloudBucketContents+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F3E1DD24F3B6D600CC920D /* QCloudBucketContents+Addition.m */; };
-		D2F3E1E224F3B6D600CC920D /* NSString+UINCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F3E1DE24F3B6D600CC920D /* NSString+UINCategory.m */; };
-		D2F3E1E324F3B6D600CC920D /* NSURL+FileExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F3E1DF24F3B6D600CC920D /* NSURL+FileExtension.m */; };
+		D2D9685028D1BB78004D074A /* QCloudBucketContents+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D9684928D1BB78004D074A /* QCloudBucketContents+Addition.m */; };
+		D2D9685128D1BB78004D074A /* NSURL+FileExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D9684B28D1BB78004D074A /* NSURL+FileExtension.m */; };
+		D2D9685228D1BB78004D074A /* UIViewController+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D9684C28D1BB78004D074A /* UIViewController+Loading.m */; };
+		D2D9685328D1BB78004D074A /* NSString+UINCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D9684F28D1BB78004D074A /* NSString+UINCategory.m */; };
 		E4AD7C2EB1A83F3EAEAEB935 /* Pods_QCloudCOSXMLSwiftDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F063BE7F64CC76A7D5BC04C8 /* Pods_QCloudCOSXMLSwiftDemoTests.framework */; };
 		ECE8406A2B41173D8D926A5D /* Pods_QCloudCOSXMLSwiftDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 998300DF1A628AFAA50D3D03 /* Pods_QCloudCOSXMLSwiftDemo.framework */; };
 /* End PBXBuildFile section */
@@ -94,14 +94,14 @@
 		D242839D24F3B2D7002CA2EB /* QCloudTransferController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QCloudTransferController.swift; sourceTree = "<group>"; };
 		D24283B124F3B302002CA2EB /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		D24283B224F3B321002CA2EB /* COS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = COS.swift; sourceTree = "<group>"; };
-		D2F3E1D824F3B6D600CC920D /* NSURL+FileExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSURL+FileExtension.h"; path = "../../../QCloudCOSXMLDemo/QCloudCOSXMLDemo/NSURL+FileExtension.h"; sourceTree = "<group>"; };
-		D2F3E1D924F3B6D600CC920D /* QCloudBucketContents+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "QCloudBucketContents+Addition.h"; path = "../../../QCloudCOSXMLDemo/QCloudCOSXMLDemo/QCloudBucketContents+Addition.h"; sourceTree = "<group>"; };
-		D2F3E1DA24F3B6D600CC920D /* NSString+UINCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+UINCategory.h"; path = "../../../QCloudCOSXMLDemo/QCloudCOSXMLDemo/NSString+UINCategory.h"; sourceTree = "<group>"; };
-		D2F3E1DB24F3B6D600CC920D /* UIViewController+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Loading.h"; path = "../../../QCloudCOSXMLDemo/QCloudCOSXMLDemo/UIViewController+Loading.h"; sourceTree = "<group>"; };
-		D2F3E1DC24F3B6D600CC920D /* UIViewController+Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Loading.m"; path = "../../../QCloudCOSXMLDemo/QCloudCOSXMLDemo/UIViewController+Loading.m"; sourceTree = "<group>"; };
-		D2F3E1DD24F3B6D600CC920D /* QCloudBucketContents+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "QCloudBucketContents+Addition.m"; path = "../../../QCloudCOSXMLDemo/QCloudCOSXMLDemo/QCloudBucketContents+Addition.m"; sourceTree = "<group>"; };
-		D2F3E1DE24F3B6D600CC920D /* NSString+UINCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+UINCategory.m"; path = "../../../QCloudCOSXMLDemo/QCloudCOSXMLDemo/NSString+UINCategory.m"; sourceTree = "<group>"; };
-		D2F3E1DF24F3B6D600CC920D /* NSURL+FileExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURL+FileExtension.m"; path = "../../../QCloudCOSXMLDemo/QCloudCOSXMLDemo/NSURL+FileExtension.m"; sourceTree = "<group>"; };
+		D2D9684828D1BB78004D074A /* UIViewController+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Loading.h"; sourceTree = "<group>"; };
+		D2D9684928D1BB78004D074A /* QCloudBucketContents+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QCloudBucketContents+Addition.m"; sourceTree = "<group>"; };
+		D2D9684A28D1BB78004D074A /* NSString+UINCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UINCategory.h"; sourceTree = "<group>"; };
+		D2D9684B28D1BB78004D074A /* NSURL+FileExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+FileExtension.m"; sourceTree = "<group>"; };
+		D2D9684C28D1BB78004D074A /* UIViewController+Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Loading.m"; sourceTree = "<group>"; };
+		D2D9684D28D1BB78004D074A /* QCloudBucketContents+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QCloudBucketContents+Addition.h"; sourceTree = "<group>"; };
+		D2D9684E28D1BB78004D074A /* NSURL+FileExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+FileExtension.h"; sourceTree = "<group>"; };
+		D2D9684F28D1BB78004D074A /* NSString+UINCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UINCategory.m"; sourceTree = "<group>"; };
 		F063BE7F64CC76A7D5BC04C8 /* Pods_QCloudCOSXMLSwiftDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QCloudCOSXMLSwiftDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -177,7 +177,7 @@
 		D242835524F3B23F002CA2EB /* QCloudCOSXMLSwiftDemo */ = {
 			isa = PBXGroup;
 			children = (
-				D2F3E1D724F3B63600CC920D /* Category */,
+				D2D9684728D1BB78004D074A /* category */,
 				D242838B24F3B2D7002CA2EB /* UploadModule */,
 				D242839A24F3B2D7002CA2EB /* HomeModule */,
 				D242839124F3B2D7002CA2EB /* DownloadModule */,
@@ -257,19 +257,19 @@
 			path = HomeModule;
 			sourceTree = "<group>";
 		};
-		D2F3E1D724F3B63600CC920D /* Category */ = {
+		D2D9684728D1BB78004D074A /* category */ = {
 			isa = PBXGroup;
 			children = (
-				D2F3E1DA24F3B6D600CC920D /* NSString+UINCategory.h */,
-				D2F3E1DE24F3B6D600CC920D /* NSString+UINCategory.m */,
-				D2F3E1D824F3B6D600CC920D /* NSURL+FileExtension.h */,
-				D2F3E1DF24F3B6D600CC920D /* NSURL+FileExtension.m */,
-				D2F3E1D924F3B6D600CC920D /* QCloudBucketContents+Addition.h */,
-				D2F3E1DD24F3B6D600CC920D /* QCloudBucketContents+Addition.m */,
-				D2F3E1DB24F3B6D600CC920D /* UIViewController+Loading.h */,
-				D2F3E1DC24F3B6D600CC920D /* UIViewController+Loading.m */,
+				D2D9684828D1BB78004D074A /* UIViewController+Loading.h */,
+				D2D9684928D1BB78004D074A /* QCloudBucketContents+Addition.m */,
+				D2D9684A28D1BB78004D074A /* NSString+UINCategory.h */,
+				D2D9684B28D1BB78004D074A /* NSURL+FileExtension.m */,
+				D2D9684C28D1BB78004D074A /* UIViewController+Loading.m */,
+				D2D9684D28D1BB78004D074A /* QCloudBucketContents+Addition.h */,
+				D2D9684E28D1BB78004D074A /* NSURL+FileExtension.h */,
+				D2D9684F28D1BB78004D074A /* NSString+UINCategory.m */,
 			);
-			path = Category;
+			path = category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,25 +454,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				D24283AD24F3B2D8002CA2EB /* QCloudCOSXMLServiceConfiguration.swift in Sources */,
+				D2D9685028D1BB78004D074A /* QCloudBucketContents+Addition.m in Sources */,
 				D24283AF24F3B2D8002CA2EB /* QCCouldMyBucketCell.swift in Sources */,
 				D24283B024F3B2D8002CA2EB /* QCloudTransferController.swift in Sources */,
 				D24283A824F3B2D7002CA2EB /* QCloudDownLoadNewCtor.swift in Sources */,
 				D24283AB24F3B2D8002CA2EB /* utils.swift in Sources */,
 				D242839E24F3B2D7002CA2EB /* QCloudCreateBucketCtor.swift in Sources */,
+				D2D9685328D1BB78004D074A /* NSString+UINCategory.m in Sources */,
 				D24283A424F3B2D7002CA2EB /* QCloudCOSXMLRegionsController.swift in Sources */,
 				D24283A024F3B2D7002CA2EB /* BucketFileItemViewCell.swift in Sources */,
+				D2D9685228D1BB78004D074A /* UIViewController+Loading.m in Sources */,
 				D24283A224F3B2D7002CA2EB /* QCloudUploadController.swift in Sources */,
 				D24283AE24F3B2D8002CA2EB /* QCloudMyBucketListCtor.swift in Sources */,
+				D2D9685128D1BB78004D074A /* NSURL+FileExtension.m in Sources */,
 				D24283A924F3B2D7002CA2EB /* QCloudDownloadController.swift in Sources */,
 				D242839F24F3B2D7002CA2EB /* QCloudFileListCtor.swift in Sources */,
-				D2F3E1E224F3B6D600CC920D /* NSString+UINCategory.m in Sources */,
 				D24283A124F3B2D7002CA2EB /* QCloudUploadNewCtor.swift in Sources */,
 				D24283AA24F3B2D7002CA2EB /* AppDelegate.swift in Sources */,
 				D24283A524F3B2D7002CA2EB /* ViewController.swift in Sources */,
-				D2F3E1E024F3B6D600CC920D /* UIViewController+Loading.m in Sources */,
 				D24283A324F3B2D7002CA2EB /* cos_config.swift in Sources */,
-				D2F3E1E124F3B6D600CC920D /* QCloudBucketContents+Addition.m in Sources */,
-				D2F3E1E324F3B6D600CC920D /* NSURL+FileExtension.m in Sources */,
 				D24283B324F3B321002CA2EB /* COS.swift in Sources */,
 				D24283A724F3B2D7002CA2EB /* QCloudDownloadedFileInfo.swift in Sources */,
 				D24283A624F3B2D7002CA2EB /* QCloudFileDetailController.swift in Sources */,
