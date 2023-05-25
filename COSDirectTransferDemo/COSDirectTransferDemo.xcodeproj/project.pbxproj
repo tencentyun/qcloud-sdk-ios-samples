@@ -1,0 +1,602 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D22D6C8A2A1F457C00C8A05F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D6C892A1F457C00C8A05F /* AppDelegate.m */; };
+		D22D6C8D2A1F457C00C8A05F /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D6C8C2A1F457C00C8A05F /* SceneDelegate.m */; };
+		D22D6C902A1F457C00C8A05F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D6C8F2A1F457C00C8A05F /* ViewController.m */; };
+		D22D6C932A1F457C00C8A05F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D22D6C912A1F457C00C8A05F /* Main.storyboard */; };
+		D22D6C952A1F457F00C8A05F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22D6C942A1F457F00C8A05F /* Assets.xcassets */; };
+		D22D6C982A1F457F00C8A05F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D22D6C962A1F457F00C8A05F /* LaunchScreen.storyboard */; };
+		D22D6C9B2A1F457F00C8A05F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D6C9A2A1F457F00C8A05F /* main.m */; };
+		D22D6CA52A1F457F00C8A05F /* COSDirectTransferDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D6CA42A1F457F00C8A05F /* COSDirectTransferDemoTests.m */; };
+		D22D6CAF2A1F457F00C8A05F /* COSDirectTransferDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D6CAE2A1F457F00C8A05F /* COSDirectTransferDemoUITests.m */; };
+		D22D6CB12A1F457F00C8A05F /* COSDirectTransferDemoUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D6CB02A1F457F00C8A05F /* COSDirectTransferDemoUITestsLaunchTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D22D6CA12A1F457F00C8A05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D22D6C7D2A1F457C00C8A05F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D22D6C842A1F457C00C8A05F;
+			remoteInfo = COSDirectTransferDemo;
+		};
+		D22D6CAB2A1F457F00C8A05F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D22D6C7D2A1F457C00C8A05F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D22D6C842A1F457C00C8A05F;
+			remoteInfo = COSDirectTransferDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D22D6C852A1F457C00C8A05F /* COSDirectTransferDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = COSDirectTransferDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D22D6C882A1F457C00C8A05F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D22D6C892A1F457C00C8A05F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D22D6C8B2A1F457C00C8A05F /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		D22D6C8C2A1F457C00C8A05F /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		D22D6C8E2A1F457C00C8A05F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D22D6C8F2A1F457C00C8A05F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D22D6C922A1F457C00C8A05F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D22D6C942A1F457F00C8A05F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D22D6C972A1F457F00C8A05F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D22D6C992A1F457F00C8A05F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D22D6C9A2A1F457F00C8A05F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D22D6CA02A1F457F00C8A05F /* COSDirectTransferDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = COSDirectTransferDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D22D6CA42A1F457F00C8A05F /* COSDirectTransferDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = COSDirectTransferDemoTests.m; sourceTree = "<group>"; };
+		D22D6CAA2A1F457F00C8A05F /* COSDirectTransferDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = COSDirectTransferDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D22D6CAE2A1F457F00C8A05F /* COSDirectTransferDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = COSDirectTransferDemoUITests.m; sourceTree = "<group>"; };
+		D22D6CB02A1F457F00C8A05F /* COSDirectTransferDemoUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = COSDirectTransferDemoUITestsLaunchTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D22D6C822A1F457C00C8A05F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D22D6C9D2A1F457F00C8A05F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D22D6CA72A1F457F00C8A05F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D22D6C7C2A1F457C00C8A05F = {
+			isa = PBXGroup;
+			children = (
+				D22D6C872A1F457C00C8A05F /* COSDirectTransferDemo */,
+				D22D6CA32A1F457F00C8A05F /* COSDirectTransferDemoTests */,
+				D22D6CAD2A1F457F00C8A05F /* COSDirectTransferDemoUITests */,
+				D22D6C862A1F457C00C8A05F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D22D6C862A1F457C00C8A05F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D22D6C852A1F457C00C8A05F /* COSDirectTransferDemo.app */,
+				D22D6CA02A1F457F00C8A05F /* COSDirectTransferDemoTests.xctest */,
+				D22D6CAA2A1F457F00C8A05F /* COSDirectTransferDemoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D22D6C872A1F457C00C8A05F /* COSDirectTransferDemo */ = {
+			isa = PBXGroup;
+			children = (
+				D22D6C882A1F457C00C8A05F /* AppDelegate.h */,
+				D22D6C892A1F457C00C8A05F /* AppDelegate.m */,
+				D22D6C8B2A1F457C00C8A05F /* SceneDelegate.h */,
+				D22D6C8C2A1F457C00C8A05F /* SceneDelegate.m */,
+				D22D6C8E2A1F457C00C8A05F /* ViewController.h */,
+				D22D6C8F2A1F457C00C8A05F /* ViewController.m */,
+				D22D6C912A1F457C00C8A05F /* Main.storyboard */,
+				D22D6C942A1F457F00C8A05F /* Assets.xcassets */,
+				D22D6C962A1F457F00C8A05F /* LaunchScreen.storyboard */,
+				D22D6C992A1F457F00C8A05F /* Info.plist */,
+				D22D6C9A2A1F457F00C8A05F /* main.m */,
+			);
+			path = COSDirectTransferDemo;
+			sourceTree = "<group>";
+		};
+		D22D6CA32A1F457F00C8A05F /* COSDirectTransferDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				D22D6CA42A1F457F00C8A05F /* COSDirectTransferDemoTests.m */,
+			);
+			path = COSDirectTransferDemoTests;
+			sourceTree = "<group>";
+		};
+		D22D6CAD2A1F457F00C8A05F /* COSDirectTransferDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D22D6CAE2A1F457F00C8A05F /* COSDirectTransferDemoUITests.m */,
+				D22D6CB02A1F457F00C8A05F /* COSDirectTransferDemoUITestsLaunchTests.m */,
+			);
+			path = COSDirectTransferDemoUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D22D6C842A1F457C00C8A05F /* COSDirectTransferDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D22D6CB42A1F457F00C8A05F /* Build configuration list for PBXNativeTarget "COSDirectTransferDemo" */;
+			buildPhases = (
+				D22D6C812A1F457C00C8A05F /* Sources */,
+				D22D6C822A1F457C00C8A05F /* Frameworks */,
+				D22D6C832A1F457C00C8A05F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = COSDirectTransferDemo;
+			productName = COSDirectTransferDemo;
+			productReference = D22D6C852A1F457C00C8A05F /* COSDirectTransferDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D22D6C9F2A1F457F00C8A05F /* COSDirectTransferDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D22D6CB72A1F457F00C8A05F /* Build configuration list for PBXNativeTarget "COSDirectTransferDemoTests" */;
+			buildPhases = (
+				D22D6C9C2A1F457F00C8A05F /* Sources */,
+				D22D6C9D2A1F457F00C8A05F /* Frameworks */,
+				D22D6C9E2A1F457F00C8A05F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D22D6CA22A1F457F00C8A05F /* PBXTargetDependency */,
+			);
+			name = COSDirectTransferDemoTests;
+			productName = COSDirectTransferDemoTests;
+			productReference = D22D6CA02A1F457F00C8A05F /* COSDirectTransferDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D22D6CA92A1F457F00C8A05F /* COSDirectTransferDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D22D6CBA2A1F457F00C8A05F /* Build configuration list for PBXNativeTarget "COSDirectTransferDemoUITests" */;
+			buildPhases = (
+				D22D6CA62A1F457F00C8A05F /* Sources */,
+				D22D6CA72A1F457F00C8A05F /* Frameworks */,
+				D22D6CA82A1F457F00C8A05F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D22D6CAC2A1F457F00C8A05F /* PBXTargetDependency */,
+			);
+			name = COSDirectTransferDemoUITests;
+			productName = COSDirectTransferDemoUITests;
+			productReference = D22D6CAA2A1F457F00C8A05F /* COSDirectTransferDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D22D6C7D2A1F457C00C8A05F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					D22D6C842A1F457C00C8A05F = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					D22D6C9F2A1F457F00C8A05F = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = D22D6C842A1F457C00C8A05F;
+					};
+					D22D6CA92A1F457F00C8A05F = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = D22D6C842A1F457C00C8A05F;
+					};
+				};
+			};
+			buildConfigurationList = D22D6C802A1F457C00C8A05F /* Build configuration list for PBXProject "COSDirectTransferDemo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D22D6C7C2A1F457C00C8A05F;
+			productRefGroup = D22D6C862A1F457C00C8A05F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D22D6C842A1F457C00C8A05F /* COSDirectTransferDemo */,
+				D22D6C9F2A1F457F00C8A05F /* COSDirectTransferDemoTests */,
+				D22D6CA92A1F457F00C8A05F /* COSDirectTransferDemoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D22D6C832A1F457C00C8A05F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D22D6C982A1F457F00C8A05F /* LaunchScreen.storyboard in Resources */,
+				D22D6C952A1F457F00C8A05F /* Assets.xcassets in Resources */,
+				D22D6C932A1F457C00C8A05F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D22D6C9E2A1F457F00C8A05F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D22D6CA82A1F457F00C8A05F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D22D6C812A1F457C00C8A05F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D22D6C902A1F457C00C8A05F /* ViewController.m in Sources */,
+				D22D6C8A2A1F457C00C8A05F /* AppDelegate.m in Sources */,
+				D22D6C9B2A1F457F00C8A05F /* main.m in Sources */,
+				D22D6C8D2A1F457C00C8A05F /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D22D6C9C2A1F457F00C8A05F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D22D6CA52A1F457F00C8A05F /* COSDirectTransferDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D22D6CA62A1F457F00C8A05F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D22D6CAF2A1F457F00C8A05F /* COSDirectTransferDemoUITests.m in Sources */,
+				D22D6CB12A1F457F00C8A05F /* COSDirectTransferDemoUITestsLaunchTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D22D6CA22A1F457F00C8A05F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D22D6C842A1F457C00C8A05F /* COSDirectTransferDemo */;
+			targetProxy = D22D6CA12A1F457F00C8A05F /* PBXContainerItemProxy */;
+		};
+		D22D6CAC2A1F457F00C8A05F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D22D6C842A1F457C00C8A05F /* COSDirectTransferDemo */;
+			targetProxy = D22D6CAB2A1F457F00C8A05F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D22D6C912A1F457C00C8A05F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D22D6C922A1F457C00C8A05F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D22D6C962A1F457F00C8A05F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D22D6C972A1F457F00C8A05F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D22D6CB22A1F457F00C8A05F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D22D6CB32A1F457F00C8A05F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D22D6CB52A1F457F00C8A05F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6RL39LH4U4;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = COSDirectTransferDemo/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tx.test.COSDirectTransferDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D22D6CB62A1F457F00C8A05F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6RL39LH4U4;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = COSDirectTransferDemo/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tx.test.COSDirectTransferDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D22D6CB82A1F457F00C8A05F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6RL39LH4U4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tx.test.COSDirectTransferDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/COSDirectTransferDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/COSDirectTransferDemo";
+			};
+			name = Debug;
+		};
+		D22D6CB92A1F457F00C8A05F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6RL39LH4U4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tx.test.COSDirectTransferDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/COSDirectTransferDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/COSDirectTransferDemo";
+			};
+			name = Release;
+		};
+		D22D6CBB2A1F457F00C8A05F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6RL39LH4U4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tx.test.COSDirectTransferDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = COSDirectTransferDemo;
+			};
+			name = Debug;
+		};
+		D22D6CBC2A1F457F00C8A05F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6RL39LH4U4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tx.test.COSDirectTransferDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = COSDirectTransferDemo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D22D6C802A1F457C00C8A05F /* Build configuration list for PBXProject "COSDirectTransferDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D22D6CB22A1F457F00C8A05F /* Debug */,
+				D22D6CB32A1F457F00C8A05F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D22D6CB42A1F457F00C8A05F /* Build configuration list for PBXNativeTarget "COSDirectTransferDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D22D6CB52A1F457F00C8A05F /* Debug */,
+				D22D6CB62A1F457F00C8A05F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D22D6CB72A1F457F00C8A05F /* Build configuration list for PBXNativeTarget "COSDirectTransferDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D22D6CB82A1F457F00C8A05F /* Debug */,
+				D22D6CB92A1F457F00C8A05F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D22D6CBA2A1F457F00C8A05F /* Build configuration list for PBXNativeTarget "COSDirectTransferDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D22D6CBB2A1F457F00C8A05F /* Debug */,
+				D22D6CBC2A1F457F00C8A05F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D22D6C7D2A1F457C00C8A05F /* Project object */;
+}

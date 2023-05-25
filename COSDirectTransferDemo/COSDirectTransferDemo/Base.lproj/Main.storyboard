@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g2h-NJ-PxV">
+                                <rect key="frame" x="24" y="83" width="345" height="230"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="g2h-NJ-PxV" secondAttribute="height" multiplier="9:6" id="Hoc-TS-Pi8"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2b-bk-rL7">
+                                <rect key="frame" x="24" y="361" width="345" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="T5H-Fl-8Ju"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apk-8L-tX0">
+                                <rect key="frame" x="24" y="426" width="345" height="38"/>
+                                <color key="backgroundColor" red="0.0" green="0.32156862749999998" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="RJ0-Fy-Jx6"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="开始"/>
+                                <connections>
+                                    <action selector="actionStart:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xtJ-XT-tGv"/>
+                                </connections>
+                            </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IDg-as-Urp">
+                                <rect key="frame" x="24" y="398" width="345" height="4"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmA-X2-6n1">
+                                <rect key="frame" x="24" y="83" width="345" height="230"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="选择照片"/>
+                                <connections>
+                                    <action selector="selectImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4e1-O2-v0m"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jVi-Fe-5kQ">
+                                <rect key="frame" x="24" y="480" width="345" height="314"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jVi-Fe-5kQ" secondAttribute="trailing" constant="24" id="2Gl-eA-7tM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="IDg-as-Urp" secondAttribute="trailing" constant="24" id="6ta-hG-l3R"/>
+                            <constraint firstItem="apk-8L-tX0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="7ww-Zo-IKg"/>
+                            <constraint firstItem="jVi-Fe-5kQ" firstAttribute="top" secondItem="apk-8L-tX0" secondAttribute="bottom" constant="16" id="8wx-bb-IXk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="g2h-NJ-PxV" secondAttribute="trailing" constant="24" id="A2F-8Q-8Te"/>
+                            <constraint firstItem="IDg-as-Urp" firstAttribute="top" secondItem="a2b-bk-rL7" secondAttribute="bottom" constant="12" id="Cug-y5-P8p"/>
+                            <constraint firstItem="lmA-X2-6n1" firstAttribute="top" secondItem="g2h-NJ-PxV" secondAttribute="top" id="M4j-Iu-7Ko"/>
+                            <constraint firstItem="lmA-X2-6n1" firstAttribute="leading" secondItem="g2h-NJ-PxV" secondAttribute="leading" id="OjR-CL-SZY"/>
+                            <constraint firstItem="a2b-bk-rL7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="OoO-Jv-9Ku"/>
+                            <constraint firstItem="a2b-bk-rL7" firstAttribute="top" secondItem="g2h-NJ-PxV" secondAttribute="bottom" constant="48" id="QRb-6p-4YB"/>
+                            <constraint firstItem="g2h-NJ-PxV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="Swh-aP-915"/>
+                            <constraint firstItem="lmA-X2-6n1" firstAttribute="trailing" secondItem="g2h-NJ-PxV" secondAttribute="trailing" id="Taf-e2-tO1"/>
+                            <constraint firstItem="IDg-as-Urp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="cox-Kh-skW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="apk-8L-tX0" secondAttribute="trailing" constant="24" id="dP5-iN-MlZ"/>
+                            <constraint firstItem="g2h-NJ-PxV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="24" id="ern-6P-ryC"/>
+                            <constraint firstItem="jVi-Fe-5kQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="j7q-D3-QLa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jVi-Fe-5kQ" secondAttribute="bottom" constant="24" id="kSJ-D6-VK6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="a2b-bk-rL7" secondAttribute="trailing" constant="24" id="pwT-p8-mhp"/>
+                            <constraint firstItem="lmA-X2-6n1" firstAttribute="bottom" secondItem="g2h-NJ-PxV" secondAttribute="bottom" id="vbO-9D-NOH"/>
+                            <constraint firstItem="apk-8L-tX0" firstAttribute="top" secondItem="IDg-as-Urp" secondAttribute="bottom" constant="24" id="wfQ-wh-2XW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonStart" destination="apk-8L-tX0" id="5Cc-fM-0xK"/>
+                        <outlet property="imageView" destination="g2h-NJ-PxV" id="N5G-Dr-PuC"/>
+                        <outlet property="labelProgress" destination="a2b-bk-rL7" id="OPz-li-KGQ"/>
+                        <outlet property="progress" destination="IDg-as-Urp" id="Wae-jP-hTT"/>
+                        <outlet property="tvResult" destination="jVi-Fe-5kQ" id="ouM-3A-L7E"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="32.824427480916029" y="-27.464788732394368"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
