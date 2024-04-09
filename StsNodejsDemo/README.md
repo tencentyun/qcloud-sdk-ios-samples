@@ -1,14 +1,22 @@
 # qcloud-cos-sts
 
 ## 安装方法
-
+进入 StsNodejsDemo 目录，输入以下命令。
 ```cmd
 npm i qcloud-cos-sts --save
 ```
 
-## 调用示例
+## 配置参数
+打开 StsNodejsDemo/demo/sts-server.js 文件，在配置参数 config 中分别填入 secretId、secretKey、bucket、region 参数。
 
-请查看 [demo](https://github.com/tencentyun/qcloud-cos-sts-sdk/blob/master/nodejs/demo/demo.js) 里的示例。
+## 启动服务
+在 StsNodejsDemo 目中，输入以下命令，即可启动服务。
+```cmd
+npm run sts-server
+```
+
+## 调用示例
+在浏览器中输入 `http://127.0.0.1:3000/sts` 并打开，即可看到请求到的临时秘钥。
 
 ## 接口说明
 
