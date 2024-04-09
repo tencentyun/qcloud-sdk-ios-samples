@@ -14,9 +14,11 @@ npm i qcloud-cos-sts --save
 ```cmd
 npm run sts-server
 ```
+终端输出 `app is listening at http://127.0.0.1:3000` 则表示服务启动成功。
 
-## 调用示例
-在浏览器中输入 `http://127.0.0.1:3000/sts` 并打开，即可看到请求到的临时秘钥。
+## 客户端接入
+1.修改临时秘钥请求地址为 `http://127.0.0.1:3000/sts`。
+2.运行 QCloudCOSXMLDemo 即可。
 
 ## 接口说明
 
