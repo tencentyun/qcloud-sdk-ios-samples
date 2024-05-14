@@ -23,6 +23,7 @@ class QCloudUploadController: UIViewController,UIImagePickerControllerDelegate,U
     var bucket:String = "demo-ap-guangzhou";
     override func viewDidLoad() {
         super.viewDidLoad();
+        NSError;
         self.bucket = QCloudCOSXMLServiceConfiguration.shared.currentBucket!;
         self.view.backgroundColor = .white;
         let item = UIBarButtonItem(title: "相册", style:.plain, target: self, action:#selector(selectImage))

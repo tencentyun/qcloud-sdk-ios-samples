@@ -13,7 +13,7 @@
 #import "SecretStorage.h"
 #import "QCloudMyBucketListCtor.h"
 //#import <QCloudCOSXML/QCloudLogManager.h>
-#define  USE_TEMPERATE_SECRET
+//#define  USE_TEMPERATE_SECRET
 
 @interface AppDelegate () <QCloudSignatureProvider, QCloudCredentailFenceQueueDelegate>
 
@@ -30,18 +30,18 @@
 - (void) fenceQueue:(QCloudCredentailFenceQueue *)queue requestCreatorWithContinue:(QCloudCredentailFenceQueueContinue)continueBlock
 {                                                                                                                                      
     // @"http://127.0.0.1:3000/sts" sts 接口地址，实际调用时请换成真是的地址。
-    [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:@"http://127.0.0.1:3000/sts"] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            NSDictionary * result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            QCloudCredential* credential = [QCloudCredential new];
-//            credential.startDate = [NSDate dateWithTimeIntervalSince1970:[[result objectForKey:@"startTime"] integerValue]];
-            credential.secretID = result[@"credentials"][@"tmpSecretId"];
-            credential.secretKey = result[@"credentials"][@"tmpSecretKey"];
-             //签名过期时间
-//            credential.expirationDate = [NSDate dateWithTimeIntervalSince1970:[[result objectForKey:@"expiration"] integerValue]];
-            credential.token = result[@"credentials"][@"sessionToken"];
-            QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc] initWithCredential:credential];
-            continueBlock(creator, nil);
-        }] resume] ;
+//    [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:@"http://127.0.0.1:3000/sts"] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//            NSDictionary * result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+//            QCloudCredential* credential = [QCloudCredential new];
+////            credential.startDate = [NSDate dateWithTimeIntervalSince1970:[[result objectForKey:@"startTime"] integerValue]];
+//            credential.secretID = result[@"credentials"][@"tmpSecretId"];
+//            credential.secretKey = result[@"credentials"][@"tmpSecretKey"];
+//             //签名过期时间
+////            credential.expirationDate = [NSDate dateWithTimeIntervalSince1970:[[result objectForKey:@"expiration"] integerValue]];
+//            credential.token = result[@"credentials"][@"sessionToken"];
+//            QCloudAuthentationV5Creator* creator = [[QCloudAuthentationV5Creator alloc] initWithCredential:credential];
+//            continueBlock(creator, nil);
+//        }] resume] ;
 }
 - (void) signatureWithFields:(QCloudSignatureFields*)fileds
                      request:(QCloudBizHTTPRequest*)request

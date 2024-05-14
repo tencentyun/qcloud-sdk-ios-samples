@@ -267,6 +267,14 @@ class QCloudUploadNewCtor: UIViewController,UIImagePickerControllerDelegate,UINa
                     self.progressView.progress = 1.0;
                     self.labUploadState.text = "上传完成";
                     
+                    // 服务端crc64;
+                    let dic = result?.__originHTTPURLResponse__.allHeaderFields;
+                    let crc64 = dic?["x-cos-hash-crc64ecma"];
+                    
+                    // 本地crc64
+                    let localCrc64 = NSMutableData.init(contentsOfFile: "本地文件")?.qcloud_crc64();
+                    let localCrc64Str = String(format: "%llu", localCrc64 ?? 0);
+                    
                     let afterDate = NSDate.now;
                     let uploadTime = Double(afterDate .timeIntervalSince(beforeDate));
                     let uploadSpeed = fileSizeSmallerThan1024/uploadTime;
