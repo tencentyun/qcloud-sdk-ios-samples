@@ -51,7 +51,7 @@
     [super setUp];
     [self setupSpecialCOSXMLShareService];
     
-    [[QCloudHttpDNS shareDNS] setIp:@"101.227.219.151" forDomain:[NSString stringWithFormat:@"%@-%@.cos.%@.myqcloud.com", QUIC_BUCKET, kAppID, QUIC_BUCKET_REGION]];
+    [[QCloudHttpDNS shareDNS] setIp:@"0.0.0.0" forDomain:[NSString stringWithFormat:@"%@-%@.cos.%@.myqcloud.com", QUIC_BUCKET, kAppID, QUIC_BUCKET_REGION]];
 }
 
 - (NSString*) tempFileWithSize:(int)size
