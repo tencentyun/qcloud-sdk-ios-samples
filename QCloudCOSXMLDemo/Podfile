@@ -4,9 +4,9 @@ source "https://github.com/CocoaPods/Specs"
 use_frameworks!
 
 target 'QCloudCOSXMLDemo' do
-pod 'QCloudCOSXML','6.3.9'
-pod 'QCloudCore','6.3.9'
-pod 'QCloudTrack','6.3.9'
+pod 'QCloudCOSXML'
+pod 'QCloudCore'
+pod 'QCloudTrack'
 target 'QCloudCOSXMLDemoTests' do
   inherit! :search_paths
 end
