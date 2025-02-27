@@ -7,6 +7,7 @@ target 'QCloudCOSXMLDemo' do
 pod 'QCloudCOSXML'
 pod 'QCloudCore'
 pod 'QCloudTrack'
+pod 'QCloudCore/DNSLoader' 
 target 'QCloudCOSXMLDemoTests' do
   inherit! :search_paths
 end
