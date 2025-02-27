@@ -13,6 +13,9 @@
 #import "SecretStorage.h"
 #import "QCloudMyBucketListCtor.h"
 #import "QCloudHTTPDNSLoader.h"
+#import "QCloudLoaderManager.h"
+#import "QCloudAFLoader.h"
+
 //#import <QCloudCOSXML/QCloudLogManager.h>
 //#define  USE_TEMPERATE_SECRET
 
@@ -114,6 +117,22 @@
 
 }
 
+- (void) setupCOSXMLQuicService {
+    NSString * eoDomain  = @"exampledomain.com";
+    QCloudServiceConfiguration* configuration = [QCloudServiceConfiguration new];
+    //关闭读取系统剪贴板的功能
+    configuration.appID = [SecretStorage sharedInstance].appID;
+    configuration.enableQuic = YES;
+    configuration.signatureProvider = self;
+    QCloudCOSXMLEndPoint* endpoint = [[QCloudCOSXMLEndPoint alloc] initWithLiteralURL:[NSURL URLWithString:eoDomain]];
+    endpoint.useHTTPS = YES;
+    configuration.endpoint = endpoint;
+   
+    [QCloudCOSXMLService registerDefaultCOSXMLWithConfiguration:configuration];
+    [QCloudCOSTransferMangerService registerDefaultCOSTransferMangerWithConfiguration:configuration];
+
+}
+
 -(void)setupHTTPDNS{
     QCloudDnsConfig config;
     config.appId = @"******"; // 可选，应用ID，腾讯云控制台申请获得，用于灯塔数据上报（未集成灯塔时该参数无效
@@ -133,6 +152,8 @@
     self.credentialFenceQueue = [QCloudCredentailFenceQueue new];
     self.credentialFenceQueue.delegate = self;
   
+    [[QCloudLoaderManager manager]addLoader: [[QCloudAFLoader alloc]init]];
+    [QCloudLoaderManager manager].enable = YES;
     
     [QCloudCOSXMLConfiguration sharedInstance].currentRegion = kRegion;
     QCloudServiceConfiguration* configuration = [[QCloudCOSXMLService defaultCOSXML].configuration copy];

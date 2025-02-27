@@ -47,6 +47,9 @@
 		D2BC31F22512071800E46F11 /* QCloudSTSPolicyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F069E0921DDF7BC005F1AFA /* QCloudSTSPolicyTests.m */; };
 		D2BC31F32512071800E46F11 /* QCloudCOSXMLDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB144091E601E0500830F93 /* QCloudCOSXMLDemoTests.m */; };
 		D2BC31FF2512090100E46F11 /* QCloudCOSXMLDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BC31FE2512090100E46F11 /* QCloudCOSXMLDemoUITests.m */; };
+		D2F2E6B22D70669B0093F72D /* QCloudAFLoaderTask.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F2E6AE2D70669B0093F72D /* QCloudAFLoaderTask.m */; };
+		D2F2E6B32D70669B0093F72D /* QCloudAFLoaderSession.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F2E6B02D70669B0093F72D /* QCloudAFLoaderSession.m */; };
+		D2F2E6B42D70669B0093F72D /* QCloudAFLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F2E6AC2D70669B0093F72D /* QCloudAFLoader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,6 +159,12 @@
 		D2BC31FC2512090100E46F11 /* QCloudCOSXMLDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QCloudCOSXMLDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2BC31FE2512090100E46F11 /* QCloudCOSXMLDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCloudCOSXMLDemoUITests.m; sourceTree = "<group>"; };
 		D2BC32002512090100E46F11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2F2E6AB2D70669B0093F72D /* QCloudAFLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCloudAFLoader.h; sourceTree = "<group>"; };
+		D2F2E6AC2D70669B0093F72D /* QCloudAFLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCloudAFLoader.m; sourceTree = "<group>"; };
+		D2F2E6AD2D70669B0093F72D /* QCloudAFLoaderTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCloudAFLoaderTask.h; sourceTree = "<group>"; };
+		D2F2E6AE2D70669B0093F72D /* QCloudAFLoaderTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCloudAFLoaderTask.m; sourceTree = "<group>"; };
+		D2F2E6AF2D70669B0093F72D /* QCloudAFLoaderSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCloudAFLoaderSession.h; sourceTree = "<group>"; };
+		D2F2E6B02D70669B0093F72D /* QCloudAFLoaderSession.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCloudAFLoaderSession.m; sourceTree = "<group>"; };
 		F2FFB526C25234819DB6C822 /* Pods-QCloudCOSXMLDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QCloudCOSXMLDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QCloudCOSXMLDemoTests/Pods-QCloudCOSXMLDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F3E9F7DE3343D4DD2A0004E1 /* Pods-QCloudCOSXMLDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QCloudCOSXMLDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-QCloudCOSXMLDemo/Pods-QCloudCOSXMLDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F3ED2BCC59D2BD696DAAF0C1 /* Pods_QCloudCOSXMLDemoTests5_0_2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QCloudCOSXMLDemoTests5_0_2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +226,7 @@
 		1AB143EE1E601E0500830F93 /* QCloudCOSXMLDemo */ = {
 			isa = PBXGroup;
 			children = (
+				D2F2E6B12D70669B0093F72D /* AFLoader */,
 				D2B7008B247227A000F59994 /* Categroy */,
 				D22FB26F246E8D9600C04C54 /* BucketDetail */,
 				D22FB269246E304700C04C54 /* MyBucket */,
@@ -388,6 +398,19 @@
 			path = QCloudCOSXMLDemoUITests;
 			sourceTree = "<group>";
 		};
+		D2F2E6B12D70669B0093F72D /* AFLoader */ = {
+			isa = PBXGroup;
+			children = (
+				D2F2E6AB2D70669B0093F72D /* QCloudAFLoader.h */,
+				D2F2E6AC2D70669B0093F72D /* QCloudAFLoader.m */,
+				D2F2E6AD2D70669B0093F72D /* QCloudAFLoaderTask.h */,
+				D2F2E6AE2D70669B0093F72D /* QCloudAFLoaderTask.m */,
+				D2F2E6AF2D70669B0093F72D /* QCloudAFLoaderSession.h */,
+				D2F2E6B02D70669B0093F72D /* QCloudAFLoaderSession.m */,
+			);
+			path = AFLoader;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -399,7 +422,8 @@
 				1AB143E81E601E0500830F93 /* Sources */,
 				1AB143E91E601E0500830F93 /* Frameworks */,
 				1AB143EA1E601E0500830F93 /* Resources */,
-				50546706912DE417C81487C1 /* [CP] Copy Pods Resources */,
+				1B37B58DAAABAD69763A17B2 /* [CP] Embed Pods Frameworks */,
+				FDE1E37313C44EC6DBCE2087 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -526,6 +550,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1B37B58DAAABAD69763A17B2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QCloudCOSXMLDemo/Pods-QCloudCOSXMLDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${PODS_ROOT}/QCloudQuic/QCloudQuic/Classes/QuicFramework/Tquic.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tquic.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QCloudCOSXMLDemo/Pods-QCloudCOSXMLDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		338EF7152177F5FE408F920D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -548,24 +592,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		50546706912DE417C81487C1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-QCloudCOSXMLDemo/Pods-QCloudCOSXMLDemo-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/QCloudCOSXML/QCloudCOSXML.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QCloudCOSXML.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QCloudCOSXMLDemo/Pods-QCloudCOSXMLDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		9985684AE5A7F7B42D827A19 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -582,6 +608,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FDE1E37313C44EC6DBCE2087 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QCloudCOSXMLDemo/Pods-QCloudCOSXMLDemo-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/QCloudCOSXML/QCloudCOSXML.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QCloudCOSXML.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QCloudCOSXMLDemo/Pods-QCloudCOSXMLDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -608,6 +652,9 @@
 				1AB143F11E601E0500830F93 /* main.m in Sources */,
 				D22FB268246E303100C04C54 /* QCloudMyBucketListCtor.m in Sources */,
 				1AFD73241EED1EF5002A1CD2 /* QCloudUploadViewController.m in Sources */,
+				D2F2E6B22D70669B0093F72D /* QCloudAFLoaderTask.m in Sources */,
+				D2F2E6B32D70669B0093F72D /* QCloudAFLoaderSession.m in Sources */,
+				D2F2E6B42D70669B0093F72D /* QCloudAFLoader.m in Sources */,
 				1AFD73271EED1EFF002A1CD2 /* QCloudDownloadViewController.m in Sources */,
 				A89945CC2091AEC200FEFF28 /* NSURL+FileExtension.m in Sources */,
 				A89945C32091842B00FEFF28 /* QCloudTabBarViewController.m in Sources */,

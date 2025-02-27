@@ -4,10 +4,12 @@ source "https://github.com/CocoaPods/Specs"
 use_frameworks!
 
 target 'QCloudCOSXMLDemo' do
-pod 'QCloudCOSXML'
-pod 'QCloudCore'
-pod 'QCloudTrack'
-pod 'QCloudCore/DNSLoader' 
+pod 'QCloudCOSXML',:git => "https://github.com/tencentyun/qcloud-sdk-ios"
+pod 'QCloudCore',:git => "https://github.com/tencentyun/qcloud-sdk-ios"
+pod 'QCloudQuic',:git => "https://github.com/tencentyun/qcloud-sdk-ios"
+pod 'QCloudTrack',:git => "https://github.com/tencentyun/qcloud-sdk-ios"
+pod 'QCloudCore/DNSLoader' ,:git => "https://github.com/tencentyun/qcloud-sdk-ios"
+pod "AFNetworking"
 target 'QCloudCOSXMLDemoTests' do
   inherit! :search_paths
 end
